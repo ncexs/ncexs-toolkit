@@ -36,6 +36,7 @@ Run the `ncexs Toolkit.ps1` script to manage cleanup, optimization, and security
    - Click "Yes" to allow administrator access  
 5. Use the interactive menu to select tasks by number  
 
+✅ Check log_ncexs.txt for the cleanup report
 💡 **Pro Tip:** Run PowerShell as Administrator for full access to all cleanup and optimization features.
 
 ---
