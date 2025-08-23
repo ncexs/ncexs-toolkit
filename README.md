@@ -1,5 +1,7 @@
 # 🧰 ncexs Toolkit
 
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-Clean-brightgreen?logo=virustotal)](https://www.virustotal.com/gui/file/bbd0f65e26ab8ae6127503963bbc0e74b483f477e2bd03437c7c1eb92dbf5ab2/detection)
+
 ✨ Welcome to the new era! Previously known as [`ncexs Junk Cleaner`](https://github.com/ncexs/ncexs-junkcleaner), this latest version has evolved into `ncexs Toolkit` with more powerful and modular tools.  
 Say goodbye to old `.bat` scripts and hello to a sleek `PowerShell`-based utility suite.
 
@@ -10,6 +12,7 @@ Run the `ncexs Toolkit.ps1` script to manage cleanup, optimization, and security
 - Fast and easy cleanup for daily maintenance  
 - Safe and stable with PowerShell  
 - Modular design for flexibility and future updates  
+- Virus-free: All files have passed VirusTotal testing  
 
 ---
 
@@ -36,8 +39,16 @@ Run the `ncexs Toolkit.ps1` script to manage cleanup, optimization, and security
    - Click "Yes" to allow administrator access  
 5. Use the interactive menu to select tasks by number  
 
-✅ Check log_ncexs.txt for the cleanup report  
+✅ Check `log_ncexs.txt` for the cleanup report  
 💡 **Pro Tip:** Run PowerShell as Administrator for full access to all cleanup and optimization features.
+
+---
+
+## 🛡️ Security & Trust
+
+- Open-source scripts for full transparency  
+- VirusTotal verified – [Check latest release](https://www.virustotal.com/gui/file/bbd0f65e26ab8ae6127503963bbc0e74b483f477e2bd03437c7c1eb92dbf5ab2/detection)  
+- Minimal permissions required; only requests admin when needed for system cleanup  
 
 ---
 
