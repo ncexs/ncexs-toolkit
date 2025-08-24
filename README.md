@@ -1,30 +1,34 @@
 # 🧰 ncexs Toolkit
 
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-Clean-brightgreen?logo=virustotal)](https://www.virustotal.com/gui/file/bbd0f65e26ab8ae6127503963bbc0e74b483f477e2bd03437c7c1eb92dbf5ab2/detection)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F94%20detections-brightgreen?logo=virustotal)](https://www.virustotal.com/gui/file/893033acf48d6636c00d36d20e030d2d?nocache=1)
+[![Windows](https://img.shields.io/badge/Windows-10%2B-blue?logo=windows)](https://)
+[![PowerShell](https://img.shields.io/badge/PowerShell-5.0%2B-blue?logo=powershell)](https://)
 
-✨ Welcome to the new era! Previously known as [`ncexs Junk Cleaner`](https://github.com/ncexs/ncexs-junkcleaner), this latest version has evolved into `ncexs Toolkit` with more powerful and modular tools.  
+✨ Welcome to the new era! Previously known as [`ncexs Junk Cleaner`](https://github.com/ncexs/ncexs-junkcleaner), this latest version has evolved into [`ncexs Toolkit`](https://github.com/ncexs/ncexs-toolkit) with more powerful and modular tools.  
 Say goodbye to old `.bat` scripts and hello to a sleek `PowerShell`-based utility suite.
 
 🧼 Optimize and clean your Windows system in "one click" — no bloat, no drama.  
 Run the `ncexs Toolkit.ps1` script to manage cleanup, optimization, and security tasks from an interactive menu.
 
 💡 **Why ncexs Toolkit?**  
-- Fast and easy cleanup for daily maintenance  
-- Safe and stable with PowerShell  
-- Modular design for flexibility and future updates  
+- Comprehensive system maintenance in one package  
+- Enhanced safety with PowerShell scripting  
+- Modular architecture for future expansions 
 - Virus-free: All files have passed VirusTotal testing  
 
 ---
 
 ## 🗂️ Menu Features
 
-- `1` → Junk & Cache Cleaner – Cleans temporary files and browser cache  
-- `2` → Deep Cleanup – Removes uninstall leftovers, system cache, thumbnails, and orphaned registry keys  
-- `3` → Antivirus Scan – Runs Microsoft Defender Quick Scan  
-- `4` → Clear RAM – Frees standby memory and triggers garbage collection  
-- `5` → Exit – Exit the toolkit  
+- `1` → System Info – Complete system specifications and hardware dashboard
+- `2` → Junk Cleaner – Temporary files and multi-browser cache cleanup
+- `3` → Deep Cleanup – Advanced registry and system leftovers removal
+- `4` → AV Scan – Microsoft Defender Quick Scan with detailed reporting
+- `5` → Clear RAM – Advanced memory optimization techniques
+- `6` → Network Repair – TCP/IP reset, DNS flush, and Winsock repair
+- `7` → Exit – Close the application
 
-💡 **Tip:** Use Junk & Cache Cleaner daily, and Deep Cleanup occasionally to keep your system fast and healthy.
+💡 **Tip:** Use Junk Cleaner regularly, Deep Cleanup monthly, and System Info to monitor your system health.
 
 ---
 
@@ -47,7 +51,7 @@ Run the `ncexs Toolkit.ps1` script to manage cleanup, optimization, and security
 ## 🛡️ Security & Trust
 
 - Open-source scripts for full transparency  
-- VirusTotal verified – [Check latest release](https://www.virustotal.com/gui/file/bbd0f65e26ab8ae6127503963bbc0e74b483f477e2bd03437c7c1eb92dbf5ab2/detection)  
+- VirusTotal verified – [Check latest release detected](https://www.virustotal.com/gui/file/a4cdc9cb3ba57b60786d84cdbc8466ba3e4e7c06c21a0cd1654f59b114f1b4ab?nocache=1)  
 - Minimal permissions required; only requests admin when needed for system cleanup  
 
 ---
