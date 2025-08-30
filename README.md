@@ -1,81 +1,107 @@
+readme
+
 # 🧰 ncexs Toolkit
 
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F94%20detections-brightgreen?logo=virustotal)](https://www.virustotal.com/gui/file/893033acf48d6636c00d36d20e030d2d?nocache=1)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F70%20detections-brightgreen?logo=virustotal)](https://www.virustotal.com/gui/file-analysis/ODI0YzBhMmE4ZmUxYzZiMzA1YTRhYjg4ZjIxNTBmNjM6MTc1NjEzMDE5Mg==)
 [![Windows](https://img.shields.io/badge/Windows-10%2B-blue?logo=windows)](https://)
 [![PowerShell](https://img.shields.io/badge/PowerShell-5.0%2B-blue?logo=powershell)](https://)
+[![Version](https://img.shields.io/badge/Version-2.2-important)](https://)
 
-✨ Welcome to the new era! Previously known as [`ncexs Junk Cleaner`](https://github.com/ncexs/ncexs-junkcleaner), this latest version has evolved into [`ncexs Toolkit`](https://github.com/ncexs/ncexs-toolkit) with more powerful and modular tools.  
-Say goodbye to old `.bat` scripts and hello to a sleek `PowerShell`-based utility suite.
+✨ **All-in-One Windows Optimization Toolkit** - A comprehensive PowerShell-based utility suite for system maintenance, cleaning, and optimization.
 
-🧼 Optimize and clean your Windows system in "one click" — no bloat, no drama.  
-Run the `ncexs Toolkit.ps1` script to manage cleanup, optimization, and security tasks from an interactive menu.
-
-💡 **Why ncexs Toolkit?**  
-- Comprehensive system maintenance in one package  
-- Enhanced safety with PowerShell scripting  
-- Modular architecture for future expansions 
-- Virus-free: All files have passed VirusTotal testing  
+🧼 **One-Click System Care** - Clean, optimize, and secure your Windows system with an intuitive interactive menu. No bloatware, no complicated settings.
 
 ---
 
-## 🗂️ Menu Features
+## 🗂️ Core Features
 
-- `1` → System Info – Complete system specifications and hardware dashboard
-- `2` → Junk Cleaner – Temporary files and multi-browser cache cleanup
-- `3` → Deep Cleanup – Advanced registry and system leftovers removal
-- `4` → AV Scan – Microsoft Defender Quick Scan with detailed reporting
-- `5` → Clear RAM – Advanced memory optimization techniques
-- `6` → Network Repair – TCP/IP reset, DNS flush, and Winsock repair
-- `7` → Exit – Close the application
+### 🧹 Cleaning Tools
+- **Junk Cleaner** - Temporary files and browser cache (Chrome, Edge, Brave, Firefox)
+- **Deep Cleanup** - Registry cleaning and system leftovers removal
+- **Recycle Bin Manager** - Safe deletion with confirmation and preview
 
-💡 **Tip:** Use Junk Cleaner regularly, Deep Cleanup monthly, and System Info to monitor your system health.
+### ⚡ Optimization
+- **RAM Cleaner** - Memory optimization and garbage collection
+- **System Info** - Complete hardware specifications dashboard
+- **Network Repair** - TCP/IP reset, DNS flush, and Winsock repair
+
+### 🛡️ Security
+- **AV Scanner** - Microsoft Defender Quick Scan integration
+- **Safe Operations** - Confirmation prompts for critical actions
+- **Activity Logging** - Detailed operation tracking with timestamps
 
 ---
 
-## 📝 How to Use
+## 🚀 Quick Start
 
-1. Extract the ZIP file (right-click → "Extract All")  
-2. Right-click the `ncexs Toolkit.ps1` file → select "Run with PowerShell"  
-3. If "Windows protected your PC" appears:
-   - Click "More info"  
-   - Click "Run anyway"  
-4. If prompted for permission:
-   - Click "Yes" to allow administrator access  
-5. Use the interactive menu to select tasks by number  
+1. **Download** the latest release
+2. **Extract** the ZIP file
+3. **Right-click** `ncexs Toolkit.ps1` → "Run with PowerShell"
+4. **Allow permissions** when prompted
+5. **Select tasks** from the interactive menu
 
-✅ Check `log_ncexs.txt` for the cleanup report  
-💡 **Pro Tip:** Run PowerShell as Administrator for full access to all cleanup and optimization features.
+⏱️ **Quick Clean**: Options 2 → 3 → 6 for routine maintenance  
+🔧 **Full Tune-up**: Options 1 → 2 → 4 → 5 → 7 for complete optimization
 
 ---
 
 ## 🛡️ Security & Trust
 
-- Open-source scripts for full transparency  
-- VirusTotal verified – [Check latest release detected](https://www.virustotal.com/gui/file/a4cdc9cb3ba57b60786d84cdbc8466ba3e4e7c06c21a0cd1654f59b114f1b4ab?nocache=1)  
-- Minimal permissions required; only requests admin when needed for system cleanup  
+✅ **VirusTotal Verified** - 0/70 detections  
+✅ **Open Source** - Transparent code for community review  
+✅ **Minimal Permissions** - Only requests admin access when necessary  
+✅ **No Telemetry** - Zero data collection or internet calls
+
+[View latest VirusTotal report](https://www.virustotal.com/gui/file-analysis/ODI0YzBhMmE4ZmUxYzZiMzA1YTRhYjg4ZjIxNTBmNjM6MTc1NjEzMDE5Mg==)
 
 ---
 
-## 🚀 Evolution
+## 💡 Why Choose ncexs Toolkit?
 
-From [`ncexs Junk Cleaner`](https://github.com/ncexs/ncexs-junkcleaner) → [`ncexs Toolkit`](https://github.com/ncexs/ncexs-toolkit):  
-- Migrated from `.bat` to PowerShell for better permissions, stability, and flexibility  
-- Added interactive menu for fast task selection  
-- Expanded cleanup & optimization features  
-- Modular design and improved logging  
+- **🎯 All-in-One Solution** - No need for multiple cleaning utilities
+- **⚡ PowerShell Powered** - Faster and more reliable than batch scripts
+- **🔒 Safety First** - Confirmation prompts and preview features
+- **📊 Detailed Reporting** - Comprehensive logs for all operations
+- **🔄 Regular Updates** - Active maintenance and feature additions
 
-💡 Built with practicality in mind, `ncexs Toolkit` saves time and keeps your PC smooth without complicated tools.
+---
+
+## 📋 System Requirements
+
+- **Windows** 10 or later
+- **PowerShell** 5.0+
+- **Administrator Rights** (for full functionality)
+- **50MB** free disk space
+
+---
+
+## ❓ Frequently Asked Questions
+
+**Q: Is this safe to use?**  
+A: Yes! The script is open-source and has 0 detections on VirusTotal.
+
+**Q: Will this delete my important files?**  
+A: No. The tool only targets temporary files and includes safety confirmations.
+
+**Q: Do I need technical knowledge?**  
+A: No! The interactive menu makes it easy for anyone to use.
 
 ---
 
 ## 📜 License
 
-MIT – Use freely, modify, and share  
-Use at your own risk ⚠️.
+MIT License - Free to use, modify, and distribute.  
+Use at your own risk. Always backup important data.
 
 ---
 
-## 💖 Donations
+## 💖 Support the Project
 
-If you’d like to support the project:  
-Saweria: [saweria.co/ncexs](https://saweria.co/ncexs)
+If you find this tool useful, consider supporting development:
+
+Saweria: [saweria.co/ncexs](https://saweria.co/ncexs)  
+GitHub: [Give us a star ⭐](https://github.com/ncexs/ncexs-toolkit)
+
+---
+
+**🎯 Pro Tip**: Run the toolkit monthly for optimal system performance and regularly check for updates!
