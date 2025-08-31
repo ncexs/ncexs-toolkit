@@ -1,11 +1,9 @@
-readme
-
 # 🧰 ncexs Toolkit
 
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F70%20detections-brightgreen?logo=virustotal)](https://www.virustotal.com/gui/file-analysis/ODI0YzBhMmE4ZmUxYzZiMzA1YTRhYjg4ZjIxNTBmNjM6MTc1NjEzMDE5Mg==)
-[![Windows](https://img.shields.io/badge/Windows-10%2B-blue?logo=windows)](https://)
-[![PowerShell](https://img.shields.io/badge/PowerShell-5.0%2B-blue?logo=powershell)](https://)
-[![Version](https://img.shields.io/badge/Version-2.2-important)](https://)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F70%20detections-brightgreen?logo=virustotal)](https://www.virustotal.com/gui/file-analysis/MmQxZWQzNGY2MDk4MzUxNjRlMjcwNzk3NDc3ZmJjYmI6MTc1NjYzNzgyMg==)
+[![Windows](https://img.shields.io/badge/Windows-7%2B-blue?logo=windows)](https://)
+[![PowerShell](https://img.shields.io/badge/PowerShell-3.0%2B-blue?logo=powershell)](https://)
+[![Version](https://img.shields.io/badge/Version-2.2.1_Hotfix-important)](https://)
 
 ✨ **All-in-One Windows Optimization Toolkit** - A comprehensive PowerShell-based utility suite for system maintenance, cleaning, and optimization.
 
@@ -17,18 +15,22 @@ readme
 
 ### 🧹 Cleaning Tools
 - **Junk Cleaner** - Temporary files and browser cache (Chrome, Edge, Brave, Firefox)
-- **Deep Cleanup** - Registry cleaning and system leftovers removal
-- **Recycle Bin Manager** - Safe deletion with confirmation and preview
+- **Deep Cleanup** - Windows Update leftovers and system cleanup
+- **Recycle Bin Manager** - Safe deletion with confirmation and file preview
 
 ### ⚡ Optimization
-- **RAM Cleaner** - Memory optimization and garbage collection
+- **RAM Optimizer** - Memory optimization and garbage collection
 - **System Info** - Complete hardware specifications dashboard
-- **Network Repair** - TCP/IP reset, DNS flush, and Winsock repair
+- **Network Utilities** - TCP/IP reset, DNS flush, and internet optimization
 
 ### 🛡️ Security
 - **AV Scanner** - Microsoft Defender Quick Scan integration
-- **Safe Operations** - Confirmation prompts for critical actions
-- **Activity Logging** - Detailed operation tracking with timestamps
+- **Startup Manager** - Control programs that run at startup
+- **Safe Operations** - Multiple confirmation prompts for critical actions
+
+### 🌐 Multilingual
+- **Dual Language Support** - Full Indonesian and English interface
+- **Easy Switching** - Change language anytime from the menu
 
 ---
 
@@ -37,7 +39,7 @@ readme
 1. **Download** the latest release
 2. **Extract** the ZIP file
 3. **Right-click** `ncexs Toolkit.ps1` → "Run with PowerShell"
-4. **Allow permissions** when prompted
+4. **Allow permissions** when prompted (click "Yes" to UAC prompt)
 5. **Select tasks** from the interactive menu
 
 ⏱️ **Quick Clean**: Options 2 → 3 → 6 for routine maintenance  
@@ -49,29 +51,20 @@ readme
 
 ✅ **VirusTotal Verified** - 0/70 detections  
 ✅ **Open Source** - Transparent code for community review  
-✅ **Minimal Permissions** - Only requests admin access when necessary  
-✅ **No Telemetry** - Zero data collection or internet calls
+✅ **Smart Admin Handling** - Requests elevation only when needed  
+✅ **No Telemetry** - Zero data collection or internet calls  
+✅ **Activity Logging** - Detailed operation tracking with automatic cleanup
 
-[View latest VirusTotal report](https://www.virustotal.com/gui/file-analysis/ODI0YzBhMmE4ZmUxYzZiMzA1YTRhYjg4ZjIxNTBmNjM6MTc1NjEzMDE5Mg==)
-
----
-
-## 💡 Why Choose ncexs Toolkit?
-
-- **🎯 All-in-One Solution** - No need for multiple cleaning utilities
-- **⚡ PowerShell Powered** - Faster and more reliable than batch scripts
-- **🔒 Safety First** - Confirmation prompts and preview features
-- **📊 Detailed Reporting** - Comprehensive logs for all operations
-- **🔄 Regular Updates** - Active maintenance and feature additions
+[View latest VirusTotal report](https://www.virustotal.com/gui/file-analysis/MmQxZWQzNGY2MDk0MzUxNjRlMjcwNzk3NDc3ZmJjYmI6MTc1NjYzNzgyMg==)
 
 ---
 
 ## 📋 System Requirements
 
-- **Windows** 10 or later
-- **PowerShell** 5.0+
+- **Windows** 7 or later (7, 8, 8.1, 10, 11)
+- **PowerShell** 3.0 or higher
 - **Administrator Rights** (for full functionality)
-- **50MB** free disk space
+- **100MB** free disk space
 
 ---
 
@@ -81,10 +74,13 @@ readme
 A: Yes! The script is open-source and has 0 detections on VirusTotal.
 
 **Q: Will this delete my important files?**  
-A: No. The tool only targets temporary files and includes safety confirmations.
+A: No. The tool only targets temporary files and includes multiple safety confirmations.
 
 **Q: Do I need technical knowledge?**  
 A: No! The interactive menu makes it easy for anyone to use.
+
+**Q: Why does it need administrator permissions?**  
+A: Some operations like system cleanup and network repairs require elevated privileges to work properly.
 
 ---
 
@@ -104,4 +100,6 @@ GitHub: [Give us a star ⭐](https://github.com/ncexs/ncexs-toolkit)
 
 ---
 
-**🎯 Pro Tip**: Run the toolkit monthly for optimal system performance and regularly check for updates!
+**🎯 Pro Tip**: Run the toolkit monthly for optimal system performance!
+
+**⚠️ Important**: Always backup your important data before performing system maintenance operations.
