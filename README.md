@@ -3,7 +3,6 @@
 [![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F70%20Detections-brightgreen?style=flat&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file-analysis/MmQxZWQzNGY2MDk4MzUxNjRlMjcwNzk3NDc3ZmJjYmI6MTc1NjYzNzgyMg==)
 [![Windows](https://img.shields.io/badge/Windows-7%2B-blue?style=flat&logo=windows)](#)
 [![PowerShell](https://img.shields.io/badge/PowerShell-3.0%2B-blue?style=flat&logo=powershell)](#)
-[![Version](https://img.shields.io/badge/Version-2.2.1_Hotfix-important?style=flat)](#)
 
 ✨ **All-in-One Windows Toolkit** – Simple, fast, and safe tools to clean, optimize, and maintain your PC.
 
