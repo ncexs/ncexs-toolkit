@@ -1,9 +1,9 @@
 # 🧰 ncexs Toolkit
 
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F70%20detections-brightgreen?logo=virustotal)](https://www.virustotal.com/gui/file-analysis/MmQxZWQzNGY2MDk4MzUxNjRlMjcwNzk3NDc3ZmJjYmI6MTc1NjYzNzgyMg==)
-[![Windows](https://img.shields.io/badge/Windows-7%2B-blue?logo=windows)](https://)
-[![PowerShell](https://img.shields.io/badge/PowerShell-3.0%2B-blue?logo=powershell)](https://)
-[![Version](https://img.shields.io/badge/Version-2.2.1_Hotfix-important)](https://)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F70%20Detections-brightgreen?style=for-the-badge&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file-analysis/MmQxZWQzNGY2MDk4MzUxNjRlMjcwNzk3NDc3ZmJjYmI6MTc1NjYzNzgyMg==)
+[![Windows](https://img.shields.io/badge/Windows-7%2B-blue?style=for-the-badge&logo=windows)](#)
+[![PowerShell](https://img.shields.io/badge/PowerShell-3.0%2B-blue?style=for-the-badge&logo=powershell)](#)
+[![Version](https://img.shields.io/badge/Version-2.2.1_Hotfix-important?style=for-the-badge)](#)
 
 ✨ **All-in-One Windows Optimization Toolkit** - A comprehensive PowerShell-based utility suite for system maintenance, cleaning, and optimization.
 
@@ -36,14 +36,17 @@
 
 ## 🚀 Quick Start
 
-1. **Download** the latest release
-2. **Extract** the ZIP file
-3. **Right-click** `ncexs Toolkit.ps1` → "Run with PowerShell"
-4. **Allow permissions** when prompted (click "Yes" to UAC prompt)
-5. **Select tasks** from the interactive menu
+1. **Download** the latest release  
+2. **Extract** the ZIP file  
+3. **Right-click** `ncexs Toolkit.ps1` → "Run with PowerShell"  
+4. **Allow permissions** when prompted (click "Yes" to UAC prompt)  
+5. **Select tasks** from the interactive menu  
 
 ⏱️ **Quick Clean**: Options 2 → 3 → 6 for routine maintenance  
-🔧 **Full Tune-up**: Options 1 → 2 → 4 → 5 → 7 for complete optimization
+🔧 **Full Tune-up**: Options 1 → 2 → 4 → 5 → 7 for complete optimization  
+
+**Download Latest Release:**  
+[![⬇️ Download](https://img.shields.io/badge/⬇️%20Download-Latest%20Release-brightgreen?style=for-the-badge&logo=github)](https://github.com/ncexs/ncexs-toolkit/releases/latest)
 
 ---
 
@@ -53,17 +56,18 @@
 ✅ **Open Source** - Transparent code for community review  
 ✅ **Smart Admin Handling** - Requests elevation only when needed  
 ✅ **No Telemetry** - Zero data collection or internet calls  
-✅ **Activity Logging** - Detailed operation tracking with automatic cleanup
+✅ **Activity Logging** - Detailed operation tracking with automatic cleanup  
 
-[View latest VirusTotal report](https://www.virustotal.com/gui/file-analysis/MmQxZWQzNGY2MDk0MzUxNjRlMjcwNzk3NDc3ZmJjYmI6MTc1NjYzNzgyMg==)
+**View VirusTotal Report:**  
+[![View VirusTotal Report](https://img.shields.io/badge/View-VirusTotal%20Report-critical?style=for-the-badge&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file-analysis/MmQxZWQzNGY2MDk0MzUxNjRlMjcwNzk3NDc3ZmJjYmI6MTc1NjYzNzgyMg==)
 
 ---
 
 ## 📋 System Requirements
 
-- **Windows** 7 or later (7, 8, 8.1, 10, 11)
-- **PowerShell** 3.0 or higher
-- **Administrator Rights** (for full functionality)
+- **Windows** 7 or later (7, 8, 8.1, 10, 11)  
+- **PowerShell** 3.0 or higher  
+- **Administrator Rights** (for full functionality)  
 - **100MB** free disk space
 
 ---
@@ -91,15 +95,15 @@ Use at your own risk. Always backup important data.
 
 ---
 
-## 💖 Support the Project
+## ☕ Support the Project
 
 If you find this tool useful, consider supporting development:
 
-Saweria: [saweria.co/ncexs](https://saweria.co/ncexs)  
-GitHub: [Give us a star ⭐](https://github.com/ncexs/ncexs-toolkit)
+[![Buy me a coffee](https://img.shields.io/badge/Saweria-Buy%20Me%20a%20Coffee-orange?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://saweria.co/ncexs)  
+[![Star on GitHub](https://img.shields.io/badge/GitHub-Star%20Project-blue?style=for-the-badge&logo=github)](https://github.com/ncexs/ncexs-toolkit)
 
 ---
 
-**🎯 Pro Tip**: Run the toolkit monthly for optimal system performance!
+**🎯 Pro Tip**: Run the toolkit monthly for optimal system performance!  
 
 **⚠️ Important**: Always backup your important data before performing system maintenance operations.
