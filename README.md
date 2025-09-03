@@ -1,6 +1,6 @@
 # 🧰 ncexs Toolkit
 
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F70%20Detections-brightgreen?style=flat&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file-analysis/MmY3NmQxMTVhNmVlZjBhMWU1ODRmNjU3OThmYWI5MGQ6MTc1Njg3NjEzMA==)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F70%20Detections-brightgreen?style=flat&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/6fad556e7dee6f4b22336769d95f06e7c0d49bb46cb51627721856581970b2f7/detection)
 [![Windows](https://img.shields.io/badge/Windows-7%2B-blue?style=flat&logo=windows)](#)
 [![PowerShell](https://img.shields.io/badge/PowerShell-3.0%2B-blue?style=flat&logo=powershell)](#)
 
