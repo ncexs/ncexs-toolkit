@@ -1,68 +1,40 @@
-name: ncexs-Toolkit Auto Release v2.3
+name: Release ncexs-Toolkit
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*'   # Workflow berjalan setiap kali kamu push tag seperti v2.3-beta1, v2.3, dst
 
 jobs:
   build-and-release:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Get current version
-      id: get_version
-      shell: pwsh
-      run: |
-        $versionFile = "version.txt"
-        if (-Not (Test-Path $versionFile)) {
-          "2.3.0" | Out-File $versionFile
-        }
-        $version = Get-Content $versionFile -Raw
-        Write-Output "Current version: $version"
-        echo "version=$version" >> $env:GITHUB_OUTPUT
+      - name: Set version from tag
+        id: vars
+        run: |
+          $tag = "${{ github.ref_name }}"
+          echo "VERSION=$tag" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
-    - name: Validate PowerShell syntax
-      shell: pwsh
-      run: |
-        Write-Host "🔍 Checking PowerShell syntax..."
-        Get-ChildItem -Filter *.ps1 | ForEach-Object {
-          $content = Get-Content $_.FullName -Raw
-          [void][System.Management.Automation.Language.Parser]::ParseInput($content, [ref]$null, [ref]$null)
-        }
-        Write-Host "✅ Syntax OK"
+      - name: Prepare PowerShell release file
+        run: |
+          # Pastikan nama file PS1 kamu sesuai di sini
+          $source = "ncexs-Toolkit-v2.2.2-final-hotfix.ps1"
+          $target = "ncexs-Toolkit-$env:VERSION.ps1"
+          Copy-Item $source $target -Force
+          Write-Output "File renamed to $target"
 
-    - name: Create ZIP package
-      shell: pwsh
-      run: |
-        mkdir output
-        Copy-Item *.ps1 output/
-        Copy-Item version.txt output/
-        Compress-Archive -Path output/* -DestinationPath "ncexs-Toolkit-$env:GITHUB_RUN_NUMBER.zip"
-        Write-Host "📦 Package created: ncexs-Toolkit-$env:GITHUB_RUN_NUMBER.zip"
+      - name: Create ZIP archive
+        run: |
+          Compress-Archive -Path "ncexs-Toolkit-$env:VERSION.ps1" -DestinationPath "ncexs-Toolkit-$env:VERSION.zip"
+          Write-Output "Created ZIP file ncexs-Toolkit-$env:VERSION.zip"
 
-    - name: Generate changelog
-      id: changelog
-      run: |
-        echo "📝 Generating changelog..."
-        git log -1 --pretty=format:"%h - %s (%an)" > changelog.txt
-        echo "changelog<<EOF" >> $GITHUB_OUTPUT
-        cat changelog.txt >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
-
-    - name: Upload to GitHub Releases
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: v${{ steps.get_version.outputs.version }}
-        name: "ncexs-Toolkit v${{ steps.get_version.outputs.version }}"
-        body: |
-          🚀 Auto Release v${{ steps.get_version.outputs.version }}
-          ---
-          **Changelog:**
-          ${{ steps.changelog.outputs.changelog }}
-        files: ncexs-Toolkit-${{ github.run_number }}.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ncexs-Toolkit-${{ env.VERSION }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
