@@ -20,17 +20,34 @@ jobs:
         id: find
         shell: pwsh
         run: |
-          $latest = Get-ChildItem -Path . -Filter "*.ps1" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-          echo "LATEST_PS1=$($latest.Name)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          Write-Output "✅ Found PowerShell script: $($latest.Name)"
+          $latest = Get-ChildItem -Path . -Recurse -Filter "*.ps1" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+          if ($latest -eq $null) {
+              Write-Error "❌ No PowerShell script found!"
+              exit 1
+          }
+          echo "LATEST_PS1=$($latest.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          Write-Output "✅ Found PowerShell script: $($latest.FullName)"
 
-      - name: 🧾 Generate changelog from last commit
+      - name: 🧾 Generate changelog from commits since last tag
         id: changelog
         shell: pwsh
         run: |
-          $log = git log -1 --pretty=format:"%s"
+          # Ambil tag terakhir sebelum tag sekarang
+          try {
+            $lastTag = git describe --tags --abbrev=0 ${{ github.ref }}^
+          } catch {
+            $lastTag = ""
+          }
+
+          if ([string]::IsNullOrEmpty($lastTag)) {
+            $log = git log -1 --pretty=format:"- %s"
+          } else {
+            $log = git log $lastTag..HEAD --pretty=format:"- %s"
+          }
+
+          if ([string]::IsNullOrEmpty($log)) { $log = "- No changes" }
           echo "CHANGELOG=$log" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          Write-Output "📝 Changelog: $log"
+          Write-Output "📝 Changelog:`n$log"
 
       - name: 🏷️ Set version from tag
         run: |
