@@ -1,0 +1,68 @@
+name: ncexs-Toolkit Auto Release v2.3
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Get current version
+      id: get_version
+      shell: pwsh
+      run: |
+        $versionFile = "version.txt"
+        if (-Not (Test-Path $versionFile)) {
+          "2.3.0" | Out-File $versionFile
+        }
+        $version = Get-Content $versionFile -Raw
+        Write-Output "Current version: $version"
+        echo "version=$version" >> $env:GITHUB_OUTPUT
+
+    - name: Validate PowerShell syntax
+      shell: pwsh
+      run: |
+        Write-Host "🔍 Checking PowerShell syntax..."
+        Get-ChildItem -Filter *.ps1 | ForEach-Object {
+          $content = Get-Content $_.FullName -Raw
+          [void][System.Management.Automation.Language.Parser]::ParseInput($content, [ref]$null, [ref]$null)
+        }
+        Write-Host "✅ Syntax OK"
+
+    - name: Create ZIP package
+      shell: pwsh
+      run: |
+        mkdir output
+        Copy-Item *.ps1 output/
+        Copy-Item version.txt output/
+        Compress-Archive -Path output/* -DestinationPath "ncexs-Toolkit-$env:GITHUB_RUN_NUMBER.zip"
+        Write-Host "📦 Package created: ncexs-Toolkit-$env:GITHUB_RUN_NUMBER.zip"
+
+    - name: Generate changelog
+      id: changelog
+      run: |
+        echo "📝 Generating changelog..."
+        git log -1 --pretty=format:"%h - %s (%an)" > changelog.txt
+        echo "changelog<<EOF" >> $GITHUB_OUTPUT
+        cat changelog.txt >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Upload to GitHub Releases
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: v${{ steps.get_version.outputs.version }}
+        name: "ncexs-Toolkit v${{ steps.get_version.outputs.version }}"
+        body: |
+          🚀 Auto Release v${{ steps.get_version.outputs.version }}
+          ---
+          **Changelog:**
+          ${{ steps.changelog.outputs.changelog }}
+        files: ncexs-Toolkit-${{ github.run_number }}.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
