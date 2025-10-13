@@ -1,41 +1,66 @@
-# .github/workflows/release.yml
 name: 🚀 ncexs Toolkit Auto Release
 
 on:
-  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'  # Jalan otomatis setiap ada tag baru, misalnya v2.3-beta1
 
 jobs:
-  release:
+  build-and-release:
     runs-on: windows-latest
 
     steps:
-      - name: 📥 Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🔍 Find Latest PS1 File
+      - name: Set version from tag
+        id: vars
+        run: |
+          echo "VERSION=${{ github.ref_name }}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: 🔍 Find latest PS1 file
         id: find_ps1
-        shell: pwsh
         run: |
-          $latest = Get-ChildItem -Path . -Filter "*.ps1" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-          Write-Host "✅ Found file: $($latest.Name)"
-          echo "file_name=$($latest.Name)" >> $env:GITHUB_OUTPUT
+          $latest = Get-ChildItem -Path . -Filter *.ps1 | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+          if (-not $latest) {
+            Write-Error "❌ No .ps1 file found in repository!"
+            exit 1
+          }
+          echo "LATEST_FILE=$($latest.Name)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          Write-Output "Found latest file: $($latest.Name)"
 
-      - name: 📝 Generate Release Notes
-        id: notes
-        shell: pwsh
+      - name: 🧩 Prepare PowerShell release file
         run: |
-          $changelog = "## 🚀 ncexs Toolkit – $env:RELEASE_TITLE`n`n"
-          $changelog += "Auto-generated release for latest script version.`n"
-          echo "changelog<<EOF" >> $env:GITHUB_OUTPUT
-          echo "$changelog" >> $env:GITHUB_OUTPUT
-          echo "EOF" >> $env:GITHUB_OUTPUT
+          $source = "${{ env.LATEST_FILE }}"
+          $version = "${{ env.VERSION }}"
+          $target = "ncexs-Toolkit-$version.ps1"
 
-      - name: 📦 Create GitHub Release
+          # Tambahkan watermark versi di baris pertama
+          $content = Get-Content $source
+          "# Version: $version" | Out-File $target -Encoding utf8
+          $content | Out-File $target -Encoding utf8 -Append
+
+          Write-Output "File ready: $target"
+
+      - name: 🧾 Generate changelog from recent commits
+        id: changelog
+        run: |
+          $log = git log -1 --pretty=format:"- %s"
+          echo "CHANGELOG=$log" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          Write-Output "Generated changelog: $log"
+
+      - name: 📦 Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.event.inputs.tag_name || 'v2.3-beta1' }}
-          name: ${{ github.event.inputs.release_title || '🚀 ncexs Toolkit v2.3 Beta 1' }}
-          body: ${{ steps.notes.outputs.changelog }}
-          files: ${{ steps.find_ps1.outputs.file_name }}
+          name: 🚀 ncexs Toolkit ${{ env.VERSION }}
+          body: |
+            ## 🧰 ncexs Toolkit – ${{ env.VERSION }}
+
+            ### 🆕 What's New
+            ${{ env.CHANGELOG }}
+
+            ---
+            🔧 Automatically generated via GitHub Actions CI/CD.
+          files: ncexs-Toolkit-${{ env.VERSION }}.ps1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
