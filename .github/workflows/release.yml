@@ -1,64 +1,41 @@
-name: Release ncexs-Toolkit
+# .github/workflows/release.yml
+name: 🚀 ncexs Toolkit Auto Release
 
 on:
-  push:
-    tags:
-      - 'v*'   # jalankan setiap kali ada push tag: v2.3-beta1, v2.3, dll
+  workflow_dispatch:
 
 jobs:
-  build-and-release:
+  release:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set VERSION from tag
-        id: set-version
+      - name: 🔍 Find Latest PS1 File
+        id: find_ps1
         shell: pwsh
         run: |
-          # tulis variabel VERSION ke GITHUB_ENV sehingga dapat dipakai step selanjutnya
-          [System.IO.File]::AppendAllText($env:GITHUB_ENV, "VERSION=${{ github.ref_name }}`n")
-          Write-Host "VERSION set to $($env:GITHUB_REF)"
+          $latest = Get-ChildItem -Path . -Filter "*.ps1" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+          Write-Host "✅ Found file: $($latest.Name)"
+          echo "file_name=$($latest.Name)" >> $env:GITHUB_OUTPUT
 
-      - name: Prepare PowerShell release file
+      - name: 📝 Generate Release Notes
+        id: notes
         shell: pwsh
         run: |
-          $source = "ncexs-Toolkit-v2.2.2-final-hotfix.ps1"
-          if (-not (Test-Path $source)) {
-            Write-Error "Source file '$source' not found. Make sure it exists in repo root."
-            exit 1
-          }
+          $changelog = "## 🚀 ncexs Toolkit – $env:RELEASE_TITLE`n`n"
+          $changelog += "Auto-generated release for latest script version.`n"
+          echo "changelog<<EOF" >> $env:GITHUB_OUTPUT
+          echo "$changelog" >> $env:GITHUB_OUTPUT
+          echo "EOF" >> $env:GITHUB_OUTPUT
 
-          $version = $env:VERSION
-          $target = "ncexs-Toolkit-$version.ps1"
-
-          # tulis watermark versi di baris pertama lalu append isi source
-          "# Version: $version" | Out-File -Encoding utf8 $target
-          Get-Content $source | Out-File -Encoding utf8 -Append $target
-
-          Write-Host "Prepared file: $target"
-
-      - name: Create ZIP archive
-        shell: pwsh
-        run: |
-          $version = $env:VERSION
-          $ps1file = "ncexs-Toolkit-$version.ps1"
-          $zipfile = "ncexs-Toolkit-$version.zip"
-
-          if (-not (Test-Path $ps1file)) {
-            Write-Error "Prepared PS1 '$ps1file' not found."
-            exit 1
-          }
-
-          Compress-Archive -Path $ps1file -DestinationPath $zipfile -Force
-          Write-Host "Created ZIP: $zipfile"
-
-      - name: Upload to GitHub Release
+      - name: 📦 Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}
-          name: "🚀 ncexs Toolkit ${{ github.ref_name }}"
-          files: ncexs-Toolkit-${{ env.VERSION }}.zip
+          tag_name: ${{ github.event.inputs.tag_name || 'v2.3-beta1' }}
+          name: ${{ github.event.inputs.release_title || '🚀 ncexs Toolkit v2.3 Beta 1' }}
+          body: ${{ steps.notes.outputs.changelog }}
+          files: ${{ steps.find_ps1.outputs.file_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
