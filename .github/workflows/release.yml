@@ -3,7 +3,7 @@ name: Release ncexs-Toolkit
 on:
   push:
     tags:
-      - 'v*'   
+      - 'v*'   # jalankan setiap kali ada push tag: v2.3-beta1, v2.3, dll
 
 jobs:
   build-and-release:
@@ -13,34 +13,52 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set version from tag
-        id: vars
+      - name: Set VERSION from tag
+        id: set-version
+        shell: pwsh
         run: |
-          $tag = "${{ github.ref_name }}"
-          echo "VERSION=$tag" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          # tulis variabel VERSION ke GITHUB_ENV sehingga dapat dipakai step selanjutnya
+          [System.IO.File]::AppendAllText($env:GITHUB_ENV, "VERSION=${{ github.ref_name }}`n")
+          Write-Host "VERSION set to $($env:GITHUB_REF)"
 
       - name: Prepare PowerShell release file
+        shell: pwsh
         run: |
-          
           $source = "ncexs-Toolkit-v2.2.2-final-hotfix.ps1"
-          $target = "ncexs-Toolkit-$env:VERSION.ps1"
+          if (-not (Test-Path $source)) {
+            Write-Error "Source file '$source' not found. Make sure it exists in repo root."
+            exit 1
+          }
 
-          
-          $content = Get-Content $source
-          "# Version: $env:VERSION" | Out-File $target -Encoding utf8
-          $content | Out-File $target -Encoding utf8 -Append
+          $version = $env:VERSION
+          $target = "ncexs-Toolkit-$version.ps1"
 
-          Write-Output "File ready: $target"
+          # tulis watermark versi di baris pertama lalu append isi source
+          "# Version: $version" | Out-File -Encoding utf8 $target
+          Get-Content $source | Out-File -Encoding utf8 -Append $target
+
+          Write-Host "Prepared file: $target"
 
       - name: Create ZIP archive
+        shell: pwsh
         run: |
-          Compress-Archive -Path "ncexs-Toolkit-$env:VERSION.ps1" -DestinationPath "ncexs-Toolkit-$env:VERSION.zip"
-          Write-Output "Created ZIP file ncexs-Toolkit-$env:VERSION.zip"
+          $version = $env:VERSION
+          $ps1file = "ncexs-Toolkit-$version.ps1"
+          $zipfile = "ncexs-Toolkit-$version.zip"
+
+          if (-not (Test-Path $ps1file)) {
+            Write-Error "Prepared PS1 '$ps1file' not found."
+            exit 1
+          }
+
+          Compress-Archive -Path $ps1file -DestinationPath $zipfile -Force
+          Write-Host "Created ZIP: $zipfile"
 
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          name: 🚀 ncexs Toolkit ${{ env.VERSION }}
+          tag_name: ${{ github.ref_name }}
+          name: "🚀 ncexs Toolkit ${{ github.ref_name }}"
           files: ncexs-Toolkit-${{ env.VERSION }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
