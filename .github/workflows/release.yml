@@ -3,7 +3,7 @@ name: Release ncexs-Toolkit
 on:
   push:
     tags:
-      - 'v*'   # Workflow berjalan setiap kali kamu push tag seperti v2.3-beta1, v2.3, dst
+      - 'v*'   
 
 jobs:
   build-and-release:
@@ -21,11 +21,16 @@ jobs:
 
       - name: Prepare PowerShell release file
         run: |
-          # Pastikan nama file PS1 kamu sesuai di sini
+          
           $source = "ncexs-Toolkit-v2.2.2-final-hotfix.ps1"
           $target = "ncexs-Toolkit-$env:VERSION.ps1"
-          Copy-Item $source $target -Force
-          Write-Output "File renamed to $target"
+
+          
+          $content = Get-Content $source
+          "# Version: $env:VERSION" | Out-File $target -Encoding utf8
+          $content | Out-File $target -Encoding utf8 -Append
+
+          Write-Output "File ready: $target"
 
       - name: Create ZIP archive
         run: |
@@ -35,6 +40,7 @@ jobs:
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          name: 🚀 ncexs Toolkit ${{ env.VERSION }}
           files: ncexs-Toolkit-${{ env.VERSION }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
