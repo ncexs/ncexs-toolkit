@@ -1,0 +1,18 @@
+{
+  "categories": [
+    {
+      "title": "✨ Added",
+      "labels": ["feat", "add", "enhancement"]
+    },
+    {
+      "title": "🔧 Bug Fixes",
+      "labels": ["fix", "bug", "error"]
+    },
+    {
+      "title": "⚡ Performance",
+      "labels": ["perf", "optimize", "improve"]
+    }
+  ],
+  "template": "${{CHANGELOG}}",
+  "pr_template": "- ${{TITLE}}"
+}
