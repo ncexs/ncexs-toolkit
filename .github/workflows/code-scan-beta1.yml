@@ -113,7 +113,7 @@ jobs:
           labels: ["autofix", "beta", "v2.3"]
           reviewers: ["ncexs"]
 
-      # 🧠 Post analysis summary to PR
+      # 🧠 Post analysis summary to PR (FIXED YAML FORMAT)
       - name: 💬 Post Summary Comment
         if: steps.pr.outputs.pull-request-number
         uses: marocchino/sticky-pull-request-comment@v2
@@ -121,11 +121,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           header: summary
           number: ${{ steps.pr.outputs.pull-request-number }}
-          message: |
-            ## 🧩 PowerShell Analyzer Summary – v2.3 Beta 1
-            - **Warnings:** ${{ steps.analyze.outputs.warnings }}
-            - **Errors:** ${{ steps.analyze.outputs.errors }}
-            - **Auto-fix branch:** `autofix/v2.3-beta1`
-            - 📝 [View Full Report (PSScriptAnalyzer-results.json)](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          message: >
+            ## 🧩 PowerShell Analyzer Summary – v2.3 Beta 1  
+            - **Warnings:** ${{ steps.analyze.outputs.warnings }}  
+            - **Errors:** ${{ steps.analyze.outputs.errors }}  
+            - **Auto-fix branch:** `autofix/v2.3-beta1`  
+            - 📝 [View Full Report (PSScriptAnalyzer-results.json)](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})  
             ---
             _Generated automatically by ncexs-bot_
