@@ -1,4 +1,4 @@
-name: 🚀 Auto Release PowerShell Script
+name: 🚀 ncexs Toolkit Auto CI/CD
 
 on:
   push:
@@ -6,13 +6,54 @@ on:
       - main
 
 jobs:
-  release:
+  build-test-release:
     runs-on: ubuntu-latest
 
     steps:
       - name: 📦 Checkout repository
         uses: actions/checkout@v4
 
+      - name: ⚙️ Setup PowerShell
+        uses: actions/setup-powershell@v2
+
+      # =======================
+      # 🔍 LINTER (PSScriptAnalyzer)
+      # =======================
+      - name: 🔍 Lint PowerShell Script
+        run: |
+          pwsh -Command "Install-Module PSScriptAnalyzer -Force"
+          pwsh -Command "Invoke-ScriptAnalyzer -Path . -Recurse -Severity Warning"
+
+      # =======================
+      # 🧪 TEST
+      # =======================
+      - name: 🧪 Test PowerShell Script
+        run: |
+          echo "Running test..."
+          pwsh -Command "
+            try {
+              .\ncexs-Toolkit-v2.3-beta1.ps1 -ErrorAction Stop
+              Write-Host '✅ Script ran successfully.'
+            } catch {
+              Write-Host '❌ Error detected: ' + $_.Exception.Message
+              exit 1
+            }
+          "
+
+      # =======================
+      # 🪄 AUTO CHANGELOG
+      # =======================
+      - name: 🪄 Generate Changelog
+        id: changelog
+        uses: mikepenz/release-changelog-builder-action@v5
+        with:
+          configuration: ".github/changelog-config.json"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # =======================
+      # 🧮 VERSION DETECTION
+      # =======================
       - name: 🧮 Get version from filename
         id: version
         run: |
@@ -21,7 +62,10 @@ jobs:
           echo "file=$FILE" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: 📝 Create GitHub Release
+      # =======================
+      # 🚀 RELEASE
+      # =======================
+      - name: 🚀 Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.version }}
@@ -29,9 +73,8 @@ jobs:
           body: |
             ## 🧰 ncexs Toolkit – ${{ steps.version.outputs.version }}
 
-            ### 🚀 What's New
-            - Beta build uploaded automatically via CI/CD
-            - Script: `${{ steps.version.outputs.file }}`
+            ${{ steps.changelog.outputs.changelog }}
+
           files: ${{ steps.version.outputs.file }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
