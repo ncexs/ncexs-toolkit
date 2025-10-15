@@ -123,11 +123,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           header: summary
           number: ${{ steps.pr.outputs.pull-request-number }}
-          message: >
-            ## PowerShell Analyzer Summary – v2.3 Beta 1  
-            - Warnings: ${{ steps.analyze.outputs.warnings }}  
-            - Errors: ${{ steps.analyze.outputs.errors }}  
-            - Auto-fix branch: `autofix/v2.3-beta1`  
-            - View full report: [PSScriptAnalyzer-results.json](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})  
-            ---  
+          message: |
+            ## PowerShell Analyzer Summary – v2.3 Beta 1
+            - Warnings: ${{ steps.analyze.outputs.warnings }}
+            - Errors: ${{ steps.analyze.outputs.errors }}
+            - Auto-fix branch: `autofix/v2.3-beta1`
+            - View full report: [PSScriptAnalyzer-results.json](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            
+            ---
             Generated automatically by ncexs-bot
