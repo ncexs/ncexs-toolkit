@@ -71,30 +71,33 @@ jobs:
         run: |
           git push origin autofix/v2.3-beta1 || echo "No changes pushed"
 
-      - name: 📝 Update CHANGELOG.md
+      - name: 📝 Update CHANGELOG.md (fixed: use array to avoid here-string/indent issues)
         shell: pwsh
         run: |
-          $changelog = @"
-## 🧰 ncexs Toolkit – v2.3 Beta 1
-
-### ✨ Added
-- 🧩 New Versioning System via GitHub Actions (CI/CD integration)
-- ⚙️ Automatic Release Packaging – auto ZIP creation with embedded version tag
-- 💡 Improved PowerShell 7+ compatibility and stability
-
-### 🔧 Bug Fixes
-- Fixed minor path detection inconsistencies
-- Adjusted startup check for smoother initialization
-- Improved variable handling to prevent duplicate entries
-
-### ⚡ Performance
-- Slightly faster initialization on Windows 10/11
-- Reduced memory usage on script runtime
-"@
+          $lines = @(
+            "## 🧰 ncexs Toolkit – v2.3 Beta 1",
+            "",
+            "### ✨ Added",
+            "- 🧩 New Versioning System via GitHub Actions (CI/CD integration)",
+            "- ⚙️ Automatic Release Packaging – auto ZIP creation with embedded version tag",
+            "- 💡 Improved PowerShell 7+ compatibility and stability",
+            "",
+            "### 🔧 Bug Fixes",
+            "- Fixed minor path detection inconsistencies",
+            "- Adjusted startup check for smoother initialization",
+            "- Improved variable handling to prevent duplicate entries",
+            "",
+            "### ⚡ Performance",
+            "- Slightly faster initialization on Windows 10/11",
+            "- Reduced memory usage on script runtime"
+          )
+          $newContent = $lines -join "`n"
           if (Test-Path CHANGELOG.md) {
-            $changelog + "`n`n" + (Get-Content CHANGELOG.md -Raw) | Set-Content CHANGELOG.md
+            $existing = Get-Content CHANGELOG.md -Raw
+            $merged = $newContent + "`n`n" + $existing
+            Set-Content -Path CHANGELOG.md -Value $merged -Encoding utf8
           } else {
-            $changelog | Out-File CHANGELOG.md
+            Set-Content -Path CHANGELOG.md -Value $newContent -Encoding utf8
           }
           git add CHANGELOG.md
           git commit -m "📝 Add CHANGELOG for v2.3 Beta 1" || echo "No changelog changes"
@@ -113,7 +116,7 @@ jobs:
           labels: ["autofix", "beta", "v2.3"]
           reviewers: ["ncexs"]
 
-      # 🧠 Post analysis summary to PR (FIXED YAML FORMAT)
+      # 🧠 Post analysis summary to PR
       - name: 💬 Post Summary Comment
         if: steps.pr.outputs.pull-request-number
         uses: marocchino/sticky-pull-request-comment@v2
@@ -127,5 +130,5 @@ jobs:
             - **Errors:** ${{ steps.analyze.outputs.errors }}  
             - **Auto-fix branch:** `autofix/v2.3-beta1`  
             - 📝 [View Full Report (PSScriptAnalyzer-results.json)](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})  
-            ---
+            ---  
             _Generated automatically by ncexs-bot_
