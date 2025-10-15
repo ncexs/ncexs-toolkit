@@ -1,4 +1,4 @@
-name: 🧰 ncexs Toolkit – Beta 1 Analyzer
+name: ncexs Toolkit Beta 1 Analyzer
 
 on:
   push:
@@ -7,22 +7,22 @@ on:
 
 jobs:
   analyze-and-fix-beta1:
-    name: 🔍 Analyze & Auto-Fix ncexs Toolkit v2.3 Beta 1
+    name: Analyze and Auto-Fix ncexs Toolkit v2.3 Beta 1
     runs-on: windows-latest
 
     steps:
-      - name: 📦 Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 🧩 Install PSScriptAnalyzer
+      - name: Install PSScriptAnalyzer
         shell: pwsh
         run: |
           Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
           Import-Module PSScriptAnalyzer
 
-      - name: 🔍 Run static analysis
+      - name: Run static analysis
         id: analyze
         shell: pwsh
         run: |
@@ -39,12 +39,12 @@ jobs:
             echo "errors=0" >> $env:GITHUB_OUTPUT
           }
 
-      - name: 🛠️ Auto-fix basic style issues
+      - name: Auto-fix basic style issues
         shell: pwsh
         run: |
           $files = Get-ChildItem -Path . -Filter "*.ps1" -Recurse
           foreach ($file in $files) {
-            Write-Host "✨ Formatting $($file.FullName)"
+            Write-Host "Formatting $($file.FullName)"
             try {
               Invoke-Formatter -ScriptDefinition (Get-Content $file.FullName -Raw) |
                 Out-File -Encoding utf8 $file.FullName
@@ -53,43 +53,43 @@ jobs:
             }
           }
 
-      - name: 🧾 Configure Git
+      - name: Configure Git
         run: |
           git config user.name "ncexs-bot"
           git config user.email "actions@github.com"
 
-      - name: 🪄 Create auto-fix branch
+      - name: Create auto-fix branch
         run: |
           git checkout -b autofix/v2.3-beta1
 
-      - name: 💾 Commit auto-fix changes
+      - name: Commit auto-fix changes
         run: |
           git add .
-          git commit -m "🔧 Auto-fix PowerShell style & formatting (v2.3 Beta 1)" || echo "No changes to commit"
+          git commit -m "Auto-fix PowerShell style & formatting (v2.3 Beta 1)" || echo "No changes to commit"
 
-      - name: 🚀 Push auto-fix branch
+      - name: Push auto-fix branch
         run: |
           git push origin autofix/v2.3-beta1 || echo "No changes pushed"
 
-      - name: 📝 Update CHANGELOG.md (fixed: use array to avoid here-string/indent issues)
+      - name: Update CHANGELOG.md safely
         shell: pwsh
         run: |
           $lines = @(
-            "## 🧰 ncexs Toolkit – v2.3 Beta 1",
+            "## ncexs Toolkit – v2.3 Beta 1",
             "",
-            "### ✨ Added",
-            "- 🧩 New Versioning System via GitHub Actions (CI/CD integration)",
-            "- ⚙️ Automatic Release Packaging – auto ZIP creation with embedded version tag",
-            "- 💡 Improved PowerShell 7+ compatibility and stability",
+            "### Added",
+            "- New Versioning System via GitHub Actions (CI/CD integration)",
+            "- Automatic Release Packaging with embedded version tag",
+            "- Improved PowerShell 7+ compatibility and stability",
             "",
-            "### 🔧 Bug Fixes",
+            "### Bug Fixes",
             "- Fixed minor path detection inconsistencies",
             "- Adjusted startup check for smoother initialization",
             "- Improved variable handling to prevent duplicate entries",
             "",
-            "### ⚡ Performance",
+            "### Performance",
             "- Slightly faster initialization on Windows 10/11",
-            "- Reduced memory usage on script runtime"
+            "- Reduced memory usage during runtime"
           )
           $newContent = $lines -join "`n"
           if (Test-Path CHANGELOG.md) {
@@ -100,24 +100,23 @@ jobs:
             Set-Content -Path CHANGELOG.md -Value $newContent -Encoding utf8
           }
           git add CHANGELOG.md
-          git commit -m "📝 Add CHANGELOG for v2.3 Beta 1" || echo "No changelog changes"
+          git commit -m "Add CHANGELOG for v2.3 Beta 1" || echo "No changelog changes"
 
-      - name: 🔁 Create Pull Request
+      - name: Create Pull Request
         id: pr
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: autofix/v2.3-beta1
-          title: "🔧 Auto-fix ncexs Toolkit v2.3 Beta 1"
+          title: "Auto-fix ncexs Toolkit v2.3 Beta 1"
           body: |
-            This PR includes automatic fixes and changelog for **ncexs Toolkit v2.3 Beta 1**.
+            This PR includes automatic fixes and changelog for ncexs Toolkit v2.3 Beta 1.
             Generated via PowerShell Analyzer workflow.
           commit-message: "Auto-fix PowerShell style issues (v2.3 Beta 1)"
           labels: ["autofix", "beta", "v2.3"]
           reviewers: ["ncexs"]
 
-      # 🧠 Post analysis summary to PR
-      - name: 💬 Post Summary Comment
+      - name: Post Summary Comment
         if: steps.pr.outputs.pull-request-number
         uses: marocchino/sticky-pull-request-comment@v2
         with:
@@ -125,10 +124,10 @@ jobs:
           header: summary
           number: ${{ steps.pr.outputs.pull-request-number }}
           message: >
-            ## 🧩 PowerShell Analyzer Summary – v2.3 Beta 1  
-            - **Warnings:** ${{ steps.analyze.outputs.warnings }}  
-            - **Errors:** ${{ steps.analyze.outputs.errors }}  
-            - **Auto-fix branch:** `autofix/v2.3-beta1`  
-            - 📝 [View Full Report (PSScriptAnalyzer-results.json)](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})  
+            ## PowerShell Analyzer Summary – v2.3 Beta 1  
+            - Warnings: ${{ steps.analyze.outputs.warnings }}  
+            - Errors: ${{ steps.analyze.outputs.errors }}  
+            - Auto-fix branch: `autofix/v2.3-beta1`  
+            - View full report: [PSScriptAnalyzer-results.json](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})  
             ---  
-            _Generated automatically by ncexs-bot_
+            Generated automatically by ncexs-bot
