@@ -1,76 +1,37 @@
-name: 🚀 Auto Release PowerShell
+name: 🚀 Auto Release PowerShell Script
 
 on:
   push:
-    tags:
-      - 'v*'   # Contoh: v2.3-beta1, v2.3, v3.0, dll
-
-permissions:
-  contents: write
+    branches:
+      - main
 
 jobs:
   release:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - name: 🧩 Checkout repository
+      - name: 📦 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🔖 Set version from tag
+      - name: 🧮 Get version from filename
+        id: version
         run: |
-          $tag = "${{ github.ref_name }}"
-          echo "VERSION=$tag" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          Write-Output "🔖 Version: $tag"
+          FILE=$(ls *.ps1 | head -n 1)
+          VERSION=$(echo $FILE | grep -oE 'v[0-9]+\.[0-9]+(-[a-zA-Z0-9]+)?')
+          echo "file=$FILE" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: 🔍 Find latest PowerShell script
-        id: find
-        shell: pwsh
-        run: |
-          $latest = Get-ChildItem -Path . -Recurse -Filter "*.ps1" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-          if ($latest -eq $null) {
-              Write-Error "❌ No PowerShell script found!"
-              exit 1
-          }
-
-          # Salin dan rename sesuai versi tag
-          $destName = "ncexs-Toolkit-$env:VERSION.ps1"
-          Copy-Item $latest.FullName $destName -Force
-          echo "LATEST_PS1=$destName" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          Write-Output "✅ Found PowerShell script: $($latest.FullName)"
-          Write-Output "✅ Renamed for release: $destName"
-
-      - name: 🧾 Generate changelog from commits since last tag
-        id: changelog
-        shell: pwsh
-        run: |
-          try {
-            $lastTag = git describe --tags --abbrev=0 ${{ github.ref }}^
-          } catch {
-            $lastTag = ""
-          }
-
-          if ([string]::IsNullOrEmpty($lastTag)) {
-            $log = git log -1 --pretty=format:"- %s"
-          } else {
-            $log = git log $lastTag..HEAD --pretty=format:"- %s"
-          }
-
-          if ([string]::IsNullOrEmpty($log)) { $log = "- No changes" }
-          echo "CHANGELOG=$log" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          Write-Output "📝 Changelog:`n$log"
-
-      - name: 📦 Upload to GitHub Release
+      - name: 📝 Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          name: 🚀 ncexs Toolkit ${{ env.VERSION }}
+          tag_name: ${{ steps.version.outputs.version }}
+          name: "ncexs Toolkit – ${{ steps.version.outputs.version }}"
           body: |
-            ## 🧰 ncexs Toolkit – ${{ env.VERSION }}
+            ## 🧰 ncexs Toolkit – ${{ steps.version.outputs.version }}
 
-            ### 🆕 What's New
-            ${{ env.CHANGELOG }}
-
-            ---
-            🔧 Automatically generated via GitHub Actions CI/CD.
-          files: ${{ env.LATEST_PS1 }}
+            ### 🚀 What's New
+            - Beta build uploaded automatically via CI/CD
+            - Script: `${{ steps.version.outputs.file }}`
+          files: ${{ steps.version.outputs.file }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
