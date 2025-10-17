@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "*.ps1"   # Jalankan hanya jika ada file PowerShell yang berubah
+      - "*.ps1"
 
 jobs:
   build:
@@ -15,7 +15,6 @@ jobs:
       - name: 🧩 Checkout Repository
         uses: actions/checkout@v4
 
-      # Jalankan langsung PowerShell (tanpa setup tambahan)
       - name: ⚙️ Run PowerShell Script (Syntax Check)
         shell: pwsh
         run: |
