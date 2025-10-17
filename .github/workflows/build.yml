@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "*.ps1"   # Jalankan hanya jika ada file PS1 yang berubah
+      - "*.ps1"   
 
 jobs:
   build:
@@ -15,25 +15,31 @@ jobs:
       - name: 🧩 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: ⚙️ Run PowerShell Script (Test Build)
+      - name: ⚙️ Run PowerShell Script (Syntax Check)
         shell: pwsh
         run: |
           Write-Host "=== Running ncexs Toolkit Build ==="
           $files = Get-ChildItem -Path . -Filter "*.ps1"
           foreach ($f in $files) {
-            Write-Host "Testing: $($f.Name)"
-            # Jalankan test ringan biar ketahuan kalau ada error sintaks
+            Write-Host "🔍 Checking: $($f.Name)"
             try {
-              powershell -NoLogo -NoProfile -Command "& { . .\$($f.Name); Write-Host '✅ OK' }"
+              powershell -NoLogo -NoProfile -Command "& { . .\$($f.Name); Write-Host '✅ Syntax OK' }"
             } catch {
               Write-Host "❌ Error in $($f.Name): $($_.Exception.Message)"
               exit 1
             }
           }
-          Write-Host "All scripts checked successfully ✅"
+
+      - name: 🧾 Save Build Log
+        shell: pwsh
+        run: |
+          $logPath = "build-log.txt"
+          "Build completed at $(Get-Date)" | Out-File $logPath
+          "Checked files:" | Out-File $logPath -Append
+          Get-ChildItem -Filter "*.ps1" | ForEach-Object { $_.Name } | Out-File $logPath -Append
 
       - name: 📤 Upload Build Log
         uses: actions/upload-artifact@v4
         with:
-          name: ncexs-build-log
-          path: .
+          name: build-log
+          path: build-log.txt
