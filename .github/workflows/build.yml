@@ -1,28 +1,46 @@
-name: Build and Test
+name: 🧱 Build ncexs Toolkit
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
+    paths:
+      - "*.ps1"   # Jalankan hanya jika ada file PowerShell yang berubah
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
+      - name: 🧩 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup .NET (if needed)
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
-
-      - name: Run build script
+      # Jalankan langsung PowerShell (tanpa setup tambahan)
+      - name: ⚙️ Run PowerShell Script (Syntax Check)
         shell: pwsh
         run: |
-          Write-Host "Starting build..."
-          # Contoh build process
-          dotnet build
-          Write-Host "✅ Build completed successfully"
+          Write-Host "=== Running ncexs Toolkit Build ==="
+          $files = Get-ChildItem -Path . -Filter "*.ps1"
+          foreach ($f in $files) {
+            Write-Host "🔍 Checking: $($f.Name)"
+            try {
+              pwsh -NoLogo -NoProfile -Command "& { . .\$($f.Name); Write-Host '✅ Syntax OK' }"
+            } catch {
+              Write-Host "❌ Error in $($f.Name): $($_.Exception.Message)"
+              exit 1
+            }
+          }
+
+      - name: 🧾 Save Build Log
+        shell: pwsh
+        run: |
+          $logPath = "build-log.txt"
+          "Build completed at $(Get-Date)" | Out-File $logPath
+          "Checked files:" | Out-File $logPath -Append
+          Get-ChildItem -Filter "*.ps1" | ForEach-Object { $_.Name } | Out-File $logPath -Append
+
+      - name: 📤 Upload Build Log
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build-log.txt
