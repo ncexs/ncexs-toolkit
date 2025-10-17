@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "*.ps1"   
+      - "*.ps1"   # Jalankan hanya jika ada file PowerShell yang berubah
 
 jobs:
   build:
