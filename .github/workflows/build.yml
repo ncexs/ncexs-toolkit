@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - "*.ps1"   # Jalankan hanya jika ada file PowerShell yang berubah
+      - "*.ps1"  # Jalankan hanya jika ada file PowerShell yang berubah
+      - ".github/workflows/build.yml"  # build juga kalau workflow diubah
 
 jobs:
   build:
@@ -20,10 +21,14 @@ jobs:
         run: |
           Write-Host "=== Running ncexs Toolkit Build ==="
           $files = Get-ChildItem -Path . -Filter "*.ps1"
+          if (-not $files) {
+            Write-Host "⚠️ No .ps1 files found, skipping syntax check."
+            exit 0
+          }
           foreach ($f in $files) {
             Write-Host "🔍 Checking: $($f.Name)"
             try {
-              powershell -NoLogo -NoProfile -Command "& { . .\$($f.Name); Write-Host '✅ Syntax OK' }"
+              pwsh -NoLogo -NoProfile -Command "& { . .\$($f.Name); Write-Host '✅ Syntax OK' }"
             } catch {
               Write-Host "❌ Error in $($f.Name): $($_.Exception.Message)"
               exit 1
