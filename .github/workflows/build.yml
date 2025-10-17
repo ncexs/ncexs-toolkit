@@ -1,0 +1,33 @@
+name: Build Script (Auto Save)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up PowerShell
+        uses: actions/setup-powershell@v2
+
+      - name: Show files
+        run: Get-ChildItem -Path . -Recurse
+
+      - name: Build script (optional step)
+        run: |
+          Write-Host "Building script..."
+          # Misal kamu ingin gabungin file, kompres, atau validasi syntax PowerShell
+          # Contoh: Test-ModuleManifest atau sekadar copy file utama
+          Copy-Item ncexs-Toolkit-v2.3.ps1 build-output\ -Force
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ncexs-toolkit-build
+          path: build-output/
