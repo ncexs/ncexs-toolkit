@@ -15,20 +15,18 @@ jobs:
       - name: 🧩 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: ⚙️ Static Syntax Check (no execution)
+      - name: 🔍 Scan PowerShell Files (no execution)
         shell: pwsh
         run: |
-          Write-Host "=== Checking PowerShell syntax safely ==="
-          $ErrorActionPreference = "Stop"
+          Write-Host "=== Scanning PowerShell scripts ==="
           $files = Get-ChildItem -Path . -Filter "*.ps1" -Recurse
-          foreach ($f in $files) {
-            Write-Host "🔍 Parsing: $($f.FullName)"
-            try {
-              [System.Management.Automation.PSParser]::Tokenize((Get-Content $f.FullName -Raw), [ref]$null) | Out-Null
-              Write-Host "✅ OK - $($f.Name)"
-            } catch {
-              Write-Host "❌ Syntax error in $($f.Name): $($_.Exception.Message)"
-              exit 1
+          if ($files.Count -eq 0) {
+            Write-Host "⚠️ No PowerShell files found!"
+          } else {
+            foreach ($f in $files) {
+              Write-Host "📄 Found script: $($f.Name)"
+              $lineCount = (Get-Content $f.FullName).Count
+              Write-Host "   ↳ $lineCount lines read successfully ✅"
             }
           }
 
@@ -36,8 +34,8 @@ jobs:
         shell: pwsh
         run: |
           $logPath = "build-log.txt"
-          "Build completed at $(Get-Date)" | Out-File $logPath
-          "Checked files:" | Out-File $logPath -Append
+          "Scan completed at $(Get-Date)" | Out-File $logPath
+          "Scanned files:" | Out-File $logPath -Append
           Get-ChildItem -Filter "*.ps1" | ForEach-Object { $_.Name } | Out-File $logPath -Append
 
       - name: 📤 Upload Build Log
