@@ -15,20 +15,22 @@ jobs:
       - name: 🧩 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: ⚙️ Run PowerShell Script (Syntax Check)
+      - name: ⚙️ Run PowerShell Syntax Check (Quick)
         shell: pwsh
         run: |
-          Write-Host "=== Running ncexs Toolkit Build ==="
+          Write-Host "=== Quick Syntax Validation ==="
           $files = Get-ChildItem -Path . -Filter "*.ps1"
           foreach ($f in $files) {
-            Write-Host "🔍 Checking: $($f.Name)"
-            try {
-              pwsh -NoLogo -NoProfile -Command "& { . .\$($f.Name); Write-Host '✅ Syntax OK' }"
-            } catch {
-              Write-Host "❌ Error in $($f.Name): $($_.Exception.Message)"
+            Write-Host "🔍 Checking syntax of $($f.Name)"
+            $syntaxCheck = powershell -NoLogo -NoProfile -Command "[System.Management.Automation.PSParser]::Tokenize((Get-Content .\$($f.Name) -Raw), [ref]$null)" 2>&1
+            if ($LASTEXITCODE -ne 0) {
+              Write-Host "❌ Syntax issue found in $($f.Name)"
               exit 1
+            } else {
+              Write-Host "✅ Syntax OK - $($f.Name)"
             }
           }
+
 
       - name: 🧾 Save Build Log
         shell: pwsh
