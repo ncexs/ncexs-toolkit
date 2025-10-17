@@ -15,16 +15,17 @@ jobs:
       - name: 🧩 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: ⚙️ Quick Syntax Validation
+      - name: ⚙️ Static Syntax Check (no execution)
         shell: pwsh
         run: |
-          Write-Host "=== Quick Syntax Validation ==="
-          $files = Get-ChildItem -Path . -Filter "*.ps1"
+          Write-Host "=== Checking PowerShell syntax safely ==="
+          $ErrorActionPreference = "Stop"
+          $files = Get-ChildItem -Path . -Filter "*.ps1" -Recurse
           foreach ($f in $files) {
-            Write-Host "🔍 Checking syntax of $($f.Name)"
+            Write-Host "🔍 Parsing: $($f.FullName)"
             try {
-              [System.Management.Automation.PSParser]::Tokenize((Get-Content .\$($f.Name) -Raw), [ref]$null) | Out-Null
-              Write-Host "✅ Syntax OK - $($f.Name)"
+              [System.Management.Automation.PSParser]::Tokenize((Get-Content $f.FullName -Raw), [ref]$null) | Out-Null
+              Write-Host "✅ OK - $($f.Name)"
             } catch {
               Write-Host "❌ Syntax error in $($f.Name): $($_.Exception.Message)"
               exit 1
