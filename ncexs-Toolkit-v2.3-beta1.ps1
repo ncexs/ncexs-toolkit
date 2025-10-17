@@ -1,6 +1,6 @@
 <#
 ===============================================
- ncexs Toolkit v2.3 Beta1
+ ncexs Toolkit v2.6
 ===============================================
 #>
 
@@ -23,7 +23,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction S
 # ---------------------------
 # Global vars & Translations
 # ---------------------------
-$global:ToolkitVersion = "2.3 Beta1"
+$global:ToolkitVersion = "2.6"
 $global:Language = "ID"  # default
 
 # Standardized translation structure
@@ -33,15 +33,15 @@ $global:Translations = @{
         "Menu_Option1" = "System Information"
         "Menu_Option2" = "Junk Cleaner"
         "Menu_Option3" = "Empty Recycle Bin"
-        "Menu_Option4" = "Open Disk Cleanup" # CHANGED
+        "Menu_Option4" = "Open Disk Cleanup"
         "Menu_Option5" = "Network Utilities"
         "Menu_Option6" = "Memory Optimizer"
-        "Menu_Option7" = "Open Windows Security" # CHANGED
-        "Menu_Option8" = "Defragment Disk" # NEW
-        "Menu_Option9" = "System Health Checker" # Re-numbered
-        "Menu_Option10" = "Startup Manager" # Re-numbered
-        "Menu_Option11" = "Language Settings" # Re-numbered
-        "Menu_Option12" = "Exit" # Re-numbered
+        "Menu_Option7" = "Open Windows Security"
+        "Menu_Option8" = "Defragment & Optimize Drives" # CHANGED
+        "Menu_Option9" = "System Health Checker"
+        "Menu_Option10" = "Startup Manager"
+        "Menu_Option11" = "Language Settings"
+        "Menu_Option12" = "Exit"
         "SubMenu_Network" = "NETWORK UTILITIES"
         "SubMenu_Network1" = "Network Repair (Reset TCP/IP & flush DNS)"
         "SubMenu_Network2" = "Internet Accelerator (Change DNS)"
@@ -80,6 +80,7 @@ $global:Translations = @{
         "Health_DISM_Error" = "DISM repair failed with exit code: {0}. This indicates a Windows System issue."
         "Clean_Calculating" = "Calculating space to be freed..."
         "Clean_SpaceFreed" = "Cleanup complete. Freed approximately {0} MB of space."
+        "Clean_Warning" = "Note: Some files may not be deleted if they are currently in use by another program."
         "RAM_Confirm" = "This will run a light optimization on the memory. The effect may be minimal. Continue?"
         "RAM_Before" = "Available Memory (Before): {0} MB"
         "RAM_After" = "Available Memory (After): {0} MB"
@@ -101,30 +102,31 @@ $global:Translations = @{
         "Startup_Error" = "Error managing startup: {0}"
         "System_Title" = "System Information"
         "Clean_ErrorCalc" = "Error calculating size in {0}: {1}"
-        "Clean_ErrorDelete" = "Error deleting {0}: {1}"
+        "Clean_ErrorDelete" = "Could not delete locked file {0}: {1}"
         "Clean_Status" = "Cleaning in progress..."
         "RAM_Error" = "Error clearing memory: {0}"
-        "Defrag_Title" = "DISK DEFRAGMENTER"
-        "Defrag_Select" = "Select the drive to defragment:"
-        "Defrag_Analyzing" = "Analyzing {0}..."
-        "Defrag_Defragmenting" = "Defragmenting {0}..."
+        "Defrag_Title" = "OPTIMIZE DRIVES"
+        "Defrag_Select" = "Select the drive to optimize:"
+        "Defrag_Analyzing" = "Analyzing {0} ({1})..."
+        "Defrag_Optimizing" = "Optimizing {0} ({1})... This may take a while."
         "Defrag_Complete" = "Optimization complete for drive {0}."
-        "Defrag_NoSSD" = "Note: Defragmentation is not recommended for SSDs. This tool will perform a 'Trim' operation instead."
-    }
+        "Defrag_Type_SSD" = "SSD"
+        "Defrag_Type_HDD" = "HDD"
+    };
     "ID" = @{
         "Menu_Title" = ("ncexs Toolkit v{0}" -f $global:ToolkitVersion)
         "Menu_Option1" = "Informasi Sistem"
         "Menu_Option2" = "Pembersih Sampah"
         "Menu_Option3" = "Kosongkan Recycle Bin"
-        "Menu_Option4" = "Buka Disk Cleanup" # CHANGED
+        "Menu_Option4" = "Buka Disk Cleanup"
         "Menu_Option5" = "Utilitas Jaringan"
         "Menu_Option6" = "Optimasi Memori"
-        "Menu_Option7" = "Buka Keamanan Windows" # CHANGED
-        "Menu_Option8" = "Defragment Disk" # NEW
-        "Menu_Option9" = "Pemeriksa Kesehatan Sistem" # Re-numbered
-        "Menu_Option10" = "Pengelola Startup" # Re-numbered
-        "Menu_Option11" = "Pengaturan Bahasa" # Re-numbered
-        "Menu_Option12" = "Keluar" # Re-numbered
+        "Menu_Option7" = "Buka Keamanan Windows"
+        "Menu_Option8" = "Defragment & Optimasi Drive" # CHANGED
+        "Menu_Option9" = "Pemeriksa Kesehatan Sistem"
+        "Menu_Option10" = "Pengelola Startup"
+        "Menu_Option11" = "Pengaturan Bahasa"
+        "Menu_Option12" = "Keluar"
         "SubMenu_Network" = "UTILITAS JARINGAN"
         "SubMenu_Network1" = "Perbaikan Jaringan (Reset TCP/IP & flush DNS)"
         "SubMenu_Network2" = "Akselerator Internet (Ubah DNS)"
@@ -163,6 +165,7 @@ $global:Translations = @{
         "Health_DISM_Error" = "Perbaikan DISM gagal dengan kode keluar: {0}. Ini menandakan ada masalah pada sistem Windows."
         "Clean_Calculating" = "Menghitung ruang yang akan dibersihkan..."
         "Clean_SpaceFreed" = "Pembersihan selesai. Berhasil membebaskan sekitar {0} MB ruang."
+        "Clean_Warning" = "Catatan: Beberapa file mungkin tidak terhapus jika sedang digunakan oleh program lain."
         "RAM_Confirm" = "Ini akan menjalankan optimasi ringan pada memori. Efeknya mungkin minimal. Lanjutkan?"
         "RAM_Before" = "Memori Tersedia (Sebelum): {0} MB"
         "RAM_After" = "Memori Tersedia (Setelah): {0} MB"
@@ -184,15 +187,16 @@ $global:Translations = @{
         "Startup_Error" = "Kesalahan mengelola startup: {0}"
         "System_Title" = "Informasi Sistem"
         "Clean_ErrorCalc" = "Kesalahan menghitung ukuran di {0}: {1}"
-        "Clean_ErrorDelete" = "Kesalahan menghapus {0}: {1}"
+        "Clean_ErrorDelete" = "Tidak dapat menghapus file terkunci {0}: {1}"
         "Clean_Status" = "Pembersihan sedang berlangsung..."
         "RAM_Error" = "Kesalahan saat membersihkan memori: {0}"
-        "Defrag_Title" = "DEFRAGMENTER DISK"
-        "Defrag_Select" = "Pilih drive yang akan di-defrag:"
-        "Defrag_Analyzing" = "Menganalisis {0}..."
-        "Defrag_Defragmenting" = "Mendefrag {0}..."
+        "Defrag_Title" = "OPTIMASI DRIVE"
+        "Defrag_Select" = "Pilih drive yang akan dioptimasi:"
+        "Defrag_Analyzing" = "Menganalisis {0} ({1})..."
+        "Defrag_Optimizing" = "Mengoptimasi {0} ({1})... Proses ini mungkin butuh waktu."
         "Defrag_Complete" = "Optimalisasi selesai untuk drive {0}."
-        "Defrag_NoSSD" = "Catatan: Defragmentasi tidak disarankan untuk SSD. Tool ini akan melakukan operasi 'Trim' sebagai gantinya."
+        "Defrag_Type_SSD" = "SSD"
+        "Defrag_Type_HDD" = "HDD"
     }
 }
 
@@ -272,8 +276,8 @@ function Show-SystemInfo {
 function Clear-JunkFiles {
     Write-Log (Get-Translation 'Clean_Title') "INFO"
     Write-Host "`n=== $(Get-Translation 'Clean_Title') ===" -ForegroundColor Cyan
+    Write-Host (Get-Translation 'Clean_Warning') -ForegroundColor Yellow
 
-    # FIXED: Added %localappdata%\Temp
     $pathsToClean = @(
         "$env:TEMP\*",
         "$env:LOCALAPPDATA\Temp\*",
@@ -284,7 +288,6 @@ function Clear-JunkFiles {
         "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*",
         "$env:LOCALAPPDATA\BraveSoftware\Brave-Browser\User Data\Default\Cache\*"
     )
-
     $firefoxBasePath = Join-Path $env:APPDATA 'Mozilla\Firefox\Profiles\'
     if (Test-Path $firefoxBasePath) {
         $firefoxProfiles = Get-ChildItem $firefoxBasePath -Directory -ErrorAction SilentlyContinue
@@ -296,20 +299,12 @@ function Clear-JunkFiles {
         }
     }
 
-    Write-Host (Get-Translation 'Clean_Calculating') -ForegroundColor Yellow
+    Write-Host (Get-Translation 'Clean_Calculating') -ForegroundColor Gray
     $filesToDelete = @()
     foreach ($path in $pathsToClean) {
-        $parentPath = Split-Path -Path $path -Parent
-        if (Test-Path $parentPath) {
-            try {
-                $files = Get-ChildItem -Path $path -Recurse -Force -File -ErrorAction SilentlyContinue
-                if ($files) {
-                    $filesToDelete += $files
-                }
-            } catch {
-                $errMsg = (Get-Translation 'Clean_ErrorCalc') -f $path, $_.Exception.Message
-                Write-Log $errMsg "WARNING"
-            }
+        if (Test-Path (Split-Path -Path $path -Parent)) {
+            $files = Get-ChildItem -Path $path -Recurse -Force -File -ErrorAction SilentlyContinue
+            if ($files) { $filesToDelete += $files }
         }
     }
     
@@ -321,7 +316,9 @@ function Clear-JunkFiles {
             Remove-Item -Path $file.FullName -Force -ErrorAction Stop
             $actualFreed += $fileSize
         } catch {
-            $errMsg = (Get-Translation 'Clean_ErrorDelete') -f $file.FullName, $_.Exception.Message
+            # BUG FIX: Write a warning to the console if a file is locked
+            $errMsg = (Get-Translation 'Clean_ErrorDelete') -f $file.Name, $_.Exception.Message
+            Write-Warning $errMsg
             Write-Log $errMsg "WARNING"
         }
     }
@@ -343,12 +340,19 @@ function Clear-RecycleBin-Menu {
 
     if (($global:Language -eq "ID" -and $confirm -match '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirm -match '^(Y|y)$')) {
         try {
-            # FIXED: Use Clear-RecycleBin -Force to suppress the confirmation GUI
-            $recycleBinContent = Get-ChildItem -Path "Recycle:" -Force -ErrorAction SilentlyContinue
-            if ($recycleBinContent) {
+            # BUG FIX: A more robust method to check and clear all recycle bins
+            $shell = New-Object -ComObject Shell.Application
+            $recycleBin = $shell.NameSpace(0x0a)
+            if ($recycleBin.Items().Count -gt 0) {
+                Write-Host "Emptying Recycle Bin..." -ForegroundColor Yellow
                 Clear-RecycleBin -Force -ErrorAction Stop
-                Write-Host (Get-Translation 'Recycle_Success') -ForegroundColor Green
-                Write-Log "Recycle bin emptied." "SUCCESS"
+                Start-Sleep -Seconds 1 # Give time for the system to process
+                if (($shell.NameSpace(0x0a)).Items().Count -eq 0) {
+                    Write-Host (Get-Translation 'Recycle_Success') -ForegroundColor Green
+                    Write-Log "Recycle bin emptied successfully." "SUCCESS"
+                } else {
+                    Throw "Recycle Bin could not be emptied completely. Please check permissions."
+                }
             } else {
                 Write-Host (Get-Translation 'Recycle_AlreadyEmpty') -ForegroundColor Yellow
             }
@@ -360,12 +364,11 @@ function Clear-RecycleBin-Menu {
     } else {
         Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow
     }
-
     Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
 
 # ---------------------------
-# 4. Open Disk Cleanup (NEW)
+# 4. Open Disk Cleanup
 # ---------------------------
 function Open-DiskCleanup {
     Write-Host "`nOpening Windows Disk Cleanup utility..." -ForegroundColor Cyan
@@ -407,7 +410,6 @@ function Show-NetworkMenu {
 function Invoke-NetworkRepair {
     Write-Log "Repairing network connections..." "INFO"
     Write-Host (Get-Translation 'Network_Repairing') -ForegroundColor Yellow
-
     try {
         netsh int ip reset | Out-Null
         netsh winsock reset | Out-Null
@@ -423,59 +425,48 @@ function Invoke-NetworkRepair {
 
 function Set-InternetAcceleration {
     Write-Host "This feature will optimize your connection by changing the DNS server." -ForegroundColor Yellow
-    
     try {
-        # FIXED: Removed filter that excluded Wireless adapters
         $activeAdapters = Get-NetAdapter -ErrorAction Stop | Where-Object {
             $_.Status -eq 'Up' -and (Get-NetIPConfiguration -InterfaceAlias $_.Name -ErrorAction SilentlyContinue).IPv4DefaultGateway
         }
         if (-not $activeAdapters) {
-            Write-Host "No active network adapter with a gateway found. Connect to a network first." -ForegroundColor Red
-            return
+            Write-Host "No active network adapter with a gateway found." -ForegroundColor Red; return
         }
-
         Write-Host "`nPlease select the network adapter to configure:" -ForegroundColor Cyan
         for($i=0; $i -lt $activeAdapters.Count; $i++) {
             Write-Host "[$($i+1)] $($activeAdapters[$i].Name) - $($activeAdapters[$i].InterfaceDescription)"
         }
         Write-Host "[C] Cancel" -ForegroundColor Yellow
-
         $adapterChoice = Read-Host "Select adapter"
         if ($adapterChoice -match 'c' -or ![int]::TryParse($adapterChoice, [ref]$null) -or [int]$adapterChoice -lt 1 -or [int]$adapterChoice -gt $activeAdapters.Count) {
              Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow; return
         }
         $adapterToChange = $activeAdapters[[int]$adapterChoice - 1]
-
     } catch {
         $errorMsg = "FAILED to find network adapters. Error: $($_.Exception.Message)"
         Write-Host $errorMsg -ForegroundColor Red; Write-Log $errorMsg "ERROR"; return
     }
-
     Write-Host "`nSelect DNS Provider for '$($adapterToChange.Name)':" -ForegroundColor Yellow
     Write-Host "1. Set DNS to Google (8.8.8.8, 8.8.4.4)"
     Write-Host "2. Set DNS to Cloudflare (1.1.1.1, 1.0.0.1)"
     Write-Host "3. Revert to Automatic DNS (DHCP)"
     Write-Host "4. Cancel" -ForegroundColor Cyan
-    
     $dnsServers = $null
     $dnsChoice = Read-Host "`nSelect Optimization Option"
     switch($dnsChoice) {
         "1" { $dnsServers = @("8.8.8.8", "8.8.4.4") }
         "2" { $dnsServers = @("1.1.1.1", "1.0.0.1") }
-        "3" { $dnsServers = @() } # Empty array for automatic
+        "3" { $dnsServers = @() }
         "4" { Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow; return }
         default { Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red; return }
     }
-
     try {
         Write-Host "Changing DNS for adapter: $($adapterToChange.Name)..." -ForegroundColor Green
-
         if ($dnsServers.Count -gt 0) {
             $adapterToChange | Set-DnsClientServerAddress -ServerAddresses $dnsServers -ErrorAction Stop
         } else {
             $adapterToChange | Set-DnsClientServerAddress -ResetServerAddresses -ErrorAction Stop
         }
-
         Write-Host "DNS settings changed successfully. Flushing DNS cache..." -ForegroundColor Green
         ipconfig /flushdns | Out-Null
         Write-Host "Done." -ForegroundColor Green
@@ -493,35 +484,25 @@ function Set-InternetAcceleration {
 # ---------------------------
 function Clear-RAM {
     Write-Host "`n=== $(Get-Translation 'Menu_Option6') ===" -ForegroundColor Cyan
-    
     $confirm = Read-Host "$(Get-Translation 'RAM_Confirm') $(Get-Translation 'YesNoPrompt')"
     if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -and ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) {
-        Write-Host (Get-Translation 'RAM_Cancel') -ForegroundColor Yellow
-        Read-Host "`n$(Get-Translation 'PressAnyKey')"
-        return
+        Write-Host (Get-Translation 'RAM_Cancel') -ForegroundColor Yellow; Read-Host "`n$(Get-Translation 'PressAnyKey')"; return
     }
-
     try {
         $os = Get-CimInstance -ClassName Win32_OperatingSystem
         $memBefore = [math]::Round($os.FreePhysicalMemory / 1024)
         Write-Host ((Get-Translation 'RAM_Before') -f $memBefore) -ForegroundColor Gray
-        [System.GC]::Collect()
-        [System.GC]::WaitForPendingFinalizers()
-        Start-Sleep -Seconds 1
+        [System.GC]::Collect(); [System.GC]::WaitForPendingFinalizers(); Start-Sleep -Seconds 1
         $memAfter = [math]::Round((Get-CimInstance -ClassName Win32_OperatingSystem).FreePhysicalMemory / 1024)
         Write-Host ((Get-Translation 'RAM_After') -f $memAfter) -ForegroundColor Gray
         $memFreed = $memAfter - $memBefore
         if ($memFreed -gt 5) {
             $message = (Get-Translation 'RAM_Freed') -f $memFreed
-            Write-Log "$message" "SUCCESS"
-            Write-Host $message -ForegroundColor Green
-        } else {
-            Write-Host "Memory is already optimized." -ForegroundColor Green
-        }
+            Write-Log "$message" "SUCCESS"; Write-Host $message -ForegroundColor Green
+        } else { Write-Host "Memory is already optimized." -ForegroundColor Green }
     } catch {
         $errorMsg = (Get-Translation 'RAM_Error') -f $_.Exception.Message
-        Write-Log $errorMsg "ERROR"
-        Write-Host $errorMsg -ForegroundColor Red
+        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
     }
     Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
@@ -536,24 +517,19 @@ function Open-WindowsSecurity {
         Write-Log "Launched Windows Security (windowsdefender:)" "INFO"
     } catch {
         $errorMsg = "Failed to open Windows Security: $($_.Exception.Message)"
-        Write-Log $errorMsg "ERROR"
-        Write-Host $errorMsg -ForegroundColor Red
+        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
         Read-Host "`n$(Get-Translation 'PressAnyKey')"
     }
 }
 
 # ---------------------------
-# 8. Defragment Disk (NEW)
+# 8. Defragment & Optimize Drives
 # ---------------------------
 function Invoke-Defragment {
     Write-Host "`n=== $(Get-Translation 'Defrag_Title') ===" -ForegroundColor Cyan
-    Write-Host (Get-Translation 'Defrag_NoSSD') -ForegroundColor Yellow
-
     try {
         $volumes = Get-Volume | Where-Object { $_.DriveType -eq 'Fixed' -and $_.DriveLetter } | Sort-Object DriveLetter
-        if (-not $volumes) {
-            Write-Host "No fixed drives found to optimize." -ForegroundColor Red; return
-        }
+        if (-not $volumes) { Write-Host "No fixed drives found to optimize." -ForegroundColor Red; return }
 
         Write-Host "`n$(Get-Translation 'Defrag_Select')" -ForegroundColor Cyan
         for ($i=0; $i -lt $volumes.Count; $i++) {
@@ -570,17 +546,25 @@ function Invoke-Defragment {
         $selectedVolume = $volumes[[int]$choice - 1]
         $driveLetter = $selectedVolume.DriveLetter
 
-        Write-Host "`n$( (Get-Translation 'Defrag_Analyzing') -f $driveLetter )" -ForegroundColor Gray
+        # BUG FIX: Automatically detect drive media type (SSD/HDD)
+        $partition = Get-Partition -DriveLetter $selectedVolume.DriveLetter
+        $diskNumber = $partition.DiskNumber
+        $mediaType = (Get-PhysicalDisk -DeviceNumber $diskNumber).MediaType
+        $mediaTypeDisplay = if($mediaType -eq "SSD") { (Get-Translation 'Defrag_Type_SSD') } else { (Get-Translation 'Defrag_Type_HDD') }
+
+        Write-Host "`n$( (Get-Translation 'Defrag_Analyzing') -f $driveLetter, $mediaTypeDisplay )" -ForegroundColor Gray
         Optimize-Volume -DriveLetter $driveLetter -Analyze -Verbose
 
-        Write-Host "`n$( (Get-Translation 'Defrag_Defragmenting') -f $driveLetter )" -ForegroundColor Yellow
-        Optimize-Volume -DriveLetter $driveLetter -Defrag -Verbose
+        $confirmationMessage = (Get-Translation 'Defrag_Optimizing') -f $driveLetter, $mediaTypeDisplay
+        Write-Host "`n$confirmationMessage" -ForegroundColor Yellow
+        
+        # The Optimize-Volume cmdlet is smart: it runs Defrag for HDD and Trim for SSD automatically.
+        Optimize-Volume -DriveLetter $driveLetter -Verbose
 
         Write-Host "`n$( (Get-Translation 'Defrag_Complete') -f $driveLetter )" -ForegroundColor Green
     } catch {
         $errorMsg = "An error occurred during optimization: $($_.Exception.Message)"
-        Write-Log $errorMsg "ERROR"
-        Write-Host $errorMsg -ForegroundColor Red
+        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
     }
     Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
@@ -612,7 +596,6 @@ function Show-SystemHealthMenu {
 function Invoke-SFCScan {
     $confirm = Read-Host "`n$(Get-Translation 'Health_Warning') $(Get-Translation 'YesNoPrompt')"
     if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -and ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) { return }
-
     Write-Host "`n$(Get-Translation 'Health_SFC_Running')" -ForegroundColor Yellow
     try {
         $process = Start-Process -FilePath "sfc.exe" -ArgumentList "/scannow" -Wait -PassThru -NoNewWindow
@@ -621,8 +604,7 @@ function Invoke-SFCScan {
             Write-Log "SFC Scan completed successfully." "SUCCESS"
         } else {
             $errorMsg = (Get-Translation 'Health_SFC_Error') -f "$($process.ExitCode)"
-            Write-Log "SFC.exe tool reported an error." "ERROR"
-            Write-Host "`n$errorMsg" -ForegroundColor Red
+            Write-Log "SFC.exe tool reported an error." "ERROR"; Write-Host "`n$errorMsg" -ForegroundColor Red
         }
     } catch { Write-Log "Failed to start sfc.exe: $($_.Exception.Message)" "ERROR" }
 }
@@ -630,7 +612,6 @@ function Invoke-SFCScan {
 function Invoke-DISMRepair {
     $confirm = Read-Host "`n$(Get-Translation 'Health_Warning') $(Get-Translation 'YesNoPrompt')"
     if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -and ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) { return }
-    
     Write-Host "`n$(Get-Translation 'Health_DISM_Running')" -ForegroundColor Yellow
     try {
         $process = Start-Process -FilePath "dism.exe" -ArgumentList "/online", "/cleanup-image", "/restorehealth" -Wait -PassThru -NoNewWindow
@@ -639,8 +620,7 @@ function Invoke-DISMRepair {
             Write-Log "DISM repair completed successfully." "SUCCESS"
         } else {
             $errorMsg = (Get-Translation 'Health_DISM_Error') -f "$($process.ExitCode)"
-            Write-Log "DISM.exe tool reported an error." "ERROR"
-            Write-Host "`n$errorMsg" -ForegroundColor Red
+            Write-Log "DISM.exe tool reported an error." "ERROR"; Write-Host "`n$errorMsg" -ForegroundColor Red
         }
     } catch { Write-Log "Failed to start dism.exe: $($_.Exception.Message)" "ERROR" }
 }
@@ -672,20 +652,15 @@ function Show-StartupManager {
 function Set-StartupProgram {
     param([ValidateSet("Disable", "Enable")][string]$Action)
     $backupFile = Join-Path -Path $PSScriptRoot -ChildPath "StartupBackup.json"
-
     if ($Action -eq "Disable") {
         Write-Host "`n=== $(Get-Translation 'SubMenu_Startup1') ===" -ForegroundColor Cyan
         try {
             $startupItems = Get-CimInstance -ClassName Win32_StartupCommand | Select-Object @{N="Name";E={$_.Name}}, Command, Location, User | Sort-Object Name
             if (-not $startupItems) { Write-Host (Get-Translation 'Startup_None') -ForegroundColor Yellow; return }
-
             Write-Host (Get-Translation 'Startup_List') -ForegroundColor Yellow
-            for ($i = 0; $i -lt $startupItems.Count; $i++) {
-                Write-Host ("[{0}] {1} ({2})" -f ($i+1), $startupItems[$i].Name, $startupItems[$i].Location) -ForegroundColor Gray
-            }
+            for ($i = 0; $i -lt $startupItems.Count; $i++) { Write-Host ("[{0}] {1} ({2})" -f ($i+1), $startupItems[$i].Name, $startupItems[$i].Location) -ForegroundColor Gray }
             $itemChoice = Read-Host "`nEnter number to disable (or press Enter to cancel)"
             if ([string]::IsNullOrWhiteSpace($itemChoice)) { Write-Host (Get-Translation 'Cancel'); return }
-            
             if ($itemChoice -match '^\d+$' -and [int]$itemChoice -ge 1 -and [int]$itemChoice -le $startupItems.Count) {
                 $selectedItem = $startupItems[[int]$itemChoice - 1]
                 if ($selectedItem.Location -notlike "*Registry*") { Write-Host "Cannot disable non-registry startup item '$($selectedItem.Name)'." -ForegroundColor Yellow; return }
@@ -698,30 +673,25 @@ function Set-StartupProgram {
                 Write-Host ((Get-Translation 'Startup_Disabled') -f $selectedItem.Name) -ForegroundColor Green
             } else { Write-Host "Invalid selection." -ForegroundColor Red }
         } catch { $errorMsg = (Get-Translation 'Startup_Error') -f $_.Exception.Message; Write-Log $errorMsg "ERROR" }
-    }
-    elseif ($Action -eq "Enable") {
+    } elseif ($Action -eq "Enable") {
         Write-Host "`n=== $(Get-Translation 'SubMenu_Startup2') ===" -ForegroundColor Cyan
         if (-not (Test-Path $backupFile)) { Write-Host "No backup of disabled startup items found." -ForegroundColor Yellow; return }
         $backupItems = Get-Content $backupFile -Raw | ConvertFrom-Json
         if (-not $backupItems) { Write-Host "No items to restore." -ForegroundColor Yellow; return }
-
         Write-Host "Disabled Startup Programs (available to enable):" -ForegroundColor Yellow
         for ($i = 0; $i -lt $backupItems.Count; $i++) { Write-Host ("[{0}] {1}" -f ($i+1), $backupItems[$i].Name) -ForegroundColor Gray }
         $itemChoice = Read-Host "`nEnter number to enable (or 'all', or Enter to cancel)"
         if ([string]::IsNullOrWhiteSpace($itemChoice)) { Write-Host (Get-Translation 'Cancel'); return }
-
         $itemsToRestore = @()
         if ($itemChoice -eq 'all') { $itemsToRestore = $backupItems } 
         elseif ($itemChoice -match '^\d+$' -and [int]$itemChoice -ge 1 -and [int]$itemChoice -le $backupItems.Count) { $itemsToRestore += $backupItems[[int]$itemChoice - 1] } 
         else { Write-Host "Invalid selection." -ForegroundColor Red; return }
-        
         $remainingItems = $backupItems | Where-Object { $_ -notin $itemsToRestore }
         foreach ($item in $itemsToRestore) {
             try {
                 if (-not (Test-Path $item.Path)) { New-Item -Path $item.Path -Force | Out-Null }
                 Set-ItemProperty -Path $item.Path -Name $item.Name -Value $item.Command -ErrorAction Stop
-                Write-Log "Enabled startup item: $($item.Name)" "INFO"
-                Write-Host ((Get-Translation 'Startup_Enabled') -f $item.Name) -ForegroundColor Green
+                Write-Log "Enabled startup item: $($item.Name)" "INFO"; Write-Host ((Get-Translation 'Startup_Enabled') -f $item.Name) -ForegroundColor Green
             } catch {
                 Write-Host "Failed to enable $($item.Name): $($_.Exception.Message)" -ForegroundColor Red
                 Write-Log "Failed to enable startup item $($item.Name): $($_.Exception.Message)" "ERROR"
@@ -744,7 +714,6 @@ function Show-LanguageMenu {
     Write-Host "2. $(Get-Translation 'LanguageMenu2')"
     Write-Host "3. $(Get-Translation 'LanguageMenu3')"
     Write-Host "=========================================" -ForegroundColor Green
-
     do {
         $choice = Read-Host "`n$(Get-Translation 'SelectOption')"
         switch ($choice) {
@@ -774,15 +743,15 @@ function Show-MainMenu {
     Write-Host ("1. {0}" -f (Get-Translation 'Menu_Option1'))
     Write-Host ("2. {0}" -f (Get-Translation 'Menu_Option2'))
     Write-Host ("3. {0}" -f (Get-Translation 'Menu_Option3'))
-    Write-Host ("4. {0}" -f (Get-Translation 'Menu_Option4')) # New
+    Write-Host ("4. {0}" -f (Get-Translation 'Menu_Option4'))
     Write-Host ("5. {0}" -f (Get-Translation 'Menu_Option5'))
     Write-Host ("6. {0}" -f (Get-Translation 'Menu_Option6'))
-    Write-Host ("7. {0}" -f (Get-Translation 'Menu_Option7')) -ForegroundColor Yellow # New
-    Write-Host ("8. {0}" -f (Get-Translation 'Menu_Option8')) -ForegroundColor Yellow # New
+    Write-Host ("7. {0}" -f (Get-Translation 'Menu_Option7')) -ForegroundColor Yellow
+    Write-Host ("8. {0}" -f (Get-Translation 'Menu_Option8')) -ForegroundColor Yellow
     Write-Host ("9. {0}" -f (Get-Translation 'Menu_Option9'))
     Write-Host ("10. {0}" -f (Get-Translation 'Menu_Option10'))
     Write-Host ("11. {0}" -f (Get-Translation 'Menu_Option11'))
-    Write-Host ("12. {0}" -f (Get-Translation 'Menu_Option12')) -ForegroundColor Red # New number
+    Write-Host ("12. {0}" -f (Get-Translation 'Menu_Option12')) -ForegroundColor Red
     Write-Host "=========================================" -ForegroundColor Green
 }
 
@@ -796,15 +765,15 @@ do {
         "1"  { Show-SystemInfo }
         "2"  { Clear-JunkFiles }
         "3"  { Clear-RecycleBin-Menu }
-        "4"  { Open-DiskCleanup }      # CHANGED
+        "4"  { Open-DiskCleanup }
         "5"  { Show-NetworkMenu }
         "6"  { Clear-RAM }
-        "7"  { Open-WindowsSecurity }  # CHANGED
-        "8"  { Invoke-Defragment }     # NEW
-        "9"  { Show-SystemHealthMenu } # Re-numbered
-        "10" { Show-StartupManager }   # Re-numbered
-        "11" { Show-LanguageMenu }     # Re-numbered
-        "12" { # Re-numbered
+        "7"  { Open-WindowsSecurity }
+        "8"  { Invoke-Defragment }
+        "9"  { Show-SystemHealthMenu }
+        "10" { Show-StartupManager }
+        "11" { Show-LanguageMenu }
+        "12" {
             Write-Log "Toolkit session completed." "INFO"
             Write-Host (Get-Translation 'ExitMessage') -ForegroundColor Green
             Start-Sleep -Seconds 1
