@@ -15,22 +15,21 @@ jobs:
       - name: 🧩 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: ⚙️ Run PowerShell Syntax Check (Quick)
+      - name: ⚙️ Quick Syntax Validation
         shell: pwsh
         run: |
           Write-Host "=== Quick Syntax Validation ==="
           $files = Get-ChildItem -Path . -Filter "*.ps1"
           foreach ($f in $files) {
             Write-Host "🔍 Checking syntax of $($f.Name)"
-            $syntaxCheck = powershell -NoLogo -NoProfile -Command "[System.Management.Automation.PSParser]::Tokenize((Get-Content .\$($f.Name) -Raw), [ref]$null)" 2>&1
-            if ($LASTEXITCODE -ne 0) {
-              Write-Host "❌ Syntax issue found in $($f.Name)"
-              exit 1
-            } else {
+            try {
+              [System.Management.Automation.PSParser]::Tokenize((Get-Content .\$($f.Name) -Raw), [ref]$null) | Out-Null
               Write-Host "✅ Syntax OK - $($f.Name)"
+            } catch {
+              Write-Host "❌ Syntax error in $($f.Name): $($_.Exception.Message)"
+              exit 1
             }
           }
-
 
       - name: 🧾 Save Build Log
         shell: pwsh
