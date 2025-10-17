@@ -110,7 +110,7 @@ $global:Translations = @{
         "Defrag_Defragmenting" = "Defragmenting {0}..."
         "Defrag_Complete" = "Optimization complete for drive {0}."
         "Defrag_NoSSD" = "Note: Defragmentation is not recommended for SSDs. This tool will perform a 'Trim' operation instead."
-    }; # BUG FIX: Added semicolon
+    }
     "ID" = @{
         "Menu_Title" = ("ncexs Toolkit v{0}" -f $global:ToolkitVersion)
         "Menu_Option1" = "Informasi Sistem"
