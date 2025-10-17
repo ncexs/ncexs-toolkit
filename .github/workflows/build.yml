@@ -1,33 +1,39 @@
-name: Build Script (Auto Save)
+name: 🧱 Build ncexs Toolkit
 
 on:
   push:
     branches:
       - main
+    paths:
+      - "*.ps1"   # Jalankan hanya jika ada file PS1 yang berubah
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
+      - name: 🧩 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up PowerShell
-        uses: actions/setup-powershell@v2
-
-      - name: Show files
-        run: Get-ChildItem -Path . -Recurse
-
-      - name: Build script (optional step)
+      - name: ⚙️ Run PowerShell Script (Test Build)
+        shell: pwsh
         run: |
-          Write-Host "Building script..."
-          # Misal kamu ingin gabungin file, kompres, atau validasi syntax PowerShell
-          # Contoh: Test-ModuleManifest atau sekadar copy file utama
-          Copy-Item ncexs-Toolkit-v2.3.ps1 build-output\ -Force
+          Write-Host "=== Running ncexs Toolkit Build ==="
+          $files = Get-ChildItem -Path . -Filter "*.ps1"
+          foreach ($f in $files) {
+            Write-Host "Testing: $($f.Name)"
+            # Jalankan test ringan biar ketahuan kalau ada error sintaks
+            try {
+              powershell -NoLogo -NoProfile -Command "& { . .\$($f.Name); Write-Host '✅ OK' }"
+            } catch {
+              Write-Host "❌ Error in $($f.Name): $($_.Exception.Message)"
+              exit 1
+            }
+          }
+          Write-Host "All scripts checked successfully ✅"
 
-      - name: Upload build artifact
+      - name: 📤 Upload Build Log
         uses: actions/upload-artifact@v4
         with:
-          name: ncexs-toolkit-build
-          path: build-output/
+          name: ncexs-build-log
+          path: .
