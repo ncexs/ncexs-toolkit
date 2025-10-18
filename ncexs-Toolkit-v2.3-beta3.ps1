@@ -1,6 +1,6 @@
 <#
 ===============================================
- ncexs Toolkit v2.3 beta2
+ ncexs Toolkit v2.3 beta3
 ===============================================
 #>
 
@@ -23,7 +23,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction S
 # ---------------------------
 # Global vars & Translations
 # ---------------------------
-$global:ToolkitVersion = "2.3 beta2"
+$global:ToolkitVersion = "2.3 beta3"
 $global:Language = "ID"  # default
 
 # Standardized translation structure
@@ -300,7 +300,8 @@ function Clear-JunkFiles {
 
     $pathsToClean = @(
         "$env:SystemRoot\Temp",
-        "$env:TEMP"
+        "$env:TEMP",
+        "$env:SystemRoot\Prefetch" # FIX 1: Menambahkan folder Prefetch
     )
 
     Write-Host "`n$( (Get-Translation 'Clean_Calculating') )" -ForegroundColor Gray
@@ -311,12 +312,11 @@ function Clear-JunkFiles {
     foreach ($folderPath in $pathsToClean) {
         if (-not (Test-Path $folderPath)) { continue }
         
-        # BUG FIX: Get items first, then try to delete. This handles path issues better.
+        # FIX 2: Memperbaiki typo dari -Recourse menjadi -Recurse
         $items = Get-ChildItem -Path $folderPath -Recurse -Force -ErrorAction SilentlyContinue
         
         foreach ($item in $items) {
             try {
-                # BUG FIX: Directly use the Length property from the item object
                 $itemSize = if ($item.PSIsContainer) { 0 } else { $item.Length }
                 
                 Remove-Item -Path $item.FullName -Recurse -Force -ErrorAction Stop
