@@ -66,7 +66,7 @@ $global:Translations = @{
         "Clean_SpaceFreed" = "Cleanup complete. Freed approximately {0} MB of space."
         "Clean_Warning" = "Note: Some files may not be deleted if they are currently in use by another program."
         "Clean_Confirm" = "This will clean system temporary files and browser data (if detected). Continue?"
-        "RAM_Confirm" = "This will run a light optimization on the memory. The effect may be minimal. Continue?"
+        "RAM_Confirm" = "This will perform an optimal cleanup of the system memory cache to free up RAM. Continue?"
         "RAM_Before" = "Available Memory (Before): {0} MB"
         "RAM_After" = "Available Memory (After): {0} MB"
         "RAM_Freed" = "Successfully freed {0} MB of memory."
@@ -141,7 +141,7 @@ $global:Translations = @{
         "Clean_SpaceFreed" = "Pembersihan selesai. Berhasil membebaskan sekitar {0} MB ruang."
         "Clean_Warning" = "Catatan: Beberapa file mungkin tidak terhapus jika sedang digunakan oleh program lain."
         "Clean_Confirm" = "Tindakan ini akan membersihkan file sementara sistem dan data browser (jika terdeteksi). Lanjutkan?"
-        "RAM_Confirm" = "Ini akan menjalankan optimasi ringan pada memori. Efeknya mungkin minimal. Lanjutkan?"
+        "RAM_Confirm" = "Tindakan ini akan melakukan pembersihan optimal pada cache memori sistem untuk melegakan RAM. Lanjutkan?"
         "RAM_Before" = "Memori Tersedia (Sebelum): {0} MB"
         "RAM_After" = "Memori Tersedia (Setelah): {0} MB"
         "RAM_Freed" = "Berhasil membebaskan {0} MB memori."
@@ -388,18 +388,75 @@ function Invoke-NetworkRepair {
 # ---------------------------
 function Clear-RAM {
     Write-Host "`n=== $(Get-Translation 'Menu_Option6') ===" -ForegroundColor Cyan
-    $confirm = Read-Host "$(Get-Translation 'RAM_Confirm') $(Get-Translation 'YesNoPrompt')"
-    if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -and ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) { Write-Host (Get-Translation 'RAM_Cancel') -ForegroundColor Yellow; Read-Host "`n$(Get-Translation 'PressAnyKey')"; return }
+    $confirm = Read-Host "`n$(Get-Translation 'RAM_Confirm') $(Get-Translation 'YesNoPrompt')"
+    if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -and ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) {
+        Write-Host (Get-Translation 'RAM_Cancel') -ForegroundColor Yellow
+        Read-Host "`n$(Get-Translation 'PressAnyKey')"
+        return
+    }
+
     try {
-        $os = Get-CimInstance -ClassName Win32_OperatingSystem; $memBefore = [math]::Round($os.FreePhysicalMemory / 1024)
+        # --- Measure memory BEFORE optimization ---
+        $os = Get-CimInstance -ClassName Win32_OperatingSystem
+        $memBefore = [math]::Round($os.FreePhysicalMemory / 1024)
         Write-Host ((Get-Translation 'RAM_Before') -f $memBefore) -ForegroundColor Gray
-        [System.GC]::Collect(); [System.GC]::WaitForPendingFinalizers(); Start-Sleep -Seconds 1
+        Write-Progress -Activity (Get-Translation 'Menu_Option6') -Status "Optimizing..."
+
+        # --- C# code to call Windows API for clearing memory cache ---
+        $CSharpCode = @"
+        using System;
+        using System.Runtime.InteropServices;
+        public class MemoryOptimizer
+        {
+            [DllImport("psapi.dll")]
+            private static extern bool EmptyWorkingSet(IntPtr hProcess);
+
+            public static void ClearAllProcessesWorkingSet()
+            {
+                foreach (var process in System.Diagnostics.Process.GetProcesses())
+                {
+                    try
+                    {
+                        // We don't need to empty our own process
+                        if (process.Id != System.Diagnostics.Process.GetCurrentProcess().Id)
+                        {
+                            EmptyWorkingSet(process.Handle);
+                        }
+                    }
+                    catch { /* Ignore processes that we can't access */ }
+                }
+            }
+        }
+"@
+        # --- Compile and run the C# code ---
+        Add-Type -TypeDefinition $CSharpCode
+        [MemoryOptimizer]::ClearAllProcessesWorkingSet()
+        
+        # --- Perform a light garbage collection for the script itself ---
+        [System.GC]::Collect()
+        [System.GC]::WaitForPendingFinalizers()
+        Start-Sleep -Seconds 1
+
+        # --- Measure memory AFTER optimization ---
         $memAfter = [math]::Round((Get-CimInstance -ClassName Win32_OperatingSystem).FreePhysicalMemory / 1024)
         Write-Host ((Get-Translation 'RAM_After') -f $memAfter) -ForegroundColor Gray
+        
         $memFreed = $memAfter - $memBefore
-        if ($memFreed -gt 5) { $message = (Get-Translation 'RAM_Freed') -f $memFreed; Write-Log "$message" "SUCCESS"; Write-Host $message -ForegroundColor Green }
-        else { Write-Host "Memory is already optimized." -ForegroundColor Green }
-    } catch { $errorMsg = (Get-Translation 'RAM_Error') -f $_.Exception.Message; Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red }
+        if ($memFreed -gt 10) { # Increased threshold
+            $message = (Get-Translation 'RAM_Freed') -f $memFreed
+            Write-Log "$message" "SUCCESS"
+            Write-Host $message -ForegroundColor Green
+        }
+        else {
+            Write-Host "Memory is already optimized." -ForegroundColor Green
+        }
+    } catch {
+        $errorMsg = (Get-Translation 'RAM_Error') -f $_.Exception.Message
+        Write-Log $errorMsg "ERROR"
+        Write-Host $errorMsg -ForegroundColor Red
+    } finally {
+        Write-Progress -Activity (Get-Translation 'Menu_Option6') -Completed
+    }
     Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
 
