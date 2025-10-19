@@ -34,7 +34,7 @@ $global:Translations = @{
         "Menu_Option2" = "Junk Cleaner"
         "Menu_Option3" = "Empty Recycle Bin"
         "Menu_Option4" = "Open Disk Cleanup"
-        "Menu_Option5" = "Network Utilities"
+        "Menu_Option5" = "Automatic Network Repair"
         "Menu_Option6" = "Memory Optimizer"
         "Menu_Option7" = "Open Windows Security"
         "Menu_Option8" = "Defragment & Optimize Drives"
@@ -42,22 +42,6 @@ $global:Translations = @{
         "Menu_Option10" = "Startup Manager"
         "Menu_Option11" = "Language Settings"
         "Menu_Option12" = "Exit"
-        "SubMenu_Network" = "NETWORK UTILITIES"
-        "SubMenu_Network1" = "Network Repair (Reset TCP/IP & flush DNS)"
-        "SubMenu_Network2" = "Internet Accelerator (Change DNS)"
-        "SubMenu_Network3" = "Back to Main Menu"
-        "SubMenu_Health" = "SYSTEM HEALTH CHECKER"
-        "SubMenu_Health1" = "Run System File Checker (SFC)"
-        "SubMenu_Health2" = "Run DISM Image Repair"
-        "SubMenu_Health3" = "Back to Main Menu"
-        "SubMenu_Startup" = "STARTUP MANAGER"
-        "SubMenu_Startup1" = "Disable Startup Programs"
-        "SubMenu_Startup2" = "Enable Startup Programs"
-        "SubMenu_Startup3" = "Back to Main Menu"
-        "LanguageMenu" = "LANGUAGE SETTINGS"
-        "LanguageMenu1" = "English"
-        "LanguageMenu2" = "Indonesian"
-        "LanguageMenu3" = "Back to Main Menu"
         "PressAnyKey" = "Press any key to continue..."
         "InvalidOption" = "Invalid option. Please try again."
         "ExitMessage" = "Thank you for using ncexs Toolkit!"
@@ -92,7 +76,8 @@ $global:Translations = @{
         "Recycle_Success" = "Recycle Bin emptied successfully."
         "Recycle_AlreadyEmpty" = "Recycle Bin is already empty."
         "Clean_Title" = "TEMP & CACHE CLEANUP"
-        "Network_Repairing" = "Repairing network settings..."
+        "Network_Title" = "AUTOMATIC NETWORK REPAIR"
+        "Network_Repairing" = "Repairing network settings (Reset TCP/IP, Winsock, Flush DNS)..."
         "Network_Repaired" = "Network settings repaired successfully."
         "Network_ErrorRepair" = "Error repairing network: {0}"
         "Startup_Title" = "STARTUP MANAGER"
@@ -124,7 +109,7 @@ $global:Translations = @{
         "Menu_Option2" = "Pembersih Sampah"
         "Menu_Option3" = "Kosongkan Recycle Bin"
         "Menu_Option4" = "Buka Disk Cleanup"
-        "Menu_Option5" = "Utilitas Jaringan"
+        "Menu_Option5" = "Perbaikan Jaringan Otomatis"
         "Menu_Option6" = "Optimasi Memori"
         "Menu_Option7" = "Buka Keamanan Windows"
         "Menu_Option8" = "Defragment & Optimasi Drive"
@@ -132,22 +117,6 @@ $global:Translations = @{
         "Menu_Option10" = "Pengelola Startup"
         "Menu_Option11" = "Pengaturan Bahasa"
         "Menu_Option12" = "Keluar"
-        "SubMenu_Network" = "UTILITAS JARINGAN"
-        "SubMenu_Network1" = "Perbaikan Jaringan (Reset TCP/IP & flush DNS)"
-        "SubMenu_Network2" = "Akselerator Internet (Ubah DNS)"
-        "SubMenu_Network3" = "Kembali ke Menu Utama"
-        "SubMenu_Health" = "PEMERIKSA KESEHATAN SISTEM"
-        "SubMenu_Health1" = "Jalankan Pemeriksa Berkas Sistem (SFC)"
-        "SubMenu_Health2" = "Jalankan Perbaikan Image DISM"
-        "SubMenu_Health3" = "Kembali ke Menu Utama"
-        "SubMenu_Startup" = "PENGELOLA STARTUP"
-        "SubMenu_Startup1" = "Nonaktifkan Program Startup"
-        "SubMenu_Startup2" = "Aktifkan Program Startup"
-        "SubMenu_Startup3" = "Kembali ke Menu Utama"
-        "LanguageMenu" = "PENGATURAN BAHASA"
-        "LanguageMenu1" = "Bahasa Inggris"
-        "LanguageMenu2" = "Bahasa Indonesia"
-        "LanguageMenu3" = "Kembali ke Menu Utama"
         "PressAnyKey" = "Tekan sembarang tombol untuk melanjutkan..."
         "InvalidOption" = "Pilihan tidak valid. Silakan coba lagi."
         "ExitMessage" = "Terima kasih telah menggunakan ncexs Toolkit!"
@@ -182,7 +151,8 @@ $global:Translations = @{
         "Recycle_Success" = "Recycle Bin berhasil dikosongkan."
         "Recycle_AlreadyEmpty" = "Recycle Bin sudah kosong."
         "Clean_Title" = "PEMBERSIHAN SEMENTARA & CACHE"
-        "Network_Repairing" = "Memperbaiki pengaturan jaringan..."
+        "Network_Title" = "PERBAIKAN JARINGAN OTOMATIS"
+        "Network_Repairing" = "Memperbaiki pengaturan jaringan (Reset TCP/IP, Winsock, Flush DNS)..."
         "Network_Repaired" = "Pengaturan jaringan berhasil diperbaiki."
         "Network_ErrorRepair" = "Kesalahan memperbaiki jaringan: {0}"
         "Startup_Title" = "PENGELOLA STARTUP"
@@ -287,12 +257,11 @@ function Clear-JunkFiles {
     Write-Log (Get-Translation 'Clean_Title') "INFO"
     Write-Host "`n=== $(Get-Translation 'Clean_Title') ===" -ForegroundColor Cyan
 
-    # Konfirmasi untuk seluruh proses pembersihan
     $confirm = Read-Host "`n$(Get-Translation 'Clean_Confirm') $(Get-Translation 'YesNoPrompt')"
     if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) {
         Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow
         Read-Host "`n$(Get-Translation 'PressAnyKey')"
-        return # Keluar dari fungsi jika pengguna memilih tidak
+        return
     }
 
     Write-Host (Get-Translation 'Clean_Warning') -ForegroundColor Yellow
@@ -321,7 +290,6 @@ function Clear-JunkFiles {
         foreach ($item in $items) {
             try {
                 $itemSize = if ($item.PSIsContainer) { 0 } else { $item.Length }
-                
                 Remove-Item -Path $item.FullName -Recurse -Force -ErrorAction Stop
                 $totalFreed += $itemSize
             } catch {
@@ -395,64 +363,24 @@ function Open-DiskCleanup {
 }
 
 # ---------------------------
-# 5. Network Utilities
+# 5. Automatic Network Repair
 # ---------------------------
-function Show-NetworkMenu {
-    do {
-        Clear-Host
-        Write-Host "=========================================" -ForegroundColor Green
-        Write-Host "        $(Get-Translation 'SubMenu_Network')" -ForegroundColor Cyan
-        Write-Host "=========================================" -ForegroundColor Green
-        Write-Host "1. $(Get-Translation 'SubMenu_Network1')"; Write-Host "2. $(Get-Translation 'SubMenu_Network2')"; Write-Host "3. $(Get-Translation 'SubMenu_Network3')"
-        Write-Host "=========================================" -ForegroundColor Green
-        $choice = Read-Host "`n$(Get-Translation 'SelectOption')"
-        switch ($choice) {
-            "1" { Invoke-NetworkRepair; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
-            "2" { Set-InternetAcceleration; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
-            "3" { return }
-            default { Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red; Start-Sleep -Seconds 2 }
-        }
-    } while ($true)
-}
-
 function Invoke-NetworkRepair {
-    Write-Log "Repairing network connections..." "INFO"; Write-Host (Get-Translation 'Network_Repairing') -ForegroundColor Yellow
+    Write-Host "`n=== $(Get-Translation 'Network_Title') ===" -ForegroundColor Cyan
+    
+    Write-Log "Repairing network connections..." "INFO"
+    Write-Host "`n$(Get-Translation 'Network_Repairing')" -ForegroundColor Yellow
     try {
-        netsh int ip reset | Out-Null; netsh winsock reset | Out-Null; ipconfig /flushdns | Out-Null
-        Write-Log "Network repair completed." "SUCCESS"; Write-Host (Get-Translation 'Network_Repaired') -ForegroundColor Green
-    } catch { $errorMsg = (Get-Translation 'Network_ErrorRepair') -f $_.Exception.Message; Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red }
-}
-
-function Set-InternetAcceleration {
-    Write-Host "This feature will optimize your connection by changing the DNS server." -ForegroundColor Yellow
-    try {
-        $activeAdapters = Get-NetAdapter -ErrorAction Stop | Where-Object { $_.Status -eq 'Up' -and (Get-NetIPConfiguration -InterfaceAlias $_.Name -ErrorAction SilentlyContinue).IPv4DefaultGateway }
-        if (-not $activeAdapters) { Write-Host "No active network adapter with a gateway found." -ForegroundColor Red; return }
-        Write-Host "`nPlease select the network adapter to configure:" -ForegroundColor Cyan
-        for($i=0; $i -lt $activeAdapters.Count; $i++) { Write-Host "[$($i+1)] $($activeAdapters[$i].Name) - $($activeAdapters[$i].InterfaceDescription)" }
-        Write-Host "[C] Cancel" -ForegroundColor Yellow
-        $adapterChoice = Read-Host "Select adapter"
-        if ($adapterChoice -match 'c' -or ![int]::TryParse($adapterChoice, [ref]$null) -or [int]$adapterChoice -lt 1 -or [int]$adapterChoice -gt $activeAdapters.Count) { Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow; return }
-        $adapterToChange = $activeAdapters[[int]$adapterChoice - 1]
-    } catch { $errorMsg = "FAILED to find network adapters. Error: $($_.Exception.Message)"; Write-Host $errorMsg -ForegroundColor Red; Write-Log $errorMsg "ERROR"; return }
-    Write-Host "`nSelect DNS Provider for '$($adapterToChange.Name)':" -ForegroundColor Yellow
-    Write-Host "1. Google (8.8.8.8)"; Write-Host "2. Cloudflare (1.1.1.1)"; Write-Host "3. Automatic (DHCP)"; Write-Host "4. Cancel" -ForegroundColor Cyan
-    $dnsServers = $null; $dnsChoice = Read-Host "`nSelect Optimization Option"
-    switch($dnsChoice) {
-        "1" { $dnsServers = @("8.8.8.8", "8.8.4.4") }
-        "2" { $dnsServers = @("1.1.1.1", "1.0.0.1") }
-        "3" { $dnsServers = @() }
-        "4" { Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow; return }
-        default { Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red; return }
+        netsh int ip reset | Out-Null
+        netsh winsock reset | Out-Null
+        ipconfig /flushdns | Out-Null
+        Write-Log "Network repair completed." "SUCCESS"
+        Write-Host (Get-Translation 'Network_Repaired') -ForegroundColor Green
+    } catch { 
+        $errorMsg = (Get-Translation 'Network_ErrorRepair') -f $_.Exception.Message
+        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red 
     }
-    try {
-        Write-Host "Changing DNS for adapter: $($adapterToChange.Name)..." -ForegroundColor Green
-        if ($dnsServers.Count -gt 0) { $adapterToChange | Set-DnsClientServerAddress -ServerAddresses $dnsServers -ErrorAction Stop }
-        else { $adapterToChange | Set-DnsClientServerAddress -ResetServerAddresses -ErrorAction Stop }
-        Write-Host "DNS settings changed successfully. Flushing DNS cache..." -ForegroundColor Green
-        ipconfig /flushdns | Out-Null; Write-Host "Done." -ForegroundColor Green
-        $dnsLog = if ($dnsServers.Count -gt 0) { $dnsServers -join ', ' } else { "Automatic (DHCP)" }; Write-Log "DNS updated for adapter $($adapterToChange.Name) to $dnsLog" "SUCCESS"
-    } catch { $errorMsg = "FAILED to change DNS settings. Error: $($_.Exception.Message)"; Write-Host $errorMsg -ForegroundColor Red; Write-Log $errorMsg "ERROR" }
+    Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
 
 # ---------------------------
@@ -500,7 +428,6 @@ function Invoke-Defragment {
         $selectedVolume = $volumes[[int]$choice - 1]
         $driveLetter = $selectedVolume.DriveLetter
         
-        # BUG FIX: Automatically cancel if SSD
         $diskNumber = (Get-Partition -DriveLetter $selectedVolume.DriveLetter).DiskNumber
         $mediaType = (Get-PhysicalDisk -DeviceNumber $diskNumber).MediaType
         if ($mediaType -eq "SSD") {
@@ -696,7 +623,7 @@ do {
         "2"  { Clear-JunkFiles }
         "3"  { Clear-RecycleBin-Menu }
         "4"  { Open-DiskCleanup }
-        "5"  { Show-NetworkMenu }
+        "5"  { Invoke-NetworkRepair }
         "6"  { Clear-RAM }
         "7"  { Open-WindowsSecurity }
         "8"  { Invoke-Defragment }
