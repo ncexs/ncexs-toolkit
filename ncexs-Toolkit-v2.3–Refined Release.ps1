@@ -1,6 +1,6 @@
 <#
 ===============================================
- ncexs Toolkit v2.3 beta3
+ ncexs Toolkit v2.3 – Refined Release
 ===============================================
 #>
 
@@ -23,7 +23,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction S
 # ---------------------------
 # Global vars & Translations
 # ---------------------------
-$global:ToolkitVersion = "2.3 beta3"
+$global:ToolkitVersion = "2.3 Refined Release"
 $global:Language = "ID"  # default
 
 # Standardized translation structure
@@ -646,23 +646,23 @@ function Show-MainMenu {
     Clear-Host
     Write-Host "=========================================" -ForegroundColor Green
     Write-Host ""
-    Write-Host "                   _ __   ___ _____  _____ " -ForegroundColor Cyan
-    Write-Host "                  | '_ \ / __/ _ \ \/ / __|" -ForegroundColor Cyan
-    Write-Host "                  | | | | (_|  __/>  <\__ \ " -ForegroundColor Cyan
-    Write-Host "                  |_| |_|\___\___/_/\_\___/" -ForegroundColor Cyan
+    Write-Host "        _ __   ___ _____  _____ " -ForegroundColor Cyan
+    Write-Host "       | '_ \ / __/ _ \ \/ / __|" -ForegroundColor Cyan
+    Write-Host "       | | | | (_|  __/>  <\__ \ " -ForegroundColor Cyan
+    Write-Host "       |_| |_|\___\___/_/\_\___/" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host ("                  {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor Yellow
+    Write-Host ("   {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor Yellow
     Write-Host ""
     Write-Host "=========================================" -ForegroundColor Green
-    Write-Host ("1. {0}" -f (Get-Translation 'Menu_Option1'))
-    Write-Host ("2. {0}" -f (Get-Translation 'Menu_Option2'))
-    Write-Host ("3. {0}" -f (Get-Translation 'Menu_Option3'))
-    Write-Host ("4. {0}" -f (Get-Translation 'Menu_Option4'))
-    Write-Host ("5. {0}" -f (Get-Translation 'Menu_Option5'))
-    Write-Host ("6. {0}" -f (Get-Translation 'Menu_Option6'))
-    Write-Host ("7. {0}" -f (Get-Translation 'Menu_Option7')) -ForegroundColor Yellow
-    Write-Host ("8. {0}" -f (Get-Translation 'Menu_Option8')) -ForegroundColor Yellow
-    Write-Host ("9. {0}" -f (Get-Translation 'Menu_Option9'))
+    Write-Host ("1.  {0}" -f (Get-Translation 'Menu_Option1'))
+    Write-Host ("2.  {0}" -f (Get-Translation 'Menu_Option2'))
+    Write-Host ("3.  {0}" -f (Get-Translation 'Menu_Option3'))
+    Write-Host ("4.  {0}" -f (Get-Translation 'Menu_Option4'))
+    Write-Host ("5.  {0}" -f (Get-Translation 'Menu_Option5'))
+    Write-Host ("6.  {0}" -f (Get-Translation 'Menu_Option6'))
+    Write-Host ("7.  {0}" -f (Get-Translation 'Menu_Option7')) -ForegroundColor Yellow
+    Write-Host ("8.  {0}" -f (Get-Translation 'Menu_Option8')) -ForegroundColor Yellow
+    Write-Host ("9.  {0}" -f (Get-Translation 'Menu_Option9'))
     Write-Host ("10. {0}" -f (Get-Translation 'Menu_Option10'))
     Write-Host ("11. {0}" -f (Get-Translation 'Menu_Option11'))
     Write-Host ("12. {0}" -f (Get-Translation 'Menu_Option12')) -ForegroundColor Red
