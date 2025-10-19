@@ -81,6 +81,7 @@ $global:Translations = @{
         "Clean_Calculating" = "Calculating space to be freed..."
         "Clean_SpaceFreed" = "Cleanup complete. Freed approximately {0} MB of space."
         "Clean_Warning" = "Note: Some files may not be deleted if they are currently in use by another program."
+        "Clean_Confirm" = "This will clean system temporary files and browser data (if detected). Continue?"
         "RAM_Confirm" = "This will run a light optimization on the memory. The effect may be minimal. Continue?"
         "RAM_Before" = "Available Memory (Before): {0} MB"
         "RAM_After" = "Available Memory (After): {0} MB"
@@ -113,8 +114,6 @@ $global:Translations = @{
         "Defrag_Type_SSD" = "SSD"
         "Defrag_Type_HDD" = "HDD"
         "Defrag_SSD_Cancel" = "Operation cancelled. The selected drive is an SSD. Defragmentation is not needed."
-        "Chrome_Confirm" = "Do you want to clean Google Chrome? This will close all Chrome windows but will NOT log you out of websites."
-        "Chrome_Closing" = "Closing Google Chrome processes..."
         "Chrome_Cleaning" = "Cleaning Chrome cache, history, and session data..."
         "Chrome_Done" = "Google Chrome cleanup complete."
         "Chrome_NotFound" = "Google Chrome installation not found."
@@ -172,6 +171,7 @@ $global:Translations = @{
         "Clean_Calculating" = "Menghitung ruang yang akan dibersihkan..."
         "Clean_SpaceFreed" = "Pembersihan selesai. Berhasil membebaskan sekitar {0} MB ruang."
         "Clean_Warning" = "Catatan: Beberapa file mungkin tidak terhapus jika sedang digunakan oleh program lain."
+        "Clean_Confirm" = "Tindakan ini akan membersihkan file sementara sistem dan data browser (jika terdeteksi). Lanjutkan?"
         "RAM_Confirm" = "Ini akan menjalankan optimasi ringan pada memori. Efeknya mungkin minimal. Lanjutkan?"
         "RAM_Before" = "Memori Tersedia (Sebelum): {0} MB"
         "RAM_After" = "Memori Tersedia (Setelah): {0} MB"
@@ -204,8 +204,6 @@ $global:Translations = @{
         "Defrag_Type_SSD" = "SSD"
         "Defrag_Type_HDD" = "HDD"
         "Defrag_SSD_Cancel" = "Operasi dibatalkan. Drive yang dipilih adalah SSD. Defragmentasi tidak diperlukan."
-        "Chrome_Confirm" = "Apakah Anda ingin membersihkan Google Chrome? Ini akan menutup semua jendela Chrome tapi TIDAK akan membuat Anda logout dari website."
-        "Chrome_Closing" = "Menutup proses Google Chrome..."
         "Chrome_Cleaning" = "Membersihkan cache, riwayat, dan data sesi Chrome..."
         "Chrome_Done" = "Pembersihan Google Chrome selesai."
         "Chrome_NotFound" = "Instalasi Google Chrome tidak ditemukan."
@@ -272,7 +270,7 @@ function Show-SystemInfo {
         foreach ($disk in $disks) {
             $freeSpace = [math]::Round($disk.FreeSpace / 1GB, 2)
             $totalSize = [math]::Round($disk.Size / 1GB, 2)
-            Write-Host ("  {0} {1} GB ({2} GB {3})" -f $disk.DeviceID, $totalSize, $freeSpace, (Get-Translation "Free")) -ForegroundColor Gray
+            Write-Host ("   {0} {1} GB ({2} GB {3})" -f $disk.DeviceID, $totalSize, $freeSpace, (Get-Translation "Free")) -ForegroundColor Gray
         }
     } catch {
         Write-Log "Failed to get system info: $($_.Exception.Message)" "ERROR"
@@ -288,20 +286,26 @@ function Show-SystemInfo {
 function Clear-JunkFiles {
     Write-Log (Get-Translation 'Clean_Title') "INFO"
     Write-Host "`n=== $(Get-Translation 'Clean_Title') ===" -ForegroundColor Cyan
+
+    # Konfirmasi untuk seluruh proses pembersihan
+    $confirm = Read-Host "`n$(Get-Translation 'Clean_Confirm') $(Get-Translation 'YesNoPrompt')"
+    if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) {
+        Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow
+        Read-Host "`n$(Get-Translation 'PressAnyKey')"
+        return # Keluar dari fungsi jika pengguna memilih tidak
+    }
+
     Write-Host (Get-Translation 'Clean_Warning') -ForegroundColor Yellow
 
     $chromeProfilePath = Join-Path $env:LOCALAPPDATA 'Google\Chrome\User Data\Default'
     if (Test-Path $chromeProfilePath) {
-        $confirmChrome = Read-Host "`n$( (Get-Translation 'Chrome_Confirm') ) $( (Get-Translation 'YesNoPrompt') )"
-        if (($global:Language -eq "ID" -and $confirmChrome -match '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirmChrome -match '^(Y|y)$')) {
-            Invoke-ChromeCleanup -ProfilePath $chromeProfilePath
-        }
+        Invoke-ChromeCleanup -ProfilePath $chromeProfilePath
     }
 
     $pathsToClean = @(
         "$env:SystemRoot\Temp",
         "$env:TEMP",
-        "$env:SystemRoot\Prefetch" # FIX 1: Menambahkan folder Prefetch
+        "$env:SystemRoot\Prefetch"
     )
 
     Write-Host "`n$( (Get-Translation 'Clean_Calculating') )" -ForegroundColor Gray
@@ -312,7 +316,6 @@ function Clear-JunkFiles {
     foreach ($folderPath in $pathsToClean) {
         if (-not (Test-Path $folderPath)) { continue }
         
-        # FIX 2: Memperbaiki typo dari -Recourse menjadi -Recurse
         $items = Get-ChildItem -Path $folderPath -Recurse -Force -ErrorAction SilentlyContinue
         
         foreach ($item in $items) {
@@ -338,10 +341,7 @@ function Clear-JunkFiles {
 
 function Invoke-ChromeCleanup {
     param([string]$ProfilePath)
-    Write-Host "`n$(Get-Translation 'Chrome_Closing')" -ForegroundColor Yellow
-    Stop-Process -Name "chrome" -Force -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 2
-    Write-Host (Get-Translation 'Chrome_Cleaning') -ForegroundColor Gray
+    Write-Host "`n$(Get-Translation 'Chrome_Cleaning')" -ForegroundColor Gray
     $chromePaths = @(
         Join-Path $ProfilePath 'Cache\*', Join-Path $ProfilePath 'Code Cache\*', Join-Path $ProfilePath 'GPUCache\*',
         Join-Path $ProfilePath 'Session Storage\*', Join-Path $ProfilePath 'Service Worker\CacheStorage\*',
@@ -662,12 +662,12 @@ function Show-MainMenu {
     Clear-Host
     Write-Host "=========================================" -ForegroundColor Green
     Write-Host ""
-    Write-Host "           _ __   ___ _____  _____ " -ForegroundColor Cyan
-    Write-Host "          | '_ \ / __/ _ \ \/ / __|" -ForegroundColor Cyan
-    Write-Host "          | | | | (_|  __/>  <\__ \ " -ForegroundColor Cyan
-    Write-Host "          |_| |_|\___\___/_/\_\___/" -ForegroundColor Cyan
+    Write-Host "                   _ __   ___ _____  _____ " -ForegroundColor Cyan
+    Write-Host "                  | '_ \ / __/ _ \ \/ / __|" -ForegroundColor Cyan
+    Write-Host "                  | | | | (_|  __/>  <\__ \ " -ForegroundColor Cyan
+    Write-Host "                  |_| |_|\___\___/_/\_\___/" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host ("          {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor Yellow
+    Write-Host ("                  {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor Yellow
     Write-Host ""
     Write-Host "=========================================" -ForegroundColor Green
     Write-Host ("1. {0}" -f (Get-Translation 'Menu_Option1'))
