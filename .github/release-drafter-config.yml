@@ -1,0 +1,29 @@
+name-template: 'v$NEXT_PATCH_VERSION'
+tag-template: 'v$NEXT_PATCH_VERSION'
+template: |
+  ## 🧰 ncexs Toolkit – $NEXT_PATCH_VERSION Refined Release
+
+  $CHANGES
+
+  ---
+
+  **Note:** This release includes major stability and performance updates. It introduces a completely overhauled Memory Optimizer, streamlines the Network Utility, and enhances the Junk Cleaner with more thorough and safer routines. This version resolves critical bugs from the beta phase and improves overall script reliability while maintaining full bilingual support and universal Windows compatibility.
+categories:
+  - title: '✨ Features & Enhancements'
+    labels:
+      - 'feat'
+      - 'feature'
+      - 'enhancement'
+  - title: '🔧 Bug Fixes & Refactors'
+    labels:
+      - 'fix'
+      - 'bug'
+      - 'refactor'
+  - title: '⚡ Performance'
+    labels:
+      - 'perf'
+      - 'performance'
+  - title: '📄 Documentation'
+    labels:
+      - 'docs'
+      - 'documentation'
