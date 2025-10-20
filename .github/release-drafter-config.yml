@@ -1,24 +1,14 @@
 name-template: '🚀 ncexs Toolkit v$NEXT_PATCH_VERSION'
 tag-template: 'v$NEXT_PATCH_VERSION'
+
 template: |
   ## 🧰 ncexs Toolkit – v$NEXT_PATCH_VERSION Refined Release
 
-  ### ✨ Added
-  - _List new features or improvements here automatically from PR labels_
-
-  ### 🔧 Bug Fixes
-  - _List of bug fixes automatically generated from PR labels_
-
-  ### ⚡ Performance
-  - _Performance improvements noted from PR labels_
+  $CHANGES
 
   ---
 
-  **Note:** This release includes major stability and performance updates.  
-  It introduces a completely overhauled Memory Optimizer, streamlines the Network Utility,  
-  and enhances the Junk Cleaner with more thorough and safer routines.  
-  This version resolves critical bugs from the beta phase and improves overall script reliability  
-  while maintaining full bilingual support and universal Windows compatibility.
+  {% include .github/release-notes/v$NEXT_PATCH_VERSION.md %}
 
 categories:
   - title: '✨ Features & Enhancements'
@@ -39,19 +29,3 @@ categories:
     labels:
       - 'docs'
       - 'documentation'
-
-change-template: '- $TITLE (#$NUMBER)'
-change-title-escapes: '\<*_&'  # biar judul PR gak rusak format markdown-nya
-version-resolver:
-  major:
-    labels:
-      - 'major'
-  minor:
-    labels:
-      - 'minor'
-      - 'feature'
-  patch:
-    labels:
-      - 'patch'
-      - 'fix'
-      - 'bug'
