@@ -1,17 +1,21 @@
 @{
-    # Module manifest for NCEXS Toolkit
     RootModule        = 'ncexs-toolkit.psm1'
-    ModuleVersion     = '2.3.0'
-    Author            = 'Fathullah Nur Akbar'
-    CompanyName       = 'NCEXS Project'
-    Copyright         = '(c) 2025 NCEXS'
-    Description       = 'NCEXS Toolkit - All-in-one PowerShell utility suite for Windows optimization and maintenance.'
+    ModuleVersion     = '2.3'  # This will auto-update from release tag
+    GUID              = '12345678-abcd-1234-abcd-1234567890ab'
+    Author            = 'ncexs'
+    CompanyName       = 'ncexs Dev'
+    Copyright         = '(c) 2025 ncexs. All rights reserved.'
+    Description       = 'ncexs Toolkit — a lightweight, modular PowerShell utility for Windows optimization and maintenance.'
     PowerShellVersion = '5.1'
-    FunctionsToExport = @(
-        'Start-NcexsToolkit',
-        'Invoke-JunkCleaner',
-        'Optimize-Memory',
-        'Test-NetworkUtility'
-    )
-    GUID = 'a7c2d6f8-f04e-4c5b-95b2-12fd4c8a42a1'
+    FunctionsToExport = '*'
+    CmdletsToExport   = @()
+    AliasesToExport   = @()
+    PrivateData       = @{
+        PSData = @{
+            Tags = @('toolkit', 'optimizer', 'windows', 'ncexs')
+            LicenseUri = 'https://github.com/ncexs/ncexs-toolkit/blob/main/LICENSE'
+            ProjectUri = 'https://github.com/ncexs/ncexs-toolkit'
+            ReleaseNotes = 'https://github.com/ncexs/ncexs-toolkit/releases'
+        }
+    }
 }
