@@ -1,6 +1,6 @@
 <#
 ===============================================
- ncexs Toolkit v2.3 – Refined Release
+ ncexs Toolkit v2.4 beta1
 ===============================================
 #>
 
@@ -23,7 +23,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction S
 # ---------------------------
 # Global vars & Translations
 # ---------------------------
-$global:ToolkitVersion = "2.3 Refined Release"
+$global:ToolkitVersion = "2.4 beta1"
 $global:Language = "ID"  # default
 
 # Standardized translation structure
@@ -34,14 +34,19 @@ $global:Translations = @{
         "Menu_Option2" = "Junk Cleaner"
         "Menu_Option3" = "Empty Recycle Bin"
         "Menu_Option4" = "Open Disk Cleanup"
-        "Menu_Option5" = "Automatic Network Repair"
-        "Menu_Option6" = "Memory Optimizer"
-        "Menu_Option7" = "Open Windows Security"
-        "Menu_Option8" = "Defragment & Optimize Drives"
-        "Menu_Option9" = "System Health Checker"
-        "Menu_Option10" = "Startup Manager"
-        "Menu_Option11" = "Language Settings"
-        "Menu_Option12" = "Exit"
+        "Menu_Option5" = "Uninstall Programs"
+        "Menu_Option6" = "Automatic Network Repair"
+        "Menu_Option7" = "Power & Battery Utilities"
+        "Menu_Option8" = "Memory Optimizer"
+        "Menu_Option9" = "Defragment & Optimize Drives"
+        "Menu_Option10" = "System Health Checker"
+        "Menu_Option11" = "Startup Manager"
+        "Menu_Option12" = "Language Settings"
+        "Menu_Option13" = "Exit"
+        "SubMenu_Power" = "POWER & BATTERY UTILITIES"
+        "SubMenu_Power1" = "Change Power Plan"
+        "SubMenu_Power2" = "Generate Battery Health Report"
+        "SubMenu_Power3" = "Back to Main Menu"
         "PressAnyKey" = "Press any key to continue..."
         "InvalidOption" = "Invalid option. Please try again."
         "ExitMessage" = "Thank you for using ncexs Toolkit!"
@@ -80,6 +85,16 @@ $global:Translations = @{
         "Network_Repairing" = "Repairing network settings (Reset TCP/IP, Winsock, Flush DNS)..."
         "Network_Repaired" = "Network settings repaired successfully."
         "Network_ErrorRepair" = "Error repairing network: {0}"
+        "Power_Select" = "Select a power plan to activate:"
+        "Power_Balanced" = "Balanced (Recommended)"
+        "Power_Saver" = "Power Saver"
+        "Power_High" = "High Performance"
+        "Power_Changed" = "Power plan successfully changed to {0}."
+        "Battery_Generating" = "Generating battery health report..."
+        "Battery_Generated" = "Report saved to {0}. Opening now..."
+        "Battery_NotFound" = "Could not generate report. This PC may not have a battery."
+        "Battery_Error" = "An error occurred while generating the battery report."
+        "Uninstall_Opening" = "Opening 'Programs and Features'..."
         "Startup_Title" = "STARTUP MANAGER"
         "Startup_List" = "Current Startup Programs:"
         "Startup_Disabled" = "Startup program disabled: {0}"
@@ -109,14 +124,19 @@ $global:Translations = @{
         "Menu_Option2" = "Pembersih Sampah"
         "Menu_Option3" = "Kosongkan Recycle Bin"
         "Menu_Option4" = "Buka Disk Cleanup"
-        "Menu_Option5" = "Perbaikan Jaringan Otomatis"
-        "Menu_Option6" = "Optimasi Memori"
-        "Menu_Option7" = "Buka Keamanan Windows"
-        "Menu_Option8" = "Defragment & Optimasi Drive"
-        "Menu_Option9" = "Pemeriksa Kesehatan Sistem"
-        "Menu_Option10" = "Pengelola Startup"
-        "Menu_Option11" = "Pengaturan Bahasa"
-        "Menu_Option12" = "Keluar"
+        "Menu_Option5" = "Copot Pemasangan Program"
+        "Menu_Option6" = "Perbaikan Jaringan Otomatis"
+        "Menu_Option7" = "Utilitas Daya & Baterai"
+        "Menu_Option8" = "Optimasi Memori"
+        "Menu_Option9" = "Defragment & Optimasi Drive"
+        "Menu_Option10" = "Pemeriksa Kesehatan Sistem"
+        "Menu_Option11" = "Pengelola Startup"
+        "Menu_Option12" = "Pengaturan Bahasa"
+        "Menu_Option13" = "Keluar"
+        "SubMenu_Power" = "UTILITAS DAYA & BATERAI"
+        "SubMenu_Power1" = "Ubah Power Plan"
+        "SubMenu_Power2" = "Buat Laporan Kesehatan Baterai"
+        "SubMenu_Power3" = "Kembali ke Menu Utama"
         "PressAnyKey" = "Tekan sembarang tombol untuk melanjutkan..."
         "InvalidOption" = "Pilihan tidak valid. Silakan coba lagi."
         "ExitMessage" = "Terima kasih telah menggunakan ncexs Toolkit!"
@@ -155,6 +175,16 @@ $global:Translations = @{
         "Network_Repairing" = "Memperbaiki pengaturan jaringan (Reset TCP/IP, Winsock, Flush DNS)..."
         "Network_Repaired" = "Pengaturan jaringan berhasil diperbaiki."
         "Network_ErrorRepair" = "Kesalahan memperbaiki jaringan: {0}"
+        "Power_Select" = "Pilih power plan untuk diaktifkan:"
+        "Power_Balanced" = "Seimbang (Disarankan)"
+        "Power_Saver" = "Hemat Daya"
+        "Power_High" = "Performa Tinggi"
+        "Power_Changed" = "Power plan berhasil diubah ke {0}."
+        "Battery_Generating" = "Membuat laporan kesehatan baterai..."
+        "Battery_Generated" = "Laporan disimpan di {0}. Sedang dibuka..."
+        "Battery_NotFound" = "Tidak dapat membuat laporan. PC ini mungkin tidak memiliki baterai."
+        "Battery_Error" = "Terjadi kesalahan saat membuat laporan baterai."
+        "Uninstall_Opening" = "Membuka 'Programs and Features'..."
         "Startup_Title" = "PENGELOLA STARTUP"
         "Startup_List" = "Program Startup Saat Ini:"
         "Startup_Disabled" = "Program startup dinonaktifkan: {0}"
@@ -363,7 +393,22 @@ function Open-DiskCleanup {
 }
 
 # ---------------------------
-# 5. Automatic Network Repair
+# 5. Uninstall Programs
+# ---------------------------
+function Open-Uninstaller {
+    Write-Host "`n$(Get-Translation 'Uninstall_Opening')" -ForegroundColor Cyan
+    try {
+        Start-Process "appwiz.cpl" -ErrorAction Stop
+        Write-Log "Launched appwiz.cpl" "INFO"
+    } catch {
+        $errorMsg = "Failed to open Programs and Features: $($_.Exception.Message)"
+        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
+        Read-Host "`n$(Get-Translation 'PressAnyKey')"
+    }
+}
+
+# ---------------------------
+# 6. Automatic Network Repair
 # ---------------------------
 function Invoke-NetworkRepair {
     Write-Host "`n=== $(Get-Translation 'Network_Title') ===" -ForegroundColor Cyan
@@ -384,10 +429,88 @@ function Invoke-NetworkRepair {
 }
 
 # ---------------------------
-# 6. Clear RAM
+# 7. Power & Battery Utilities
+# ---------------------------
+function Show-PowerMenu {
+    do {
+        Clear-Host
+        Write-Host "=========================================" -ForegroundColor Green
+        Write-Host "        $(Get-Translation 'SubMenu_Power')" -ForegroundColor Cyan
+        Write-Host "=========================================" -ForegroundColor Green
+        Write-Host "1. $(Get-Translation 'SubMenu_Power1')"
+        Write-Host "2. $(Get-Translation 'SubMenu_Power2')"
+        Write-Host "3. $(Get-Translation 'SubMenu_Power3')"
+        Write-Host "=========================================" -ForegroundColor Green
+        $choice = Read-Host "`n$(Get-Translation 'SelectOption')"
+        switch ($choice) {
+            "1" { Invoke-PowerPlanChange; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
+            "2" { Invoke-BatteryReport; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
+            "3" { return }
+            default { Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red; Start-Sleep -Seconds 2 }
+        }
+    } while ($true)
+}
+
+function Invoke-PowerPlanChange {
+    Write-Host "`n$(Get-Translation 'Power_Select')" -ForegroundColor Cyan
+    Write-Host "1. $(Get-Translation 'Power_Saver')"
+    Write-Host "2. $(Get-Translation 'Power_Balanced')"
+    Write-Host "3. $(Get-Translation 'Power_High')"
+    Write-Host "4. $(Get-Translation 'Cancel')" -ForegroundColor Yellow
+    
+    $choice = Read-Host "`n$(Get-Translation 'SelectOption')"
+    
+    $plan = $null
+    $guid = $null
+    
+    switch ($choice) {
+        "1" { $plan = (Get-Translation 'Power_Saver'); $guid = "a1841308-3541-4fab-bc81-f71556f20b4a" }
+        "2" { $plan = (Get-Translation 'Power_Balanced'); $guid = "381b4222-f694-41f0-9685-ff5bb260df2e" }
+        "3" { $plan = (Get-Translation 'Power_High'); $guid = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c" }
+        "4" { Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow; return }
+        default { Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red; return }
+    }
+
+    try {
+        powercfg /setactive $guid | Out-Null
+        $message = (Get-Translation 'Power_Changed') -f $plan
+        Write-Log $message "SUCCESS"
+        Write-Host "`n$message" -ForegroundColor Green
+    } catch {
+        $errorMsg = "Failed to change power plan: $($_.Exception.Message)"
+        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
+    }
+}
+
+function Invoke-BatteryReport {
+    $reportPath = Join-Path -Path $PSScriptRoot -ChildPath "battery_report.html"
+    Write-Host "`n$(Get-Translation 'Battery_Generating')" -ForegroundColor Yellow
+    
+    try {
+        # The output of this command can be noisy, so we pipe it to Out-Null
+        powercfg /batteryreport /output "$reportPath" /duration 1 | Out-Null
+        
+        if (Test-Path $reportPath) {
+            $message = (Get-Translation 'Battery_Generated') -f $reportPath
+            Write-Host $message -ForegroundColor Green
+            Start-Process $reportPath
+            Write-Log "Battery report generated and opened." "SUCCESS"
+        } else {
+            # This handles the case for desktops without batteries
+            Write-Host (Get-Translation 'Battery_NotFound') -ForegroundColor Yellow
+            Write-Log "Battery report failed, likely no battery." "WARNING"
+        }
+    } catch {
+        $errorMsg = (Get-Translation 'Battery_Error') + ": $($_.Exception.Message)"
+        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
+    }
+}
+
+# ---------------------------
+# 8. Memory Optimizer
 # ---------------------------
 function Clear-RAM {
-    Write-Host "`n=== $(Get-Translation 'Menu_Option6') ===" -ForegroundColor Cyan
+    Write-Host "`n=== $(Get-Translation 'Menu_Option8') ===" -ForegroundColor Cyan
     $confirm = Read-Host "`n$(Get-Translation 'RAM_Confirm') $(Get-Translation 'YesNoPrompt')"
     if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -and ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) {
         Write-Host (Get-Translation 'RAM_Cancel') -ForegroundColor Yellow
@@ -396,13 +519,11 @@ function Clear-RAM {
     }
 
     try {
-        # --- Measure memory BEFORE optimization ---
         $os = Get-CimInstance -ClassName Win32_OperatingSystem
         $memBefore = [math]::Round($os.FreePhysicalMemory / 1024)
         Write-Host ((Get-Translation 'RAM_Before') -f $memBefore) -ForegroundColor Gray
-        Write-Progress -Activity (Get-Translation 'Menu_Option6') -Status "Optimizing..."
+        Write-Progress -Activity (Get-Translation 'Menu_Option8') -Status "Optimizing..."
 
-        # --- C# code to call Windows API for clearing memory cache ---
         $CSharpCode = @"
         using System;
         using System.Runtime.InteropServices;
@@ -410,14 +531,12 @@ function Clear-RAM {
         {
             [DllImport("psapi.dll")]
             private static extern bool EmptyWorkingSet(IntPtr hProcess);
-
             public static void ClearAllProcessesWorkingSet()
             {
                 foreach (var process in System.Diagnostics.Process.GetProcesses())
                 {
                     try
                     {
-                        // We don't need to empty our own process
                         if (process.Id != System.Diagnostics.Process.GetCurrentProcess().Id)
                         {
                             EmptyWorkingSet(process.Handle);
@@ -428,49 +547,35 @@ function Clear-RAM {
             }
         }
 "@
-        # --- Compile and run the C# code ---
         Add-Type -TypeDefinition $CSharpCode
         [MemoryOptimizer]::ClearAllProcessesWorkingSet()
         
-        # --- Perform a light garbage collection for the script itself ---
         [System.GC]::Collect()
         [System.GC]::WaitForPendingFinalizers()
         Start-Sleep -Seconds 1
 
-        # --- Measure memory AFTER optimization ---
         $memAfter = [math]::Round((Get-CimInstance -ClassName Win32_OperatingSystem).FreePhysicalMemory / 1024)
         Write-Host ((Get-Translation 'RAM_After') -f $memAfter) -ForegroundColor Gray
         
         $memFreed = $memAfter - $memBefore
-        if ($memFreed -gt 10) { # Increased threshold
+        if ($memFreed -gt 10) {
             $message = (Get-Translation 'RAM_Freed') -f $memFreed
-            Write-Log "$message" "SUCCESS"
-            Write-Host $message -ForegroundColor Green
+            Write-Log "$message" "SUCCESS"; Write-Host $message -ForegroundColor Green
         }
         else {
             Write-Host "Memory is already optimized." -ForegroundColor Green
         }
     } catch {
         $errorMsg = (Get-Translation 'RAM_Error') -f $_.Exception.Message
-        Write-Log $errorMsg "ERROR"
-        Write-Host $errorMsg -ForegroundColor Red
+        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
     } finally {
-        Write-Progress -Activity (Get-Translation 'Menu_Option6') -Completed
+        Write-Progress -Activity (Get-Translation 'Menu_Option8') -Completed
     }
     Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
 
 # ---------------------------
-# 7. Open Windows Security
-# ---------------------------
-function Open-WindowsSecurity {
-    Write-Host "`nOpening Windows Security dashboard..." -ForegroundColor Cyan
-    try { Start-Process "windowsdefender:" -ErrorAction Stop; Write-Log "Launched Windows Security (windowsdefender:)" "INFO" }
-    catch { $errorMsg = "Failed to open Windows Security: $($_.Exception.Message)"; Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
-}
-
-# ---------------------------
-# 8. Defragment & Optimize Drives
+# 9. Defragment & Optimize Drives
 # ---------------------------
 function Invoke-Defragment {
     Write-Host "`n=== $(Get-Translation 'Defrag_Title') ===" -ForegroundColor Cyan
@@ -506,7 +611,7 @@ function Invoke-Defragment {
 }
 
 # ---------------------------
-# 9. System Health Checker
+# 10. System Health Checker
 # ---------------------------
 function Show-SystemHealthMenu {
     do {
@@ -549,7 +654,7 @@ function Invoke-DISMRepair {
 }
 
 # ---------------------------
-# 10. Startup Manager
+# 11. Startup Manager
 # ---------------------------
 function Show-StartupManager {
     do {
@@ -619,7 +724,7 @@ function Set-StartupProgram {
 }
 
 # ---------------------------
-# 11. Language Settings
+# 12. Language Settings
 # ---------------------------
 function Show-LanguageMenu {
     Clear-Host
@@ -646,26 +751,27 @@ function Show-MainMenu {
     Clear-Host
     Write-Host "=========================================" -ForegroundColor Green
     Write-Host ""
-    Write-Host "        _ __   ___ _____  _____ " -ForegroundColor Cyan
-    Write-Host "       | '_ \ / __/ _ \ \/ / __|" -ForegroundColor Cyan
-    Write-Host "       | | | | (_|  __/>  <\__ \ " -ForegroundColor Cyan
-    Write-Host "       |_| |_|\___\___/_/\_\___/" -ForegroundColor Cyan
+    Write-Host "                   _ __   ___ _____  _____ " -ForegroundColor Cyan
+    Write-Host "                  | '_ \ / __/ _ \ \/ / __|" -ForegroundColor Cyan
+    Write-Host "                  | | | | (_|  __/>  <\__ \ " -ForegroundColor Cyan
+    Write-Host "                  |_| |_|\___\___/_/\_\___/" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host ("   {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor Yellow
+    Write-Host ("                  {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor Yellow
     Write-Host ""
     Write-Host "=========================================" -ForegroundColor Green
-    Write-Host ("1.  {0}" -f (Get-Translation 'Menu_Option1'))
-    Write-Host ("2.  {0}" -f (Get-Translation 'Menu_Option2'))
-    Write-Host ("3.  {0}" -f (Get-Translation 'Menu_Option3'))
-    Write-Host ("4.  {0}" -f (Get-Translation 'Menu_Option4'))
-    Write-Host ("5.  {0}" -f (Get-Translation 'Menu_Option5'))
-    Write-Host ("6.  {0}" -f (Get-Translation 'Menu_Option6'))
-    Write-Host ("7.  {0}" -f (Get-Translation 'Menu_Option7')) -ForegroundColor Yellow
-    Write-Host ("8.  {0}" -f (Get-Translation 'Menu_Option8')) -ForegroundColor Yellow
-    Write-Host ("9.  {0}" -f (Get-Translation 'Menu_Option9'))
+    Write-Host ("1. {0}" -f (Get-Translation 'Menu_Option1'))
+    Write-Host ("2. {0}" -f (Get-Translation 'Menu_Option2'))
+    Write-Host ("3. {0}" -f (Get-Translation 'Menu_Option3'))
+    Write-Host ("4. {0}" -f (Get-Translation 'Menu_Option4'))
+    Write-Host ("5. {0}" -f (Get-Translation 'Menu_Option5'))
+    Write-Host ("6. {0}" -f (Get-Translation 'Menu_Option6'))
+    Write-Host ("7. {0}" -f (Get-Translation 'Menu_Option7'))
+    Write-Host ("8. {0}" -f (Get-Translation 'Menu_Option8'))
+    Write-Host ("9. {0}" -f (Get-Translation 'Menu_Option9'))
     Write-Host ("10. {0}" -f (Get-Translation 'Menu_Option10'))
     Write-Host ("11. {0}" -f (Get-Translation 'Menu_Option11'))
-    Write-Host ("12. {0}" -f (Get-Translation 'Menu_Option12')) -ForegroundColor Red
+    Write-Host ("12. {0}" -f (Get-Translation 'Menu_Option12'))
+    Write-Host ("13. {0}" -f (Get-Translation 'Menu_Option13')) -ForegroundColor Red
     Write-Host "=========================================" -ForegroundColor Green
 }
 
@@ -680,14 +786,15 @@ do {
         "2"  { Clear-JunkFiles }
         "3"  { Clear-RecycleBin-Menu }
         "4"  { Open-DiskCleanup }
-        "5"  { Invoke-NetworkRepair }
-        "6"  { Clear-RAM }
-        "7"  { Open-WindowsSecurity }
-        "8"  { Invoke-Defragment }
-        "9"  { Show-SystemHealthMenu }
-        "10" { Show-StartupManager }
-        "11" { Show-LanguageMenu }
-        "12" {
+        "5"  { Open-Uninstaller }
+        "6"  { Invoke-NetworkRepair }
+        "7"  { Show-PowerMenu }
+        "8"  { Clear-RAM }
+        "9"  { Invoke-Defragment }
+        "10" { Show-SystemHealthMenu }
+        "11" { Show-StartupManager }
+        "12" { Show-LanguageMenu }
+        "13" {
             Write-Log "Toolkit session completed." "INFO"
             Write-Host (Get-Translation 'ExitMessage') -ForegroundColor Green
             Start-Sleep -Seconds 1
