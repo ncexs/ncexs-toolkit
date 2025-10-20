@@ -1,6 +1,6 @@
 <#
 ===============================================
- ncexs Toolkit v2.3 beta3
+ ncexs Toolkit v2.3 – Refined Release
 ===============================================
 #>
 
@@ -23,7 +23,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction S
 # ---------------------------
 # Global vars & Translations
 # ---------------------------
-$global:ToolkitVersion = "2.3 beta3"
+$global:ToolkitVersion = "2.3 Refined Release"
 $global:Language = "ID"  # default
 
 # Standardized translation structure
@@ -34,7 +34,7 @@ $global:Translations = @{
         "Menu_Option2" = "Junk Cleaner"
         "Menu_Option3" = "Empty Recycle Bin"
         "Menu_Option4" = "Open Disk Cleanup"
-        "Menu_Option5" = "Network Utilities"
+        "Menu_Option5" = "Automatic Network Repair"
         "Menu_Option6" = "Memory Optimizer"
         "Menu_Option7" = "Open Windows Security"
         "Menu_Option8" = "Defragment & Optimize Drives"
@@ -42,22 +42,6 @@ $global:Translations = @{
         "Menu_Option10" = "Startup Manager"
         "Menu_Option11" = "Language Settings"
         "Menu_Option12" = "Exit"
-        "SubMenu_Network" = "NETWORK UTILITIES"
-        "SubMenu_Network1" = "Network Repair (Reset TCP/IP & flush DNS)"
-        "SubMenu_Network2" = "Internet Accelerator (Change DNS)"
-        "SubMenu_Network3" = "Back to Main Menu"
-        "SubMenu_Health" = "SYSTEM HEALTH CHECKER"
-        "SubMenu_Health1" = "Run System File Checker (SFC)"
-        "SubMenu_Health2" = "Run DISM Image Repair"
-        "SubMenu_Health3" = "Back to Main Menu"
-        "SubMenu_Startup" = "STARTUP MANAGER"
-        "SubMenu_Startup1" = "Disable Startup Programs"
-        "SubMenu_Startup2" = "Enable Startup Programs"
-        "SubMenu_Startup3" = "Back to Main Menu"
-        "LanguageMenu" = "LANGUAGE SETTINGS"
-        "LanguageMenu1" = "English"
-        "LanguageMenu2" = "Indonesian"
-        "LanguageMenu3" = "Back to Main Menu"
         "PressAnyKey" = "Press any key to continue..."
         "InvalidOption" = "Invalid option. Please try again."
         "ExitMessage" = "Thank you for using ncexs Toolkit!"
@@ -81,7 +65,8 @@ $global:Translations = @{
         "Clean_Calculating" = "Calculating space to be freed..."
         "Clean_SpaceFreed" = "Cleanup complete. Freed approximately {0} MB of space."
         "Clean_Warning" = "Note: Some files may not be deleted if they are currently in use by another program."
-        "RAM_Confirm" = "This will run a light optimization on the memory. The effect may be minimal. Continue?"
+        "Clean_Confirm" = "This will clean system temporary files and browser data (if detected). Continue?"
+        "RAM_Confirm" = "This will perform an optimal cleanup of the system memory cache to free up RAM. Continue?"
         "RAM_Before" = "Available Memory (Before): {0} MB"
         "RAM_After" = "Available Memory (After): {0} MB"
         "RAM_Freed" = "Successfully freed {0} MB of memory."
@@ -91,7 +76,8 @@ $global:Translations = @{
         "Recycle_Success" = "Recycle Bin emptied successfully."
         "Recycle_AlreadyEmpty" = "Recycle Bin is already empty."
         "Clean_Title" = "TEMP & CACHE CLEANUP"
-        "Network_Repairing" = "Repairing network settings..."
+        "Network_Title" = "AUTOMATIC NETWORK REPAIR"
+        "Network_Repairing" = "Repairing network settings (Reset TCP/IP, Winsock, Flush DNS)..."
         "Network_Repaired" = "Network settings repaired successfully."
         "Network_ErrorRepair" = "Error repairing network: {0}"
         "Startup_Title" = "STARTUP MANAGER"
@@ -113,8 +99,6 @@ $global:Translations = @{
         "Defrag_Type_SSD" = "SSD"
         "Defrag_Type_HDD" = "HDD"
         "Defrag_SSD_Cancel" = "Operation cancelled. The selected drive is an SSD. Defragmentation is not needed."
-        "Chrome_Confirm" = "Do you want to clean Google Chrome? This will close all Chrome windows but will NOT log you out of websites."
-        "Chrome_Closing" = "Closing Google Chrome processes..."
         "Chrome_Cleaning" = "Cleaning Chrome cache, history, and session data..."
         "Chrome_Done" = "Google Chrome cleanup complete."
         "Chrome_NotFound" = "Google Chrome installation not found."
@@ -125,7 +109,7 @@ $global:Translations = @{
         "Menu_Option2" = "Pembersih Sampah"
         "Menu_Option3" = "Kosongkan Recycle Bin"
         "Menu_Option4" = "Buka Disk Cleanup"
-        "Menu_Option5" = "Utilitas Jaringan"
+        "Menu_Option5" = "Perbaikan Jaringan Otomatis"
         "Menu_Option6" = "Optimasi Memori"
         "Menu_Option7" = "Buka Keamanan Windows"
         "Menu_Option8" = "Defragment & Optimasi Drive"
@@ -133,22 +117,6 @@ $global:Translations = @{
         "Menu_Option10" = "Pengelola Startup"
         "Menu_Option11" = "Pengaturan Bahasa"
         "Menu_Option12" = "Keluar"
-        "SubMenu_Network" = "UTILITAS JARINGAN"
-        "SubMenu_Network1" = "Perbaikan Jaringan (Reset TCP/IP & flush DNS)"
-        "SubMenu_Network2" = "Akselerator Internet (Ubah DNS)"
-        "SubMenu_Network3" = "Kembali ke Menu Utama"
-        "SubMenu_Health" = "PEMERIKSA KESEHATAN SISTEM"
-        "SubMenu_Health1" = "Jalankan Pemeriksa Berkas Sistem (SFC)"
-        "SubMenu_Health2" = "Jalankan Perbaikan Image DISM"
-        "SubMenu_Health3" = "Kembali ke Menu Utama"
-        "SubMenu_Startup" = "PENGELOLA STARTUP"
-        "SubMenu_Startup1" = "Nonaktifkan Program Startup"
-        "SubMenu_Startup2" = "Aktifkan Program Startup"
-        "SubMenu_Startup3" = "Kembali ke Menu Utama"
-        "LanguageMenu" = "PENGATURAN BAHASA"
-        "LanguageMenu1" = "Bahasa Inggris"
-        "LanguageMenu2" = "Bahasa Indonesia"
-        "LanguageMenu3" = "Kembali ke Menu Utama"
         "PressAnyKey" = "Tekan sembarang tombol untuk melanjutkan..."
         "InvalidOption" = "Pilihan tidak valid. Silakan coba lagi."
         "ExitMessage" = "Terima kasih telah menggunakan ncexs Toolkit!"
@@ -172,7 +140,8 @@ $global:Translations = @{
         "Clean_Calculating" = "Menghitung ruang yang akan dibersihkan..."
         "Clean_SpaceFreed" = "Pembersihan selesai. Berhasil membebaskan sekitar {0} MB ruang."
         "Clean_Warning" = "Catatan: Beberapa file mungkin tidak terhapus jika sedang digunakan oleh program lain."
-        "RAM_Confirm" = "Ini akan menjalankan optimasi ringan pada memori. Efeknya mungkin minimal. Lanjutkan?"
+        "Clean_Confirm" = "Tindakan ini akan membersihkan file sementara sistem dan data browser (jika terdeteksi). Lanjutkan?"
+        "RAM_Confirm" = "Tindakan ini akan melakukan pembersihan optimal pada cache memori sistem untuk melegakan RAM. Lanjutkan?"
         "RAM_Before" = "Memori Tersedia (Sebelum): {0} MB"
         "RAM_After" = "Memori Tersedia (Setelah): {0} MB"
         "RAM_Freed" = "Berhasil membebaskan {0} MB memori."
@@ -182,7 +151,8 @@ $global:Translations = @{
         "Recycle_Success" = "Recycle Bin berhasil dikosongkan."
         "Recycle_AlreadyEmpty" = "Recycle Bin sudah kosong."
         "Clean_Title" = "PEMBERSIHAN SEMENTARA & CACHE"
-        "Network_Repairing" = "Memperbaiki pengaturan jaringan..."
+        "Network_Title" = "PERBAIKAN JARINGAN OTOMATIS"
+        "Network_Repairing" = "Memperbaiki pengaturan jaringan (Reset TCP/IP, Winsock, Flush DNS)..."
         "Network_Repaired" = "Pengaturan jaringan berhasil diperbaiki."
         "Network_ErrorRepair" = "Kesalahan memperbaiki jaringan: {0}"
         "Startup_Title" = "PENGELOLA STARTUP"
@@ -204,8 +174,6 @@ $global:Translations = @{
         "Defrag_Type_SSD" = "SSD"
         "Defrag_Type_HDD" = "HDD"
         "Defrag_SSD_Cancel" = "Operasi dibatalkan. Drive yang dipilih adalah SSD. Defragmentasi tidak diperlukan."
-        "Chrome_Confirm" = "Apakah Anda ingin membersihkan Google Chrome? Ini akan menutup semua jendela Chrome tapi TIDAK akan membuat Anda logout dari website."
-        "Chrome_Closing" = "Menutup proses Google Chrome..."
         "Chrome_Cleaning" = "Membersihkan cache, riwayat, dan data sesi Chrome..."
         "Chrome_Done" = "Pembersihan Google Chrome selesai."
         "Chrome_NotFound" = "Instalasi Google Chrome tidak ditemukan."
@@ -272,7 +240,7 @@ function Show-SystemInfo {
         foreach ($disk in $disks) {
             $freeSpace = [math]::Round($disk.FreeSpace / 1GB, 2)
             $totalSize = [math]::Round($disk.Size / 1GB, 2)
-            Write-Host ("  {0} {1} GB ({2} GB {3})" -f $disk.DeviceID, $totalSize, $freeSpace, (Get-Translation "Free")) -ForegroundColor Gray
+            Write-Host ("   {0} {1} GB ({2} GB {3})" -f $disk.DeviceID, $totalSize, $freeSpace, (Get-Translation "Free")) -ForegroundColor Gray
         }
     } catch {
         Write-Log "Failed to get system info: $($_.Exception.Message)" "ERROR"
@@ -288,20 +256,25 @@ function Show-SystemInfo {
 function Clear-JunkFiles {
     Write-Log (Get-Translation 'Clean_Title') "INFO"
     Write-Host "`n=== $(Get-Translation 'Clean_Title') ===" -ForegroundColor Cyan
+
+    $confirm = Read-Host "`n$(Get-Translation 'Clean_Confirm') $(Get-Translation 'YesNoPrompt')"
+    if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) {
+        Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow
+        Read-Host "`n$(Get-Translation 'PressAnyKey')"
+        return
+    }
+
     Write-Host (Get-Translation 'Clean_Warning') -ForegroundColor Yellow
 
     $chromeProfilePath = Join-Path $env:LOCALAPPDATA 'Google\Chrome\User Data\Default'
     if (Test-Path $chromeProfilePath) {
-        $confirmChrome = Read-Host "`n$( (Get-Translation 'Chrome_Confirm') ) $( (Get-Translation 'YesNoPrompt') )"
-        if (($global:Language -eq "ID" -and $confirmChrome -match '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirmChrome -match '^(Y|y)$')) {
-            Invoke-ChromeCleanup -ProfilePath $chromeProfilePath
-        }
+        Invoke-ChromeCleanup -ProfilePath $chromeProfilePath
     }
 
     $pathsToClean = @(
         "$env:SystemRoot\Temp",
         "$env:TEMP",
-        "$env:SystemRoot\Prefetch" # FIX 1: Menambahkan folder Prefetch
+        "$env:SystemRoot\Prefetch"
     )
 
     Write-Host "`n$( (Get-Translation 'Clean_Calculating') )" -ForegroundColor Gray
@@ -312,13 +285,11 @@ function Clear-JunkFiles {
     foreach ($folderPath in $pathsToClean) {
         if (-not (Test-Path $folderPath)) { continue }
         
-        # FIX 2: Memperbaiki typo dari -Recourse menjadi -Recurse
         $items = Get-ChildItem -Path $folderPath -Recurse -Force -ErrorAction SilentlyContinue
         
         foreach ($item in $items) {
             try {
                 $itemSize = if ($item.PSIsContainer) { 0 } else { $item.Length }
-                
                 Remove-Item -Path $item.FullName -Recurse -Force -ErrorAction Stop
                 $totalFreed += $itemSize
             } catch {
@@ -338,10 +309,7 @@ function Clear-JunkFiles {
 
 function Invoke-ChromeCleanup {
     param([string]$ProfilePath)
-    Write-Host "`n$(Get-Translation 'Chrome_Closing')" -ForegroundColor Yellow
-    Stop-Process -Name "chrome" -Force -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 2
-    Write-Host (Get-Translation 'Chrome_Cleaning') -ForegroundColor Gray
+    Write-Host "`n$(Get-Translation 'Chrome_Cleaning')" -ForegroundColor Gray
     $chromePaths = @(
         Join-Path $ProfilePath 'Cache\*', Join-Path $ProfilePath 'Code Cache\*', Join-Path $ProfilePath 'GPUCache\*',
         Join-Path $ProfilePath 'Session Storage\*', Join-Path $ProfilePath 'Service Worker\CacheStorage\*',
@@ -395,64 +363,24 @@ function Open-DiskCleanup {
 }
 
 # ---------------------------
-# 5. Network Utilities
+# 5. Automatic Network Repair
 # ---------------------------
-function Show-NetworkMenu {
-    do {
-        Clear-Host
-        Write-Host "=========================================" -ForegroundColor Green
-        Write-Host "        $(Get-Translation 'SubMenu_Network')" -ForegroundColor Cyan
-        Write-Host "=========================================" -ForegroundColor Green
-        Write-Host "1. $(Get-Translation 'SubMenu_Network1')"; Write-Host "2. $(Get-Translation 'SubMenu_Network2')"; Write-Host "3. $(Get-Translation 'SubMenu_Network3')"
-        Write-Host "=========================================" -ForegroundColor Green
-        $choice = Read-Host "`n$(Get-Translation 'SelectOption')"
-        switch ($choice) {
-            "1" { Invoke-NetworkRepair; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
-            "2" { Set-InternetAcceleration; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
-            "3" { return }
-            default { Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red; Start-Sleep -Seconds 2 }
-        }
-    } while ($true)
-}
-
 function Invoke-NetworkRepair {
-    Write-Log "Repairing network connections..." "INFO"; Write-Host (Get-Translation 'Network_Repairing') -ForegroundColor Yellow
+    Write-Host "`n=== $(Get-Translation 'Network_Title') ===" -ForegroundColor Cyan
+    
+    Write-Log "Repairing network connections..." "INFO"
+    Write-Host "`n$(Get-Translation 'Network_Repairing')" -ForegroundColor Yellow
     try {
-        netsh int ip reset | Out-Null; netsh winsock reset | Out-Null; ipconfig /flushdns | Out-Null
-        Write-Log "Network repair completed." "SUCCESS"; Write-Host (Get-Translation 'Network_Repaired') -ForegroundColor Green
-    } catch { $errorMsg = (Get-Translation 'Network_ErrorRepair') -f $_.Exception.Message; Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red }
-}
-
-function Set-InternetAcceleration {
-    Write-Host "This feature will optimize your connection by changing the DNS server." -ForegroundColor Yellow
-    try {
-        $activeAdapters = Get-NetAdapter -ErrorAction Stop | Where-Object { $_.Status -eq 'Up' -and (Get-NetIPConfiguration -InterfaceAlias $_.Name -ErrorAction SilentlyContinue).IPv4DefaultGateway }
-        if (-not $activeAdapters) { Write-Host "No active network adapter with a gateway found." -ForegroundColor Red; return }
-        Write-Host "`nPlease select the network adapter to configure:" -ForegroundColor Cyan
-        for($i=0; $i -lt $activeAdapters.Count; $i++) { Write-Host "[$($i+1)] $($activeAdapters[$i].Name) - $($activeAdapters[$i].InterfaceDescription)" }
-        Write-Host "[C] Cancel" -ForegroundColor Yellow
-        $adapterChoice = Read-Host "Select adapter"
-        if ($adapterChoice -match 'c' -or ![int]::TryParse($adapterChoice, [ref]$null) -or [int]$adapterChoice -lt 1 -or [int]$adapterChoice -gt $activeAdapters.Count) { Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow; return }
-        $adapterToChange = $activeAdapters[[int]$adapterChoice - 1]
-    } catch { $errorMsg = "FAILED to find network adapters. Error: $($_.Exception.Message)"; Write-Host $errorMsg -ForegroundColor Red; Write-Log $errorMsg "ERROR"; return }
-    Write-Host "`nSelect DNS Provider for '$($adapterToChange.Name)':" -ForegroundColor Yellow
-    Write-Host "1. Google (8.8.8.8)"; Write-Host "2. Cloudflare (1.1.1.1)"; Write-Host "3. Automatic (DHCP)"; Write-Host "4. Cancel" -ForegroundColor Cyan
-    $dnsServers = $null; $dnsChoice = Read-Host "`nSelect Optimization Option"
-    switch($dnsChoice) {
-        "1" { $dnsServers = @("8.8.8.8", "8.8.4.4") }
-        "2" { $dnsServers = @("1.1.1.1", "1.0.0.1") }
-        "3" { $dnsServers = @() }
-        "4" { Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow; return }
-        default { Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red; return }
+        netsh int ip reset | Out-Null
+        netsh winsock reset | Out-Null
+        ipconfig /flushdns | Out-Null
+        Write-Log "Network repair completed." "SUCCESS"
+        Write-Host (Get-Translation 'Network_Repaired') -ForegroundColor Green
+    } catch { 
+        $errorMsg = (Get-Translation 'Network_ErrorRepair') -f $_.Exception.Message
+        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red 
     }
-    try {
-        Write-Host "Changing DNS for adapter: $($adapterToChange.Name)..." -ForegroundColor Green
-        if ($dnsServers.Count -gt 0) { $adapterToChange | Set-DnsClientServerAddress -ServerAddresses $dnsServers -ErrorAction Stop }
-        else { $adapterToChange | Set-DnsClientServerAddress -ResetServerAddresses -ErrorAction Stop }
-        Write-Host "DNS settings changed successfully. Flushing DNS cache..." -ForegroundColor Green
-        ipconfig /flushdns | Out-Null; Write-Host "Done." -ForegroundColor Green
-        $dnsLog = if ($dnsServers.Count -gt 0) { $dnsServers -join ', ' } else { "Automatic (DHCP)" }; Write-Log "DNS updated for adapter $($adapterToChange.Name) to $dnsLog" "SUCCESS"
-    } catch { $errorMsg = "FAILED to change DNS settings. Error: $($_.Exception.Message)"; Write-Host $errorMsg -ForegroundColor Red; Write-Log $errorMsg "ERROR" }
+    Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
 
 # ---------------------------
@@ -460,18 +388,75 @@ function Set-InternetAcceleration {
 # ---------------------------
 function Clear-RAM {
     Write-Host "`n=== $(Get-Translation 'Menu_Option6') ===" -ForegroundColor Cyan
-    $confirm = Read-Host "$(Get-Translation 'RAM_Confirm') $(Get-Translation 'YesNoPrompt')"
-    if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -and ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) { Write-Host (Get-Translation 'RAM_Cancel') -ForegroundColor Yellow; Read-Host "`n$(Get-Translation 'PressAnyKey')"; return }
+    $confirm = Read-Host "`n$(Get-Translation 'RAM_Confirm') $(Get-Translation 'YesNoPrompt')"
+    if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -and ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) {
+        Write-Host (Get-Translation 'RAM_Cancel') -ForegroundColor Yellow
+        Read-Host "`n$(Get-Translation 'PressAnyKey')"
+        return
+    }
+
     try {
-        $os = Get-CimInstance -ClassName Win32_OperatingSystem; $memBefore = [math]::Round($os.FreePhysicalMemory / 1024)
+        # --- Measure memory BEFORE optimization ---
+        $os = Get-CimInstance -ClassName Win32_OperatingSystem
+        $memBefore = [math]::Round($os.FreePhysicalMemory / 1024)
         Write-Host ((Get-Translation 'RAM_Before') -f $memBefore) -ForegroundColor Gray
-        [System.GC]::Collect(); [System.GC]::WaitForPendingFinalizers(); Start-Sleep -Seconds 1
+        Write-Progress -Activity (Get-Translation 'Menu_Option6') -Status "Optimizing..."
+
+        # --- C# code to call Windows API for clearing memory cache ---
+        $CSharpCode = @"
+        using System;
+        using System.Runtime.InteropServices;
+        public class MemoryOptimizer
+        {
+            [DllImport("psapi.dll")]
+            private static extern bool EmptyWorkingSet(IntPtr hProcess);
+
+            public static void ClearAllProcessesWorkingSet()
+            {
+                foreach (var process in System.Diagnostics.Process.GetProcesses())
+                {
+                    try
+                    {
+                        // We don't need to empty our own process
+                        if (process.Id != System.Diagnostics.Process.GetCurrentProcess().Id)
+                        {
+                            EmptyWorkingSet(process.Handle);
+                        }
+                    }
+                    catch { /* Ignore processes that we can't access */ }
+                }
+            }
+        }
+"@
+        # --- Compile and run the C# code ---
+        Add-Type -TypeDefinition $CSharpCode
+        [MemoryOptimizer]::ClearAllProcessesWorkingSet()
+        
+        # --- Perform a light garbage collection for the script itself ---
+        [System.GC]::Collect()
+        [System.GC]::WaitForPendingFinalizers()
+        Start-Sleep -Seconds 1
+
+        # --- Measure memory AFTER optimization ---
         $memAfter = [math]::Round((Get-CimInstance -ClassName Win32_OperatingSystem).FreePhysicalMemory / 1024)
         Write-Host ((Get-Translation 'RAM_After') -f $memAfter) -ForegroundColor Gray
+        
         $memFreed = $memAfter - $memBefore
-        if ($memFreed -gt 5) { $message = (Get-Translation 'RAM_Freed') -f $memFreed; Write-Log "$message" "SUCCESS"; Write-Host $message -ForegroundColor Green }
-        else { Write-Host "Memory is already optimized." -ForegroundColor Green }
-    } catch { $errorMsg = (Get-Translation 'RAM_Error') -f $_.Exception.Message; Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red }
+        if ($memFreed -gt 10) { # Increased threshold
+            $message = (Get-Translation 'RAM_Freed') -f $memFreed
+            Write-Log "$message" "SUCCESS"
+            Write-Host $message -ForegroundColor Green
+        }
+        else {
+            Write-Host "Memory is already optimized." -ForegroundColor Green
+        }
+    } catch {
+        $errorMsg = (Get-Translation 'RAM_Error') -f $_.Exception.Message
+        Write-Log $errorMsg "ERROR"
+        Write-Host $errorMsg -ForegroundColor Red
+    } finally {
+        Write-Progress -Activity (Get-Translation 'Menu_Option6') -Completed
+    }
     Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
 
@@ -500,7 +485,6 @@ function Invoke-Defragment {
         $selectedVolume = $volumes[[int]$choice - 1]
         $driveLetter = $selectedVolume.DriveLetter
         
-        # BUG FIX: Automatically cancel if SSD
         $diskNumber = (Get-Partition -DriveLetter $selectedVolume.DriveLetter).DiskNumber
         $mediaType = (Get-PhysicalDisk -DeviceNumber $diskNumber).MediaType
         if ($mediaType -eq "SSD") {
@@ -662,23 +646,23 @@ function Show-MainMenu {
     Clear-Host
     Write-Host "=========================================" -ForegroundColor Green
     Write-Host ""
-    Write-Host "           _ __   ___ _____  _____ " -ForegroundColor Cyan
-    Write-Host "          | '_ \ / __/ _ \ \/ / __|" -ForegroundColor Cyan
-    Write-Host "          | | | | (_|  __/>  <\__ \ " -ForegroundColor Cyan
-    Write-Host "          |_| |_|\___\___/_/\_\___/" -ForegroundColor Cyan
+    Write-Host "        _ __   ___ _____  _____ " -ForegroundColor Cyan
+    Write-Host "       | '_ \ / __/ _ \ \/ / __|" -ForegroundColor Cyan
+    Write-Host "       | | | | (_|  __/>  <\__ \ " -ForegroundColor Cyan
+    Write-Host "       |_| |_|\___\___/_/\_\___/" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host ("          {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor Yellow
+    Write-Host ("   {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor Yellow
     Write-Host ""
     Write-Host "=========================================" -ForegroundColor Green
-    Write-Host ("1. {0}" -f (Get-Translation 'Menu_Option1'))
-    Write-Host ("2. {0}" -f (Get-Translation 'Menu_Option2'))
-    Write-Host ("3. {0}" -f (Get-Translation 'Menu_Option3'))
-    Write-Host ("4. {0}" -f (Get-Translation 'Menu_Option4'))
-    Write-Host ("5. {0}" -f (Get-Translation 'Menu_Option5'))
-    Write-Host ("6. {0}" -f (Get-Translation 'Menu_Option6'))
-    Write-Host ("7. {0}" -f (Get-Translation 'Menu_Option7')) -ForegroundColor Yellow
-    Write-Host ("8. {0}" -f (Get-Translation 'Menu_Option8')) -ForegroundColor Yellow
-    Write-Host ("9. {0}" -f (Get-Translation 'Menu_Option9'))
+    Write-Host ("1.  {0}" -f (Get-Translation 'Menu_Option1'))
+    Write-Host ("2.  {0}" -f (Get-Translation 'Menu_Option2'))
+    Write-Host ("3.  {0}" -f (Get-Translation 'Menu_Option3'))
+    Write-Host ("4.  {0}" -f (Get-Translation 'Menu_Option4'))
+    Write-Host ("5.  {0}" -f (Get-Translation 'Menu_Option5'))
+    Write-Host ("6.  {0}" -f (Get-Translation 'Menu_Option6'))
+    Write-Host ("7.  {0}" -f (Get-Translation 'Menu_Option7')) -ForegroundColor Yellow
+    Write-Host ("8.  {0}" -f (Get-Translation 'Menu_Option8')) -ForegroundColor Yellow
+    Write-Host ("9.  {0}" -f (Get-Translation 'Menu_Option9'))
     Write-Host ("10. {0}" -f (Get-Translation 'Menu_Option10'))
     Write-Host ("11. {0}" -f (Get-Translation 'Menu_Option11'))
     Write-Host ("12. {0}" -f (Get-Translation 'Menu_Option12')) -ForegroundColor Red
@@ -696,7 +680,7 @@ do {
         "2"  { Clear-JunkFiles }
         "3"  { Clear-RecycleBin-Menu }
         "4"  { Open-DiskCleanup }
-        "5"  { Show-NetworkMenu }
+        "5"  { Invoke-NetworkRepair }
         "6"  { Clear-RAM }
         "7"  { Open-WindowsSecurity }
         "8"  { Invoke-Defragment }
