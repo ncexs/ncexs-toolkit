@@ -34,7 +34,7 @@ $global:Translations = @{
         "Menu_Option2" = "Junk Cleaner"
         "Menu_Option3" = "Empty Recycle Bin"
         "Menu_Option4" = "Open Disk Cleanup"
-        "Menu_Option5" = "Uninstall Programs"
+        "Menu_Option5" = "Advanced Uninstaller"
         "Menu_Option6" = "Automatic Network Repair"
         "Menu_Option7" = "Power & Battery Utilities"
         "Menu_Option8" = "Memory Optimizer"
@@ -45,8 +45,20 @@ $global:Translations = @{
         "Menu_Option13" = "Exit"
         "SubMenu_Power" = "POWER & BATTERY UTILITIES"
         "SubMenu_Power1" = "Change Power Plan"
-        "SubMenu_Power2" = "Generate Battery Health Report"
+        "SubMenu_Power2" = "Show Battery Health Report"
         "SubMenu_Power3" = "Back to Main Menu"
+        "SubMenu_Health" = "SYSTEM HEALTH CHECKER"
+        "SubMenu_Health1" = "Run System File Checker (SFC)"
+        "SubMenu_Health2" = "Run DISM Image Repair"
+        "SubMenu_Health3" = "Back to Main Menu"
+        "SubMenu_Startup" = "STARTUP MANAGER"
+        "SubMenu_Startup1" = "Disable Startup Programs"
+        "SubMenu_Startup2" = "Enable Startup Programs"
+        "SubMenu_Startup3" = "Back to Main Menu"
+        "LanguageMenu" = "LANGUAGE SETTINGS"
+        "LanguageMenu1" = "English"
+        "LanguageMenu2" = "Indonesian"
+        "LanguageMenu3" = "Back to Main Menu"
         "PressAnyKey" = "Press any key to continue..."
         "InvalidOption" = "Invalid option. Please try again."
         "ExitMessage" = "Thank you for using ncexs Toolkit!"
@@ -90,11 +102,29 @@ $global:Translations = @{
         "Power_Saver" = "Power Saver"
         "Power_High" = "High Performance"
         "Power_Changed" = "Power plan successfully changed to {0}."
-        "Battery_Generating" = "Generating battery health report..."
-        "Battery_Generated" = "Report saved to {0}. Opening now..."
-        "Battery_NotFound" = "Could not generate report. This PC may not have a battery."
-        "Battery_Error" = "An error occurred while generating the battery report."
-        "Uninstall_Opening" = "Opening 'Programs and Features'..."
+        "Battery_Title" = "BATTERY HEALTH REPORT"
+        "Battery_Health" = "Health"
+        "Battery_Design" = "Design Capacity"
+        "Battery_FullCharge" = "Current Full Charge Capacity"
+        "Battery_Status" = "Current Status"
+        "Battery_Status_Charging" = "Charging"
+        "Battery_Status_Discharging" = "Discharging"
+        "Battery_Status_OnAC" = "On AC Power"
+        "Battery_Status_Unknown" = "Unknown"
+        "Battery_NotFound" = "No battery detected on this system."
+        "Battery_Error" = "An error occurred while retrieving battery information."
+        "Uninstall_Title" = "ADVANCED UNINSTALLER"
+        "Uninstall_Scanning" = "Scanning registry for installed programs... Please wait."
+        "Uninstall_Found" = "Found {0} programs."
+        "Uninstall_Prompt" = "Type the name (or part of the name) of the program to uninstall (or press Enter to cancel):"
+        "Uninstall_Searching" = "Searching for '{0}'..."
+        "Uninstall_FoundMultiple" = "Found multiple matches. Please be more specific:"
+        "Uninstall_FoundOne" = "Found program: {0}"
+        "Uninstall_Confirm" = "Are you sure you want to run the uninstaller for this program?"
+        "Uninstall_Running" = "Running uninstaller... Please follow the prompts on your screen."
+        "Uninstall_Success" = "Uninstaller process started successfully."
+        "Uninstall_NoMatch" = "No program found matching that name."
+        "Uninstall_Error" = "Could not run the uninstaller. The program may be corrupt or already partially removed."
         "Startup_Title" = "STARTUP MANAGER"
         "Startup_List" = "Current Startup Programs:"
         "Startup_Disabled" = "Startup program disabled: {0}"
@@ -124,7 +154,7 @@ $global:Translations = @{
         "Menu_Option2" = "Pembersih Sampah"
         "Menu_Option3" = "Kosongkan Recycle Bin"
         "Menu_Option4" = "Buka Disk Cleanup"
-        "Menu_Option5" = "Copot Pemasangan Program"
+        "Menu_Option5" = "Uninstaller Canggih"
         "Menu_Option6" = "Perbaikan Jaringan Otomatis"
         "Menu_Option7" = "Utilitas Daya & Baterai"
         "Menu_Option8" = "Optimasi Memori"
@@ -135,8 +165,20 @@ $global:Translations = @{
         "Menu_Option13" = "Keluar"
         "SubMenu_Power" = "UTILITAS DAYA & BATERAI"
         "SubMenu_Power1" = "Ubah Power Plan"
-        "SubMenu_Power2" = "Buat Laporan Kesehatan Baterai"
+        "SubMenu_Power2" = "Tampilkan Laporan Kesehatan Baterai"
         "SubMenu_Power3" = "Kembali ke Menu Utama"
+        "SubMenu_Health" = "PEMERIKSA KESEHATAN SISTEM"
+        "SubMenu_Health1" = "Jalankan Pemeriksa Berkas Sistem (SFC)"
+        "SubMenu_Health2" = "Jalankan Perbaikan Image DISM"
+        "SubMenu_Health3" = "Kembali ke Menu Utama"
+        "SubMenu_Startup" = "PENGELOLA STARTUP"
+        "SubMenu_Startup1" = "Nonaktifkan Program Startup"
+        "SubMenu_Startup2" = "Aktifkan Program Startup"
+        "SubMenu_Startup3" = "Kembali ke Menu Utama"
+        "LanguageMenu" = "PENGATURAN BAHASA"
+        "LanguageMenu1" = "Bahasa Inggris"
+        "LanguageMenu2" = "Bahasa Indonesia"
+        "LanguageMenu3" = "Kembali ke Menu Utama"
         "PressAnyKey" = "Tekan sembarang tombol untuk melanjutkan..."
         "InvalidOption" = "Pilihan tidak valid. Silakan coba lagi."
         "ExitMessage" = "Terima kasih telah menggunakan ncexs Toolkit!"
@@ -180,11 +222,29 @@ $global:Translations = @{
         "Power_Saver" = "Hemat Daya"
         "Power_High" = "Performa Tinggi"
         "Power_Changed" = "Power plan berhasil diubah ke {0}."
-        "Battery_Generating" = "Membuat laporan kesehatan baterai..."
-        "Battery_Generated" = "Laporan disimpan di {0}. Sedang dibuka..."
-        "Battery_NotFound" = "Tidak dapat membuat laporan. PC ini mungkin tidak memiliki baterai."
-        "Battery_Error" = "Terjadi kesalahan saat membuat laporan baterai."
-        "Uninstall_Opening" = "Membuka 'Programs and Features'..."
+        "Battery_Title" = "LAPORAN KESEHATAN BATERAI"
+        "Battery_Health" = "Kesehatan"
+        "Battery_Design" = "Kapasitas Desain"
+        "Battery_FullCharge" = "Kapasitas Penuh Saat Ini"
+        "Battery_Status" = "Status Saat Ini"
+        "Battery_Status_Charging" = "Mengisi Daya"
+        "Battery_Status_Discharging" = "Menggunakan Baterai"
+        "Battery_Status_OnAC" = "Terhubung ke Listrik"
+        "Battery_Status_Unknown" = "Tidak diketahui"
+        "Battery_NotFound" = "Tidak ada baterai yang terdeteksi pada sistem ini."
+        "Battery_Error" = "Terjadi kesalahan saat mengambil informasi baterai."
+        "Uninstall_Title" = "UNINSTALLER CANGGIH"
+        "Uninstall_Scanning" = "Memindai registry untuk program terinstal... Harap tunggu."
+        "Uninstall_Found" = "Ditemukan {0} program."
+        "Uninstall_Prompt" = "Ketik nama (atau bagian nama) program untuk di-uninstall (atau tekan Enter untuk batal):"
+        "Uninstall_Searching" = "Mencari '{0}'..."
+        "Uninstall_FoundMultiple" = "Ditemukan beberapa yang cocok. Harap lebih spesifik:"
+        "Uninstall_FoundOne" = "Program ditemukan: {0}"
+        "Uninstall_Confirm" = "Apakah Anda yakin ingin menjalankan uninstaller untuk program ini?"
+        "Uninstall_Running" = "Menjalankan uninstaller... Harap ikuti petunjuk di layar Anda."
+        "Uninstall_Success" = "Proses uninstaller berhasil dimulai."
+        "Uninstall_NoMatch" = "Tidak ada program yang ditemukan cocok dengan nama itu."
+        "Uninstall_Error" = "Tidak dapat menjalankan uninstaller. Program mungkin rusak atau sudah terhapus sebagian."
         "Startup_Title" = "PENGELOLA STARTUP"
         "Startup_List" = "Program Startup Saat Ini:"
         "Startup_Disabled" = "Program startup dinonaktifkan: {0}"
@@ -393,17 +453,104 @@ function Open-DiskCleanup {
 }
 
 # ---------------------------
-# 5. Uninstall Programs
+# 5. Advanced Uninstaller
 # ---------------------------
-function Open-Uninstaller {
-    Write-Host "`n$(Get-Translation 'Uninstall_Opening')" -ForegroundColor Cyan
-    try {
-        Start-Process "appwiz.cpl" -ErrorAction Stop
-        Write-Log "Launched appwiz.cpl" "INFO"
-    } catch {
-        $errorMsg = "Failed to open Programs and Features: $($_.Exception.Message)"
-        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
-        Read-Host "`n$(Get-Translation 'PressAnyKey')"
+function Show-AdvancedUninstaller {
+    Write-Host "`n=== $(Get-Translation 'Uninstall_Title') ===" -ForegroundColor Cyan
+    Write-Host (Get-Translation 'Uninstall_Scanning') -ForegroundColor Yellow
+    
+    $programs = @()
+    $registryPaths = @(
+        'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*',
+        'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*',
+        'HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*'
+    )
+
+    foreach ($path in $registryPaths) {
+        try {
+            Get-ItemProperty -Path $path -ErrorAction SilentlyContinue | ForEach-Object {
+                if ($_.DisplayName -and $_.UninstallString) {
+                    if (($_.DisplayName -notmatch "KB[0-9]") -and (-not $_.ParentKeyName) -and ($_.SystemComponent -ne 1)) {
+                        $programs += [PSCustomObject]@{
+                            DisplayName     = $_.DisplayName
+                            UninstallString = $_.UninstallString
+                        }
+                    }
+                }
+            }
+        } catch {}
+    }
+    
+    $uniquePrograms = $programs | Sort-Object DisplayName -Unique
+    
+    Write-Host (Get-Translation 'Uninstall_Found' -f $uniquePrograms.Count) -ForegroundColor Green
+    $searchTerm = Read-Host "`n$(Get-Translation 'Uninstall_Prompt')"
+    
+    if ([string]::IsNullOrWhiteSpace($searchTerm)) {
+        Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow
+        return
+    }
+    
+    Write-Host "`n$( (Get-Translation 'Uninstall_Searching') -f $searchTerm )" -ForegroundColor Gray
+    
+    # PERBAIKAN BUG: Mengganti $matches menjadi $matchingPrograms
+    $matchingPrograms = $uniquePrograms | Where-Object { $_.DisplayName -like "*$searchTerm*" }
+    
+    if (-not $matchingPrograms) {
+        Write-Host (Get-Translation 'Uninstall_NoMatch') -ForegroundColor Red
+        return
+    }
+    
+    $selectedProgram = $null
+    if ($matchingPrograms.Count -eq 1) {
+        $selectedProgram = $matchingPrograms[0]
+        Write-Host (Get-Translation 'Uninstall_FoundOne' -f $selectedProgram.DisplayName) -ForegroundColor Green
+    } else {
+        Write-Host (Get-Translation 'Uninstall_FoundMultiple') -ForegroundColor Yellow
+        for ($i = 0; $i -lt $matchingPrograms.Count; $i++) {
+            Write-Host "[$($i+1)] $($matchingPrograms[$i].DisplayName)"
+        }
+        $choice = Read-Host "`n$(Get-Translation 'SelectOption')"
+        if ($choice -match '^\d+$' -and [int]$choice -ge 1 -and [int]$choice -le $matchingPrograms.Count) {
+            $selectedProgram = $matchingPrograms[[int]$choice - 1]
+        } else {
+            Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow
+            return
+        }
+    }
+    
+    $confirm = Read-Host "`n$((Get-Translation 'Uninstall_Confirm')) $(Get-Translation 'YesNoPrompt')"
+    if (($global:Language -eq "ID" -and $confirm -match '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirm -match '^(Y|y)$')) {
+        Write-Host "`n$(Get-Translation 'Uninstall_Running')" -ForegroundColor Yellow
+        Write-Log "Attempting to uninstall: $($selectedProgram.DisplayName)" "INFO"
+        
+        $uninstallString = $selectedProgram.UninstallString
+        $uninstallString = $uninstallString.Trim('"')
+        
+        try {
+            if ($uninstallString -like "MsiExec.exe*") {
+                Start-Process "cmd.exe" -ArgumentList "/c $uninstallString" -Wait -Verb RunAs
+            } else {
+                # Coba cari path executable jika tidak ada di string
+                $command = $uninstallString.Split(' ')[0]
+                if (-not (Test-Path $command)) {
+                    $command = (Get-Command $command -ErrorAction SilentlyContinue).Source
+                }
+                $arguments = $uninstallString.Substring($uninstallString.IndexOf(' ') + 1)
+                
+                if ($command) {
+                   Start-Process $command -ArgumentList $arguments -Wait -Verb RunAs
+                } else {
+                   Start-Process $uninstallString -Wait -Verb RunAs
+                }
+            }
+            Write-Host "`n$(Get-Translation 'Uninstall_Success')" -ForegroundColor Green
+        } catch {
+            Write-Host "`n$(Get-Translation 'Uninstall_Error')" -ForegroundColor Red
+            Write-Log "Failed to run uninstaller: $($_.Exception.Message)" "ERROR"
+        }
+    } else {
+        Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow
     }
 }
 
@@ -483,26 +630,70 @@ function Invoke-PowerPlanChange {
 }
 
 function Invoke-BatteryReport {
-    $reportPath = Join-Path -Path $PSScriptRoot -ChildPath "battery_report.html"
-    Write-Host "`n$(Get-Translation 'Battery_Generating')" -ForegroundColor Yellow
-    
+    Write-Host "`n=== $(Get-Translation 'Battery_Title') ===" -ForegroundColor Cyan
+    $tempReportPath = Join-Path $env:TEMP "temp_battery_report.html"
     try {
-        # The output of this command can be noisy, so we pipe it to Out-Null
-        powercfg /batteryreport /output "$reportPath" /duration 1 | Out-Null
-        
-        if (Test-Path $reportPath) {
-            $message = (Get-Translation 'Battery_Generated') -f $reportPath
-            Write-Host $message -ForegroundColor Green
-            Start-Process $reportPath
-            Write-Log "Battery report generated and opened." "SUCCESS"
-        } else {
-            # This handles the case for desktops without batteries
+        # Generate the report silently
+        powercfg /batteryreport /output "$tempReportPath" /duration 1 | Out-Null -ErrorAction Stop
+
+        if (-not (Test-Path $tempReportPath)) {
             Write-Host (Get-Translation 'Battery_NotFound') -ForegroundColor Yellow
-            Write-Log "Battery report failed, likely no battery." "WARNING"
+            Write-Log "powercfg failed to generate report. No battery detected." "WARNING"
+            return
         }
+
+        # Read the report and extract data
+        $reportContent = Get-Content $tempReportPath -Raw
+        
+        # Regex yang dimodifikasi untuk mengambil angka dengan atau tanpa tanda baca dan multibahasa
+        $designMatch = $reportContent | Select-String -Pattern '(?is)(DESIGN CAPACITY|KAPASITAS DESAIN)\s*<td[^>]*>\s*([\d.,]+)'
+        $fullChargeMatch = $reportContent | Select-String -Pattern '(?is)(FULL CHARGE CAPACITY|KAPASITAS PENGISIAN PENUH)\s*<td[^>]*>\s*([\d.,]+)'
+        
+        # Bersihkan angka dari tanda baca (titik atau koma)
+        $design = $designMatch.Matches[0].Groups[2].Value -replace '[.,]'
+        $fullCharge = $fullChargeMatch.Matches[0].Groups[2].Value -replace '[.,]'
+        
+        # Get real-time status via CIM
+        $batteryStatus = Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue
+        
+        if ($design -gt 0) {
+            $health = [math]::Round(($fullCharge / $design * 100))
+            $healthColor = "Green"
+            if ($health -lt 80) { $healthColor = "Yellow" }
+            if ($health -lt 50) { $healthColor = "Red" }
+            $healthDisplay = "$($health)%"
+        } else {
+            $healthDisplay = "N/A"
+            $healthColor = "White"
+        }
+
+        Write-Host ("{0,-30}: {1} mWh" -f (Get-Translation 'Battery_Design'), $design)
+        Write-Host ("{0,-30}: {1} mWh" -f (Get-Translation 'Battery_FullCharge'), $fullCharge)
+        Write-Host ("{0,-30}: " -f (Get-Translation 'Battery_Health')) -NoNewline
+        Write-Host $healthDisplay -ForegroundColor $healthColor
+
+        if ($batteryStatus) {
+            $statusText = switch ($batteryStatus.BatteryStatus) {
+                1       { (Get-Translation 'Battery_Status_Discharging') }
+                2       { (Get-Translation 'Battery_Status_OnAC') }
+                3       { (Get-Translation 'Battery_Status_OnAC') } 
+                6       { (Get-Translation 'Battery_Status_Charging') }
+                default { (Get-Translation 'Battery_Status_Unknown') }
+            }
+             Write-Host ("{0,-30}: {1} ({2}%)" -f (Get-Translation 'Battery_Status'), $statusText, $batteryStatus.EstimatedChargeRemaining)
+        }
+        
+        Write-Log "Displayed battery health report from powercfg." "SUCCESS"
+
     } catch {
-        $errorMsg = (Get-Translation 'Battery_Error') + ": $($_.Exception.Message)"
-        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
+        # Tangkap error jika powercfg gagal atau tidak ada baterai
+        Write-Host (Get-Translation 'Battery_NotFound') -ForegroundColor Yellow
+        Write-Log "Battery health report failed. Error: $($_.Exception.Message)" "WARNING"
+    } finally {
+        # Clean up the temporary report file
+        if (Test-Path $tempReportPath) {
+            Remove-Item $tempReportPath -Force -ErrorAction SilentlyContinue
+        }
     }
 }
 
@@ -786,7 +977,7 @@ do {
         "2"  { Clear-JunkFiles }
         "3"  { Clear-RecycleBin-Menu }
         "4"  { Open-DiskCleanup }
-        "5"  { Open-Uninstaller }
+        "5"  { Show-AdvancedUninstaller; Read-Host "`n$(Get-Translation 'PressAnyKey')" } # Diubah ke fungsi baru
         "6"  { Invoke-NetworkRepair }
         "7"  { Show-PowerMenu }
         "8"  { Clear-RAM }
