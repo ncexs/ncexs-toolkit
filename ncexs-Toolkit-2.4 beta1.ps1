@@ -34,27 +34,22 @@ $global:Translations = @{
         "Menu_Option2" = "Junk Cleaner"
         "Menu_Option3" = "Empty Recycle Bin"
         "Menu_Option4" = "Open Disk Cleanup"
-        "Menu_Option5" = "Advanced Uninstaller"
+        "Menu_Option5" = "Manual Uninstaller"
         "Menu_Option6" = "Automatic Network Repair"
         "Menu_Option7" = "Power & Battery Utilities"
         "Menu_Option8" = "Memory Optimizer"
         "Menu_Option9" = "Defragment & Optimize Drives"
         "Menu_Option10" = "System Health Checker"
-        "Menu_Option11" = "Startup Manager"
-        "Menu_Option12" = "Language Settings"
-        "Menu_Option13" = "Exit"
+        "Menu_Option11" = "Language Settings" # Startup Manager Dihapus
+        "Menu_Option12" = "Exit" # Nomor diubah
         "SubMenu_Power" = "POWER & BATTERY UTILITIES"
         "SubMenu_Power1" = "Change Power Plan"
-        "SubMenu_Power2" = "Show Battery Health Report"
+        "SubMenu_Power2" = "Generate Battery Health Report"
         "SubMenu_Power3" = "Back to Main Menu"
         "SubMenu_Health" = "SYSTEM HEALTH CHECKER"
         "SubMenu_Health1" = "Run System File Checker (SFC)"
         "SubMenu_Health2" = "Run DISM Image Repair"
         "SubMenu_Health3" = "Back to Main Menu"
-        "SubMenu_Startup" = "STARTUP MANAGER"
-        "SubMenu_Startup1" = "Disable Startup Programs"
-        "SubMenu_Startup2" = "Enable Startup Programs"
-        "SubMenu_Startup3" = "Back to Main Menu"
         "LanguageMenu" = "LANGUAGE SETTINGS"
         "LanguageMenu1" = "English"
         "LanguageMenu2" = "Indonesian"
@@ -102,18 +97,11 @@ $global:Translations = @{
         "Power_Saver" = "Power Saver"
         "Power_High" = "High Performance"
         "Power_Changed" = "Power plan successfully changed to {0}."
-        "Battery_Title" = "BATTERY HEALTH REPORT"
-        "Battery_Health" = "Health"
-        "Battery_Design" = "Design Capacity"
-        "Battery_FullCharge" = "Current Full Charge Capacity"
-        "Battery_Status" = "Current Status"
-        "Battery_Status_Charging" = "Charging"
-        "Battery_Status_Discharging" = "Discharging"
-        "Battery_Status_OnAC" = "On AC Power"
-        "Battery_Status_Unknown" = "Unknown"
-        "Battery_NotFound" = "No battery detected on this system."
-        "Battery_Error" = "An error occurred while retrieving battery information."
-        "Uninstall_Title" = "ADVANCED UNINSTALLER"
+        "Battery_Generating" = "Generating battery health report..."
+        "Battery_Generated" = "Report saved to {0}. Opening now..."
+        "Battery_NotFound" = "Could not generate report. This PC may not have a battery."
+        "Battery_Error" = "An error occurred while generating the battery report."
+        "Uninstall_Title" = "MANUAL UNINSTALLER"
         "Uninstall_Scanning" = "Scanning registry for installed programs... Please wait."
         "Uninstall_Found" = "Found {0} programs."
         "Uninstall_Prompt" = "Type the name (or part of the name) of the program to uninstall (or press Enter to cancel):"
@@ -125,12 +113,6 @@ $global:Translations = @{
         "Uninstall_Success" = "Uninstaller process started successfully."
         "Uninstall_NoMatch" = "No program found matching that name."
         "Uninstall_Error" = "Could not run the uninstaller. The program may be corrupt or already partially removed."
-        "Startup_Title" = "STARTUP MANAGER"
-        "Startup_List" = "Current Startup Programs:"
-        "Startup_Disabled" = "Startup program disabled: {0}"
-        "Startup_Enabled" = "Startup program enabled: {0}"
-        "Startup_None" = "No startup programs found."
-        "Startup_Error" = "Error managing startup: {0}"
         "System_Title" = "System Information"
         "Clean_ErrorCalc" = "Error calculating size in {0}: {1}"
         "Clean_ErrorDelete" = "Could not delete locked file {0}: {1}"
@@ -154,27 +136,22 @@ $global:Translations = @{
         "Menu_Option2" = "Pembersih Sampah"
         "Menu_Option3" = "Kosongkan Recycle Bin"
         "Menu_Option4" = "Buka Disk Cleanup"
-        "Menu_Option5" = "Uninstaller Canggih"
+        "Menu_Option5" = "Uninstaller Manual"
         "Menu_Option6" = "Perbaikan Jaringan Otomatis"
         "Menu_Option7" = "Utilitas Daya & Baterai"
         "Menu_Option8" = "Optimasi Memori"
         "Menu_Option9" = "Defragment & Optimasi Drive"
         "Menu_Option10" = "Pemeriksa Kesehatan Sistem"
-        "Menu_Option11" = "Pengelola Startup"
-        "Menu_Option12" = "Pengaturan Bahasa"
-        "Menu_Option13" = "Keluar"
+        "Menu_Option11" = "Pengaturan Bahasa" # Startup Manager Dihapus
+        "Menu_Option12" = "Keluar" # Nomor diubah
         "SubMenu_Power" = "UTILITAS DAYA & BATERAI"
         "SubMenu_Power1" = "Ubah Power Plan"
-        "SubMenu_Power2" = "Tampilkan Laporan Kesehatan Baterai"
+        "SubMenu_Power2" = "Buat Laporan Kesehatan Baterai"
         "SubMenu_Power3" = "Kembali ke Menu Utama"
         "SubMenu_Health" = "PEMERIKSA KESEHATAN SISTEM"
         "SubMenu_Health1" = "Jalankan Pemeriksa Berkas Sistem (SFC)"
         "SubMenu_Health2" = "Jalankan Perbaikan Image DISM"
         "SubMenu_Health3" = "Kembali ke Menu Utama"
-        "SubMenu_Startup" = "PENGELOLA STARTUP"
-        "SubMenu_Startup1" = "Nonaktifkan Program Startup"
-        "SubMenu_Startup2" = "Aktifkan Program Startup"
-        "SubMenu_Startup3" = "Kembali ke Menu Utama"
         "LanguageMenu" = "PENGATURAN BAHASA"
         "LanguageMenu1" = "Bahasa Inggris"
         "LanguageMenu2" = "Bahasa Indonesia"
@@ -222,18 +199,11 @@ $global:Translations = @{
         "Power_Saver" = "Hemat Daya"
         "Power_High" = "Performa Tinggi"
         "Power_Changed" = "Power plan berhasil diubah ke {0}."
-        "Battery_Title" = "LAPORAN KESEHATAN BATERAI"
-        "Battery_Health" = "Kesehatan"
-        "Battery_Design" = "Kapasitas Desain"
-        "Battery_FullCharge" = "Kapasitas Penuh Saat Ini"
-        "Battery_Status" = "Status Saat Ini"
-        "Battery_Status_Charging" = "Mengisi Daya"
-        "Battery_Status_Discharging" = "Menggunakan Baterai"
-        "Battery_Status_OnAC" = "Terhubung ke Listrik"
-        "Battery_Status_Unknown" = "Tidak diketahui"
-        "Battery_NotFound" = "Tidak ada baterai yang terdeteksi pada sistem ini."
-        "Battery_Error" = "Terjadi kesalahan saat mengambil informasi baterai."
-        "Uninstall_Title" = "UNINSTALLER CANGGIH"
+        "Battery_Generating" = "Membuat laporan kesehatan baterai..."
+        "Battery_Generated" = "Laporan disimpan di {0}. Sedang dibuka..."
+        "Battery_NotFound" = "Tidak dapat membuat laporan. PC ini mungkin tidak memiliki baterai."
+        "Battery_Error" = "Terjadi kesalahan saat membuat laporan baterai."
+        "Uninstall_Title" = "UNINSTALLER MANUAL"
         "Uninstall_Scanning" = "Memindai registry untuk program terinstal... Harap tunggu."
         "Uninstall_Found" = "Ditemukan {0} program."
         "Uninstall_Prompt" = "Ketik nama (atau bagian nama) program untuk di-uninstall (atau tekan Enter untuk batal):"
@@ -245,12 +215,6 @@ $global:Translations = @{
         "Uninstall_Success" = "Proses uninstaller berhasil dimulai."
         "Uninstall_NoMatch" = "Tidak ada program yang ditemukan cocok dengan nama itu."
         "Uninstall_Error" = "Tidak dapat menjalankan uninstaller. Program mungkin rusak atau sudah terhapus sebagian."
-        "Startup_Title" = "PENGELOLA STARTUP"
-        "Startup_List" = "Program Startup Saat Ini:"
-        "Startup_Disabled" = "Program startup dinonaktifkan: {0}"
-        "Startup_Enabled" = "Program startup diaktifkan: {0}"
-        "Startup_None" = "Tidak ada program startup yang ditemukan."
-        "Startup_Error" = "Kesalahan mengelola startup: {0}"
         "System_Title" = "Informasi Sistem"
         "Clean_ErrorCalc" = "Kesalahan menghitung ukuran di {0}: {1}"
         "Clean_ErrorDelete" = "Tidak dapat menghapus file terkunci {0}: {1}"
@@ -630,70 +594,25 @@ function Invoke-PowerPlanChange {
 }
 
 function Invoke-BatteryReport {
-    Write-Host "`n=== $(Get-Translation 'Battery_Title') ===" -ForegroundColor Cyan
-    $tempReportPath = Join-Path $env:TEMP "temp_battery_report.html"
+    # Ini adalah fungsi yang Anda berikan, yang membuat file HTML
+    $reportPath = Join-Path -Path $PSScriptRoot -ChildPath "battery_report.html"
+    Write-Host "`n$(Get-Translation 'Battery_Generating')" -ForegroundColor Yellow
+    
     try {
-        # Generate the report silently
-        powercfg /batteryreport /output "$tempReportPath" /duration 1 | Out-Null -ErrorAction Stop
-
-        if (-not (Test-Path $tempReportPath)) {
-            Write-Host (Get-Translation 'Battery_NotFound') -ForegroundColor Yellow
-            Write-Log "powercfg failed to generate report. No battery detected." "WARNING"
-            return
-        }
-
-        # Read the report and extract data
-        $reportContent = Get-Content $tempReportPath -Raw
+        powercfg /batteryreport /output "$reportPath" /duration 1 | Out-Null
         
-        # Regex yang dimodifikasi untuk mengambil angka dengan atau tanpa tanda baca dan multibahasa
-        $designMatch = $reportContent | Select-String -Pattern '(?is)(DESIGN CAPACITY|KAPASITAS DESAIN)\s*<td[^>]*>\s*([\d.,]+)'
-        $fullChargeMatch = $reportContent | Select-String -Pattern '(?is)(FULL CHARGE CAPACITY|KAPASITAS PENGISIAN PENUH)\s*<td[^>]*>\s*([\d.,]+)'
-        
-        # Bersihkan angka dari tanda baca (titik atau koma)
-        $design = $designMatch.Matches[0].Groups[2].Value -replace '[.,]'
-        $fullCharge = $fullChargeMatch.Matches[0].Groups[2].Value -replace '[.,]'
-        
-        # Get real-time status via CIM
-        $batteryStatus = Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue
-        
-        if ($design -gt 0) {
-            $health = [math]::Round(($fullCharge / $design * 100))
-            $healthColor = "Green"
-            if ($health -lt 80) { $healthColor = "Yellow" }
-            if ($health -lt 50) { $healthColor = "Red" }
-            $healthDisplay = "$($health)%"
+        if (Test-Path $reportPath) {
+            $message = (Get-Translation 'Battery_Generated') -f $reportPath
+            Write-Host $message -ForegroundColor Green
+            Start-Process $reportPath
+            Write-Log "Battery report generated and opened." "SUCCESS"
         } else {
-            $healthDisplay = "N/A"
-            $healthColor = "White"
+            Write-Host (Get-Translation 'Battery_NotFound') -ForegroundColor Yellow
+            Write-Log "Battery report failed, likely no battery." "WARNING"
         }
-
-        Write-Host ("{0,-30}: {1} mWh" -f (Get-Translation 'Battery_Design'), $design)
-        Write-Host ("{0,-30}: {1} mWh" -f (Get-Translation 'Battery_FullCharge'), $fullCharge)
-        Write-Host ("{0,-30}: " -f (Get-Translation 'Battery_Health')) -NoNewline
-        Write-Host $healthDisplay -ForegroundColor $healthColor
-
-        if ($batteryStatus) {
-            $statusText = switch ($batteryStatus.BatteryStatus) {
-                1       { (Get-Translation 'Battery_Status_Discharging') }
-                2       { (Get-Translation 'Battery_Status_OnAC') }
-                3       { (Get-Translation 'Battery_Status_OnAC') } 
-                6       { (Get-Translation 'Battery_Status_Charging') }
-                default { (Get-Translation 'Battery_Status_Unknown') }
-            }
-             Write-Host ("{0,-30}: {1} ({2}%)" -f (Get-Translation 'Battery_Status'), $statusText, $batteryStatus.EstimatedChargeRemaining)
-        }
-        
-        Write-Log "Displayed battery health report from powercfg." "SUCCESS"
-
     } catch {
-        # Tangkap error jika powercfg gagal atau tidak ada baterai
-        Write-Host (Get-Translation 'Battery_NotFound') -ForegroundColor Yellow
-        Write-Log "Battery health report failed. Error: $($_.Exception.Message)" "WARNING"
-    } finally {
-        # Clean up the temporary report file
-        if (Test-Path $tempReportPath) {
-            Remove-Item $tempReportPath -Force -ErrorAction SilentlyContinue
-        }
+        $errorMsg = (Get-Translation 'Battery_Error') + ": $($_.Exception.Message)"
+        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
     }
 }
 
@@ -845,77 +764,7 @@ function Invoke-DISMRepair {
 }
 
 # ---------------------------
-# 11. Startup Manager
-# ---------------------------
-function Show-StartupManager {
-    do {
-        Clear-Host
-        Write-Host "=========================================" -ForegroundColor Green
-        Write-Host "        $(Get-Translation 'SubMenu_Startup')" -ForegroundColor Cyan
-        Write-Host "=========================================" -ForegroundColor Green
-        Write-Host "1. $(Get-Translation 'SubMenu_Startup1')"; Write-Host "2. $(Get-Translation 'SubMenu_Startup2')"; Write-Host "3. $(Get-Translation 'SubMenu_Startup3')"
-        Write-Host "=========================================" -ForegroundColor Green
-        $choice = Read-Host "`n$(Get-Translation 'SelectOption')"
-        switch ($choice) {
-            "1" { Set-StartupProgram -Action Disable; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
-            "2" { Set-StartupProgram -Action Enable; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
-            "3" { return }
-            default { Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red; Start-Sleep -Seconds 2 }
-        }
-    } while ($true)
-}
-
-function Set-StartupProgram {
-    param([ValidateSet("Disable", "Enable")][string]$Action)
-    $backupFile = Join-Path -Path $PSScriptRoot -ChildPath "StartupBackup.json"
-    if ($Action -eq "Disable") {
-        Write-Host "`n=== $(Get-Translation 'SubMenu_Startup1') ===" -ForegroundColor Cyan
-        try {
-            $startupItems = Get-CimInstance -ClassName Win32_StartupCommand | Select-Object @{N="Name";E={$_.Name}}, Command, Location, User | Sort-Object Name
-            if (-not $startupItems) { Write-Host (Get-Translation 'Startup_None') -ForegroundColor Yellow; return }
-            Write-Host (Get-Translation 'Startup_List') -ForegroundColor Yellow
-            for ($i = 0; $i -lt $startupItems.Count; $i++) { Write-Host ("[{0}] {1} ({2})" -f ($i+1), $startupItems[$i].Name, $startupItems[$i].Location) -ForegroundColor Gray }
-            $itemChoice = Read-Host "`nEnter number to disable (or press Enter to cancel)"
-            if ([string]::IsNullOrWhiteSpace($itemChoice)) { Write-Host (Get-Translation 'Cancel'); return }
-            if ($itemChoice -match '^\d+$' -and [int]$itemChoice -ge 1 -and [int]$itemChoice -le $startupItems.Count) {
-                $selectedItem = $startupItems[[int]$itemChoice - 1]
-                if ($selectedItem.Location -notlike "*Registry*") { Write-Host "Cannot disable non-registry startup item '$($selectedItem.Name)'." -ForegroundColor Yellow; return }
-                $regPath = if ($selectedItem.User -eq "All Users") { "HKLM:\Software\Microsoft\Windows\CurrentVersion\Run" } else { "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" }
-                $existingBackup = if (Test-Path $backupFile) { (Get-Content $backupFile -Raw | ConvertFrom-Json) } else { @() }
-                $existingBackup += [pscustomobject]@{ Name = $selectedItem.Name; Command = $selectedItem.Command; Path = $regPath }
-                $existingBackup | ConvertTo-Json | Set-Content $backupFile -Encoding UTF8
-                Remove-ItemProperty -Path $regPath -Name $selectedItem.Name -Force -ErrorAction Stop
-                Write-Log "Disabled startup item: $($selectedItem.Name)" "INFO"; Write-Host ((Get-Translation 'Startup_Disabled') -f $selectedItem.Name) -ForegroundColor Green
-            } else { Write-Host "Invalid selection." -ForegroundColor Red }
-        } catch { $errorMsg = (Get-Translation 'Startup_Error') -f $_.Exception.Message; Write-Log $errorMsg "ERROR" }
-    } elseif ($Action -eq "Enable") {
-        Write-Host "`n=== $(Get-Translation 'SubMenu_Startup2') ===" -ForegroundColor Cyan
-        if (-not (Test-Path $backupFile)) { Write-Host "No backup of disabled startup items found." -ForegroundColor Yellow; return }
-        $backupItems = Get-Content $backupFile -Raw | ConvertFrom-Json
-        if (-not $backupItems) { Write-Host "No items to restore." -ForegroundColor Yellow; return }
-        Write-Host "Disabled Startup Programs (available to enable):" -ForegroundColor Yellow
-        for ($i = 0; $i -lt $backupItems.Count; $i++) { Write-Host ("[{0}] {1}" -f ($i+1), $backupItems[$i].Name) -ForegroundColor Gray }
-        $itemChoice = Read-Host "`nEnter number to enable (or 'all', or Enter to cancel)"
-        if ([string]::IsNullOrWhiteSpace($itemChoice)) { Write-Host (Get-Translation 'Cancel'); return }
-        $itemsToRestore = @()
-        if ($itemChoice -eq 'all') { $itemsToRestore = $backupItems } 
-        elseif ($itemChoice -match '^\d+$' -and [int]$itemChoice -ge 1 -and [int]$itemChoice -le $backupItems.Count) { $itemsToRestore += $backupItems[[int]$itemChoice - 1] } 
-        else { Write-Host "Invalid selection." -ForegroundColor Red; return }
-        $remainingItems = $backupItems | Where-Object { $_ -notin $itemsToRestore }
-        foreach ($item in $itemsToRestore) {
-            try {
-                if (-not (Test-Path $item.Path)) { New-Item -Path $item.Path -Force | Out-Null }
-                Set-ItemProperty -Path $item.Path -Name $item.Name -Value $item.Command -ErrorAction Stop
-                Write-Log "Enabled startup item: $($item.Name)" "INFO"; Write-Host ((Get-Translation 'Startup_Enabled') -f $item.Name) -ForegroundColor Green
-            } catch { Write-Host "Failed to enable $($item.Name): $($_.Exception.Message)" -ForegroundColor Red; Write-Log "Failed to enable startup item $($item.Name): $($_.Exception.Message)" "ERROR" }
-        }
-        if ($remainingItems.Count -gt 0) { $remainingItems | ConvertTo-Json | Set-Content $backupFile -Encoding UTF8 } 
-        else { Remove-Item $backupFile -Force -ErrorAction SilentlyContinue }
-    }
-}
-
-# ---------------------------
-# 12. Language Settings
+# 11. Language Settings
 # ---------------------------
 function Show-LanguageMenu {
     Clear-Host
@@ -961,8 +810,7 @@ function Show-MainMenu {
     Write-Host ("9. {0}" -f (Get-Translation 'Menu_Option9'))
     Write-Host ("10. {0}" -f (Get-Translation 'Menu_Option10'))
     Write-Host ("11. {0}" -f (Get-Translation 'Menu_Option11'))
-    Write-Host ("12. {0}" -f (Get-Translation 'Menu_Option12'))
-    Write-Host ("13. {0}" -f (Get-Translation 'Menu_Option13')) -ForegroundColor Red
+    Write-Host ("12. {0}" -f (Get-Translation 'Menu_Option12')) -ForegroundColor Red
     Write-Host "=========================================" -ForegroundColor Green
 }
 
@@ -977,15 +825,14 @@ do {
         "2"  { Clear-JunkFiles }
         "3"  { Clear-RecycleBin-Menu }
         "4"  { Open-DiskCleanup }
-        "5"  { Show-AdvancedUninstaller; Read-Host "`n$(Get-Translation 'PressAnyKey')" } # Diubah ke fungsi baru
+        "5"  { Show-AdvancedUninstaller; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
         "6"  { Invoke-NetworkRepair }
         "7"  { Show-PowerMenu }
         "8"  { Clear-RAM }
         "9"  { Invoke-Defragment }
         "10" { Show-SystemHealthMenu }
-        "11" { Show-StartupManager }
-        "12" { Show-LanguageMenu }
-        "13" {
+        "11" { Show-LanguageMenu } # Nomor diubah
+        "12" { # Nomor diubah
             Write-Log "Toolkit session completed." "INFO"
             Write-Host (Get-Translation 'ExitMessage') -ForegroundColor Green
             Start-Sleep -Seconds 1
