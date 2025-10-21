@@ -1,7 +1,7 @@
 # 🧰 ncexs Toolkit
 
 [![Website](https://img.shields.io/badge/Website-ncexs.github.io-blueviolet?style=flat&logo=github&logoColor=white)](https://ncexs.github.io/)
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F70%20Detections-brightgreen?style=flat&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/your-new-file-hash-here/detection)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F70%2F70%20Detections-brightgreen?style=flat&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/your-new-file-hash-here/detection)
 [![Windows](https://img.shields.io/badge/Windows-7%2B-0078D4?style=flat&logo=windows)](#)
 [![PowerShell](https://img.shields.io/badge/PowerShell-3.0%2B-5D2D8C?style=flat&logo=powershell)](#)
 
@@ -37,9 +37,6 @@
 3. **Right-click** the `.ps1` file → "Run with PowerShell".
 4. **Allow permissions** if prompted (UAC prompt → Yes).
 5. **Pick your task** from the interactive menu.
-
-⏱️ **Quick Clean** → Options 2 → 3 → 6
-🔧 **Full Tune-up** → Options 1 → 2 → 4 → 5 → 8
 
 **Download Latest Release:**
 [![⬇️ Download](https://img.shields.io/badge/⬇️%20Download-Latest%20Release-brightgreen?style=flat&logo=github)](https://github.com/ncexs/ncexs-toolkit/releases/latest)
@@ -86,6 +83,7 @@ Some features, like system cleanup and network repair, need elevated permissions
 ## 📜 License
 
 MIT License – Free to use, modify, and share.
+
 ⚠️ Always back up important data before performing system maintenance.
 
 ---
