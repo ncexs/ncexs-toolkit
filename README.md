@@ -32,14 +32,15 @@
 
 ## 🚀 Get Started in 5 Steps
 
-1. **Download** the latest `.ps1` file from the [latest release](https://github.com/ncexs/ncexs-toolkit/releases/latest).
+1. **Download** the latest `.ps1` file from [![Download](https://img.shields.io/badge/%20Download-Latest%20Release-brightgreen?style=flat&logo=github)](https://github.com/ncexs/ncexs-toolkit/releases/latest)
 2. **Move** the file to a convenient location (like your Desktop).
 3. **Right-click** the `.ps1` file → "Run with PowerShell".
 4. **Allow permissions** if prompted (UAC prompt → Yes).
 5. **Pick your task** from the interactive menu.
 
-**Download Latest Release:**
-[![⬇️ Download](https://img.shields.io/badge/⬇️%20Download-Latest%20Release-brightgreen?style=flat&logo=github)](https://github.com/ncexs/ncexs-toolkit/releases/latest)
+For the complete "Get Started" guide and step-by-step instructions, please visit our official website.
+
+[**View Full Guide at ncexs.github.io**](https://ncexs.github.io/)
 
 ---
 
