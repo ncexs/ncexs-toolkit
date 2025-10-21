@@ -26,7 +26,41 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction S
 $global:ToolkitVersion = "2.4 Test"
 $global:Language = "ID"  # default
 
-# Standardized translation structure
+# ---------------------------
+# Color Theme
+# ---------------------------
+# Define all colors in one place for easy editing
+$global:Theme = @{
+    Title       = 'Cyan'
+    Separator   = 'DarkGray'
+    MenuNumber  = 'Yellow'
+    MenuText    = 'White'
+    Prompt      = 'Yellow'
+    Success     = 'Green'
+    Error       = 'Red'
+    Warning     = 'Magenta'
+    Info        = 'Gray'
+    Exit        = 'Red'
+    AsciiArt    = 'Cyan'
+}
+
+# ---------------------------
+# FIX FOR "RED FLICKER"
+# ---------------------------
+# Set the prompt color for Read-Host globally
+try {
+    $Host.PrivateData.PromptForegroundColor = $global:Theme.Prompt
+} catch {
+    # Failed to set prompt color (e.g., in non-standard hosts like ISE)
+    # This is not a fatal error, continue.
+    Write-Warning "Could not set themed prompt color. This is non-fatal."
+    # We don't need Write-Log here as it might not be ready.
+}
+# ---------------------------
+
+# ---------------------------
+# Translations
+# ---------------------------
 $global:Translations = @{
     "EN" = @{
         "Menu_Title" = ("ncexs Toolkit v{0}" -f $global:ToolkitVersion)
@@ -40,8 +74,8 @@ $global:Translations = @{
         "Menu_Option8" = "Memory Optimizer"
         "Menu_Option9" = "Defragment & Optimize Drives"
         "Menu_Option10" = "System Health Checker"
-        "Menu_Option11" = "Language Settings" # Startup Manager Removed
-        "Menu_Option12" = "Exit" # Number changed
+        "Menu_Option11" = "Language Settings"
+        "Menu_Option12" = "Exit"
         "SubMenu_Power" = "POWER & BATTERY UTILITIES"
         "SubMenu_Power1" = "Change Power Plan"
         "SubMenu_Power2" = "Generate Battery Health Report"
@@ -65,6 +99,14 @@ $global:Translations = @{
         "Version" = "Version"
         "CPU" = "Processor"
         "RAM" = "Memory"
+        "GPU" = "Graphics Card"
+        "Motherboard" = "Motherboard"
+        "Hostname" = "Computer Name"
+        "Uptime_Label" = "System Uptime"
+        "Uptime_Days" = "Days"
+        "Uptime_Hours" = "Hours"
+        "Uptime_Minutes" = "Minutes"
+        "SerialNumber" = "Serial Number"
         "System_Error" = "Error retrieving system information"
         "Cancel" = "Operation cancelled."
         "Health_Warning" = "This process can take a long time. Do you want to continue?"
@@ -143,8 +185,8 @@ $global:Translations = @{
         "Menu_Option8" = "Optimasi Memori"
         "Menu_Option9" = "Defragment & Optimasi Drive"
         "Menu_Option10" = "Pemeriksa Kesehatan Sistem"
-        "Menu_Option11" = "Pengaturan Bahasa" # Startup Manager Removed
-        "Menu_Option12" = "Keluar" # Number changed
+        "Menu_Option11" = "Pengaturan Bahasa"
+        "Menu_Option12" = "Keluar"
         "SubMenu_Power" = "UTILITAS DAYA & BATERAI"
         "SubMenu_Power1" = "Ubah Power Plan"
         "SubMenu_Power2" = "Buat Laporan Kesehatan Baterai"
@@ -168,6 +210,14 @@ $global:Translations = @{
         "Version" = "Versi"
         "CPU" = "Prosesor"
         "RAM" = "Memori"
+        "GPU" = "Kartu Grafis"
+        "Motherboard" = "Motherboard"
+        "Hostname" = "Nama Komputer"
+        "Uptime_Label" = "Waktu Aktif Sistem"
+        "Uptime_Days" = "Hari"
+        "Uptime_Hours" = "Jam"
+        "Uptime_Minutes" = "Menit"
+        "SerialNumber" = "Nomor Seri"
         "System_Error" = "Kesalahan mengambil informasi sistem"
         "Cancel" = "Operasi dibatalkan."
         "Health_Warning" = "Proses ini bisa memakan waktu lama. Apakah Anda ingin melanjutkan?"
@@ -241,9 +291,45 @@ function Get-Translation {
     if ($global:Translations.ContainsKey($global:Language) -and $global:Translations[$global:Language].ContainsKey($key)) {
         return $global:Translations[$global:Language][$key]
     }
-    # Fallback to English if key not found in current language
     if ($global:Translations["EN"].ContainsKey($key)) { return $global:Translations["EN"][$key] }
-    return $key # Return the key itself if not found anywhere
+    return $key
+}
+
+# ---------------------------
+# UI Helper Functions
+# ---------------------------
+function Write-Separator {
+    Write-Host "=========================================" -ForegroundColor $global:Theme.Separator
+}
+
+function Write-Title {
+    param([string]$message)
+    Write-Host $message -ForegroundColor $global:Theme.Title
+}
+
+function Write-MenuOption {
+    param([string]$number, [string]$text, [string]$color = $global:Theme.MenuText)
+    Write-Host " " -NoNewline
+    Write-Host $number -ForegroundColor $global:Theme.MenuNumber -NoNewline
+    Write-Host ". " -ForegroundColor $global:Theme.Separator -NoNewline
+    Write-Host $text -ForegroundColor $color
+}
+
+function Write-Error {
+    param([string]$message)
+    Write-Host $message -ForegroundColor $global:Theme.Error
+}
+function Write-Success {
+    param([string]$message)
+    Write-Host $message -ForegroundColor $global:Theme.Success
+}
+function Write-Warning {
+    param([string]$message)
+    Write-Host $message -ForegroundColor $global:Theme.Warning
+}
+function Write-Info {
+    param([string]$message)
+    Write-Host $message -ForegroundColor $global:Theme.Info
 }
 
 # ---------------------------
@@ -255,22 +341,30 @@ function Write-Log {
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $logEntry = "[$timestamp] [$level] $msg"
     try { $logEntry | Out-File -FilePath $logfile -Append -Encoding utf8 -ErrorAction SilentlyContinue } catch {}
+    
+    # Use colors from Theme
     switch ($level) {
-        "ERROR"   { Write-Host $logEntry -ForegroundColor Red }
-        "WARNING" { Write-Host $logEntry -ForegroundColor Yellow }
-        "SUCCESS" { Write-Host $logEntry -ForegroundColor Green }
-        default   { Write-Host $logEntry -ForegroundColor White }
+        "ERROR"   { Write-Host $logEntry -ForegroundColor $global:Theme.Error }
+        "WARNING" { Write-Host $logEntry -ForegroundColor $global:Theme.Warning }
+        "SUCCESS" { Write-Host $logEntry -ForegroundColor $global:Theme.Success }
+        default   { Write-Host $logEntry -ForegroundColor $global:Theme.MenuText }
     }
 }
 
 function Clear-OldLogs {
     param([int]$maxSizeMB = 10)
     if (Test-Path $logfile) {
-        $log = Get-Item $logfile
-        if ($log.Length -gt ($maxSizeMB * 1MB)) {
-            $backupName = "log_ncexs-toolkit-backup-$(Get-Date -Format 'yyyyMMdd-HHmmss').txt"
-            Move-Item -Path $logfile -Destination (Join-Path $PSScriptRoot $backupName) -Force
-            Write-Log "Log file backed up and reset." "INFO"
+        try {
+            $log = Get-Item $logfile
+            if ($log.Length -gt ($maxSizeMB * 1MB)) {
+                $backupName = "log_ncexs-toolkit-backup-$(Get-Date -Format 'yyyyMMdd-HHmmss').txt"
+                Move-Item -Path $logfile -Destination (Join-Path $PSScriptRoot $backupName) -Force -ErrorAction Stop
+                Write-Log "Log file backed up and reset." "INFO"
+            }
+        } catch {
+            $errorMsg = "Failed to clear old log file: $($_.Exception.Message)"
+            # Write to host as error if Write-Log fails
+            Write-Error $errorMsg
         }
     }
 }
@@ -281,28 +375,50 @@ Clear-OldLogs
 # 1. System Info
 # ---------------------------
 function Show-SystemInfo {
-    Write-Host "`n=== $(Get-Translation 'System_Title') ===" -ForegroundColor Cyan
+    Write-Title "`n=== $(Get-Translation 'System_Title') ==="
     try {
         $os = Get-CimInstance -ClassName Win32_OperatingSystem
-        Write-Host ("{0}: {1}" -f (Get-Translation "OS"), $os.Caption)
-        Write-Host ("{0}: {1}" -f (Get-Translation "Version"), $os.Version)
+        $system = Get-CimInstance -ClassName Win32_ComputerSystem
+        
+        Write-Host ("{0}: {1}" -f (Get-Translation "Hostname"), $system.Name) -ForegroundColor $global:Theme.MenuText
+        Write-Host ("{0}: {1}" -f (Get-Translation "OS"), $os.Caption) -ForegroundColor $global:Theme.MenuText
+        Write-Host ("{0}: {1}" -f (Get-Translation "Version"), $os.Version) -ForegroundColor $global:Theme.MenuText
+
+        $uptimeSpan = New-TimeSpan -Start $os.LastBootUpTime
+        $uptimeString = "{0} {1}, {2} {3}, {4} {5}" -f $uptimeSpan.Days, (Get-Translation "Uptime_Days"), $uptimeSpan.Hours, (Get-Translation "Uptime_Hours"), $uptimeSpan.Minutes, (Get-Translation "Uptime_Minutes")
+        Write-Host ("{0}: {1}" -f (Get-Translation "Uptime_Label"), $uptimeString) -ForegroundColor $global:Theme.MenuText
+        
         $cpu = Get-CimInstance -ClassName Win32_Processor
-        Write-Host ("{0}: {1}" -f (Get-Translation "CPU"), $cpu.Name)
-        $memory = Get-CimInstance -ClassName Win32_ComputerSystem
-        $totalMemory = [math]::Round($memory.TotalPhysicalMemory / 1GB, 2)
-        Write-Host ("{0}: {1} GB" -f (Get-Translation "RAM"), $totalMemory)
-        Write-Host "`n$(Get-Translation 'Disk'):" -ForegroundColor Yellow
+        Write-Host ("{0}: {1}" -f (Get-Translation "CPU"), $cpu.Name.Trim()) -ForegroundColor $global:Theme.MenuText
+        
+        $gpus = Get-CimInstance -ClassName Win32_VideoController
+        foreach ($gpu in $gpus) {
+            if ($gpu.Name) { 
+                Write-Host ("{0}: {1}" -f (Get-Translation "GPU"), $gpu.Name) -ForegroundColor $global:Theme.MenuText
+            }
+        }
+        
+        $totalMemory = [math]::Round($system.TotalPhysicalMemory / 1GB, 2)
+        Write-Host ("{0}: {1} GB" -f (Get-Translation "RAM"), $totalMemory) -ForegroundColor $global:Theme.MenuText
+        
+        $board = Get-CimInstance -ClassName Win32_BaseBoard
+        Write-Host ("{0}: {1} {2}" -f (Get-Translation "Motherboard"), $board.Manufacturer, $board.Product) -ForegroundColor $global:Theme.MenuText
+        
+        $bios = Get-CimInstance -ClassName Win32_BIOS
+        Write-Host ("{0}: {1}" -f (Get-Translation "SerialNumber"), $bios.SerialNumber) -ForegroundColor $global:Theme.MenuText
+        
+        Write-Host "`n$(Get-Translation 'Disk'):" -ForegroundColor $global:Theme.Prompt
         $disks = Get-CimInstance -ClassName Win32_LogicalDisk -Filter "DriveType=3"
         foreach ($disk in $disks) {
             $freeSpace = [math]::Round($disk.FreeSpace / 1GB, 2)
             $totalSize = [math]::Round($disk.Size / 1GB, 2)
-            Write-Host ("   {0} {1} GB ({2} GB {3})" -f $disk.DeviceID, $totalSize, $freeSpace, (Get-Translation "Free")) -ForegroundColor Gray
+            Write-Host ("   {0} {1} GB ({2} GB {3})" -f $disk.DeviceID, $totalSize, $freeSpace, (Get-Translation "Free")) -ForegroundColor $global:Theme.Info
         }
     } catch {
         Write-Log "Failed to get system info: $($_.Exception.Message)" "ERROR"
-        Write-Host (Get-Translation "System_Error") -ForegroundColor Red
+        Write-Error (Get-Translation "System_Error")
     }
-    Write-Host "==========================" -ForegroundColor Cyan
+    Write-Host "==========================" -ForegroundColor $global:Theme.Title
     Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
 
@@ -311,16 +427,16 @@ function Show-SystemInfo {
 # ---------------------------
 function Clear-JunkFiles {
     Write-Log (Get-Translation 'Clean_Title') "INFO"
-    Write-Host "`n=== $(Get-Translation 'Clean_Title') ===" -ForegroundColor Cyan
+    Write-Title "`n=== $(Get-Translation 'Clean_Title') ==="
 
     $confirm = Read-Host "`n$(Get-Translation 'Clean_Confirm') $(Get-Translation 'YesNoPrompt')"
     if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) {
-        Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow
+        Write-Warning (Get-Translation 'Cancel')
         Read-Host "`n$(Get-Translation 'PressAnyKey')"
         return
     }
 
-    Write-Host (Get-Translation 'Clean_Warning') -ForegroundColor Yellow
+    Write-Warning (Get-Translation 'Clean_Warning')
 
     $chromeProfilePath = Join-Path $env:LOCALAPPDATA 'Google\Chrome\User Data\Default'
     if (Test-Path $chromeProfilePath) {
@@ -333,7 +449,7 @@ function Clear-JunkFiles {
         "$env:SystemRoot\Prefetch"
     )
 
-    Write-Host "`n$( (Get-Translation 'Clean_Calculating') )" -ForegroundColor Gray
+    Write-Info "`n$( (Get-Translation 'Clean_Calculating') )"
     
     $totalFreed = 0
     Write-Progress -Activity (Get-Translation 'Clean_Title') -Status (Get-Translation 'Clean_Status')
@@ -359,13 +475,13 @@ function Clear-JunkFiles {
     $cleanedSizeMB = [math]::Round($totalFreed / 1MB, 2)
     $message = (Get-Translation 'Clean_SpaceFreed') -f $cleanedSizeMB
     Write-Log $message "SUCCESS"
-    Write-Host "`n$message" -ForegroundColor Green
+    Write-Success "`n$message"
     Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
 
 function Invoke-ChromeCleanup {
     param([string]$ProfilePath)
-    Write-Host "`n$(Get-Translation 'Chrome_Cleaning')" -ForegroundColor Gray
+    Write-Info "`n$(Get-Translation 'Chrome_Cleaning')"
     $chromePaths = @(
         Join-Path $ProfilePath 'Cache\*', Join-Path $ProfilePath 'Code Cache\*', Join-Path $ProfilePath 'GPUCache\*',
         Join-Path $ProfilePath 'Session Storage\*', Join-Path $ProfilePath 'Service Worker\CacheStorage\*',
@@ -377,7 +493,7 @@ function Invoke-ChromeCleanup {
             catch { $errMsg = (Get-Translation 'Clean_ErrorDelete') -f $path, $_.Exception.Message; Write-Warning $errMsg; Write-Log $errMsg "WARNING" }
         }
     }
-    Write-Host (Get-Translation 'Chrome_Done') -ForegroundColor Green
+    Write-Success (Get-Translation 'Chrome_Done')
     Write-Log "Chrome cleanup performed." "SUCCESS"
 }
 
@@ -385,7 +501,7 @@ function Invoke-ChromeCleanup {
 # 3. Clear Recycle Bin
 # ---------------------------
 function Clear-RecycleBin-Menu {
-    Write-Host "`n=== $(Get-Translation 'Recycle_Title') ===" -ForegroundColor Red
+    Write-Title "`n=== $(Get-Translation 'Recycle_Title') ==="
     $confirm = Read-Host "$(Get-Translation 'Recycle_Confirm') $(Get-Translation 'YesNoPrompt')"
     if (($global:Language -eq "ID" -and $confirm -match '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirm -match '^(Y|y)$')) {
         try {
@@ -395,17 +511,17 @@ function Clear-RecycleBin-Menu {
                 $recycleBinPath = "$($drive):\`$Recycle.Bin"
                 if (Test-Path $recycleBinPath) {
                     $isEmpty = $false
-                    Write-Host "Emptying Recycle Bin on drive $($drive):..." -ForegroundColor Gray
+                    Write-Info "Emptying Recycle Bin on drive $($drive):..."
                     Remove-Item -Path $recycleBinPath -Recurse -Force -ErrorAction Stop
                 }
             }
-            if ($isEmpty) { Write-Host (Get-Translation 'Recycle_AlreadyEmpty') -ForegroundColor Yellow }
-            else { Write-Host (Get-Translation 'Recycle_Success') -ForegroundColor Green; Write-Log "All Recycle Bins emptied successfully." "SUCCESS" }
+            if ($isEmpty) { Write-Warning (Get-Translation 'Recycle_AlreadyEmpty') }
+            else { Write-Success (Get-Translation 'Recycle_Success'); Write-Log "All Recycle Bins emptied successfully." "SUCCESS" }
         } catch {
             $errorMsg = "Failed to empty recycle bin: $($_.Exception.Message)"
-            Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
+            Write-Log $errorMsg "ERROR"; Write-Error $errorMsg
         }
-    } else { Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow }
+    } else { Write-Warning (Get-Translation 'Cancel') }
     Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
 
@@ -413,17 +529,17 @@ function Clear-RecycleBin-Menu {
 # 4. Open Disk Cleanup
 # ---------------------------
 function Open-DiskCleanup {
-    Write-Host "`nOpening Windows Disk Cleanup utility..." -ForegroundColor Cyan
+    Write-Title "`nOpening Windows Disk Cleanup utility..."
     try { Start-Process -FilePath "cleanmgr.exe" -ErrorAction Stop; Write-Log "Launched cleanmgr.exe" "INFO" }
-    catch { $errorMsg = "Failed to open Disk Cleanup: $($_.Exception.Message)"; Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
+    catch { $errorMsg = "Failed to open Disk Cleanup: $($_.Exception.Message)"; Write-Log $errorMsg "ERROR"; Write-Error $errorMsg; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
 }
 
 # ---------------------------
 # 5. Advanced Uninstaller
 # ---------------------------
 function Show-AdvancedUninstaller {
-    Write-Host "`n=== $(Get-Translation 'Uninstall_Title') ===" -ForegroundColor Cyan
-    Write-Host (Get-Translation 'Uninstall_Scanning') -ForegroundColor Yellow
+    Write-Title "`n=== $(Get-Translation 'Uninstall_Title') ==="
+    Write-Warning (Get-Translation 'Uninstall_Scanning')
     
     $programs = @()
     $registryPaths = @(
@@ -449,30 +565,29 @@ function Show-AdvancedUninstaller {
     
     $uniquePrograms = $programs | Sort-Object DisplayName -Unique
     
-    Write-Host (Get-Translation 'Uninstall_Found' -f $uniquePrograms.Count) -ForegroundColor Green
+    Write-Success (Get-Translation 'Uninstall_Found' -f $uniquePrograms.Count)
     $searchTerm = Read-Host "`n$(Get-Translation 'Uninstall_Prompt')"
     
     if ([string]::IsNullOrWhiteSpace($searchTerm)) {
-        Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow
+        Write-Warning (Get-Translation 'Cancel')
         return
     }
     
-    Write-Host "`n$( (Get-Translation 'Uninstall_Searching') -f $searchTerm )" -ForegroundColor Gray
+    Write-Info "`n$( (Get-Translation 'Uninstall_Searching') -f $searchTerm )"
     
-    # BUG FIX: Changing $matches to $matchingPrograms
     $matchingPrograms = $uniquePrograms | Where-Object { $_.DisplayName -like "*$searchTerm*" }
     
     if (-not $matchingPrograms) {
-        Write-Host (Get-Translation 'Uninstall_NoMatch') -ForegroundColor Red
+        Write-Error (Get-Translation 'Uninstall_NoMatch')
         return
     }
     
     $selectedProgram = $null
     if ($matchingPrograms.Count -eq 1) {
         $selectedProgram = $matchingPrograms[0]
-        Write-Host (Get-Translation 'Uninstall_FoundOne' -f $selectedProgram.DisplayName) -ForegroundColor Green
+        Write-Success (Get-Translation 'Uninstall_FoundOne' -f $selectedProgram.DisplayName)
     } else {
-        Write-Host (Get-Translation 'Uninstall_FoundMultiple') -ForegroundColor Yellow
+        Write-Warning (Get-Translation 'Uninstall_FoundMultiple')
         for ($i = 0; $i -lt $matchingPrograms.Count; $i++) {
             Write-Host "[$($i+1)] $($matchingPrograms[$i].DisplayName)"
         }
@@ -480,14 +595,14 @@ function Show-AdvancedUninstaller {
         if ($choice -match '^\d+$' -and [int]$choice -ge 1 -and [int]$choice -le $matchingPrograms.Count) {
             $selectedProgram = $matchingPrograms[[int]$choice - 1]
         } else {
-            Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow
+            Write-Warning (Get-Translation 'Cancel')
             return
         }
     }
     
     $confirm = Read-Host "`n$((Get-Translation 'Uninstall_Confirm')) $(Get-Translation 'YesNoPrompt')"
     if (($global:Language -eq "ID" -and $confirm -match '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirm -match '^(Y|y)$')) {
-        Write-Host "`n$(Get-Translation 'Uninstall_Running')" -ForegroundColor Yellow
+        Write-Warning "`n$(Get-Translation 'Uninstall_Running')"
         Write-Log "Attempting to uninstall: $($selectedProgram.DisplayName)" "INFO"
         
         $uninstallString = $selectedProgram.UninstallString
@@ -497,7 +612,6 @@ function Show-AdvancedUninstaller {
             if ($uninstallString -like "MsiExec.exe*") {
                 Start-Process "cmd.exe" -ArgumentList "/c $uninstallString" -Wait -Verb RunAs
             } else {
-                # Try to find executable path if not in string
                 $command = $uninstallString.Split(' ')[0]
                 if (-not (Test-Path $command)) {
                     $command = (Get-Command $command -ErrorAction SilentlyContinue).Source
@@ -510,13 +624,13 @@ function Show-AdvancedUninstaller {
                     Start-Process $uninstallString -Wait -Verb RunAs
                 }
             }
-            Write-Host "`n$(Get-Translation 'Uninstall_Success')" -ForegroundColor Green
+            Write-Success "`n$(Get-Translation 'Uninstall_Success')"
         } catch {
-            Write-Host "`n$(Get-Translation 'Uninstall_Error')" -ForegroundColor Red
+            Write-Error "`n$(Get-Translation 'Uninstall_Error')"
             Write-Log "Failed to run uninstaller: $($_.Exception.Message)" "ERROR"
         }
     } else {
-        Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow
+        Write-Warning (Get-Translation 'Cancel')
     }
 }
 
@@ -524,19 +638,19 @@ function Show-AdvancedUninstaller {
 # 6. Automatic Network Repair
 # ---------------------------
 function Invoke-NetworkRepair {
-    Write-Host "`n=== $(Get-Translation 'Network_Title') ===" -ForegroundColor Cyan
+    Write-Title "`n=== $(Get-Translation 'Network_Title') ==="
     
     Write-Log "Repairing network connections..." "INFO"
-    Write-Host "`n$(Get-Translation 'Network_Repairing')" -ForegroundColor Yellow
+    Write-Warning "`n$(Get-Translation 'Network_Repairing')"
     try {
         netsh int ip reset | Out-Null
         netsh winsock reset | Out-Null
         ipconfig /flushdns | Out-Null
         Write-Log "Network repair completed." "SUCCESS"
-        Write-Host (Get-Translation 'Network_Repaired') -ForegroundColor Green
+        Write-Success (Get-Translation 'Network_Repaired')
     } catch { 
         $errorMsg = (Get-Translation 'Network_ErrorRepair') -f $_.Exception.Message
-        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red 
+        Write-Log $errorMsg "ERROR"; Write-Error $errorMsg 
     }
     Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
@@ -547,29 +661,29 @@ function Invoke-NetworkRepair {
 function Show-PowerMenu {
     do {
         Clear-Host
-        Write-Host "=========================================" -ForegroundColor Green
-        Write-Host "        $(Get-Translation 'SubMenu_Power')" -ForegroundColor Cyan
-        Write-Host "=========================================" -ForegroundColor Green
-        Write-Host "1. $(Get-Translation 'SubMenu_Power1')"
-        Write-Host "2. $(Get-Translation 'SubMenu_Power2')"
-        Write-Host "3. $(Get-Translation 'SubMenu_Power3')"
-        Write-Host "=========================================" -ForegroundColor Green
+        Write-Separator
+        Write-Title "         $(Get-Translation 'SubMenu_Power')"
+        Write-Separator
+        Write-MenuOption "1" (Get-Translation 'SubMenu_Power1')
+        Write-MenuOption "2" (Get-Translation 'SubMenu_Power2')
+        Write-MenuOption "3" (Get-Translation 'SubMenu_Power3') $global:Theme.Exit
+        Write-Separator
         $choice = Read-Host "`n$(Get-Translation 'SelectOption')"
         switch ($choice) {
             "1" { Invoke-PowerPlanChange; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
             "2" { Invoke-BatteryReport; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
             "3" { return }
-            default { Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red; Start-Sleep -Seconds 2 }
+            default { Write-Error (Get-Translation 'InvalidOption'); Start-Sleep -Seconds 2 }
         }
     } while ($true)
 }
 
 function Invoke-PowerPlanChange {
-    Write-Host "`n$(Get-Translation 'Power_Select')" -ForegroundColor Cyan
-    Write-Host "1. $(Get-Translation 'Power_Saver')"
-    Write-Host "2. $(Get-Translation 'Power_Balanced')"
-    Write-Host "3. $(Get-Translation 'Power_High')"
-    Write-Host "4. $(Get-Translation 'Cancel')" -ForegroundColor Yellow
+    Write-Title "`n$(Get-Translation 'Power_Select')"
+    Write-MenuOption "1" (Get-Translation 'Power_Saver')
+    Write-MenuOption "2" (Get-Translation 'Power_Balanced')
+    Write-MenuOption "3" (Get-Translation 'Power_High')
+    Write-MenuOption "4" (Get-Translation 'Cancel') $global:Theme.Exit
     
     $choice = Read-Host "`n$(Get-Translation 'SelectOption')"
     
@@ -580,34 +694,29 @@ function Invoke-PowerPlanChange {
         "1" { $plan = (Get-Translation 'Power_Saver'); $guid = "a1841308-3541-4fab-bc81-f71556f20b4a" }
         "2" { $plan = (Get-Translation 'Power_Balanced'); $guid = "381b4222-f694-41f0-9685-ff5bb260df2e" }
         "3" { $plan = (Get-Translation 'Power_High'); $guid = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c" }
-        "4" { Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow; return }
-        default { Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red; return }
+        "4" { Write-Warning (Get-Translation 'Cancel'); return }
+        default { Write-Error (Get-Translation 'InvalidOption'); return }
     }
 
     try {
         powercfg /setactive $guid | Out-Null
         $message = (Get-Translation 'Power_Changed') -f $plan
         Write-Log $message "SUCCESS"
-        Write-Host "`n$message" -ForegroundColor Green
+        Write-Success "`n$message"
 
-        # Add proof of the active power plan
         try {
             $activeSchemeOutput = powercfg /getactivescheme
             $activeSchemeName = $null
             
-            # The output is: "Power Scheme GUID: ... (Plan Name)"
-            # We get the text inside the parentheses
             if ($activeSchemeOutput -match '\((.*?)\)') {
                 $activeSchemeName = $matches[1].Trim() 
             }
 
             if (-not [string]::IsNullOrWhiteSpace($activeSchemeName)) {
-                # Use the new translation
                 $confirmMsg = (Get-Translation 'Power_Active_Now') -f $activeSchemeName
-                Write-Host $confirmMsg -ForegroundColor White
+                Write-Host $confirmMsg -ForegroundColor $global:Theme.MenuText
             } else {
-                # Fallback if regex parsing fails, show raw output
-                Write-Host $activeSchemeOutput -ForegroundColor White
+                Write-Host $activeSchemeOutput -ForegroundColor $global:Theme.MenuText
             }
         } catch {
             Write-Log "Failed to verify active power plan." "WARNING"
@@ -615,30 +724,29 @@ function Invoke-PowerPlanChange {
 
     } catch {
         $errorMsg = "Failed to change power plan: $($_.Exception.Message)"
-        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
+        Write-Log $errorMsg "ERROR"; Write-Error $errorMsg
     }
 }
 
 function Invoke-BatteryReport {
-    # This is the function you provided, which creates the HTML file
     $reportPath = Join-Path -Path $PSScriptRoot -ChildPath "battery_report.html"
-    Write-Host "`n$(Get-Translation 'Battery_Generating')" -ForegroundColor Yellow
+    Write-Warning "`n$(Get-Translation 'Battery_Generating')"
     
     try {
         powercfg /batteryreport /output "$reportPath" /duration 1 | Out-Null
         
         if (Test-Path $reportPath) {
             $message = (Get-Translation 'Battery_Generated') -f $reportPath
-            Write-Host $message -ForegroundColor Green
+            Write-Success $message
             Start-Process $reportPath
             Write-Log "Battery report generated and opened." "SUCCESS"
         } else {
-            Write-Host (Get-Translation 'Battery_NotFound') -ForegroundColor Yellow
+            Write-Warning (Get-Translation 'Battery_NotFound')
             Write-Log "Battery report failed, likely no battery." "WARNING"
         }
     } catch {
         $errorMsg = (Get-Translation 'Battery_Error') + ": $($_.Exception.Message)"
-        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
+        Write-Log $errorMsg "ERROR"; Write-Error $errorMsg
     }
 }
 
@@ -646,10 +754,10 @@ function Invoke-BatteryReport {
 # 8. Memory Optimizer
 # ---------------------------
 function Clear-RAM {
-    Write-Host "`n=== $(Get-Translation 'Menu_Option8') ===" -ForegroundColor Cyan
+    Write-Title "`n=== $(Get-Translation 'Menu_Option8') ==="
     $confirm = Read-Host "`n$(Get-Translation 'RAM_Confirm') $(Get-Translation 'YesNoPrompt')"
     if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) {
-        Write-Host (Get-Translation 'RAM_Cancel') -ForegroundColor Yellow
+        Write-Warning (Get-Translation 'RAM_Cancel')
         Read-Host "`n$(Get-Translation 'PressAnyKey')"
         return
     }
@@ -657,7 +765,7 @@ function Clear-RAM {
     try {
         $os = Get-CimInstance -ClassName Win32_OperatingSystem
         $memBefore = [math]::Round($os.FreePhysicalMemory / 1024)
-        Write-Host ((Get-Translation 'RAM_Before') -f $memBefore) -ForegroundColor Gray
+        Write-Info ((Get-Translation 'RAM_Before') -f $memBefore)
         Write-Progress -Activity (Get-Translation 'Menu_Option8') -Status "Optimizing..."
 
         $CSharpCode = @"
@@ -691,19 +799,19 @@ function Clear-RAM {
         Start-Sleep -Seconds 1
 
         $memAfter = [math]::Round((Get-CimInstance -ClassName Win32_OperatingSystem).FreePhysicalMemory / 1024)
-        Write-Host ((Get-Translation 'RAM_After') -f $memAfter) -ForegroundColor Gray
+        Write-Info ((Get-Translation 'RAM_After') -f $memAfter)
         
         $memFreed = $memAfter - $memBefore
         if ($memFreed -gt 10) {
             $message = (Get-Translation 'RAM_Freed') -f $memFreed
-            Write-Log "$message" "SUCCESS"; Write-Host $message -ForegroundColor Green
+            Write-Log "$message" "SUCCESS"; Write-Success $message
         }
         else {
-            Write-Host "Memory is already optimized." -ForegroundColor Green
+            Write-Success "Memory is already optimized."
         }
     } catch {
         $errorMsg = (Get-Translation 'RAM_Error') -f $_.Exception.Message
-        Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
+        Write-Log $errorMsg "ERROR"; Write-Error $errorMsg
     } finally {
         Write-Progress -Activity (Get-Translation 'Menu_Option8') -Completed
     }
@@ -714,35 +822,35 @@ function Clear-RAM {
 # 9. Defragment & Optimize Drives
 # ---------------------------
 function Invoke-Defragment {
-    Write-Host "`n=== $(Get-Translation 'Defrag_Title') ===" -ForegroundColor Cyan
+    Write-Title "`n=== $(Get-Translation 'Defrag_Title') ==="
     try {
         $volumes = Get-Volume | Where-Object { $_.DriveType -eq 'Fixed' -and $_.DriveLetter } | Sort-Object DriveLetter
-        if (-not $volumes) { Write-Host "No fixed drives found to optimize." -ForegroundColor Red; return }
-        Write-Host "`n$(Get-Translation 'Defrag_Select')" -ForegroundColor Cyan
-        for ($i=0; $i -lt $volumes.Count; $i++) { $vol = $volumes[$i]; $label = if ($vol.FileSystemLabel) { $vol.FileSystemLabel } else { "No Label" }; Write-Host "[$($i+1)] $($vol.DriveLetter): ($label) - $($vol.FileSystem)" }
-        Write-Host "[C] Cancel" -ForegroundColor Yellow
+        if (-not $volumes) { Write-Error "No fixed drives found to optimize."; return }
+        Write-Title "`n$(Get-Translation 'Defrag_Select')"
+        for ($i=0; $i -lt $volumes.Count; $i++) { $vol = $volumes[$i]; $label = if ($vol.FileSystemLabel) { $vol.FileSystemLabel } else { "No Label" }; Write-MenuOption "[$($i+1)]" "$($vol.DriveLetter): ($label) - $($vol.FileSystem)" }
+        Write-MenuOption "[C]" "Cancel" $global:Theme.Exit
         $choice = Read-Host "Select drive"
-        if ($choice -match 'c' -or ![int]::TryParse($choice, [ref]$null) -or [int]$choice -lt 1 -or [int]$choice -gt $volumes.Count) { Write-Host (Get-Translation 'Cancel') -ForegroundColor Yellow; return }
+        if ($choice -match 'c' -or ![int]::TryParse($choice, [ref]$null) -or [int]$choice -lt 1 -or [int]$choice -gt $volumes.Count) { Write-Warning (Get-Translation 'Cancel'); return }
         $selectedVolume = $volumes[[int]$choice - 1]
         $driveLetter = $selectedVolume.DriveLetter
         
         $diskNumber = (Get-Partition -DriveLetter $selectedVolume.DriveLetter).DiskNumber
         $mediaType = (Get-PhysicalDisk -DeviceNumber $diskNumber).MediaType
         if ($mediaType -eq "SSD") {
-            Write-Host "`n$(Get-Translation 'Defrag_SSD_Cancel')" -ForegroundColor Yellow
+            Write-Warning "`n$(Get-Translation 'Defrag_SSD_Cancel')"
             Write-Log "Defragmentation cancelled for SSD drive $driveLetter." "INFO"
             Read-Host "`n$(Get-Translation 'PressAnyKey')"
             return
         }
         
         $mediaTypeDisplay = Get-Translation 'Defrag_Type_HDD'
-        Write-Host "`n$( (Get-Translation 'Defrag_Analyzing') -f $driveLetter, $mediaTypeDisplay )" -ForegroundColor Gray
+        Write-Info "`n$( (Get-Translation 'Defrag_Analyzing') -f $driveLetter, $mediaTypeDisplay )"
         Optimize-Volume -DriveLetter $driveLetter -Analyze -Verbose
         $confirmationMessage = (Get-Translation 'Defrag_Optimizing') -f $driveLetter, $mediaTypeDisplay
-        Write-Host "`n$confirmationMessage" -ForegroundColor Yellow
+        Write-Warning "`n$confirmationMessage"
         Optimize-Volume -DriveLetter $driveLetter -Verbose
-        Write-Host "`n$( (Get-Translation 'Defrag_Complete') -f $driveLetter )" -ForegroundColor Green
-    } catch { $errorMsg = "An error occurred during optimization: $($_.Exception.Message)"; Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red }
+        Write-Success "`n$( (Get-Translation 'Defrag_Complete') -f $driveLetter )"
+    } catch { $errorMsg = "An error occurred during optimization: $($_.Exception.Message)"; Write-Log $errorMsg "ERROR"; Write-Error $errorMsg }
     Read-Host "`n$(Get-Translation 'PressAnyKey')"
 }
 
@@ -752,17 +860,19 @@ function Invoke-Defragment {
 function Show-SystemHealthMenu {
     do {
         Clear-Host
-        Write-Host "=========================================" -ForegroundColor Green
-        Write-Host "        $(Get-Translation 'SubMenu_Health')" -ForegroundColor Cyan
-        Write-Host "=========================================" -ForegroundColor Green
-        Write-Host "1. $(Get-Translation 'SubMenu_Health1')"; Write-Host "2. $(Get-Translation 'SubMenu_Health2')"; Write-Host "3. $(Get-Translation 'SubMenu_Health3')"
-        Write-Host "=========================================" -ForegroundColor Green
+        Write-Separator
+        Write-Title "         $(Get-Translation 'SubMenu_Health')"
+        Write-Separator
+        Write-MenuOption "1" (Get-Translation 'SubMenu_Health1')
+        Write-MenuOption "2" (Get-Translation 'SubMenu_Health2')
+        Write-MenuOption "3" (Get-Translation 'SubMenu_Health3') $global:Theme.Exit # Exit color
+        Write-Separator
         $choice = Read-Host "`n$(Get-Translation 'SelectOption')"
         switch ($choice) {
             "1" { Invoke-SFCScan; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
             "2" { Invoke-DISMRepair; Read-Host "`n$(Get-Translation 'PressAnyKey')" }
             "3" { return }
-            default { Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red; Start-Sleep -Seconds 2 }
+            default { Write-Error (Get-Translation 'InvalidOption'); Start-Sleep -Seconds 2 }
         }
     } while ($true)
 }
@@ -770,22 +880,22 @@ function Show-SystemHealthMenu {
 function Invoke-SFCScan {
     $confirm = Read-Host "`n$(Get-Translation 'Health_Warning') $(Get-Translation 'YesNoPrompt')"
     if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -and ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) { return }
-    Write-Host "`n$(Get-Translation 'Health_SFC_Running')" -ForegroundColor Yellow
+    Write-Warning "`n$(Get-Translation 'Health_SFC_Running')"
     try {
         $process = Start-Process -FilePath "sfc.exe" -ArgumentList "/scannow" -Wait -PassThru -NoNewWindow
-        if ($process.ExitCode -eq 0) { Write-Host "`n$(Get-Translation 'Health_SFC_Done')" -ForegroundColor Green; Write-Log "SFC Scan completed successfully." "SUCCESS" }
-        else { $errorMsg = (Get-Translation 'Health_SFC_Error') -f "$($process.ExitCode)"; Write-Log "SFC.exe tool reported an error." "ERROR"; Write-Host "`n$errorMsg" -ForegroundColor Red }
+        if ($process.ExitCode -eq 0) { Write-Success "`n$(Get-Translation 'Health_SFC_Done')"; Write-Log "SFC Scan completed successfully." "SUCCESS" }
+        else { $errorMsg = (Get-Translation 'Health_SFC_Error') -f "$($process.ExitCode)"; Write-Log "SFC.exe tool reported an error." "ERROR"; Write-Error "`n$errorMsg" }
     } catch { Write-Log "Failed to start sfc.exe: $($_.Exception.Message)" "ERROR" }
 }
 
 function Invoke-DISMRepair {
     $confirm = Read-Host "`n$(Get-Translation 'Health_Warning') $(Get-Translation 'YesNoPrompt')"
     if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -and ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) { return }
-    Write-Host "`n$(Get-Translation 'Health_DISM_Running')" -ForegroundColor Yellow
+    Write-Warning "`n$(Get-Translation 'Health_DISM_Running')"
     try {
         $process = Start-Process -FilePath "dism.exe" -ArgumentList "/online", "/cleanup-image", "/restorehealth" -Wait -PassThru -NoNewWindow
-        if ($process.ExitCode -eq 0) { Write-Host "`n$(Get-Translation 'Health_DISM_Done')" -ForegroundColor Green; Write-Log "DISM repair completed successfully." "SUCCESS" }
-        else { $errorMsg = (Get-Translation 'Health_DISM_Error') -f "$($process.ExitCode)"; Write-Log "DISM.exe tool reported an error." "ERROR"; Write-Host "`n$errorMsg" -ForegroundColor Red }
+        if ($process.ExitCode -eq 0) { Write-Success "`n$(Get-Translation 'Health_DISM_Done')"; Write-Log "DISM repair completed successfully." "SUCCESS" }
+        else { $errorMsg = (Get-Translation 'Health_DISM_Error') -f "$($process.ExitCode)"; Write-Log "DISM.exe tool reported an error." "ERROR"; Write-Error "`n$errorMsg" }
     } catch { Write-Log "Failed to start dism.exe: $($_.Exception.Message)" "ERROR" }
 }
 
@@ -794,18 +904,20 @@ function Invoke-DISMRepair {
 # ---------------------------
 function Show-LanguageMenu {
     Clear-Host
-    Write-Host "=========================================" -ForegroundColor Green
-    Write-Host "         $(Get-Translation 'LanguageMenu')" -ForegroundColor Cyan
-    Write-Host "=========================================" -ForegroundColor Green
-    Write-Host "1. $(Get-Translation 'LanguageMenu1')"; Write-Host "2. $(Get-Translation 'LanguageMenu2')"; Write-Host "3. $(Get-Translation 'LanguageMenu3')"
-    Write-Host "=========================================" -ForegroundColor Green
+    Write-Separator
+    Write-Title "          $(Get-Translation 'LanguageMenu')"
+    Write-Separator
+    Write-MenuOption "1" (Get-Translation 'LanguageMenu1')
+    Write-MenuOption "2" (Get-Translation 'LanguageMenu2')
+    Write-MenuOption "3" (Get-Translation 'LanguageMenu3') $global:Theme.Exit
+    Write-Separator
     do {
         $choice = Read-Host "`n$(Get-Translation 'SelectOption')"
         switch ($choice) {
-            "1" { $global:Language = "EN"; Write-Host "Language changed to English." -ForegroundColor Green; Start-Sleep -Seconds 1; return }
-            "2" { $global:Language = "ID"; Write-Host "Bahasa diubah ke Indonesia." -ForegroundColor Green; Start-Sleep -Seconds 1; return }
+            "1" { $global:Language = "EN"; Write-Success "Language changed to English."; Start-Sleep -Seconds 1; return }
+            "2" { $global:Language = "ID"; Write-Success "Bahasa diubah ke Indonesia."; Start-Sleep -Seconds 1; return }
             "3" { return }
-            default { Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red }
+            default { Write-Error (Get-Translation 'InvalidOption') }
         }
     } while ($true)
 }
@@ -815,29 +927,29 @@ function Show-LanguageMenu {
 # ---------------------------
 function Show-MainMenu {
     Clear-Host
-    Write-Host "=========================================" -ForegroundColor Green
+    Write-Separator
     Write-Host ""
-    Write-Host "                   _ __   ___ _____  _____ " -ForegroundColor Cyan
-    Write-Host "                  | '_ \ / __/ _ \ \/ / __|" -ForegroundColor Cyan
-    Write-Host "                  | | | | (_|  __/>  <\__ \ " -ForegroundColor Cyan
-    Write-Host "                  |_| |_|\___\___/_/\_\___/" -ForegroundColor Cyan
+    Write-Host "                   _ __   ___ _____  _____ " -ForegroundColor $global:Theme.AsciiArt
+    Write-Host "                  | '_ \ / __/ _ \ \/ / __|" -ForegroundColor $global:Theme.AsciiArt
+    Write-Host "                  | | | | (_|  __/>  <\__ \ " -ForegroundColor $global:Theme.AsciiArt
+    Write-Host "                  |_| |_|\___\___/_/\_\___/" -ForegroundColor $global:Theme.AsciiArt
     Write-Host ""
-    Write-Host ("                   {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor Yellow
+    Write-Host ("                     {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor $global:Theme.Prompt # Highlight the version
     Write-Host ""
-    Write-Host "=========================================" -ForegroundColor Green
-    Write-Host ("1. {0}" -f (Get-Translation 'Menu_Option1'))
-    Write-Host ("2. {0}" -f (Get-Translation 'Menu_Option2'))
-    Write-Host ("3. {0}" -f (Get-Translation 'Menu_Option3'))
-    Write-Host ("4. {0}" -f (Get-Translation 'Menu_Option4'))
-    Write-Host ("5. {0}" -f (Get-Translation 'Menu_Option5'))
-    Write-Host ("6. {0}" -f (Get-Translation 'Menu_Option6'))
-    Write-Host ("7. {0}" -f (Get-Translation 'Menu_Option7'))
-    Write-Host ("8. {0}" -f (Get-Translation 'Menu_Option8'))
-    Write-Host ("9. {0}" -f (Get-Translation 'Menu_Option9'))
-    Write-Host ("10. {0}" -f (Get-Translation 'Menu_Option10'))
-    Write-Host ("11. {0}" -f (Get-Translation 'Menu_Option11'))
-    Write-Host ("12. {0}" -f (Get-Translation 'Menu_Option12')) -ForegroundColor Red
-    Write-Host "=========================================" -ForegroundColor Green
+    Write-Separator
+    Write-MenuOption "1" (Get-Translation 'Menu_Option1')
+    Write-MenuOption "2" (Get-Translation 'Menu_Option2')
+    Write-MenuOption "3" (Get-Translation 'Menu_Option3')
+    Write-MenuOption "4" (Get-Translation 'Menu_Option4')
+    Write-MenuOption "5" (Get-Translation 'Menu_Option5')
+    Write-MenuOption "6" (Get-Translation 'Menu_Option6')
+    Write-MenuOption "7" (Get-Translation 'Menu_Option7')
+    Write-MenuOption "8" (Get-Translation 'Menu_Option8')
+    Write-MenuOption "9" (Get-Translation 'Menu_Option9')
+    Write-MenuOption "10" (Get-Translation 'Menu_Option10')
+    Write-MenuOption "11" (Get-Translation 'Menu_Option11')
+    Write-MenuOption "12" (Get-Translation 'Menu_Option12') $global:Theme.Exit
+    Write-Separator
 }
 
 # ---------------------------
@@ -860,12 +972,12 @@ do {
         "11" { Show-LanguageMenu }
         "12" {
             Write-Log "Toolkit session completed." "INFO"
-            Write-Host (Get-Translation 'ExitMessage') -ForegroundColor Green
+            Write-Success (Get-Translation 'ExitMessage')
             Start-Sleep -Seconds 1
             exit
         }
         default {
-            Write-Host (Get-Translation 'InvalidOption') -ForegroundColor Red
+            Write-Error (Get-Translation 'InvalidOption')
             Start-Sleep -Seconds 2
         }
     }
