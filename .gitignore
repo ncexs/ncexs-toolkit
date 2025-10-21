@@ -1,0 +1,7 @@
+# Generated files
+log_ncexs-toolkit.txt
+log_ncexs-toolkit-backup-*.txt
+battery_report.html
+
+# PowerShell session data
+.vscode/
