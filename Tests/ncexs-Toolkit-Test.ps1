@@ -40,8 +40,8 @@ $global:Translations = @{
         "Menu_Option8" = "Memory Optimizer"
         "Menu_Option9" = "Defragment & Optimize Drives"
         "Menu_Option10" = "System Health Checker"
-        "Menu_Option11" = "Language Settings" # Startup Manager Dihapus
-        "Menu_Option12" = "Exit" # Nomor diubah
+        "Menu_Option11" = "Language Settings" # Startup Manager Removed
+        "Menu_Option12" = "Exit" # Number changed
         "SubMenu_Power" = "POWER & BATTERY UTILITIES"
         "SubMenu_Power1" = "Change Power Plan"
         "SubMenu_Power2" = "Generate Battery Health Report"
@@ -97,6 +97,7 @@ $global:Translations = @{
         "Power_Saver" = "Power Saver"
         "Power_High" = "High Performance"
         "Power_Changed" = "Power plan successfully changed to {0}."
+        "Power_Active_Now" = "Active plan is now: {0}"
         "Battery_Generating" = "Generating battery health report..."
         "Battery_Generated" = "Report saved to {0}. Opening now..."
         "Battery_NotFound" = "Could not generate report. This PC may not have a battery."
@@ -142,8 +143,8 @@ $global:Translations = @{
         "Menu_Option8" = "Optimasi Memori"
         "Menu_Option9" = "Defragment & Optimasi Drive"
         "Menu_Option10" = "Pemeriksa Kesehatan Sistem"
-        "Menu_Option11" = "Pengaturan Bahasa" # Startup Manager Dihapus
-        "Menu_Option12" = "Keluar" # Nomor diubah
+        "Menu_Option11" = "Pengaturan Bahasa" # Startup Manager Removed
+        "Menu_Option12" = "Keluar" # Number changed
         "SubMenu_Power" = "UTILITAS DAYA & BATERAI"
         "SubMenu_Power1" = "Ubah Power Plan"
         "SubMenu_Power2" = "Buat Laporan Kesehatan Baterai"
@@ -199,6 +200,7 @@ $global:Translations = @{
         "Power_Saver" = "Hemat Daya"
         "Power_High" = "Performa Tinggi"
         "Power_Changed" = "Power plan berhasil diubah ke {0}."
+        "Power_Active_Now" = "Power plan aktif saat ini: {0}"
         "Battery_Generating" = "Membuat laporan kesehatan baterai..."
         "Battery_Generated" = "Laporan disimpan di {0}. Sedang dibuka..."
         "Battery_NotFound" = "Tidak dapat membuat laporan. PC ini mungkin tidak memiliki baterai."
@@ -457,7 +459,7 @@ function Show-AdvancedUninstaller {
     
     Write-Host "`n$( (Get-Translation 'Uninstall_Searching') -f $searchTerm )" -ForegroundColor Gray
     
-    # PERBAIKAN BUG: Mengganti $matches menjadi $matchingPrograms
+    # BUG FIX: Changing $matches to $matchingPrograms
     $matchingPrograms = $uniquePrograms | Where-Object { $_.DisplayName -like "*$searchTerm*" }
     
     if (-not $matchingPrograms) {
@@ -495,7 +497,7 @@ function Show-AdvancedUninstaller {
             if ($uninstallString -like "MsiExec.exe*") {
                 Start-Process "cmd.exe" -ArgumentList "/c $uninstallString" -Wait -Verb RunAs
             } else {
-                # Coba cari path executable jika tidak ada di string
+                # Try to find executable path if not in string
                 $command = $uninstallString.Split(' ')[0]
                 if (-not (Test-Path $command)) {
                     $command = (Get-Command $command -ErrorAction SilentlyContinue).Source
@@ -503,9 +505,9 @@ function Show-AdvancedUninstaller {
                 $arguments = $uninstallString.Substring($uninstallString.IndexOf(' ') + 1)
                 
                 if ($command) {
-                   Start-Process $command -ArgumentList $arguments -Wait -Verb RunAs
+                    Start-Process $command -ArgumentList $arguments -Wait -Verb RunAs
                 } else {
-                   Start-Process $uninstallString -Wait -Verb RunAs
+                    Start-Process $uninstallString -Wait -Verb RunAs
                 }
             }
             Write-Host "`n$(Get-Translation 'Uninstall_Success')" -ForegroundColor Green
@@ -587,6 +589,30 @@ function Invoke-PowerPlanChange {
         $message = (Get-Translation 'Power_Changed') -f $plan
         Write-Log $message "SUCCESS"
         Write-Host "`n$message" -ForegroundColor Green
+
+        # Add proof of the active power plan
+        try {
+            $activeSchemeOutput = powercfg /getactivescheme
+            $activeSchemeName = $null
+            
+            # The output is: "Power Scheme GUID: ... (Plan Name)"
+            # We get the text inside the parentheses
+            if ($activeSchemeOutput -match '\((.*?)\)') {
+                $activeSchemeName = $matches[1].Trim() 
+            }
+
+            if (-not [string]::IsNullOrWhiteSpace($activeSchemeName)) {
+                # Use the new translation
+                $confirmMsg = (Get-Translation 'Power_Active_Now') -f $activeSchemeName
+                Write-Host $confirmMsg -ForegroundColor White
+            } else {
+                # Fallback if regex parsing fails, show raw output
+                Write-Host $activeSchemeOutput -ForegroundColor White
+            }
+        } catch {
+            Write-Log "Failed to verify active power plan." "WARNING"
+        }
+
     } catch {
         $errorMsg = "Failed to change power plan: $($_.Exception.Message)"
         Write-Log $errorMsg "ERROR"; Write-Host $errorMsg -ForegroundColor Red
@@ -594,7 +620,7 @@ function Invoke-PowerPlanChange {
 }
 
 function Invoke-BatteryReport {
-    # Ini adalah fungsi yang Anda berikan, yang membuat file HTML
+    # This is the function you provided, which creates the HTML file
     $reportPath = Join-Path -Path $PSScriptRoot -ChildPath "battery_report.html"
     Write-Host "`n$(Get-Translation 'Battery_Generating')" -ForegroundColor Yellow
     
@@ -622,7 +648,7 @@ function Invoke-BatteryReport {
 function Clear-RAM {
     Write-Host "`n=== $(Get-Translation 'Menu_Option8') ===" -ForegroundColor Cyan
     $confirm = Read-Host "`n$(Get-Translation 'RAM_Confirm') $(Get-Translation 'YesNoPrompt')"
-    if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -and ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) {
+    if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) {
         Write-Host (Get-Translation 'RAM_Cancel') -ForegroundColor Yellow
         Read-Host "`n$(Get-Translation 'PressAnyKey')"
         return
@@ -796,7 +822,7 @@ function Show-MainMenu {
     Write-Host "                  | | | | (_|  __/>  <\__ \ " -ForegroundColor Cyan
     Write-Host "                  |_| |_|\___\___/_/\_\___/" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host ("                  {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor Yellow
+    Write-Host ("                   {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor Yellow
     Write-Host ""
     Write-Host "=========================================" -ForegroundColor Green
     Write-Host ("1. {0}" -f (Get-Translation 'Menu_Option1'))
@@ -831,8 +857,8 @@ do {
         "8"  { Clear-RAM }
         "9"  { Invoke-Defragment }
         "10" { Show-SystemHealthMenu }
-        "11" { Show-LanguageMenu } # Nomor diubah
-        "12" { # Nomor diubah
+        "11" { Show-LanguageMenu }
+        "12" {
             Write-Log "Toolkit session completed." "INFO"
             Write-Host (Get-Translation 'ExitMessage') -ForegroundColor Green
             Start-Sleep -Seconds 1
