@@ -1,4 +1,4 @@
-name: 🧱 Build ncexs Toolkit
+name: 🧱 Build & Test ncexs Toolkit
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "*.ps1"
+      - "Tests/*.ps1"
 
 jobs:
   build:
@@ -30,16 +31,20 @@ jobs:
             }
           }
 
-      - name: 🧾 Save Build Log
+      - name: 🧪 Run Pester Tests
         shell: pwsh
         run: |
-          $logPath = "build-log.txt"
-          "Scan completed at $(Get-Date)" | Out-File $logPath
-          "Scanned files:" | Out-File $logPath -Append
-          Get-ChildItem -Filter "*.ps1" | ForEach-Object { $_.Name } | Out-File $logPath -Append
-
-      - name: 📤 Upload Build Log
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-log
-          path: build-log.txt
+          Write-Host "=== Running Pester Tests ==="
+          Install-Module -Name Pester -Force -Scope CurrentUser
+          $testPath = "Tests/Ncexs-Toolkit.Tests.ps1"
+          if (Test-Path $testPath) {
+            $results = Invoke-Pester -Path $testPath -PassThru
+            if ($results.FailedCount -gt 0) {
+              Write-Error "❌ Some tests failed: $($results.FailedCount) test(s) failed."
+              exit 1
+            } else {
+              Write-Host "✅ All tests passed successfully!"
+            }
+          } else {
+            Write-Host "⚠️ Test file not found at $testPath — skipping tests."
+          }
