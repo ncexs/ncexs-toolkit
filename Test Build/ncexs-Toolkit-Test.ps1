@@ -54,7 +54,6 @@ try {
     # Failed to set prompt color (e.g., in non-standard hosts like ISE)
     # This is not a fatal error, continue.
     Write-Warning "Could not set themed prompt color. This is non-fatal."
-    # We don't need Write-Log here as it might not be ready.
 }
 # ---------------------------
 
@@ -390,12 +389,45 @@ function Show-SystemInfo {
         $cpu = Get-CimInstance -ClassName Win32_Processor
         Write-Host ("{0}: {1}" -f (Get-Translation "CPU"), $cpu.Name.Trim()) -ForegroundColor $global:Theme.MenuText
         
+        # --- GPU ENHANCEMENT WITH DRIVER VERSION ---
         $gpus = Get-CimInstance -ClassName Win32_VideoController
         foreach ($gpu in $gpus) {
-            if ($gpu.Name) { 
-                Write-Host ("{0}: {1}" -f (Get-Translation "GPU"), $gpu.Name) -ForegroundColor $global:Theme.MenuText
+            if ($gpu.Name) {
+                $gpuName = $gpu.Name
+                $driverVersion = $null
+                
+                try {
+                    # Try to find driver version in registry for better accuracy
+                    if ($gpuName -like "*NVIDIA*") {
+                        $regPath = "HKLM:\SOFTWARE\NVIDIA Corporation\Geforce"
+                        if (Test-Path $regPath) {
+                            $driverVersion = (Get-ItemProperty $regPath).Version
+                        }
+                    } elseif ($gpuName -like "*AMD*" -or $gpuName -like "*Radeon*") {
+                        $regPath = "HKLM:\SOFTWARE\AMD\CNext\CNext"
+                         if (Test-Path $regPath) {
+                            $driverVersion = (Get-ItemProperty $regPath).DriverVersion
+                         }
+                    } elseif ($gpuName -like "*Intel*") {
+                        $regPath = "HKLM:\SOFTWARE\Intel\Gfx"
+                        if (Test-Path $regPath) {
+                            $driverVersion = (Get-ItemProperty $regPath).Version
+                        }
+                    }
+                } catch {
+                    # If registry fails, use the WMI version as a fallback
+                    $driverVersion = $gpu.DriverVersion
+                }
+                
+                # Final fallback if registry check was skipped or failed
+                if (-not $driverVersion) {
+                    $driverVersion = $gpu.DriverVersion
+                }
+
+                Write-Host ("{0}: {1} (Driver: {2})" -f (Get-Translation "GPU"), $gpuName, $driverVersion) -ForegroundColor $global:Theme.MenuText
             }
         }
+        # --- END OF ENHANCEMENT ---
         
         $totalMemory = [math]::Round($system.TotalPhysicalMemory / 1GB, 2)
         Write-Host ("{0}: {1} GB" -f (Get-Translation "RAM"), $totalMemory) -ForegroundColor $global:Theme.MenuText
@@ -687,7 +719,7 @@ function Show-PowerMenu {
     do {
         Clear-Host
         Write-Separator
-        Write-Title "        $(Get-Translation 'SubMenu_Power')"
+        Write-Title "       $(Get-Translation 'SubMenu_Power')"
         Write-Separator
         Write-MenuOption "1" (Get-Translation 'SubMenu_Power1')
         Write-MenuOption "2" (Get-Translation 'SubMenu_Power2')
@@ -886,11 +918,11 @@ function Show-SystemHealthMenu {
     do {
         Clear-Host
         Write-Separator
-        Write-Title "        $(Get-Translation 'SubMenu_Health')"
+        Write-Title "       $(Get-Translation 'SubMenu_Health')"
         Write-Separator
         Write-MenuOption "1" (Get-Translation 'SubMenu_Health1')
         Write-MenuOption "2" (Get-Translation 'SubMenu_Health2')
-        Write-MenuOption "3" (Get-Translation 'SubMenu_Health3') $global:Theme.Exit # Exit color
+        Write-MenuOption "3" (Get-Translation 'SubMenu_Health3') $global:Theme.Exit
         Write-Separator
         $choice = Read-Host "`n$(Get-Translation 'SelectOption')"
         switch ($choice) {
@@ -904,7 +936,7 @@ function Show-SystemHealthMenu {
 
 function Invoke-SFCScan {
     $confirm = Read-Host "`n$(Get-Translation 'Health_Warning') $(Get-Translation 'YesNoPrompt')"
-    if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -and ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) { return }
+    if (($global:Language -eq "ID" -and $confirm -notmatch '^(Y|y)$') -or ($global:Language -eq "EN" -and $confirm -notmatch '^(Y|y)$')) { return }
     Write-Warning "`n$(Get-Translation 'Health_SFC_Running')"
     try {
         $process = Start-Process -FilePath "sfc.exe" -ArgumentList "/scannow" -Wait -PassThru -NoNewWindow
@@ -959,7 +991,7 @@ function Show-MainMenu {
     Write-Host "                      | | | | (_|  __/>  <\__ \ " -ForegroundColor $global:Theme.AsciiArt
     Write-Host "                      |_| |_|\___\___/_/\_\___/" -ForegroundColor $global:Theme.AsciiArt
     Write-Host ""
-    Write-Host ("                      {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor $global:Theme.Prompt # Highlight the version
+    Write-Host ("                      {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor $global:Theme.Prompt
     Write-Host ""
     Write-Separator
     Write-MenuOption "1" (Get-Translation 'Menu_Option1')
