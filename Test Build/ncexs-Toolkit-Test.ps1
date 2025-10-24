@@ -97,14 +97,10 @@ $global:Translations = @{
         "OS" = "Operating System"
         "Version" = "Version"
         "CPU" = "Processor"
-        "RAM" = "Memory"
-        "GPU" = "Graphics Card"
+        "RAM" = "RAM"
+        "GPU" = "GPU"
         "Motherboard" = "Motherboard"
         "Hostname" = "Computer Name"
-        "Uptime_Label" = "System Uptime"
-        "Uptime_Days" = "Days"
-        "Uptime_Hours" = "Hours"
-        "Uptime_Minutes" = "Minutes"
         "SerialNumber" = "Serial Number"
         "System_Error" = "Error retrieving system information"
         "Cancel" = "Operation cancelled."
@@ -208,14 +204,10 @@ $global:Translations = @{
         "OS" = "Sistem Operasi"
         "Version" = "Versi"
         "CPU" = "Prosesor"
-        "RAM" = "Memori"
-        "GPU" = "Kartu Grafis"
+        "RAM" = "RAM"
+        "GPU" = "GPU"
         "Motherboard" = "Motherboard"
         "Hostname" = "Nama Komputer"
-        "Uptime_Label" = "Waktu Aktif Sistem"
-        "Uptime_Days" = "Hari"
-        "Uptime_Hours" = "Jam"
-        "Uptime_Minutes" = "Menit"
         "SerialNumber" = "Nomor Seri"
         "System_Error" = "Kesalahan mengambil informasi sistem"
         "Cancel" = "Operasi dibatalkan."
@@ -381,10 +373,6 @@ function Show-SystemInfo {
         Write-Host ("{0}: {1}" -f (Get-Translation "Hostname"), $system.Name) -ForegroundColor $global:Theme.MenuText
         Write-Host ("{0}: {1}" -f (Get-Translation "OS"), $os.Caption) -ForegroundColor $global:Theme.MenuText
         Write-Host ("{0}: {1}" -f (Get-Translation "Version"), $os.Version) -ForegroundColor $global:Theme.MenuText
-
-        $uptimeSpan = New-TimeSpan -Start $os.LastBootUpTime
-        $uptimeString = "{0} {1}, {2} {3}, {4} {5}" -f $uptimeSpan.Days, (Get-Translation "Uptime_Days"), $uptimeSpan.Hours, (Get-Translation "Uptime_Hours"), $uptimeSpan.Minutes, (Get-Translation "Uptime_Minutes")
-        Write-Host ("{0}: {1}" -f (Get-Translation "Uptime_Label"), $uptimeString) -ForegroundColor $global:Theme.MenuText
         
         $cpu = Get-CimInstance -ClassName Win32_Processor
         Write-Host ("{0}: {1}" -f (Get-Translation "CPU"), $cpu.Name.Trim()) -ForegroundColor $global:Theme.MenuText
@@ -962,7 +950,7 @@ function Invoke-DISMRepair {
 function Show-LanguageMenu {
     Clear-Host
     Write-Separator
-    Write-Title "             $(Get-Translation 'LanguageMenu')"
+    Write-Title "                 $(Get-Translation 'LanguageMenu')"
     Write-Separator
     Write-MenuOption "1" (Get-Translation 'LanguageMenu1')
     Write-MenuOption "2" (Get-Translation 'LanguageMenu2')
