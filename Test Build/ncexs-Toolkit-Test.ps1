@@ -399,7 +399,7 @@ function Show-SystemInfo {
                     } elseif ($gpuName -like "*Intel*") {
                         $regPath = "HKLM:\SOFTWARE\Intel\Gfx"
                         if (Test-Path $regPath) {
-                            $driverVersion = (Get-ItemProperty $regPath).Version
+                             $driverVersion = (Get-ItemProperty $regPath).Version
                         }
                     }
                 } catch {
@@ -418,7 +418,8 @@ function Show-SystemInfo {
         # --- END OF ENHANCEMENT ---
         
         $totalMemory = [math]::Round($system.TotalPhysicalMemory / 1GB, 2)
-        Write-Host ("{0}: {1} GB" -f (Get-Translation "RAM"), $totalMemory) -ForegroundColor $global:Theme.MenuText
+        $freeMemory = [math]::Round($os.FreePhysicalMemory / 1MB, 2) # FreePhysicalMemory is in KB, so divide by 1MB
+        Write-Host ("{0}: {1} GB ({2} GB {3})" -f (Get-Translation "RAM"), $totalMemory, $freeMemory, (Get-Translation "Free")) -ForegroundColor $global:Theme.MenuText
         
         $board = Get-CimInstance -ClassName Win32_BaseBoard
         Write-Host ("{0}: {1} {2}" -f (Get-Translation "Motherboard"), $board.Manufacturer, $board.Product) -ForegroundColor $global:Theme.MenuText
@@ -431,7 +432,7 @@ function Show-SystemInfo {
         foreach ($disk in $disks) {
             $freeSpace = [math]::Round($disk.FreeSpace / 1GB, 2)
             $totalSize = [math]::Round($disk.Size / 1GB, 2)
-            Write-Host ("   {0} {1} GB ({2} GB {3})" -f $disk.DeviceID, $totalSize, $freeSpace, (Get-Translation "Free")) -ForegroundColor $global:Theme.Info
+            Write-Host ("    {0} {1} GB ({2} GB {3})" -f $disk.DeviceID, $totalSize, $freeSpace, (Get-Translation "Free")) -ForegroundColor $global:Theme.Info
         }
     } catch {
         Write-Log "Failed to get system info: $($_.Exception.Message)" "ERROR"
