@@ -68,7 +68,7 @@ $global:Translations = @{
         "Menu_Option3" = "Empty Recycle Bin"
         "Menu_Option4" = "Open Disk Cleanup"
         "Menu_Option5" = "Manual Uninstaller"
-        "Menu_Option6" = "Automatic Network Repair"
+        "Menu_Option6" = "Network Repair"
         "Menu_Option7" = "Power & Battery Utilities"
         "Menu_Option8" = "Memory Optimizer"
         "Menu_Option9" = "Defragment & Optimize Drives"
@@ -125,10 +125,11 @@ $global:Translations = @{
         "Recycle_Success" = "Recycle Bin emptied successfully."
         "Recycle_AlreadyEmpty" = "Recycle Bin is already empty."
         "Clean_Title" = "TEMP & CACHE CLEANUP"
-        "Network_Title" = "AUTOMATIC NETWORK REPAIR"
-        "Network_Repairing" = "Repairing network settings (Reset TCP/IP, Winsock, Flush DNS)..."
+        "Network_Title" = "NETWORK REPAIR"
+        "Network_Repairing" = "Repairing network settings (Release, Renew, Flush DNS, Reset TCP/IP & Winsock)..."
         "Network_Repaired" = "Network settings repaired successfully."
         "Network_ErrorRepair" = "Error repairing network: {0}"
+        "Network_Restart_Warning" = "A restart is recommended for all changes to take effect."
         "Power_Select" = "Select a power plan to activate:"
         "Power_Balanced" = "Balanced (Recommended)"
         "Power_Saver" = "Power Saver"
@@ -175,7 +176,7 @@ $global:Translations = @{
         "Menu_Option3" = "Kosongkan Recycle Bin"
         "Menu_Option4" = "Buka Disk Cleanup"
         "Menu_Option5" = "Uninstaller Manual"
-        "Menu_Option6" = "Perbaikan Jaringan Otomatis"
+        "Menu_Option6" = "Perbaikan Jaringan"
         "Menu_Option7" = "Utilitas Daya & Baterai"
         "Menu_Option8" = "Optimasi Memori"
         "Menu_Option9" = "Defragment & Optimasi Drive"
@@ -232,11 +233,11 @@ $global:Translations = @{
         "Recycle_Success" = "Recycle Bin berhasil dikosongkan."
         "Recycle_AlreadyEmpty" = "Recycle Bin sudah kosong."
         "Clean_Title" = "PEMBERSIHAN SEMENTARA & CACHE"
-        "Network_Title" = "PERBAIKAN JARINGAN OTOMATIS"
-        "Network_Repairing" = "Memperbaiki pengaturan jaringan (Reset TCP/IP, Winsock, Flush DNS)..."
+        "Network_Title" = "PERBAIKAN JARINGAN"
+        "Network_Repairing" = "Memperbaiki pengaturan jaringan (Release, Renew, Flush DNS, Reset TCP/IP & Winsock)..."
         "Network_Repaired" = "Pengaturan jaringan berhasil diperbaiki."
         "Network_ErrorRepair" = "Kesalahan memperbaiki jaringan: {0}"
-        "Power_Select" = "Pilih power plan untuk diaktifkan:"
+        "Network_Restart_Warning" = "Disarankan untuk me-restart komputer Anda agar semua perubahan diterapkan."
         "Power_Balanced" = "Seimbang (Disarankan)"
         "Power_Saver" = "Hemat Daya"
         "Power_High" = "Performa Tinggi"
@@ -681,19 +682,34 @@ function Show-AdvancedUninstaller {
 }
 
 # ---------------------------
-# 6. Automatic Network Repair
+# 6. Network Repair
 # ---------------------------
 function Invoke-NetworkRepair {
     Write-Title "`n=== $(Get-Translation 'Network_Title') ==="
     
-    Write-Log "Repairing network connections..." "INFO"
+    Write-Log "Running full network repair..." "INFO"
     Write-Warning "`n$(Get-Translation 'Network_Repairing')"
     try {
-        netsh int ip reset | Out-Null
-        netsh winsock reset | Out-Null
+        # Run all commands sequentially
+        Write-Info "  -> (1/5) Running ipconfig /release..."
+        ipconfig /release | Out-Null
+        
+        Write-Info "  -> (2/5) Running ipconfig /renew..."
+        ipconfig /renew | Out-Null
+        
+        Write-Info "  -> (3/5) Running ipconfig /flushdns..."
         ipconfig /flushdns | Out-Null
-        Write-Log "Network repair completed." "SUCCESS"
-        Write-Success (Get-Translation 'Network_Repaired')
+        
+        Write-Info "  -> (4/5) Running netsh winsock reset..."
+        netsh winsock reset | Out-Null
+        
+        Write-Info "  -> (5/5) Running netsh int ip reset..."
+        netsh int ip reset | Out-Null
+        
+        Write-Log "Full network repair completed." "SUCCESS"
+        Write-Success "`n$(Get-Translation 'Network_Repaired')"
+        Write-Warning (Get-Translation 'Network_Restart_Warning')
+
     } catch { 
         $errorMsg = (Get-Translation 'Network_ErrorRepair') -f $_.Exception.Message
         Write-Log $errorMsg "ERROR"; Write-Error $errorMsg 
@@ -983,15 +999,15 @@ function Show-MainMenu {
     Write-Host ("                      {0}" -f (Get-Translation 'Menu_Title')) -ForegroundColor $global:Theme.Prompt
     Write-Host ""
     Write-Separator
-    Write-MenuOption "1" (Get-Translation 'Menu_Option1')
-    Write-MenuOption "2" (Get-Translation 'Menu_Option2')
-    Write-MenuOption "3" (Get-Translation 'Menu_Option3')
-    Write-MenuOption "4" (Get-Translation 'Menu_Option4')
-    Write-MenuOption "5" (Get-Translation 'Menu_Option5')
-    Write-MenuOption "6" (Get-Translation 'Menu_Option6')
-    Write-MenuOption "7" (Get-Translation 'Menu_Option7')
-    Write-MenuOption "8" (Get-Translation 'Menu_Option8')
-    Write-MenuOption "9" (Get-Translation 'Menu_Option9')
+    Write-MenuOption "1"  (Get-Translation 'Menu_Option1')
+    Write-MenuOption "2"  (Get-Translation 'Menu_Option2')
+    Write-MenuOption "3"  (Get-Translation 'Menu_Option3')
+    Write-MenuOption "4"  (Get-Translation 'Menu_Option4')
+    Write-MenuOption "5"  (Get-Translation 'Menu_Option5')
+    Write-MenuOption "6"  (Get-Translation 'Menu_Option6')
+    Write-MenuOption "7"  (Get-Translation 'Menu_Option7')
+    Write-MenuOption "8"  (Get-Translation 'Menu_Option8')
+    Write-MenuOption "9"  (Get-Translation 'Menu_Option9')
     Write-MenuOption "10" (Get-Translation 'Menu_Option10')
     Write-MenuOption "11" (Get-Translation 'Menu_Option11')
     Write-MenuOption "12" (Get-Translation 'Menu_Option12') $global:Theme.Exit
