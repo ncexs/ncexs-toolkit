@@ -9,17 +9,11 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     Write-Host "Toolkit perlu dijalankan sebagai Administrator" -ForegroundColor Yellow
     Write-Host "Memulai ulang sebagai Administrator..." -ForegroundColor Green
     Start-Sleep -Seconds 2
-    
-    # --- PERBAIKAN DI SINI ---
-    # Dapatkan path lengkap (absolut) dari skrip yang sedang berjalan
     $scriptPath = $MyInvocation.MyCommand.Path
     if (-not $scriptPath) {
         $scriptPath = ".\" + $MyInvocation.MyCommand.Name
     }
-    # Ubah path (yang mungkin relatif) menjadi path absolut
     $resolvedScriptPath = (Resolve-Path -Path $scriptPath).Path
-    # --- AKHIR PERBAIKAN ---
-
     Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$resolvedScriptPath`"" -Verb RunAs
     exit
 }
