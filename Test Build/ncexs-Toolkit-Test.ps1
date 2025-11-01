@@ -497,22 +497,28 @@ function Clear-JunkFiles {
         }
     }
 
-    Write-Info "`n$( (Get-Translation 'Clean_Calculating') )"
-    
+    Write-Info "`n$( (Get-Translation 'Clean_Calculating') )"   
     $totalFreed = 0
     Write-Progress -Activity (Get-Translation 'Clean_Title') -Status (Get-Translation 'Clean_Status')
 
     foreach ($folderPath in $pathsToClean) {
         if (-not (Test-Path $folderPath)) { continue }
-        
-        $items = Get-ChildItem -Path $folderPath -Recurse -Force -ErrorAction SilentlyContinue
-        
+        $items = Get-ChildItem -Path $folderPath -Force -ErrorAction SilentlyContinue   
         foreach ($item in $items) {
             try {
-                $itemSize = if ($item.PSIsContainer) { 0 } else { $item.Length }
+                $itemSize = 0
+                if (-not $item.PSIsContainer) {
+                    $itemSize = $item.Length
+                } else {
+                    $subItems = Get-ChildItem -Path $item.FullName -Recurse -Force -ErrorAction SilentlyContinue
+                    if ($subItems) {
+                        $itemSize = ($subItems | Where-Object { -not $_.PSIsContainer } | Measure-Object -Property Length -Sum -ErrorAction SilentlyContinue).Sum
+                    }
+                }
                 Remove-Item -Path $item.FullName -Recurse -Force -ErrorAction Stop
-                $totalFreed += $itemSize
+                $totalFreed += $itemSize               
             } catch {
+                # (The process cannot access the file...)
                 $errMsg = (Get-Translation 'Clean_ErrorDelete') -f $item.Name, $_.Exception.Message
                 Write-Warning $errMsg; Write-Log $errMsg "WARNING"
             }
@@ -529,16 +535,27 @@ function Clear-JunkFiles {
 
 function Invoke-ChromeCleanup {
     param([string]$ProfilePath)
-    Write-Info "`n$(Get-Translation 'Chrome_Cleaning')"
+    Write-Info "`n$(Get-Translation 'Chrome_Cleaning')" 
     $chromePaths = @(
-        Join-Path $ProfilePath 'Cache\*', Join-Path $ProfilePath 'Code Cache\*', Join-Path $ProfilePath 'GPUCache\*',
-        Join-Path $ProfilePath 'Session Storage\*', Join-Path $ProfilePath 'Service Worker\CacheStorage\*',
-        Join-Path $ProfilePath 'History', Join-Path $ProfilePath 'Web Data'
+        Join-Path $ProfilePath 'Cache\*', 
+        Join-Path $ProfilePath 'Code Cache\*', 
+        Join-Path $ProfilePath 'GPUCache\*',
+        Join-Path $ProfilePath 'Session Storage\*', 
+        Join-Path $ProfilePath 'Service Worker\CacheStorage\*',
+        Join-Path $ProfilePath 'History', 
+        Join-Path $ProfilePath 'Web Data'
     )
+    
     foreach ($path in $chromePaths) {
         if (Test-Path $path) {
-            try { Remove-Item $path -Recurse -Force -ErrorAction Stop }
-            catch { $errMsg = (Get-Translation 'Clean_ErrorDelete') -f $path, $_.Exception.Message; Write-Warning $errMsg; Write-Log $errMsg "WARNING" }
+            try { 
+                Remove-Item $path -Recurse -Force -ErrorAction Stop 
+            }
+            catch { 
+                $errMsg = (Get-Translation 'Clean_ErrorDelete') -f $path, $_.Exception.Message
+                Write-Warning $errMsg
+                Write-Log $errMsg "WARNING" 
+            }
         }
     }
     Write-Success (Get-Translation 'Chrome_Done')
