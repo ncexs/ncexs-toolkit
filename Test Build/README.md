@@ -11,4 +11,5 @@ This is a Windows utility toolkit. Due to Windows security policies, you must fo
     Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
     ```
 4.  Find your toolkit script file (e.g., `ncexs-Toolkit-Test.ps1`).
-5.  **Drag** the script file from its folder and **drop** it directly into the PowerShell window.
+5.  **Drag** the script file from its folder and **drop** it directly into the PowerShell window. The file's full path will automatically appear.
+6.  Press **Enter** one last time to run the script.
