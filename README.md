@@ -10,14 +10,16 @@
 ---
 
 ## 🧹 Cleaning Tools
-- **Junk Cleaner** – Removes temp files, prefetch cache, and browser data without closing your browser.
+- **Junk Cleaner** – Removes temp files, browser data, Windows Update cache, and **hardware-specific (AMD, Intel, NVIDIA) driver caches**.
+- **Advanced Uninstaller** – A powerful, registry-scanning uninstaller to remove programs and their leftovers.
 - **Disk Cleanup Utility** – Opens the built-in Windows Disk Cleanup tool for a deeper system clean.
 - **Recycle Bin Cleaner** – Safely empties the Recycle Bin with a confirmation prompt.
 
 ## ⚡ Optimization
 - **Powerful Memory Optimizer** – Frees up significant RAM by clearing the system's standby (cached) memory.
-- **System Dashboard** – Provides a quick overview of your hardware, OS, and disk space.
-- **Automatic Network Repair** – Fixes common connection issues with a one-click TCP/IP reset, Winsock reset, and DNS flush.
+- **System Dashboard** – Provides a quick overview of your hardware, OS, disk space, **Free RAM**, and installed **GPU driver versions**.
+- **Consolidated Network Repair** – A one-click action that runs 5 fixes (TCP/IP reset, Winsock reset, DNS flush, and more) to solve connection issues.
+- **Power & Battery Utilities** – Includes a Power Plan switcher and a generator for detailed Battery Health Reports.
 - **Drive Optimizer** – Includes an SSD safety check to prevent unnecessary defragmentation.
 
 ## 🛡️ Security
@@ -48,12 +50,13 @@ For the complete "Get Started" guide and step-by-step instructions, please visit
 
 - **VirusTotal Verified** – Scanned and confirmed to be free of malware.
 - **Open Source** – The code is fully transparent and can be reviewed by anyone.
+- **Stability Fixes** – Resolves critical parsing errors to ensure the script runs reliably on all systems.
 - **Admin-Friendly** – Only requests elevated permissions when absolutely necessary.
 - **No Telemetry** – Zero tracking, zero data collection.
 - **Smart Logging** – Keeps a record of all actions performed, with an auto-clean feature to manage log size.
 
 **View VirusTotal Report:**
-[![View VirusTotal Report](https://img.shields.io/badge/View-VirusTotal%20Report-critical?style=flat&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file-analysis/ODQyMTAzMGIyMTQ0MWEzZjFjYTVhZTk0MjVlODUwODQ6MTc2MDg3ODg2OQ==)
+[![View VirusTotal Report](https://img.shields.io/badge/View-VirusTotal%20Report-critical?style=flat&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/c70dbfa21baa8583172df28aca3ec91f715aaf49478228200aaa327ab8dc7626?nocache=1)
 
 ---
 
