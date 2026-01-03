@@ -9,78 +9,82 @@
 
 ---
 
-## 🧹 Cleaning Tools
-- **Junk Cleaner** – Removes temp files, browser data, Windows Update cache, and **hardware-specific (AMD, Intel, NVIDIA) driver caches**.
-- **Advanced Uninstaller** – A powerful, registry-scanning uninstaller to remove programs and their leftovers.
-- **Disk Cleanup Utility** – Opens the built-in Windows Disk Cleanup tool for a deeper system clean.
-- **Recycle Bin Cleaner** – Safely empties the Recycle Bin with a confirmation prompt.
+## 🔥 Key Features
 
-## ⚡ Optimization
-- **Powerful Memory Optimizer** – Frees up significant RAM by clearing the system's standby (cached) memory.
-- **System Dashboard** – Provides a quick overview of your hardware, OS, disk space, **Free RAM**, and installed **GPU driver versions**.
-- **Consolidated Network Repair** – A one-click action that runs 5 fixes (TCP/IP reset, Winsock reset, DNS flush, and more) to solve connection issues.
-- **Power & Battery Utilities** – Includes a Power Plan switcher and a generator for detailed Battery Health Reports.
-- **Drive Optimizer** – Includes an SSD safety check to prevent unnecessary defragmentation.
+### 🔄 Updates & Drivers
+* **Software Updater** – Automatically updates all installed apps via `winget` (auto-accepts source agreements).
+* **Driver Backup** – Exports all third-party drivers to a safe backup folder (`C:\DriversBackup`) before reinstalling Windows.
+* **Windows Update Fixer** – Resets update services (`wuauserv`, `bits`) and clears download cache to resolve stuck updates.
 
-## 🛡️ Security
-- **Windows Security Hub** – Quickly access the Windows Security dashboard to manage your protection.
-- **Startup Manager** – Control which apps run automatically when you start Windows.
-- **Safe by Design** – All critical actions require user confirmation to prevent mistakes.
+### 🧹 Storage & Cleanup
+* **Compact OS** – Safely compress Windows system binaries to free up **2GB – 5GB** of disk space without deleting files.
+* **Enhanced Junk Cleaner** – Comprehensive cleaning for **System Temp, Prefetch, GPU Driver Caches** (AMD, NVIDIA, Intel), old Windows Updates, and **Multi-Profile** browser caches (Chrome, Edge, Brave).
+* **Smart Uninstaller** – Registry-based uninstaller with **fuzzy search** to find and remove apps quickly.
+* **Recycle Bin Cleaner** – Safely empties the Recycle Bin with a confirmation prompt.
 
-## 🌐 Multilingual
-- **Indonesian & English** – Switch easily anytime from the menu.
+### ⚡ Performance & Optimization
+* **Memory Optimizer** – Frees up RAM by clearing working sets and displays **"Before & After" statistics** to show reclaimed memory.
+* **Smart Power Plan** – Automatically **restores hidden power plans** (High Performance/Saver) and enforces distinct brightness levels.
+* **Drive Optimizer** – Defrag/Trim tool with smart filtering (hides system partitions) and numbered navigation.
+* **System Dashboard** – Displays real-time Free RAM, Disk Space, and installed GPU driver versions.
+
+### 🌐 Network & Maintenance
+* **Network Repair Suite** – A one-click solution that runs 5 critical fixes (TCP/IP reset, Winsock reset, DNS flush, etc.).
+* **DNS Changer** – Quickly switch between Google (8.8.8.8), Cloudflare (1.1.1.1), or Auto (DHCP).
+
+### 🛡️ Security & UI
+* **Modern Interface** – Clean 2-column layout with a festive **Gold/Cyan Theme**, visual progress bars, and intro animations.
+* **Live Health Check** – Runs SFC & DISM with **real-time percentage indicators** directly in the console.
+* **Safe by Design** – All critical actions require mandatory **(Y/N)** confirmation.
 
 ---
 
-## 🚀 Get Started in 5 Steps
+## 🚀 Quick Start
 
-1. **Download** the latest `.ps1` file from [![Download](https://img.shields.io/badge/%20Download-Latest%20Release-brightgreen?style=flat&logo=github)](https://github.com/ncexs/ncexs-toolkit/releases/latest)
-2. **Move** the file to a convenient location (like your Desktop).
-3. **Right-click** the `.ps1` file → "Run with PowerShell".
-4. **Allow permissions** if prompted (UAC prompt → Yes).
-5. **Pick your task** from the interactive menu.
+For detailed installation steps and feature guides, please visit our official documentation:
 
-For the complete "Get Started" guide and step-by-step instructions, please visit our official website.
-
-[**View Full Guide at ncexs.github.io**](https://ncexs.github.io/)
+👉 [**View Full Guide at ncexs.github.io**](https://ncexs.github.io/)
 
 ---
 
 ## ✅ Trusted & Safe
 
-- **VirusTotal Verified** – Scanned and confirmed to be free of malware.
-- **Open Source** – The code is fully transparent and can be reviewed by anyone.
-- **Stability Fixes** – Resolves critical parsing errors to ensure the script runs reliably on all systems.
-- **Admin-Friendly** – Only requests elevated permissions when absolutely necessary.
-- **No Telemetry** – Zero tracking, zero data collection.
-- **Smart Logging** – Keeps a record of all actions performed, with an auto-clean feature to manage log size.
+* **VirusTotal Verified** – Scanned and confirmed to be free of malware.
+* **Open Source** – The code is fully transparent and can be reviewed by anyone.
+* **Stability Fixes** – Resolves critical parsing errors to ensure the script runs reliably on all systems.
+* **Admin-Friendly** – Only requests elevated permissions when absolutely necessary.
+* **No Telemetry** – Zero tracking, zero data collection.
+* **Smart Logging** – Keeps a record of all actions performed, with an auto-clean feature to manage log size.
 
 **View VirusTotal Report:**
-[![View VirusTotal Report](https://img.shields.io/badge/View-VirusTotal%20Report-critical?style=flat&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/c70dbfa21baa8583172df28aca3ec91f715aaf49478228200aaa327ab8dc7626?nocache=1)
+[![View VirusTotal Report](https://img.shields.io/badge/View-VirusTotal%20Report-critical?style=flat&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/377f0a7bc18cf0c382d7b3aafe71d5eff420b222510aaf4d8b7e705e47de4b2b/detection)
 
 ---
 
 ## 💻 System Requirements
 
-- **Windows** 7+ (7, 8, 8.1, 10, 11)
-- **PowerShell** 3.0+
-- **Admin Rights** (for full functionality)
+* **Windows** 7+ (7, 8, 8.1, 10, 11)
+* **PowerShell** 3.0+
+* **Admin Rights** (for full functionality)
 
 ---
 
 ## ❓ FAQ
 
 **🔹 Is it safe to use?**
-Yes. The toolkit is fully open-source and regularly verified with VirusTotal. All critical actions require your confirmation.
+Yes. The toolkit is fully open-source and regularly verified with VirusTotal. All critical actions (like deletions) require your mandatory **(Y/N)** confirmation before running.
 
-**🔹 Will it delete my important files?**
-No. It is designed to only target temporary files, system caches, and other junk data that is safe to remove.
+**🔹 Will the Junk Cleaner log me out of my browsers?**
+**No.** The Enhanced Junk Cleaner is designed to only remove **Cache, Code Cache, and GPU Cache**. It does **NOT** touch your Cookies, Saved Passwords, or History. You will stay logged in.
 
-**🔹 Do I need technical knowledge?**
-Not at all. The interactive menu is built to be simple and straightforward for everyone.
+**🔹 Does "Compact OS" slow down my computer?**
+Generally, no. Compact OS is a native Windows feature designed for SSDs. On modern CPUs, the performance impact is negligible, and it can actually make the system feel snappier by reducing disk I/O usage.
 
-**🔹 Why does it require administrator rights?**
-Some features, like system cleanup and network repair, need elevated permissions to modify system settings correctly.
+**🔹 Why does the Health Check (DISM) seem stuck?**
+Commands like `DISM /RestoreHealth` often pause at specific percentages (e.g., 62.3%) for a long time. **This is normal**. It is downloading and verifying system files in the background. Please be patient and do not close the window.
+
+**🔹 Why does it require Administrator rights?**
+Most features—such as cleaning system temp files, optimizing drives, and repairing network settings—require elevated privileges to modify protected Windows system components.
 
 ---
 
