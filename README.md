@@ -10,6 +10,9 @@
 ---
 
 ## 🔥 Key Features
+### ⚡ Quick Fix
+* **One-Click Maintenance** – (Menu Q) A high-speed automated sequence combining Junk Cleanup, Network Repair, and RAM Optimization in one go.
+* **Live Progress Tracking** – Watch the execution in real-time with integrated percentage bars.
 
 ### 🔄 Updates & Drivers
 * **Software Updater** – Automatically updates all installed apps via `winget` (auto-accepts source agreements).
@@ -55,9 +58,6 @@ For detailed installation steps and feature guides, please visit our official do
 * **Admin-Friendly** – Only requests elevated permissions when absolutely necessary.
 * **No Telemetry** – Zero tracking, zero data collection.
 * **Smart Logging** – Keeps a record of all actions performed, with an auto-clean feature to manage log size.
-
-**View VirusTotal Report:**
-[![View VirusTotal Report](https://img.shields.io/badge/View-VirusTotal%20Report-critical?style=flat&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/377f0a7bc18cf0c382d7b3aafe71d5eff420b222510aaf4d8b7e705e47de4b2b/detection)
 
 ---
 
