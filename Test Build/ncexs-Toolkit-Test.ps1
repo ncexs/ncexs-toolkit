@@ -13,10 +13,10 @@ $global:Language = "ID"
 
 $global:Theme = @{
     Border = 'DarkGray'; Title = 'Cyan'; Section = 'White'
-    MenuNumber = 'DarkCyan'; MenuText = 'Gray'; Special = 'Magenta'
+    MenuNumber = 'DarkCyan'; MenuText = 'Gray'; Special = 'Yellow'
     Highlight = 'White'; Prompt = 'Cyan'; Success = 'Green'
     Error = 'Red'; Warning = 'Yellow'; Info = 'DarkGray'
-    Exit = 'Red'; AsciiArt = 'Cyan'
+    Exit = 'Red'; AsciiArt = 'Blue'
 }
 
 try { $Host.PrivateData.PromptForegroundColor = $global:Theme.Prompt } catch {}
@@ -42,6 +42,18 @@ $global:Translations = @{
         "Stats_Before" = "Before"; "Stats_After" = "After"; "Stats_Free" = "MB Free"
         "Junk_Cleared" = "Cleared {0} MB"; "RAM_Optimized" = "Memory Optimized. Freed {0} MB."
         "YesNo" = "(Y/N)"; "SelectOption" = "Select option"; "PressAnyKey" = "Press any key..."
+        "Compact_Title" = "COMPACT OS"; "Compact_Confirm" = "Start compressing OS?"; "Compact_Done" = "OS Compression completed."
+        "System_Title" = "SYSTEM INFORMATION"; "Clean_Title" = "JUNK CLEANER"; "Clean_Confirm" = "Start scanning and cleaning junk files?"
+        "Uninstall_Title" = "ADVANCED UNINSTALLER"; "Uninstall_Prompt" = "Enter application name to search:"
+        "Uninstall_Search" = "Searching for installed applications..."; "Uninstall_NotFound" = "Application not found."
+        "Recycle_Confirm" = "Empty Recycle Bin?"; "Recycle_Success" = "Recycle Bin Emptied."; "Recycle_Empty" = "Recycle Bin is already empty."
+        "Disk_Confirm" = "Open Windows Disk Cleanup?"
+        "Net_Confirm" = "Start network repair?"; "Net_Release" = "Releasing IP Address..."; "Net_Renew" = "Renewing IP Address (Renew)..."
+        "Net_Flush" = "Flushing DNS Cache (Flush DNS)..."; "Net_Winsock" = "Resetting Winsock..."; "Net_TCP" = "Resetting TCP/IP..."
+        "Net_Done" = "Network repair completed."
+        "Invalid_Option" = "Invalid option"; "RAM_Confirm" = "Optimize memory now?"; "Defrag_Confirm" = "Optimize C: Drive?"
+        "Health_Confirm" = "Scan system health? (Takes a few minutes)"; "Update_Backup" = "Backup created at"
+        "Visual_Confirm" = "Boost UI now? (Explorer will restart)"; "Visual_Success" = "UI Boosted."
     };
     "ID" = @{
         "Menu_Title" = "ncexs Toolkit (Test Build)"; "Menu_Option0" = "Compact OS (Hemat 2-5GB Space)"
@@ -63,6 +75,18 @@ $global:Translations = @{
         "Stats_Before" = "Sebelum"; "Stats_After" = "Sesudah"; "Stats_Free" = "MB Kosong"
         "Junk_Cleared" = "Berhasil membersihkan {0} MB"; "RAM_Optimized" = "Memori Dioptimasi. Berhasil mengosongkan {0} MB."
         "YesNo" = "(Y/T)"; "SelectOption" = "Pilih opsi"; "PressAnyKey" = "Tekan sembarang tombol..."
+        "Compact_Title" = "COMPACT OS"; "Compact_Confirm" = "Mulai kompresi OS?"; "Compact_Done" = "Kompresi OS selesai."
+        "System_Title" = "INFORMASI SISTEM"; "Clean_Title" = "PEMBERSIH SAMPAH"; "Clean_Confirm" = "Mulai memindai dan membersihkan file sampah?"
+        "Uninstall_Title" = "ADVANCED UNINSTALLER"; "Uninstall_Prompt" = "Masukkan nama aplikasi yang dicari:"
+        "Uninstall_Search" = "Mencari aplikasi terinstal..."; "Uninstall_NotFound" = "Aplikasi tidak ditemukan."
+        "Recycle_Confirm" = "Kosongkan Recycle Bin?"; "Recycle_Success" = "Recycle Bin berhasil dikosongkan."; "Recycle_Empty" = "Recycle Bin sudah kosong."
+        "Disk_Confirm" = "Buka Windows Disk Cleanup?"
+        "Net_Confirm" = "Mulai perbaikan jaringan?"; "Net_Release" = "Melepaskan IP Address..."; "Net_Renew" = "Memperbarui IP Address (Renew)..."
+        "Net_Flush" = "Membersihkan DNS Cache (Flush DNS)..."; "Net_Winsock" = "Mereset Winsock..."; "Net_TCP" = "Mereset TCP/IP..."
+        "Net_Done" = "Perbaikan jaringan selesai."
+        "Invalid_Option" = "Opsi tidak valid"; "RAM_Confirm" = "Optimasi memori sekarang?"; "Defrag_Confirm" = "Optimasi Drive C:?"
+        "Health_Confirm" = "Scan kesehatan sistem? (Butuh beberapa menit)"; "Update_Backup" = "Backup selesai di"
+        "Visual_Confirm" = "Boost UI sekarang? (Explorer akan direstart)"; "Visual_Success" = "UI Boosted."
     }
 }
 
@@ -78,10 +102,15 @@ function Request-Confirm { param([string]$msg) $yn = Get-Translation "YesNo"; $c
 
 function Show-Intro {
     Clear-Host; Write-Host ""
-    Write-Centered "    _  __ ____ ______ _  __ _____" "Cyan"
-    Write-Centered "  / |/ // __// ____/| |/_// ___/" "Cyan"
-    Write-Centered " /    // /__/ __/  _>  < (__  ) " "Cyan"
-    Write-Centered "/_/|_/ \___/_____//_/|_//____/  " "Cyan"
+    Write-Centered ' __    __   ______   ________  __    __   ______  ' "Blue"
+    Write-Centered '|  \  |  \ /      \ |        \|  \  /  \ /      \ ' "Blue"
+    Write-Centered '| $$\ | $$|  $$$$$$\| $$$$$$$$ \$$\/  $$|  $$$$$$\' "Blue"
+    Write-Centered '| $$$\| $$| $$   \$$| $$__      >$$  $$ | $$___\$$' "Blue"
+    Write-Centered '| $$$$\ $$| $$      | $$  \    /  $$$$\  \$$    \ ' "Blue"
+    Write-Centered '| $$\$$ $$| $$   __ | $$$$$   |  $$ \$$\ _\$$$$$$\' "Blue"
+    Write-Centered '| $$ \$$$$| $$__/  \| $$_____ | $$  | $$|  \__| $$' "Blue"
+    Write-Centered '| $$  \$$$ \$$    $$| $$     \| $$  | $$ \$$    $$' "Blue"
+    Write-Centered ' \$$   \$$  \$$$$$$  \$$$$$$$$ \$$   \$$  \$$$$$$ ' "Blue"
     Write-Host "" ; Write-Centered "T E S T    B U I L D" "DarkCyan"; Write-Host ""
     $modules = @("Kernel", "UI", "Network", "Disk", "Security", "Social")
     foreach ($m in $modules) { Write-Host " [INIT] Loading module: $m..." -ForegroundColor DarkGray; Start-Sleep -Milliseconds 50 }
@@ -131,11 +160,11 @@ function Clear-JunkFiles {
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
-function Clear-RecycleBin-Menu { if (-not (Request-Confirm "Kosongkan Recycle Bin?")) { return }; try { Clear-RecycleBin -Force -ErrorAction Stop; Write-Success "Recycle Bin Empty." } catch { Write-Info "Already empty." }; Read-Host "`n $(Get-Translation 'PressAnyKey')" }
-function Open-DiskCleanup { if (Request-Confirm "Buka Disk Cleanup?") { cleanmgr.exe /LOWDISK } }
+function Clear-RecycleBin-Menu { if (-not (Request-Confirm (Get-Translation 'Recycle_Confirm'))) { return }; try { Clear-RecycleBin -Force -ErrorAction Stop; Write-Success (Get-Translation 'Recycle_Success') } catch { Write-Info (Get-Translation 'Recycle_Empty') }; Read-Host "`n $(Get-Translation 'PressAnyKey')" }
+function Open-DiskCleanup { if (Request-Confirm (Get-Translation 'Disk_Confirm')) { cleanmgr.exe /LOWDISK } }
 
 function Show-AdvancedUninstaller {
-    Write-Title (Get-Translation 'Uninstall_Title'); Write-Info "Mencari aplikasi..."
+    Write-Title (Get-Translation 'Uninstall_Title'); Write-Info (Get-Translation 'Uninstall_Search')
     $paths = @('HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*', 'HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*')
     $programs = foreach ($p in $paths) { Get-ItemProperty -Path $p -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -and $_.UninstallString } }
     $search = Read-Host " $(Get-Translation 'Uninstall_Prompt')"
@@ -144,29 +173,43 @@ function Show-AdvancedUninstaller {
         if ($found) { 
             $count = 1
             foreach ($item in $found) { Write-Host " [$count] $($item.DisplayName)"; $count++ }
-            $sel = Read-Host " Pilih nomor"; if ($sel -match '^\d+$') { cmd /c $found[[int]$sel - 1].UninstallString }
+            $sel = Read-Host " $(Get-Translation 'SelectOption')"; if ($sel -match '^\d+$') { cmd /c $found[[int]$sel - 1].UninstallString }
         }
         else {
-            Write-Warning "Aplikasi tidak ditemukan."
+            Write-Warning (Get-Translation 'Uninstall_NotFound')
         }
     }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
-function Invoke-NetworkRepair { if (-not (Request-Confirm "Mulai perbaikan jaringan?")) { return }; Write-Progress -Activity "Repairing..." -Status "Running Commands"; ipconfig /release > $null; ipconfig /renew > $null; ipconfig /flushdns > $null; netsh winsock reset > $null; netsh int ip reset > $null; Write-Success "Done."; Read-Host " Press any key" }
+function Invoke-NetworkRepair {
+    if (-not (Request-Confirm (Get-Translation 'Net_Confirm'))) { return }
+    Write-Info (Get-Translation 'Net_Release')
+    ipconfig /release > $null
+    Write-Info (Get-Translation 'Net_Renew')
+    ipconfig /renew > $null
+    Write-Info (Get-Translation 'Net_Flush')
+    ipconfig /flushdns > $null
+    Write-Info (Get-Translation 'Net_Winsock')
+    netsh winsock reset > $null
+    Write-Info (Get-Translation 'Net_TCP')
+    netsh int ip reset > $null
+    Write-Success (Get-Translation 'Net_Done')
+    Read-Host "`n $(Get-Translation 'PressAnyKey')"
+}
 
 function Show-PowerMenu {
     do {
         Clear-Host
         Write-Title (Get-Translation 'SubMenu_Power')
         Write-Host "`n [1] High Performance`n [2] Balanced`n [3] Back"
-        $c = Read-Host " Pilih"; if ($c -eq "1") { powercfg /setactive SCHEME_MIN; Write-Success "Set to High" } elseif ($c -eq "2") { powercfg /setactive SCHEME_BALANCED; Write-Success "Set to Balanced" } elseif ($c -eq "3") { return } else { Write-Warning "Opsi tidak valid" }
-        Read-Host " Press any key"
+        $c = Read-Host " $(Get-Translation 'SelectOption')"; if ($c -eq "1") { powercfg /setactive SCHEME_MIN; Write-Success "Set to High" } elseif ($c -eq "2") { powercfg /setactive SCHEME_BALANCED; Write-Success "Set to Balanced" } elseif ($c -eq "3") { return } else { Write-Warning (Get-Translation 'Invalid_Option') }
+        Read-Host " $(Get-Translation 'PressAnyKey')"
     } while ($true)
 }
 
 function Clear-RAM { 
-    if (-not (Request-Confirm "Optimasi memori sekarang?")) { return }
+    if (-not (Request-Confirm (Get-Translation 'RAM_Confirm'))) { return }
     $before = Get-CimInstance Win32_OperatingSystem | Select-Object -ExpandProperty FreePhysicalMemory
     $code = "using System; using System.Runtime.InteropServices; public class M { [DllImport(`"psapi.dll`")] public static extern bool EmptyWorkingSet(IntPtr h); public static void C() { foreach(var p in System.Diagnostics.Process.GetProcesses()) try { EmptyWorkingSet(p.Handle); } catch {} } }"
     Add-Type -TypeDefinition $code -ErrorAction SilentlyContinue; [M]::C(); [System.GC]::Collect();
@@ -183,41 +226,37 @@ function Clear-RAM {
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
-function Invoke-Defragment { if (-not (Request-Confirm "Optimasi Drive C:?")) { return }; Optimize-Volume -DriveLetter C -Verbose; Read-Host " Done" }
-function Show-SystemHealthMenu { if (-not (Request-Confirm "Scan kesehatan sistem? (Butuh beberapa menit)")) { return }; sfc /scannow; dism /online /cleanup-image /restorehealth; Read-Host " Done" }
+function Invoke-Defragment { if (-not (Request-Confirm (Get-Translation 'Defrag_Confirm'))) { return }; Optimize-Volume -DriveLetter C -Verbose; Read-Host "`n $(Get-Translation 'PressAnyKey')" }
+function Show-SystemHealthMenu { if (-not (Request-Confirm (Get-Translation 'Health_Confirm'))) { return }; sfc /scannow; dism /online /cleanup-image /restorehealth; Read-Host "`n $(Get-Translation 'PressAnyKey')" }
 
 function Show-UpdateDriverMenu {
-    do {
-        Clear-Host
-        Write-Title (Get-Translation 'SubMenu_Update')
-        Write-Host "`n [1] Winget Update All`n [2] Backup Drivers`n [3] Back"
-        $c = Read-Host " Pilih"; if ($c -eq "1") { winget upgrade --all --accept-package-agreements --accept-source-agreements --silent } elseif ($c -eq "2") { 
-            $dest = "C:\DriversBackup"; if (!(Test-Path -Path $dest)) { New-Item -Path $dest -ItemType Directory }; Export-WindowsDriver -Online -Destination $dest; Write-Success "Backup at $dest"
-        }
-        elseif ($c -eq "3") { return } else { Write-Warning "Opsi tidak valid" }
-        Read-Host " Press any key"
-    } while ($true)
+    Write-Host ""
+    Write-Title (Get-Translation 'SubMenu_Update')
+    Write-Host "`n [1] Winget Update All`n [2] Backup Drivers`n [3] Back"
+    $c = Read-Host " $(Get-Translation 'SelectOption')"; if ($c -eq "1") { winget upgrade --all --accept-package-agreements --accept-source-agreements --silent } elseif ($c -eq "2") { 
+        $dest = "C:\DriversBackup"; if (!(Test-Path -Path $dest)) { New-Item -Path $dest -ItemType Directory }; Export-WindowsDriver -Online -Destination $dest; Write-Success "$(Get-Translation 'Update_Backup') $dest"
+    }
+    elseif ($c -eq "3") { return } else { Write-Warning (Get-Translation 'Invalid_Option') }
+    Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
 function Show-DNSMenu { 
-    do {
-        Clear-Host
-        Write-Title (Get-Translation 'Menu_Option12')
-        Write-Host (Get-Translation 'DNS_Menu_Text')
-        $c = Read-Host " $(Get-Translation 'SelectOption')"
-        
-        if ($c -eq "6") { return }
-        
-        $adapter = Get-NetAdapter | Where-Object { $_.Status -eq "Up" -and $_.Virtual -eq $false } | Select-Object -First 1
-        if (-not $adapter -and $c -match "^[1-5]$") { Write-Error (Get-Translation 'DNS_NoAdapter') }
-        elseif ($c -eq "1") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("1.1.1.1", "1.0.0.1"); Write-Success "DNS: Cloudflare (1.1.1.1)" }
-        elseif ($c -eq "2") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("8.8.8.8", "8.8.4.4"); Write-Success "DNS: Google (8.8.8.8)" }
-        elseif ($c -eq "3") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("9.9.9.9", "149.112.112.112"); Write-Success "DNS: Quad9 (9.9.9.9)" }
-        elseif ($c -eq "4") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("94.140.14.14", "94.140.15.15"); Write-Success "DNS: AdGuard (94.140.14.14)" }
-        elseif ($c -eq "5") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ResetServerAddresses; Write-Success "DNS: Default (DHCP)" }
-        else { Write-Warning (Get-Translation 'DNS_Invalid') }
-        Read-Host "`n $(Get-Translation 'PressAnyKey')"
-    } while ($true)
+    Write-Host ""
+    Write-Title (Get-Translation 'Menu_Option12')
+    Write-Host (Get-Translation 'DNS_Menu_Text')
+    $c = Read-Host " $(Get-Translation 'SelectOption')"
+    
+    if ($c -eq "6") { return }
+    
+    $adapter = Get-NetAdapter | Where-Object { $_.Status -eq "Up" -and $_.Virtual -eq $false } | Select-Object -First 1
+    if (-not $adapter -and $c -match "^[1-5]$") { Write-Error (Get-Translation 'DNS_NoAdapter') }
+    elseif ($c -eq "1") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("1.1.1.1", "1.0.0.1"); Write-Success "DNS: Cloudflare (1.1.1.1)" }
+    elseif ($c -eq "2") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("8.8.8.8", "8.8.4.4"); Write-Success "DNS: Google (8.8.8.8)" }
+    elseif ($c -eq "3") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("9.9.9.9", "149.112.112.112"); Write-Success "DNS: Quad9 (9.9.9.9)" }
+    elseif ($c -eq "4") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("94.140.14.14", "94.140.15.15"); Write-Success "DNS: AdGuard (94.140.14.14)" }
+    elseif ($c -eq "5") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ResetServerAddresses; Write-Success "DNS: Default (DHCP)" }
+    else { Write-Warning (Get-Translation 'DNS_Invalid') }
+    Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
 function Invoke-WifiGrabber {
@@ -227,7 +266,7 @@ function Invoke-WifiGrabber {
     }; Read-Host "`n Press any key"
 }
 
-function Invoke-VisualPerf { if (-not (Request-Confirm "Boost UI sekarang? (Explorer akan direstart)")) { return }; Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Value 0; Write-Success "UI Boosted."; Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue }
+function Invoke-VisualPerf { if (-not (Request-Confirm (Get-Translation 'Visual_Confirm'))) { return }; Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Value 0; Write-Success (Get-Translation 'Visual_Success'); Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue }
 
 function Invoke-OptimizeWhatsApp {
     Write-Title (Get-Translation 'WA_Title')
@@ -254,19 +293,24 @@ function Show-MainMenu {
     Write-Host "`n"
     $w = 86; $line = "-" * ($w - 2)
     Write-Host ("+" + $line + "+") -ForegroundColor $global:Theme.Border
-    Write-Centered "    _  __ ____ ______ _  __ _____" $global:Theme.AsciiArt $w
-    Write-Centered "  / |/ // __// ____/| |/_// ___/" $global:Theme.AsciiArt $w
-    Write-Centered " /    // /__/ __/  _>  < (__  ) " $global:Theme.AsciiArt $w
-    Write-Centered "/_/|_/ \___/_____//_/|_//____/  " $global:Theme.AsciiArt $w
+    Write-Centered ' __    __   ______   ________  __    __   ______  ' $global:Theme.AsciiArt $w
+    Write-Centered '|  \  |  \ /      \ |        \|  \  /  \ /      \ ' $global:Theme.AsciiArt $w
+    Write-Centered '| $$\ | $$|  $$$$$$\| $$$$$$$$ \$$\/  $$|  $$$$$$\' $global:Theme.AsciiArt $w
+    Write-Centered '| $$$\| $$| $$   \$$| $$__      >$$  $$ | $$___\$$' $global:Theme.AsciiArt $w
+    Write-Centered '| $$$$\ $$| $$      | $$  \    /  $$$$\  \$$    \ ' $global:Theme.AsciiArt $w
+    Write-Centered '| $$\$$ $$| $$   __ | $$$$$   |  $$ \$$\ _\$$$$$$\' $global:Theme.AsciiArt $w
+    Write-Centered '| $$ \$$$$| $$__/  \| $$_____ | $$  | $$|  \__| $$' $global:Theme.AsciiArt $w
+    Write-Centered '| $$  \$$$ \$$    $$| $$     \| $$  | $$ \$$    $$' $global:Theme.AsciiArt $w
+    Write-Centered ' \$$   \$$  \$$$$$$  \$$$$$$$$ \$$   \$$  \$$$$$$ ' $global:Theme.AsciiArt $w
     Write-Host "" ; Write-Centered (Get-Translation 'Menu_Title') $global:Theme.Title $w
     Write-Host ("+" + $line + "+") -ForegroundColor $global:Theme.Border
     Write-Host "| " -NoNewline -ForegroundColor $global:Theme.Border
     Write-Host "[0] " -NoNewline -ForegroundColor $global:Theme.Highlight
     Write-Host ("{0,-35}" -f (Get-Translation 'Menu_Option0')) -NoNewline -ForegroundColor $global:Theme.Highlight
-    Write-Host "| " -NoNewline -ForegroundColor $global:Theme.Border
+    Write-Host " | " -NoNewline -ForegroundColor $global:Theme.Border
     Write-Host "[L] " -NoNewline -ForegroundColor $global:Theme.Special
     Write-Host ("{0,-36}" -f (Get-Translation 'Menu_OptionL')) -NoNewline -ForegroundColor $global:Theme.Special
-    Write-Host "|" -ForegroundColor $global:Theme.Border
+    Write-Host " |" -ForegroundColor $global:Theme.Border
     Write-Host ("+" + $line + "+") -ForegroundColor $global:Theme.Border
     for ($i = 1; $i -le 8; $i++) {
         $l_idx = $i; $r_idx = $i + 8; $l_t = Get-Translation "Menu_Option$l_idx"; $r_t = Get-Translation "Menu_Option$r_idx"
@@ -297,6 +341,6 @@ do {
         "12" { Show-DNSMenu }; "13" { Invoke-WifiGrabber }; "14" { Invoke-VisualPerf }
         "15" { Invoke-OptimizeWhatsApp }; "16" { exit }
         "L" { if ($global:Language -eq "EN") { $global:Language = "ID" } else { $global:Language = "EN" } }
-        default { Write-Warning "Opsi tidak valid / Invalid option"; Start-Sleep -Seconds 1 }
+        default { Write-Warning (Get-Translation 'Invalid_Option'); Start-Sleep -Seconds 1 }
     }
 } while ($true)
