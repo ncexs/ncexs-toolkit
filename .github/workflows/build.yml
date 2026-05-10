@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - "*.ps1"
-      - "Test Build/*.ps1"
+      - "**/*.ps1"
+      - ".github/workflows/build.yml"
 
 jobs:
   build:
@@ -20,13 +20,13 @@ jobs:
         shell: pwsh
         run: |
           Write-Host "=== Scanning PowerShell scripts ==="
-          $files = Get-ChildItem -Path . -Filter "*.ps1" -Recurse
+          $files = @(Get-ChildItem -Path . -Filter "*.ps1" -Recurse)
           if ($files.Count -eq 0) {
             Write-Host "⚠️ No PowerShell files found!"
           } else {
             foreach ($f in $files) {
               Write-Host "📄 Found script: $($f.Name)"
-              $lineCount = (Get-Content $f.FullName).Count
+              $lineCount = @(Get-Content $f.FullName).Count
               Write-Host "   ↳ $lineCount lines read successfully ✅"
             }
           }
@@ -35,7 +35,6 @@ jobs:
         shell: pwsh
         run: |
           Write-Host "=== Running Pester Tests ==="
-          Install-Module -Name Pester -Force -Scope CurrentUser
           $testPath = "Tests/Ncexs-Toolkit.Tests.ps1"
           if (Test-Path $testPath) {
             $results = Invoke-Pester -Path $testPath -PassThru
