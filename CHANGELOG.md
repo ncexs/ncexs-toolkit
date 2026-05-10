@@ -1,22 +1,19 @@
 # 🚀 ncexs Toolkit v3.0
-✨ **Added**
-- **Quick Fix (Special Birthday Utility)** – Added a specialized "One-Click" maintenance feature (Menu Q) that automates three essential tasks in sequence:
-  - Junk Cleanup: Automatically clears system temporary files and junk.
-  - Network Repair: Resets network configurations for better stability.
-  - Memory Optimization: Frees up standby RAM to boost system responsiveness.
-- **Symmetrical 2-Column UI** – Completely rebuilt the main menu with a precision-aligned 2-column layout, ensuring all borders and dividers stay perfectly straight.
-- **Side-by-Side Quick Access** – Redesigned the top row to feature Compact OS (Menu 0) and Quick Fix (Menu Q) side-by-side for faster navigation and a modern look.
-- **Dynamic Progress Integration** – Added real-time percentage progress bars to the Quick Fix utility to provide visual feedback during execution.
 
-🎨 **UI & UX Improvements**
-- **Pixel-Perfect Borders** – Implemented advanced string formatting to eliminate the "shifting" right border issue, ensuring a clean, box-shaped interface.
-- **Smart Numbering** – Numbers [1-14] are now right-aligned, preventing the layout from breaking when switching between single and double digits.
-- **Centered Metadata** – The Hostname and User information header is now mathematically centered at the bottom of the toolkit frame.
+## 🎓 ncexs Toolkit – v3.0 After UTS Build
 
-🔧 **Bug Fixes**
-- **Fixed Border Displacement** – Resolved the long-standing issue where the right vertical line would break due to varying menu text lengths.
-- **Fixed Multi-Color Spacing** – Eliminated "ghost spaces" caused by PowerShell's default Write-Host behavior ketika menangani banyak warna.
-- **Fixed Formatting Errors** – Removed risky substring logic that previously caused red error messages when menu titles were too short.
+✨ **Features & Enhancements**
+- **UI & Aesthetics**: Replaced the main ASCII art with a new bold 3D 'Big Money' design and updated its color to Blue. Improved visibility of the 'Change Language' option by changing its color to Yellow.
+- **Localization**: Added full English and Indonesian translation coverage. Replaced all hardcoded strings inside multiple toolkit functions with `Get-Translation` to ensure the language toggle works perfectly across the script.
+- **Language Toggle**: Implement a quick language toggle [L] between English and Indonesian. Fixed a bug where the case-insensitive switch toggled the language twice.
+- **DNS Changer**: Add an interactive DNS Changer sub-menu with 5 major providers. Modified 'Updates & Drivers Center' (Menu 11) and 'DNS Changer' (Menu 12) to execute inline within the main menu instead of opening in a separate screen.
+- **Detailed Optimizer Metrics**: Add 'Before/After' MB statistics to the Junk Cleaner and Memory Optimizer.
+- **Network Repair**: Added detailed step-by-step progress notifications (IP Release/Renew, DNS Flush, Winsock/TCP reset) to provide better user feedback.
+
+🐛 **Bug Fixes & Refactors**
+- **Menu Loops**: Fix infinite menu loops by adding Clear-Host and default cases to switch statements.
+- **Advanced Uninstaller**: Add a missing pause to the Advanced Uninstaller results.
+- **String Abstraction**: Abstract hardcoded strings into the global translation dictionary.
 
 ---
 # 🚀 ncexs Toolkit v2.6
