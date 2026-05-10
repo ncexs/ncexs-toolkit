@@ -1,5 +1,6 @@
 # 🧰 ncexs Toolkit
 
+[![GitHub Release](https://img.shields.io/github/v/release/ncexs/ncexs-toolkit?style=flat&logo=github)](https://github.com/ncexs/ncexs-toolkit/releases/latest)
 [![Website](https://img.shields.io/badge/Website-ncexs.github.io-blueviolet?style=flat&logo=github&logoColor=white)](https://ncexs.github.io/)
 [![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F70%20Detections-brightgreen?style=flat&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/your-new-file-hash-here/detection)
 [![Windows](https://img.shields.io/badge/Windows-7%2B-0078D4?style=flat&logo=windows)](#)
@@ -42,9 +43,17 @@
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start (Stable Release)
 
-For detailed installation steps and feature guides, please visit our official documentation:
+To run the latest stable release of the ncexs Toolkit directly without downloading files manually:
+
+1. Open your **Start Menu**, type **`powershell`**, right-click it and select **Run as Administrator**.
+2. Copy and paste the command below, then press **Enter**:
+   ```powershell
+   Set-ExecutionPolicy Bypass -Scope Process -Force; irm "https://github.com/ncexs/ncexs-toolkit/releases/latest/download/ncexs-Toolkit.ps1" | iex
+   ```
+
+For detailed manual installation steps and feature guides, please visit our official documentation:
 
 👉 [**View Full Guide at ncexs.github.io**](https://ncexs.github.io/)
 
