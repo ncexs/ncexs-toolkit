@@ -30,7 +30,7 @@ try { $Host.PrivateData.PromptForegroundColor = $global:Theme.Prompt } catch {}
 
 $global:Translations = @{
     "EN" = @{
-        "Menu_Title" = "ncexs Toolkit (Test Build)"; "Menu_Option0" = "Compact OS (Save 2-5GB Space)"
+        "Menu_Title" = "ncexs Toolkit $($global:ToolkitVersion)"; "Menu_Option0" = "Compact OS (Save 2-5GB Space)"
         "Menu_Option1" = "System Information"; "Menu_Option2" = "Enhanced Junk Cleaner"
         "Menu_Option3" = "Empty Recycle Bin"; "Menu_Option4" = "Open Disk Cleanup"
         "Menu_Option5" = "Smart Uninstaller"; "Menu_Option6" = "Network Repair"
@@ -63,7 +63,7 @@ $global:Translations = @{
         "Visual_Confirm" = "Boost UI now? (Explorer will restart)"; "Visual_Success" = "UI Boosted."
     };
     "ID" = @{
-        "Menu_Title" = "ncexs Toolkit (Test Build)"; "Menu_Option0" = "Compact OS (Hemat 2-5GB Space)"
+        "Menu_Title" = "ncexs Toolkit $($global:ToolkitVersion)"; "Menu_Option0" = "Compact OS (Hemat 2-5GB Space)"
         "Menu_Option1" = "Informasi Sistem"; "Menu_Option2" = "Pembersih Sampah (Enhanced)"
         "Menu_Option3" = "Kosongkan Recycle Bin"; "Menu_Option4" = "Buka Disk Cleanup"
         "Menu_Option5" = "Smart Uninstaller"; "Menu_Option6" = "Perbaikan Jaringan"
