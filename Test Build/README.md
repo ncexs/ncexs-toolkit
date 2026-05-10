@@ -2,6 +2,15 @@
 
 This is a Windows utility toolkit. Due to Windows security policies, you must follow these steps to run the script.
 
+## How to Run (Automatic Method - Recommended)
+This method ensures you are always running the latest version directly from GitHub.
+
+1.  Open your **Start Menu**, type **`powershell`**, right-click it and select **Run as Administrator**.
+2.  Copy the following command, paste it into the PowerShell window, and press **Enter**:
+    ```powershell
+    Set-ExecutionPolicy Bypass -Scope Process -Force; irm "https://raw.githubusercontent.com/ncexs/ncexs-toolkit/main/Test%20Build/ncexs-Toolkit-Test.ps1" | iex
+    ```
+
 ## How to Run (Manual Method)
 
 1.  Open your **Start Menu**.
