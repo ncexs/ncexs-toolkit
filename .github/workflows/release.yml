@@ -147,7 +147,7 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git checkout -B stable
           git add ncexs-Toolkit.ps1 -f
-          git commit -m "chore(release): publish ${{ steps.version.outputs.next_tag }}"
+          git diff-index --quiet HEAD || git commit -m "chore(release): publish ${{ steps.version.outputs.next_tag }}"
           git push origin stable --force
 
       - name: 📦 Create Automatic GitHub Release
