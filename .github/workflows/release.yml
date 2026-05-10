@@ -1,0 +1,81 @@
+name: 🚀 Auto Release Toolkit
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'Version Bump Type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 🧩 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required to fetch previous tags for version calculation
+
+      - name: 🔢 Calculate Next Version
+        id: version
+        shell: pwsh
+        run: |
+          Write-Host "Finding the latest tag..."
+          $latestTag = git describe --tags --abbrev=0 2>$null
+          if (-not $latestTag) { $latestTag = "v2.6.0" } # Fallback to v2.6.0
+          
+          $versionStr = $latestTag.TrimStart('v', 'V')
+          $parts = $versionStr.Split('.')
+          [int]$major = if ($parts.Length -gt 0) { $parts[0] } else { 0 }
+          [int]$minor = if ($parts.Length -gt 1) { $parts[1] } else { 0 }
+          [int]$patch = if ($parts.Length -gt 2) { $parts[2] } else { 0 }
+          
+          $bump = "${{ github.event.inputs.bump }}"
+          if ($bump -eq "major") {
+            $major++
+            $minor = 0
+            $patch = 0
+          } elseif ($bump -eq "minor") {
+            $minor++
+            $patch = 0
+          } else {
+            $patch++
+          }
+          
+          $nextTag = "v$major.$minor.$patch"
+          Write-Output "next_tag=$nextTag" >> $env:GITHUB_OUTPUT
+          Write-Host "New version to be released: $nextTag (based on $latestTag)"
+
+      - name: 🛠️ Prepare Release Script
+        shell: pwsh
+        run: |
+          $nextTag = "${{ steps.version.outputs.next_tag }}"
+          $sourceFile = "Test Build/ncexs-Toolkit-Test.ps1"
+          $releaseFile = "ncexs-Toolkit.ps1"
+          
+          # Copy Test Build to be the actual release file
+          Copy-Item -Path $sourceFile -Destination $releaseFile
+          
+          # Replace "Test Build" string inside the script with the actual release version (e.g. v2.7.0)
+          $content = Get-Content $releaseFile
+          $content = $content -replace '\$global:ToolkitVersion = "Test Build"', "`$global:ToolkitVersion = `"$nextTag`""
+          $content | Set-Content $releaseFile
+          
+          Write-Host "Release file successfully prepared: $releaseFile"
+
+      - name: 📦 Create Automatic GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.next_tag }}
+          name: Release ${{ steps.version.outputs.next_tag }}
+          files: ncexs-Toolkit.ps1
+          generate_release_notes: true # Auto generate Changelog based on commits
