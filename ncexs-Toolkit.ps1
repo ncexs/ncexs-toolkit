@@ -118,7 +118,7 @@ function Show-Intro {
     Write-Centered '| $$ \$$$$| $$__/  \| $$_____ | $$  | $$|  \__| $$' "Blue"
     Write-Centered '| $$  \$$$ \$$    $$| $$     \| $$  | $$ \$$    $$' "Blue"
     Write-Centered ' \$$   \$$  \$$$$$$  \$$$$$$$$ \$$   \$$  \$$$$$$ ' "Blue"
-    Write-Host "" ; Write-Centered "T E S T    B U I L D" "DarkCyan"; Write-Host ""
+    Write-Host "" ; Write-Centered "S T A B L E    B U I L D" "DarkCyan"; Write-Host ""
     $modules = @("Kernel", "UI", "Network", "Disk", "Security", "Social")
     foreach ($m in $modules) { Write-Host " [INIT] Loading module: $m..." -ForegroundColor DarkGray; Start-Sleep -Milliseconds 50 }
 }
