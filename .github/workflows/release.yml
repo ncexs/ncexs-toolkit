@@ -72,6 +72,15 @@ jobs:
           
           Write-Host "Release file successfully prepared: $releaseFile"
 
+      - name: 🚀 Push to Stable Branch
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -B stable
+          git add ncexs-Toolkit.ps1 -f
+          git commit -m "chore(release): publish ${{ steps.version.outputs.next_tag }}"
+          git push origin stable --force
+
       - name: 📦 Create Automatic GitHub Release
         uses: softprops/action-gh-release@v2
         with:
