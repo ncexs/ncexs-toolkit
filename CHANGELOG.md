@@ -2,7 +2,10 @@
 
 ## 🎓 ncexs Toolkit – v3.0 After UTS Build
 
-✨ **Features & Enhancements**
+### ⚡ Direct Execution (No Release File)
+- **Zero Downloads Required**: Starting from v3.0, we have eliminated the need to download `.ps1` files manually from the Releases page. The toolkit now runs directly from the raw `main` branch via a single PowerShell command, ensuring you always execute the freshest code instantly.
+
+### ✨ Features & Enhancements
 - **UI & Aesthetics**: Replaced the main ASCII art with a new bold 3D 'Big Money' design and updated its color to Blue. Improved visibility of the 'Change Language' option by changing its color to Yellow.
 - **Localization**: Added full English and Indonesian translation coverage. Replaced all hardcoded strings inside multiple toolkit functions with `Get-Translation` to ensure the language toggle works perfectly across the script.
 - **Language Toggle**: Implement a quick language toggle [L] between English and Indonesian. Fixed a bug where the case-insensitive switch toggled the language twice.
@@ -10,7 +13,7 @@
 - **Detailed Optimizer Metrics**: Add 'Before/After' MB statistics to the Junk Cleaner and Memory Optimizer.
 - **Network Repair**: Added detailed step-by-step progress notifications (IP Release/Renew, DNS Flush, Winsock/TCP reset) to provide better user feedback.
 
-🐛 **Bug Fixes & Refactors**
+### 🐛 Bug Fixes & Refactors
 - **Menu Loops**: Fix infinite menu loops by adding Clear-Host and default cases to switch statements.
 - **Advanced Uninstaller**: Add a missing pause to the Advanced Uninstaller results.
 - **String Abstraction**: Abstract hardcoded strings into the global translation dictionary.
