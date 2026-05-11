@@ -1,7 +1,22 @@
-# Generated files
+# Generated Files & Reports
 log_ncexs-toolkit.txt
 log_ncexs-toolkit-backup-*.txt
 battery_report.html
+battery-report.html
+*.log
 
-# PowerShell session data
+# PowerShell Testing
+TestResults.xml
+
+# IDEs & Editors
 .vscode/
+.history/
+.idea/
+*.suo
+*~
+*.swp
+
+# Windows System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
