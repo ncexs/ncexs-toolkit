@@ -1,5 +1,7 @@
 # 🧰 ncexs Toolkit (NT)
 
+🌐 **English** | [Bahasa Indonesia](README.id.md)
+
 [![GitHub Release](https://img.shields.io/github/v/release/ncexs/ncexs-toolkit?style=flat&logo=github)](https://github.com/ncexs/ncexs-toolkit/releases/latest)
 [![Website](https://img.shields.io/badge/Website-ncexs.github.io-blueviolet?style=flat&logo=github&logoColor=white)](https://ncexs.github.io/)
 [![VirusTotal](https://img.shields.io/badge/VirusTotal-0%2F70%20Detections-brightgreen?style=flat&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/your-new-file-hash-here/detection)
@@ -7,66 +9,6 @@
 [![PowerShell](https://img.shields.io/badge/PowerShell-3.0%2B-5D2D8C?style=flat&logo=powershell)](#)
 
 ✨ **All-in-One Windows Toolkit** – Simple, fast, and safe tools to clean, optimize, and maintain your PC through a gorgeous terminal-based dashboard.
-
----
-
-## 🎯 Purpose & Design Principles
-
-<table width="100%">
-  <tr>
-    <th width="50%" align="left">🎯 Purpose</th>
-    <th width="50%" align="left">🧠 Design Principles</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <ul>
-        <li>Provide a complete, centralized toolkit for Windows performance, storage, and network repairs.</li>
-        <li>Enable lightning-fast, automated "Quick Fix" routines.</li>
-        <li>Simplify complex administrator commands into clean, one-click options.</li>
-        <li>Promote secure system optimization without destructive registry modifications.</li>
-      </ul>
-    </td>
-    <td valign="top">
-      <ul>
-        <li><b>User-Centered & Elegant:</b> Gorgeous Gold & Cyan theme with intuitive 2-column layouts and progress loaders.</li>
-        <li><b>Safety First:</b> Vital operations require mandatory confirmation prompts.</li>
-        <li><b>Non-Destructive:</b> Retains passwords, cookies, active states, and essential system telemetry defaults.</li>
-        <li><b>100% Transparent:</b> Open-source script designed to run safely on all major Windows platforms.</li>
-      </ul>
-    </td>
-  </tr>
-</table>
-
----
-
-## ⚡ Toolkit Scope & Capabilities
-
-<table width="100%">
-  <tr>
-    <th width="50%" align="left">✅ What the Toolkit Does</th>
-    <th width="50%" align="left">❌ What the Toolkit Does NOT Do</th>
-  </tr>
-  <tr>
-    <td valign="top">
-      <ul>
-        <li><b>⚡ Quick Fix Suite:</b> Runs an automated, high-speed junk cleanup, network repair, and memory sweep in one go.</li>
-        <li><b>🧹 Enhanced Junk & Browser Cleaning:</b> Safely clears temp folders, prefetch, shader caches (Intel/AMD/NVIDIA), and multi-profile web browser caches.</li>
-        <li><b>⚙️ Storage Compression:</b> Leverages native Compact OS to reclaim up to 5GB of system drive space safely.</li>
-        <li><b>🌐 Admin Network Repairs:</b> One-click repair sequence (flush DNS, TCP/IP reset, Winsock) + rapid DNS profile switcher.</li>
-        <li><b>🛡️ System Diagnostics:</b> Real-time progress indicators for SFC and DISM health scans.</li>
-      </ul>
-    </td>
-    <td valign="top">
-      <ul>
-        <li>Does <b>NOT</b> collect or upload any user data, statistics, or custom telemetries.</li>
-        <li>Does <b>NOT</b> log you out of active websites or delete browser history, passwords, or cookies.</li>
-        <li>Does <b>NOT</b> apply dangerous or unvalidated "Windows Tweaks" that break OS updates.</li>
-        <li>Does <b>NOT</b> run third-party installers silently without your direct authorization.</li>
-        <li>Does <b>NOT</b> modify secure kernel settings or bypass critical Windows Defender policies.</li>
-      </ul>
-    </td>
-  </tr>
-</table>
 
 ---
 
