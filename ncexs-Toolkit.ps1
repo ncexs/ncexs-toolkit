@@ -50,6 +50,7 @@ $global:Translations = @{
         "Junk_Cleared" = "Cleared {0} MB"; "RAM_Optimized" = "Memory Optimized. Freed {0} MB."
         "YesNo" = "(Y/N)"; "SelectOption" = "Select option"; "PressAnyKey" = "Press any key..."
         "Process_Cancel" = "Press Ctrl+C to cancel/abort the running process."
+        "Process_Aborted" = "Process cancelled/aborted by user. Returning to main menu..."
         "Compact_Title" = "COMPACT OS"; "Compact_Confirm" = "Start compressing OS?"; "Compact_Done" = "OS Compression completed."
         "System_Title" = "SYSTEM INFORMATION"; "Clean_Title" = "JUNK CLEANER"; "Clean_Confirm" = "Start scanning and cleaning junk files?"
         "Uninstall_Title" = "ADVANCED UNINSTALLER"; "Uninstall_Prompt" = "Enter application name to search:"
@@ -84,6 +85,7 @@ $global:Translations = @{
         "Junk_Cleared" = "Berhasil membersihkan {0} MB"; "RAM_Optimized" = "Memori Dioptimasi. Berhasil mengosongkan {0} MB."
         "YesNo" = "(Y/T)"; "SelectOption" = "Pilih opsi"; "PressAnyKey" = "Tekan sembarang tombol..."
         "Process_Cancel" = "Tekan Ctrl+C untuk membatalkan/menghentikan proses yang sedang berjalan."
+        "Process_Aborted" = "Proses dibatalkan oleh pengguna. Kembali ke menu utama..."
         "Compact_Title" = "COMPACT OS"; "Compact_Confirm" = "Mulai kompresi OS?"; "Compact_Done" = "Kompresi OS selesai."
         "System_Title" = "INFORMASI SISTEM"; "Clean_Title" = "PEMBERSIH SAMPAH"; "Clean_Confirm" = "Mulai memindai dan membersihkan file sampah?"
         "Uninstall_Title" = "ADVANCED UNINSTALLER"; "Uninstall_Prompt" = "Masukkan nama aplikasi yang dicari:"
@@ -350,6 +352,12 @@ function Show-MainMenu {
 Show-Intro
 Start-Sleep -Seconds 1
 do {
+    trap [System.Management.Automation.PipelineStoppedException] {
+        Write-Host "`n"
+        Write-Warning (Get-Translation 'Process_Aborted')
+        Start-Sleep -Seconds 2
+        continue
+    }
     Clear-Host
     Show-MainMenu
     $choice = Read-Host " $(Get-Translation 'SelectOption')"

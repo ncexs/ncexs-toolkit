@@ -4,7 +4,8 @@
 
 ### ✨ Features & Enhancements
 - **UX Safety Refinement**: Added clear, dynamic multi-language cancellation instructions to help non-technical users understand how to safely cancel tasks without abruptly closing the terminal window.
-- **Multilingual Support**: Implemented a new `"Process_Cancel"` translation string covering English ("EN") and Indonesian ("ID") locales, guiding users that they can safely cancel/abort processes using `Ctrl+C` at any time.
+- **Ctrl+C Graceful Trapping**: Implemented a global exception handler (`trap [PipelineStoppedException]`) inside the main loop. Pressing `Ctrl+C` to abort a running task will no longer exit the toolkit to the shell. The script now gracefully catches the abort signal, prints a localized cancellation message, and returns the user back to the main menu without needing to rerun the execution command!
+- **Multilingual Support**: Implemented new `"Process_Cancel"` and `"Process_Aborted"` translation strings covering English ("EN") and Indonesian ("ID") locales, guiding users to cancel/abort processes using `Ctrl+C` at any time.
 - **Contextual Warning Prompts**: Integrated the cancellation warning into the standard confirmation helper so it automatically displays before executing any process (e.g., Junk Cleaner, Defrag, Compact OS), and right before starting quiet *Winget Upgrades* and *Driver Backups*.
 
 ---
