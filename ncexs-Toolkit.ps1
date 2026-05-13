@@ -15,7 +15,7 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue
 
-$global:ToolkitVersion = "v3.0"
+$global:ToolkitVersion = "v3.0.1"
 $global:Language = "ID"
 
 $global:Theme = @{
@@ -49,6 +49,7 @@ $global:Translations = @{
         "Stats_Before" = "Before"; "Stats_After" = "After"; "Stats_Free" = "MB Free"
         "Junk_Cleared" = "Cleared {0} MB"; "RAM_Optimized" = "Memory Optimized. Freed {0} MB."
         "YesNo" = "(Y/N)"; "SelectOption" = "Select option"; "PressAnyKey" = "Press any key..."
+        "Process_Cancel" = "Press Ctrl+C to cancel/abort the running process."
         "Compact_Title" = "COMPACT OS"; "Compact_Confirm" = "Start compressing OS?"; "Compact_Done" = "OS Compression completed."
         "System_Title" = "SYSTEM INFORMATION"; "Clean_Title" = "JUNK CLEANER"; "Clean_Confirm" = "Start scanning and cleaning junk files?"
         "Uninstall_Title" = "ADVANCED UNINSTALLER"; "Uninstall_Prompt" = "Enter application name to search:"
@@ -82,6 +83,7 @@ $global:Translations = @{
         "Stats_Before" = "Sebelum"; "Stats_After" = "Sesudah"; "Stats_Free" = "MB Kosong"
         "Junk_Cleared" = "Berhasil membersihkan {0} MB"; "RAM_Optimized" = "Memori Dioptimasi. Berhasil mengosongkan {0} MB."
         "YesNo" = "(Y/T)"; "SelectOption" = "Pilih opsi"; "PressAnyKey" = "Tekan sembarang tombol..."
+        "Process_Cancel" = "Tekan Ctrl+C untuk membatalkan/menghentikan proses yang sedang berjalan."
         "Compact_Title" = "COMPACT OS"; "Compact_Confirm" = "Mulai kompresi OS?"; "Compact_Done" = "Kompresi OS selesai."
         "System_Title" = "INFORMASI SISTEM"; "Clean_Title" = "PEMBERSIH SAMPAH"; "Clean_Confirm" = "Mulai memindai dan membersihkan file sampah?"
         "Uninstall_Title" = "ADVANCED UNINSTALLER"; "Uninstall_Prompt" = "Masukkan nama aplikasi yang dicari:"
@@ -105,7 +107,13 @@ function Write-Error { param([string]$message) Write-Host " [!] $message" -Foreg
 function Write-Success { param([string]$message) Write-Host " [v] $message" -ForegroundColor $global:Theme.Success }
 function Write-Warning { param([string]$message) Write-Host " [!] $message" -ForegroundColor $global:Theme.Warning }
 function Write-Info { param([string]$message) Write-Host " [i] $message" -ForegroundColor $global:Theme.Info }
-function Request-Confirm { param([string]$msg) $yn = Get-Translation "YesNo"; $c = Read-Host " $msg $yn"; return $c -match '^(Y|y)$' }
+function Request-Confirm {
+    param([string]$msg)
+    Write-Info (Get-Translation 'Process_Cancel')
+    $yn = Get-Translation "YesNo"
+    $c = Read-Host " $msg $yn"
+    return $c -match '^(Y|y)$'
+}
 
 function Show-Intro {
     Clear-Host; Write-Host ""
@@ -240,7 +248,12 @@ function Show-UpdateDriverMenu {
     Write-Host ""
     Write-Title (Get-Translation 'SubMenu_Update')
     Write-Host "`n [1] Winget Update All`n [2] Backup Drivers`n [3] Back"
-    $c = Read-Host " $(Get-Translation 'SelectOption')"; if ($c -eq "1") { winget upgrade --all --accept-package-agreements --accept-source-agreements --silent } elseif ($c -eq "2") { 
+    $c = Read-Host " $(Get-Translation 'SelectOption')"
+    if ($c -eq "1") {
+        Write-Info (Get-Translation 'Process_Cancel')
+        winget upgrade --all --accept-package-agreements --accept-source-agreements --silent
+    } elseif ($c -eq "2") {
+        Write-Info (Get-Translation 'Process_Cancel')
         $dest = "C:\DriversBackup"; if (!(Test-Path -Path $dest)) { New-Item -Path $dest -ItemType Directory }; Export-WindowsDriver -Online -Destination $dest; Write-Success "$(Get-Translation 'Update_Backup') $dest"
     }
     elseif ($c -eq "3") { return } else { Write-Warning (Get-Translation 'Invalid_Option') }

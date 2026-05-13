@@ -1,3 +1,14 @@
+# 🚀 ncexs Toolkit v3.0.1
+
+## 🧰 ncexs Toolkit – v3.0.1 Safety & UX Refinement
+
+### ✨ Features & Enhancements
+- **UX Safety Refinement**: Added clear, dynamic multi-language cancellation instructions to help non-technical users understand how to safely cancel tasks without abruptly closing the terminal window.
+- **Multilingual Support**: Implemented a new `"Process_Cancel"` translation string covering English ("EN") and Indonesian ("ID") locales, guiding users that they can safely cancel/abort processes using `Ctrl+C` at any time.
+- **Contextual Warning Prompts**: Integrated the cancellation warning into the standard confirmation helper so it automatically displays before executing any process (e.g., Junk Cleaner, Defrag, Compact OS), and right before starting quiet *Winget Upgrades* and *Driver Backups*.
+
+---
+
 # 🚀 ncexs Toolkit v3.0
 
 ## 🎓 ncexs Toolkit – v3.0 After UTS Build
