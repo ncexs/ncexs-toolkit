@@ -1,6 +1,6 @@
 # 🧰 ncexs Toolkit (NT)
 
-🌐 **English** | [Bahasa Indonesia](README.id.md)
+🌐 **English** | [Bahasa Indonesia](docs/README.id.md) | [Basa Jawa](docs/README.jv.md) | [Basa Sunda](docs/README.su.md) | [हिन्दी](docs/README.hi.md) | [Русский](docs/README.ru.md) | [日本語](docs/README.ja.md) | [한국어](docs/README.ko.md) | [中文](docs/README.zh.md) | [العربية](docs/README.ar.md)
 
 [![GitHub Release](https://img.shields.io/github/v/release/ncexs/ncexs-toolkit?style=flat&logo=github)](https://github.com/ncexs/ncexs-toolkit/releases/latest)
 [![Website](https://img.shields.io/badge/Website-ncexs.github.io-blueviolet?style=flat&logo=github&logoColor=white)](https://ncexs.github.io/)

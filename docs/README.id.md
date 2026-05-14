@@ -1,6 +1,6 @@
 # 🧰 ncexs Toolkit (NT)
 
-🌐 [English](README.md) | **Bahasa Indonesia**
+🌐 [English](../README.md) | **Bahasa Indonesia** | [Basa Jawa](README.jv.md) | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [中文](README.zh.md) | [العربية](README.ar.md)
 
 [![GitHub Release](https://img.shields.io/github/v/release/ncexs/ncexs-toolkit?style=flat&logo=github)](https://github.com/ncexs/ncexs-toolkit/releases/latest)
 [![Website](https://img.shields.io/badge/Website-ncexs.github.io-blueviolet?style=flat&logo=github&logoColor=white)](https://ncexs.github.io/)
@@ -101,7 +101,7 @@ Perintah bawaan sistem seperti `DISM /RestoreHealth` sering kali terlihat tertah
 
 ## 📜 Lisensi
 
-Didistribusikan di bawah **MIT License**. Lihat berkas [LICENSE](LICENSE) untuk detail lisensi lengkap.  
+Didistribusikan di bawah **MIT License**. Lihat berkas [LICENSE](../LICENSE) untuk detail lisensi lengkap.  
 *Selalu lakukan pencadangan data penting sebelum menjalankan pemeliharaan sistem.* ⚠️
 
 ---

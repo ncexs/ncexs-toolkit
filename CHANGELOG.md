@@ -1,5 +1,6 @@
 # 🚀 ncexs Toolkit v3.0.1
 
+🌐 **English** | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](docs/CHANGELOG.jv.md) | [Basa Sunda](docs/CHANGELOG.su.md) | [हिन्दी](docs/CHANGELOG.hi.md) | [Русский](docs/CHANGELOG.ru.md) | [日本語](docs/CHANGELOG.ja.md) | [한국어](docs/CHANGELOG.ko.md) | [中文](docs/CHANGELOG.zh.md) | [العربية](docs/CHANGELOG.ar.md)
 ## 🧰 ncexs Toolkit – v3.0.1 Safety & UX Refinement
 
 ### ✨ Features & Enhancements
