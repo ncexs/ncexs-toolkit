@@ -15,17 +15,25 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue
 
-$global:ToolkitVersion = "v3.0.1"
-$global:Language = "ID"
+$global:ToolkitVersion = "v3.1"
+$global:Language = "EN"
 
 $global:Theme = @{
-    Border = 'DarkGray'; Title = 'Cyan'; Section = 'White'
-    MenuNumber = 'DarkCyan'; MenuText = 'Gray'; Special = 'Yellow'
-    Highlight = 'White'; Prompt = 'Cyan'; Success = 'Green'
-    Error = 'Red'; Warning = 'Yellow'; Info = 'DarkGray'
-    Exit = 'Red'; AsciiArt = 'Blue'
+    Border = 'DarkCyan'; Title = 'Cyan'; Section = 'Magenta'
+    MenuNumber = 'Cyan'; MenuText = 'White'; Special = 'Yellow'
+    Highlight = 'Green'; Prompt = 'Cyan'; Success = 'Green'
+    Error = 'Red'; Warning = 'Yellow'; Info = 'Gray'
+    Exit = 'Red'; AsciiArt = 'Magenta'
 }
 
+$global:UI = @{
+    HLine = [char]0x2500; VLine = [char]0x2502
+    TopLeft = [char]0x256D; TopRight = [char]0x256E
+    BottomLeft = [char]0x2570; BottomRight = [char]0x256F
+    LeftT = [char]0x251C; RightT = [char]0x2524
+    Check = [char]0x2714; Cross = [char]0x2718
+    RArrow = [char]0x00BB; LArrow = [char]0x00AB
+}
 try { $Host.PrivateData.PromptForegroundColor = $global:Theme.Prompt } catch {}
 
 $global:Translations = @{
@@ -38,13 +46,13 @@ $global:Translations = @{
         "Menu_Option9" = "Defrag & Optimize Drives"; "Menu_Option10" = "System Health Checker"
         "Menu_Option11" = "Updates & Drivers Center"; "Menu_Option12" = "DNS Changer"
         "Menu_Option13" = "Wi-Fi Password Recovery"; "Menu_Option14" = "Visual FX Booster"
-        "Menu_Option15" = "Optimize WhatsApp"; "Menu_Option16" = "Exit Toolkit"
+        "Menu_Option15" = "Clear App Caches"; "Menu_Option16" = "Clear Event Logs"; "Menu_Option17" = "Exit Toolkit"
         "Menu_OptionL" = "Change Language"
         "SubMenu_Power" = "POWER & BATTERY"; "SubMenu_Update" = "UPDATES & DRIVERS CENTER"
         "DNS_Menu_Text" = "`n [1] Cloudflare (Fastest)`n [2] Google DNS (Stable)`n [3] Quad9 (Privacy)`n [4] AdGuard DNS (Block Ads)`n [5] Reset to Default (DHCP)`n [6] Back"
         "DNS_NoAdapter" = "No active internet adapter found."
         "DNS_Invalid" = "Invalid option"
-        "WA_Title" = "WHATSAPP OPTIMIZER"; "WA_Confirm" = "Clear WhatsApp App & Web Caches?"
+        "WA_Title" = "APP CACHE CLEANER"; "WA_Confirm" = "Clear caches for Discord, Spotify, Steam, Telegram, WhatsApp?"
         "Drive_Space" = "[C: Drive Space]"; "Memory_Status" = "[Memory Status]"
         "Stats_Before" = "Before"; "Stats_After" = "After"; "Stats_Free" = "MB Free"
         "Junk_Cleared" = "Cleared {0} MB"; "RAM_Optimized" = "Memory Optimized. Freed {0} MB."
@@ -63,6 +71,7 @@ $global:Translations = @{
         "Invalid_Option" = "Invalid option"; "RAM_Confirm" = "Optimize memory now?"; "Defrag_Confirm" = "Optimize C: Drive?"
         "Health_Confirm" = "Scan system health? (Takes a few minutes)"; "Update_Backup" = "Backup created at"
         "Visual_Confirm" = "Boost UI now? (Explorer will restart)"; "Visual_Success" = "UI Boosted."
+        "Event_Confirm" = "Clear all Windows Event Logs? (May take a minute)"; "Event_Done" = "Event Logs cleared."
     };
     "ID" = @{
         "Menu_Title" = "ncexs Toolkit $($global:ToolkitVersion)"; "Menu_Option0" = "Compact OS (Hemat 2-5GB Space)"
@@ -73,13 +82,13 @@ $global:Translations = @{
         "Menu_Option9" = "Defragment & Optimasi Drive"; "Menu_Option10" = "Pemeriksa Kesehatan Sistem"
         "Menu_Option11" = "Pusat Update & Driver"; "Menu_Option12" = "Pengubah DNS"
         "Menu_Option13" = "Wi-Fi Password Recovery"; "Menu_Option14" = "Visual FX Booster"
-        "Menu_Option15" = "Optimasi WhatsApp"; "Menu_Option16" = "Keluar Aplikasi"
+        "Menu_Option15" = "Pembersih Cache Aplikasi"; "Menu_Option16" = "Hapus Event Logs"; "Menu_Option17" = "Keluar Aplikasi"
         "Menu_OptionL" = "Ubah Bahasa"
         "SubMenu_Power" = "UTILITAS DAYA & BATERAI"; "SubMenu_Update" = "PUSAT UPDATE & DRIVER"
         "DNS_Menu_Text" = "`n [1] Cloudflare (Tercepat)`n [2] Google DNS (Stabil)`n [3] Quad9 (Privasi)`n [4] AdGuard DNS (Blokir Iklan)`n [5] Reset ke Default (DHCP)`n [6] Kembali"
         "DNS_NoAdapter" = "Tidak ada adapter internet aktif."
         "DNS_Invalid" = "Pilihan tidak valid"
-        "WA_Title" = "OPTIMASI WHATSAPP"; "WA_Confirm" = "Bersihkan Cache WhatsApp Apl & Web?"
+        "WA_Title" = "PEMBERSIH CACHE APLIKASI"; "WA_Confirm" = "Bersihkan Cache Discord, Spotify, Steam, Telegram, WhatsApp?"
         "Drive_Space" = "[Ruang Drive C:]"; "Memory_Status" = "[Status Memori]"
         "Stats_Before" = "Sebelum"; "Stats_After" = "Sesudah"; "Stats_Free" = "MB Kosong"
         "Junk_Cleared" = "Berhasil membersihkan {0} MB"; "RAM_Optimized" = "Memori Dioptimasi. Berhasil mengosongkan {0} MB."
@@ -98,15 +107,16 @@ $global:Translations = @{
         "Invalid_Option" = "Opsi tidak valid"; "RAM_Confirm" = "Optimasi memori sekarang?"; "Defrag_Confirm" = "Optimasi Drive C:?"
         "Health_Confirm" = "Scan kesehatan sistem? (Butuh beberapa menit)"; "Update_Backup" = "Backup selesai di"
         "Visual_Confirm" = "Boost UI sekarang? (Explorer akan direstart)"; "Visual_Success" = "UI Boosted."
+        "Event_Confirm" = "Bersihkan semua log Windows Event Viewer? (Butuh 1 menit)"; "Event_Done" = "Event Logs berhasil dibersihkan."
     }
 }
 
 function Get-Translation { param([string]$key) if ($global:Translations[$global:Language].ContainsKey($key)) { return $global:Translations[$global:Language][$key] } return $key }
 function Write-Centered { param([string]$text, [string]$color = $global:Theme.Title, [int]$width = 80) $padLeft = [math]::Max(0, [math]::Floor(($width - $text.Length) / 2)); Write-Host (" " * $padLeft + $text) -ForegroundColor $color }
-function Write-BoxHeader { param([string]$title) Write-Host "+------------------------------------------------------------------------------+" -ForegroundColor $global:Theme.Border; $cleanTitle = " $title "; $padLeft = [math]::Max(0, [math]::Floor((78 - $cleanTitle.Length) / 2)); $padRight = [math]::Max(0, (78 - $cleanTitle.Length - $padLeft)); Write-Host "|" -NoNewline -ForegroundColor $global:Theme.Border; Write-Host (" " * $padLeft) -NoNewline; Write-Host $cleanTitle -NoNewline -ForegroundColor $global:Theme.Title; Write-Host (" " * $padRight) -NoNewline; Write-Host "|" -ForegroundColor $global:Theme.Border; Write-Host "+------------------------------------------------------------------------------+" -ForegroundColor $global:Theme.Border }
+function Write-BoxHeader { param([string]$title) $w=86; $l=[string]$global:UI.HLine*($w-4); Write-Host (" {0}{1}{2}" -f $global:UI.TopLeft,$l,$global:UI.TopRight) -ForegroundColor $global:Theme.Border; $cleanTitle = " $title "; $padLeft = [math]::Max(0, [math]::Floor((($w-4) - $cleanTitle.Length) / 2)); $padRight = [math]::Max(0, (($w-4) - $cleanTitle.Length - $padLeft)); Write-Host " $($global:UI.VLine)" -NoNewline -ForegroundColor $global:Theme.Border; Write-Host (" " * $padLeft) -NoNewline; Write-Host $cleanTitle -NoNewline -ForegroundColor $global:Theme.Title; Write-Host (" " * $padRight) -NoNewline; Write-Host "$($global:UI.VLine)" -ForegroundColor $global:Theme.Border; Write-Host (" {0}{1}{2}" -f $global:UI.BottomLeft,$l,$global:UI.BottomRight) -ForegroundColor $global:Theme.Border }
 function Write-Title { param([string]$message) Write-BoxHeader $message }
-function Write-Error { param([string]$message) Write-Host " [!] $message" -ForegroundColor $global:Theme.Error }
-function Write-Success { param([string]$message) Write-Host " [v] $message" -ForegroundColor $global:Theme.Success }
+function Write-Error { param([string]$message) Write-Host " [$($global:UI.Cross)] $message" -ForegroundColor $global:Theme.Error }
+function Write-Success { param([string]$message) Write-Host " [$($global:UI.Check)] $message" -ForegroundColor $global:Theme.Success }
 function Write-Warning { param([string]$message) Write-Host " [!] $message" -ForegroundColor $global:Theme.Warning }
 function Write-Info { param([string]$message) Write-Host " [i] $message" -ForegroundColor $global:Theme.Info }
 function Request-Confirm {
@@ -119,16 +129,17 @@ function Request-Confirm {
 
 function Show-Intro {
     Clear-Host; Write-Host ""
-    Write-Centered ' __    __   ______   ________  __    __   ______  ' "Blue"
-    Write-Centered '|  \  |  \ /      \ |        \|  \  /  \ /      \ ' "Blue"
-    Write-Centered '| $$\ | $$|  $$$$$$\| $$$$$$$$ \$$\/  $$|  $$$$$$\' "Blue"
-    Write-Centered '| $$$\| $$| $$   \$$| $$__      >$$  $$ | $$___\$$' "Blue"
-    Write-Centered '| $$$$\ $$| $$      | $$  \    /  $$$$\  \$$    \ ' "Blue"
-    Write-Centered '| $$\$$ $$| $$   __ | $$$$$   |  $$ \$$\ _\$$$$$$\' "Blue"
-    Write-Centered '| $$ \$$$$| $$__/  \| $$_____ | $$  | $$|  \__| $$' "Blue"
-    Write-Centered '| $$  \$$$ \$$    $$| $$     \| $$  | $$ \$$    $$' "Blue"
-    Write-Centered ' \$$   \$$  \$$$$$$  \$$$$$$$$ \$$   \$$  \$$$$$$ ' "Blue"
-    Write-Host "" ; Write-Centered "S T A B L E    B U I L D" "DarkCyan"; Write-Host ""
+    $w = 86
+    Write-Centered ' __    __   ______   ________  __    __   ______  ' $global:Theme.AsciiArt $w
+    Write-Centered '|  \  |  \ /      \ |        \|  \  /  \ /      \ ' $global:Theme.AsciiArt $w
+    Write-Centered '| $$\ | $$|  $$$$$$\| $$$$$$$$ \$$\/  $$|  $$$$$$\' $global:Theme.AsciiArt $w
+    Write-Centered '| $$$\| $$| $$   \$$| $$__      >$$  $$ | $$___\$$' $global:Theme.AsciiArt $w
+    Write-Centered '| $$$$\ $$| $$      | $$  \    /  $$$$\  \$$    \ ' $global:Theme.AsciiArt $w
+    Write-Centered '| $$\$$ $$| $$   __ | $$$$$   |  $$ \$$\ _\$$$$$$\' $global:Theme.AsciiArt $w
+    Write-Centered '| $$ \$$$$| $$__/  \| $$_____ | $$  | $$|  \__| $$' $global:Theme.AsciiArt $w
+    Write-Centered '| $$  \$$$ \$$    $$| $$     \| $$  | $$ \$$    $$' $global:Theme.AsciiArt $w
+    Write-Centered ' \$$   \$$  \$$$$$$  \$$$$$$$$ \$$   \$$  \$$$$$$ ' $global:Theme.AsciiArt $w
+    Write-Host "" ; Write-Centered "S T A B L E    B U I L D" "Cyan" $w; Write-Host ""
     $modules = @("Kernel", "UI", "Network", "Disk", "Security", "Social")
     foreach ($m in $modules) { Write-Host " [INIT] Loading module: $m..." -ForegroundColor DarkGray; Start-Sleep -Milliseconds 50 }
 }
@@ -144,16 +155,37 @@ function Invoke-CompactOS {
 function Show-SystemInfo {
     Write-Title (Get-Translation 'System_Title')
     try {
-        $os = Get-CimInstance Win32_OperatingSystem; $cpu = Get-CimInstance Win32_Processor; $system = Get-CimInstance Win32_ComputerSystem
+        $os = Get-CimInstance Win32_OperatingSystem
+        $cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
+        $system = Get-CimInstance Win32_ComputerSystem
+        $gpu = Get-CimInstance Win32_VideoController | Select-Object -ExpandProperty Name
+        $mobo = Get-CimInstance Win32_BaseBoard
+        $bios = Get-CimInstance Win32_BIOS
+        
+        $uptime = (Get-Date) - $os.LastBootUpTime
+        $uptimeStr = "$($uptime.Days) Hari, $($uptime.Hours) Jam, $($uptime.Minutes) Menit"
+        
         Write-Host "`n [ System Details ]" -ForegroundColor $global:Theme.Section
-        Write-Host "   Hostname : $env:COMPUTERNAME"
-        Write-Host "   OS       : $($os.Caption)"
-        Write-Host "   CPU      : $($cpu.Name.Trim())"
-        Write-Host "   RAM      : $([math]::Round($system.TotalPhysicalMemory / 1GB, 2)) GB"
-        Write-Host "`n [ Storage ]" -ForegroundColor $global:Theme.Section
-        Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3" | ForEach-Object { Write-Host "   [$($_.DeviceID)] $([math]::Round($_.Size/1GB,2)) GB ($([math]::Round($_.FreeSpace/1GB,2)) GB Free)" }
+        Write-Host "   Hostname     : $env:COMPUTERNAME"
+        Write-Host "   OS           : $($os.Caption) ($($os.OSArchitecture))"
+        Write-Host "   OS Build     : $($os.Version)"
+        Write-Host "   System Uptime: $uptimeStr"
+        Write-Host "`n [ Hardware ]" -ForegroundColor $global:Theme.Section
+        Write-Host "   Motherboard  : $($mobo.Manufacturer) $($mobo.Product)"
+        Write-Host "   Serial Number: $($bios.SerialNumber)"
+        Write-Host "   CPU          : $($cpu.Name.Trim())"
+        Write-Host "   GPU          : $($gpu -join ' | ')"
+        Write-Host "   RAM          : $([math]::Round($system.TotalPhysicalMemory / 1GB, 2)) GB Total"
+        
+        Write-Host "`n [ Storage (Local Drives) ]" -ForegroundColor $global:Theme.Section
+        Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3" | ForEach-Object { 
+            $total = [math]::Round($_.Size/1GB, 2)
+            $free = [math]::Round($_.FreeSpace/1GB, 2)
+            $usedPct = [math]::Round((($total-$free)/$total)*100, 1)
+            Write-Host "   $($_.DeviceID)\          : $total GB Total | $free GB Free | Used: $usedPct%" 
+        }
     }
-    catch { Write-Error "Error" }
+    catch { Write-Error "Failed to load some system info." }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
@@ -163,7 +195,15 @@ function Clear-JunkFiles {
     $cDriveBefore = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='C:'"
     $freeBeforeMB = [math]::Round($cDriveBefore.FreeSpace / 1MB, 2)
     $totalFreed = 0
-    $targets = @("$env:TEMP\*", "$env:SystemRoot\Temp\*", "$env:SystemRoot\Prefetch\*")
+    $targets = @(
+        "$env:TEMP\*", 
+        "$env:SystemRoot\Temp\*", 
+        "$env:SystemRoot\Prefetch\*",
+        "$env:SystemRoot\SoftwareDistribution\Download\*",
+        "$env:LOCALAPPDATA\CrashDumps\*",
+        "$env:ProgramData\Microsoft\Windows\WER\ReportArchive\*",
+        "$env:SystemRoot\Logs\CBS\*.log"
+    )
     foreach ($p in $targets) {
         $files = Get-ChildItem -Path $p -Recurse -Force -ErrorAction SilentlyContinue
         if ($files) { $totalFreed += ($files | Measure-Object -Property Length -Sum).Sum; $files | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue }
@@ -177,7 +217,18 @@ function Clear-JunkFiles {
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
-function Clear-RecycleBin-Menu { if (-not (Request-Confirm (Get-Translation 'Recycle_Confirm'))) { return }; try { Clear-RecycleBin -Force -ErrorAction Stop; Write-Success (Get-Translation 'Recycle_Success') } catch { Write-Info (Get-Translation 'Recycle_Empty') }; Read-Host "`n $(Get-Translation 'PressAnyKey')" }
+function Clear-RecycleBin-Menu { 
+    if (-not (Request-Confirm (Get-Translation 'Recycle_Confirm'))) { return }
+    try { 
+        $items = (New-Object -ComObject Shell.Application).NameSpace(0x0a).Items()
+        $size = 0; if ($items) { foreach ($i in $items) { $size += $i.Size } }
+        Clear-RecycleBin -Force -ErrorAction Stop
+        Write-Success ((Get-Translation 'Recycle_Success') + " Freed: $([math]::Round($size / 1MB, 2)) MB")
+    } catch { 
+        Write-Info (Get-Translation 'Recycle_Empty') 
+    }
+    Read-Host "`n $(Get-Translation 'PressAnyKey')" 
+}
 function Open-DiskCleanup { if (Request-Confirm (Get-Translation 'Disk_Confirm')) { cleanmgr.exe /LOWDISK } }
 
 function Show-AdvancedUninstaller {
@@ -244,7 +295,13 @@ function Clear-RAM {
 }
 
 function Invoke-Defragment { if (-not (Request-Confirm (Get-Translation 'Defrag_Confirm'))) { return }; Optimize-Volume -DriveLetter C -Verbose; Read-Host "`n $(Get-Translation 'PressAnyKey')" }
-function Show-SystemHealthMenu { if (-not (Request-Confirm (Get-Translation 'Health_Confirm'))) { return }; sfc /scannow; dism /online /cleanup-image /restorehealth; Read-Host "`n $(Get-Translation 'PressAnyKey')" }
+function Show-SystemHealthMenu { 
+    if (-not (Request-Confirm (Get-Translation 'Health_Confirm'))) { return }
+    Write-Host "`n [1/3] Menjalankan System File Checker (SFC)..." -ForegroundColor Cyan; sfc /scannow
+    Write-Host "`n [2/3] Menjalankan Deployment Image Servicing (DISM)..." -ForegroundColor Cyan; dism /online /cleanup-image /restorehealth
+    Write-Host "`n [3/3] Memindai Error pada Drive C: (CHKDSK)..." -ForegroundColor Cyan; chkdsk C: /scan
+    Read-Host "`n $(Get-Translation 'PressAnyKey')" 
+}
 
 function Show-UpdateDriverMenu {
     Write-Host ""
@@ -290,13 +347,18 @@ function Invoke-WifiGrabber {
 
 function Invoke-VisualPerf { if (-not (Request-Confirm (Get-Translation 'Visual_Confirm'))) { return }; Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "MenuShowDelay" -Value 0; Write-Success (Get-Translation 'Visual_Success'); Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue }
 
-function Invoke-OptimizeWhatsApp {
+function Invoke-OptimizeApps {
     Write-Title (Get-Translation 'WA_Title')
     if (-not (Request-Confirm (Get-Translation 'WA_Confirm'))) { return }
     $freed = 0
     $targets = @(
         @{N = "WA Store"; P = "$env:LOCALAPPDATA\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\LocalCache" },
-        @{N = "WA Legacy"; P = "$env:USERPROFILE\AppData\Local\WhatsApp\cache" }
+        @{N = "WA Legacy"; P = "$env:USERPROFILE\AppData\Local\WhatsApp\cache" },
+        @{N = "Discord"; P = "$env:APPDATA\discord\Cache" },
+        @{N = "Discord Code"; P = "$env:APPDATA\discord\Code Cache\js" },
+        @{N = "Spotify"; P = "$env:LOCALAPPDATA\Spotify\Storage" },
+        @{N = "Steam Web"; P = "$env:LOCALAPPDATA\Steam\htmlcache" },
+        @{N = "Telegram"; P = "$env:APPDATA\Telegram Desktop\tdata\user_data\cache" }
     )
     foreach ($t in $targets) {
         if (Test-Path -Path $t.P) {
@@ -308,13 +370,25 @@ function Invoke-OptimizeWhatsApp {
             catch {}
         }
     }
-    Write-Success "WhatsApp Optimized. Freed: $([math]::Round($freed / 1MB, 2)) MB"; Read-Host "`n $(Get-Translation 'PressAnyKey')"
+    Write-Success "Apps Optimized. Freed: $([math]::Round($freed / 1MB, 2)) MB"; Read-Host "`n $(Get-Translation 'PressAnyKey')"
+}
+
+function Clear-EventLogs {
+    Write-Title (Get-Translation 'Menu_Option16')
+    if (-not (Request-Confirm (Get-Translation 'Event_Confirm'))) { return }
+    Write-Host " Clearing Event Logs (Wait a few seconds)..." -ForegroundColor Cyan
+    $logPath = "$env:SystemRoot\System32\Winevt\Logs\*"
+    $beforeSize = 0; try { $beforeSize = (Get-ChildItem -Path $logPath -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum } catch {}
+    wevtutil el | ForEach-Object { wevtutil cl "$_" 2>$null }
+    $afterSize = 0; try { $afterSize = (Get-ChildItem -Path $logPath -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum } catch {}
+    $freed = $beforeSize - $afterSize; if ($freed -lt 0) { $freed = 0 }
+    Write-Success ((Get-Translation 'Event_Done') + " Freed: $([math]::Round($freed / 1MB, 2)) MB")
+    Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
 function Show-MainMenu {
     Write-Host "`n"
-    $w = 86; $line = "-" * ($w - 2)
-    Write-Host ("+" + $line + "+") -ForegroundColor $global:Theme.Border
+    $w = 86; $line = [string]$global:UI.HLine * ($w - 4)
     Write-Centered ' __    __   ______   ________  __    __   ______  ' $global:Theme.AsciiArt $w
     Write-Centered '|  \  |  \ /      \ |        \|  \  /  \ /      \ ' $global:Theme.AsciiArt $w
     Write-Centered '| $$\ | $$|  $$$$$$\| $$$$$$$$ \$$\/  $$|  $$$$$$\' $global:Theme.AsciiArt $w
@@ -324,29 +398,44 @@ function Show-MainMenu {
     Write-Centered '| $$ \$$$$| $$__/  \| $$_____ | $$  | $$|  \__| $$' $global:Theme.AsciiArt $w
     Write-Centered '| $$  \$$$ \$$    $$| $$     \| $$  | $$ \$$    $$' $global:Theme.AsciiArt $w
     Write-Centered ' \$$   \$$  \$$$$$$  \$$$$$$$$ \$$   \$$  \$$$$$$ ' $global:Theme.AsciiArt $w
-    Write-Host "" ; Write-Centered (Get-Translation 'Menu_Title') $global:Theme.Title $w
-    Write-Host ("+" + $line + "+") -ForegroundColor $global:Theme.Border
-    Write-Host "| " -NoNewline -ForegroundColor $global:Theme.Border
+    Write-Host ""
+    Write-Host (" {0}{1}{2}" -f $global:UI.TopLeft, $line, $global:UI.TopRight) -ForegroundColor $global:Theme.Border
+    $title = " $($global:UI.RArrow) $(Get-Translation 'Menu_Title') $($global:UI.LArrow) "
+    $padLeft = [math]::Max(0, [math]::Floor((($w - 4) - $title.Length) / 2))
+    $padRight = [math]::Max(0, (($w - 4) - $title.Length - $padLeft))
+    Write-Host " $($global:UI.VLine)" -NoNewline -ForegroundColor $global:Theme.Border
+    Write-Host (" " * $padLeft) -NoNewline
+    Write-Host $title -NoNewline -ForegroundColor $global:Theme.Title
+    Write-Host (" " * $padRight) -NoNewline
+    Write-Host "$($global:UI.VLine)" -ForegroundColor $global:Theme.Border
+    Write-Host (" {0}{1}{2}" -f $global:UI.LeftT, $line, $global:UI.RightT) -ForegroundColor $global:Theme.Border
+    Write-Host " $($global:UI.VLine) " -NoNewline -ForegroundColor $global:Theme.Border
     Write-Host "[0] " -NoNewline -ForegroundColor $global:Theme.Highlight
-    Write-Host ("{0,-35}" -f (Get-Translation 'Menu_Option0')) -NoNewline -ForegroundColor $global:Theme.Highlight
-    Write-Host " | " -NoNewline -ForegroundColor $global:Theme.Border
+    Write-Host ("{0,-34}" -f (Get-Translation 'Menu_Option0')) -NoNewline -ForegroundColor $global:Theme.Highlight
+    Write-Host " $($global:UI.VLine) " -NoNewline -ForegroundColor $global:Theme.Border
     Write-Host "[L] " -NoNewline -ForegroundColor $global:Theme.Special
-    Write-Host ("{0,-36}" -f (Get-Translation 'Menu_OptionL')) -NoNewline -ForegroundColor $global:Theme.Special
-    Write-Host " |" -ForegroundColor $global:Theme.Border
-    Write-Host ("+" + $line + "+") -ForegroundColor $global:Theme.Border
-    for ($i = 1; $i -le 8; $i++) {
-        $l_idx = $i; $r_idx = $i + 8; $l_t = Get-Translation "Menu_Option$l_idx"; $r_t = Get-Translation "Menu_Option$r_idx"
-        Write-Host "| " -NoNewline -ForegroundColor $global:Theme.Border
+    Write-Host ("{0,-35}" -f (Get-Translation 'Menu_OptionL')) -NoNewline -ForegroundColor $global:Theme.Special
+    Write-Host " $($global:UI.VLine)" -ForegroundColor $global:Theme.Border
+    Write-Host (" {0}{1}{2}" -f $global:UI.LeftT, $line, $global:UI.RightT) -ForegroundColor $global:Theme.Border
+    for ($i = 1; $i -le 9; $i++) {
+        $l_idx = $i; $r_idx = $i + 9
+        $l_t = Get-Translation "Menu_Option$l_idx"
+        Write-Host " $($global:UI.VLine) " -NoNewline -ForegroundColor $global:Theme.Border
         Write-Host ("[{0,-2}]" -f $l_idx) -NoNewline -ForegroundColor $global:Theme.MenuNumber
-        Write-Host (" {0,-35}" -f $l_t) -NoNewline -ForegroundColor $global:Theme.MenuText
-        Write-Host "| " -NoNewline -ForegroundColor $global:Theme.Border
-        $rc = if ($r_idx -eq 16) { $global:Theme.Exit }else { $global:Theme.MenuNumber }
-        $rtc = if ($r_idx -eq 16) { $global:Theme.Exit }else { $global:Theme.MenuText }
-        Write-Host ("[{0,-2}]" -f $r_idx) -NoNewline -ForegroundColor $rc
-        Write-Host (" {0,-36}" -f $r_t) -NoNewline -ForegroundColor $rtc
-        Write-Host "|" -ForegroundColor $global:Theme.Border
+        Write-Host (" {0,-34}" -f $l_t) -NoNewline -ForegroundColor $global:Theme.MenuText
+        Write-Host "$($global:UI.VLine) " -NoNewline -ForegroundColor $global:Theme.Border
+        if ($r_idx -le 17) {
+            $r_t = Get-Translation "Menu_Option$r_idx"
+            $rc = if ($r_idx -eq 17) { $global:Theme.Exit } else { $global:Theme.MenuNumber }
+            $rtc = if ($r_idx -eq 17) { $global:Theme.Exit } else { $global:Theme.MenuText }
+            Write-Host ("[{0,-2}]" -f $r_idx) -NoNewline -ForegroundColor $rc
+            Write-Host (" {0,-35}" -f $r_t) -NoNewline -ForegroundColor $rtc
+        } else {
+            Write-Host (" " * 40) -NoNewline
+        }
+        Write-Host "$($global:UI.VLine)" -ForegroundColor $global:Theme.Border
     }
-    Write-Host ("+" + $line + "+") -ForegroundColor $global:Theme.Border
+    Write-Host (" {0}{1}{2}" -f $global:UI.BottomLeft, $line, $global:UI.BottomRight) -ForegroundColor $global:Theme.Border
 }
 
 Show-Intro
@@ -367,7 +456,8 @@ do {
         "6" { Invoke-NetworkRepair }; "7" { Show-PowerMenu }; "8" { Clear-RAM }
         "9" { Invoke-Defragment }; "10" { Show-SystemHealthMenu }; "11" { Show-UpdateDriverMenu }
         "12" { Show-DNSMenu }; "13" { Invoke-WifiGrabber }; "14" { Invoke-VisualPerf }
-        "15" { Invoke-OptimizeWhatsApp }; "16" { exit }
+        "15" { Invoke-OptimizeApps }; "16" { Clear-EventLogs }
+        "17" { exit }
         "L" { if ($global:Language -eq "EN") { $global:Language = "ID" } else { $global:Language = "EN" } }
         default { Write-Warning (Get-Translation 'Invalid_Option'); Start-Sleep -Seconds 1 }
     }
