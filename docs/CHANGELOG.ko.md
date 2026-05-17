@@ -1,6 +1,25 @@
-# 🚀 ncexs Toolkit v3.0.1
+# 🚀 ncexs Toolkit v3.1
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | **한국어** | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.1 시스템 마스터리 업데이트
+
+### ✨ 기능 및 개선 사항
+- **향상된 시스템 정보**: 마더보드 세부 정보, OS 빌드, 가동 시간 및 일련 번호를 추가했습니다.
+- **강력한 정크 클리너**: Windows Update 캐시, CrashDumps, WER 및 CBS 로그 정리를 추가했습니다.
+- **앱 캐시 클리너**: Discord, Spotify, Steam, Telegram 및 WhatsApp 캐시를 안전하게 삭제합니다.
+- **이벤트 로그 클리너**: Windows 이벤트 로그를 지우는 새 메뉴 (16)가 추가되었습니다.
+- **라이브 통계**: 이제 정리 도구에서 확보된 MB를 표시합니다.
+- **안전한 상태 검사**: SFC 및 DISM과 함께 `chkdsk C: /scan`을 추가했습니다.
+
+### 🎨 UI 및 UX
+- **17-메뉴 그리드**: 홀수 (17) 메뉴에 맞게 완벽하게 정렬된 인터페이스.
+- **기본 언어**: 영어(EN)로 설정되었습니다.
+- **기능 제거**: 시스템 안전을 최우선으로 하기 위해 Windows Update 재설정 기능이 삭제되었습니다.
+
+---
+
+# 🚀 ncexs Toolkit v3.0.1
 
 ## 🧰 ncexs Toolkit – v3.0.1 안전성 및 UX 개선
 

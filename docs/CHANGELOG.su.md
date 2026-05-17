@@ -1,11 +1,30 @@
-# 🚀 ncexs Toolkit v3.0.1
+# 🚀 ncexs Toolkit v3.1
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | **Basa Sunda** | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.1 Pembaruan Pangawasaan Sistem
+
+### ✨ Fitur & Peningkatan
+- **Info Sistem Ditingkatkeun**: Mintonkeun detail motherboard, versi OS build, uptime, sareng Serial Number. Métrik panyimpenan langkung écés.
+- **Pembersih Sampah Ekstra**: Mupus cache Windows Update, CrashDumps, WER, sareng log CBS pikeun méré rohangan nu langkung badag.
+- **Pembersih Cache Aplikasi**: Ngagantikeun fungsi heubeul pikeun mupus cache Discord, Spotify, Steam, Telegram, sareng WhatsApp kalayan aman.
+- **Pembersih Event Logs**: Nambihan aksi husus (Menu 16) pikeun mupus log Windows Event Viewer.
+- **Métrik Live**: Menu Recycle Bin ayeuna mintonkeun persis sabaraha MB data anu parantos dipupus.
+- **Pamariksaan Kaséhatan Aman**: Nambihan `chkdsk C: /scan` anu aman disarengan ku SFC sarta DISM.
+
+### 🎨 UI & UX
+- **Grid 17-Menu**: Antarmuka tos disampurnakeun supados tetep lempeng najan jumlahna ganjil (17).
+- **Lokal Default**: Basa bawaan diatur kana Basa Inggris (EN).
+- **Déprésiasi**: Mupus opsi Reset Windows Update demi kaamanan sistem anu optimal.
+
+---
+
+# 🚀 ncexs Toolkit v3.0.1
 
 ## 🧰 ncexs Toolkit – v3.0.1 Panyampurnaan Kaamanan & UX
 
 ### ✨ Fitur & Peningkatan
-- **Panyampurnaan Kaamanan UX**: Nambihan pituduh pambatalan multi-basa nu écés sareng dinamis pikeun ngabantu pangguna awam ngartos kumaha carana ngabatalkeun tugas kalayan aman tanpa nutup terminal sacara paksa.
+- **Panyampurnaan Kaamanan UX**: Nambihan pituduh pambatalan multi-basa nu écés sareng dinamis pikeun ngabantu pangguna ngartos kumaha carana ngabatalkeun tugas kalayan aman tanpa nutup terminal sacara paksa.
 - **Pananganan Ctrl+C**: Nerapkeun panangkap éksépsi global (`trap [PipelineStoppedException]`) dina loop utama. Menet `Ctrl+C` pikeun ngabatalkeun tugas nu nuju jalan henteu bakal deui kaluar ti toolkit ka shell. Skrip ayeuna nangkep sinyal batal kalayan lemes, mintonkeun pesen pambatalan, sareng mulangkeun pangguna kana menu utama tanpa kedah ngajalankeun deui paréntah éksekusi.
 - **Pangrojong Multi-basa**: Nambihan terjemahan `"Process_Cancel"` sareng `"Process_Aborted"` pikeun basa Inggris ("EN") sareng Indonesia ("ID"), nungtun pangguna ngabatalkeun prosés nganggo `Ctrl+C` iraha waé.
 - **Péringatan Kontekstual**: Ngagabungkeun péringatan pambatalan kana pambantu konfirmasi standar sangkan mintonkeun otomatis sateuacan ngajalankeun prosés naon waé (sapertos Junk Cleaner, Defrag, Compact OS), sareng sateuacan ngawitan *Winget Upgrades* sarta *Driver Backups*.

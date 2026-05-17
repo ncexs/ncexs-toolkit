@@ -1,11 +1,30 @@
-# 🚀 ncexs Toolkit v3.0.1
+# 🚀 ncexs Toolkit v3.1
 
 🌐 [English](../CHANGELOG.md) | **Bahasa Indonesia** | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.1 Pembaruan Penguasaan Sistem
+
+### ✨ Fitur & Peningkatan
+- **Info Sistem Ditingkatkan**: Menampilkan detail motherboard, versi OS build, uptime, dan Serial Number. Metrik penyimpanan lebih jelas.
+- **Pembersih Sampah Ekstra**: Membersihkan cache Windows Update, CrashDumps, WER, dan log CBS untuk membebaskan ruang besar.
+- **Pembersih Cache Aplikasi**: Menggantikan utilitas lama untuk membersihkan cache Discord, Spotify, Steam, Telegram, dan WhatsApp dengan aman.
+- **Pembersih Event Logs**: Menambahkan aksi khusus (Menu 16) untuk membersihkan log Windows Event Viewer.
+- **Metrik Live**: Menu Recycle Bin dan lainnya kini menampilkan persis berapa MB data yang berhasil dihapus.
+- **Pemeriksaan Kesehatan Aman**: Menambahkan pemindaian non-destruktif `chkdsk C: /scan` berdampingan dengan SFC dan DISM.
+
+### 🎨 UI & UX
+- **Grid 17-Menu**: Antarmuka disempurnakan untuk menampung jumlah ganjil (17) menu dengan mulus.
+- **Lokal Default**: Bahasa default diatur ke Bahasa Inggris (EN).
+- **Depresiasi**: Menghapus opsi Reset Windows Update demi keamanan sistem yang maksimal.
+
+---
+
+# 🚀 ncexs Toolkit v3.0.1
 
 ## 🧰 ncexs Toolkit – v3.0.1 Penyempurnaan Keamanan & UX
 
 ### ✨ Fitur & Peningkatan
-- **Penyempurnaan Keamanan UX**: Menambahkan instruksi pembatalan multi-bahasa yang jelas dan dinamis untuk membantu pengguna awam memahami cara membatalkan tugas dengan aman tanpa menutup jendela terminal secara paksa.
+- **Penyempurnaan Keamanan UX**: Menambahkan instruksi pembatalan multi-bahasa yang jelas dan dinamis untuk membantu pengguna memahami cara membatalkan tugas dengan aman tanpa menutup jendela terminal secara paksa.
 - **Penanganan Anggun Ctrl+C**: Menerapkan penangkap eksepsi global (`trap [PipelineStoppedException]`) di dalam loop utama. Menekan `Ctrl+C` untuk membatalkan tugas yang sedang berjalan tidak akan lagi keluar dari toolkit ke shell. Skrip kini menangkap sinyal batal dengan anggun, menampilkan pesan pembatalan lokal, dan mengembalikan pengguna ke menu utama tanpa perlu menjalankan ulang perintah eksekusi!
 - **Dukungan Multibahasa**: Mengimplementasikan string terjemahan baru `"Process_Cancel"` dan `"Process_Aborted"` yang mencakup bahasa Inggris ("EN") dan Indonesia ("ID"), memandu pengguna untuk membatalkan/menghentikan proses menggunakan `Ctrl+C` kapan saja.
 - **Peringatan Kontekstual**: Mengintegrasikan peringatan pembatalan ke dalam pembantu konfirmasi standar sehingga muncul otomatis sebelum mengeksekusi proses apa pun (mis. Junk Cleaner, Defrag, Compact OS), dan tepat sebelum memulai *Winget Upgrades* serta *Driver Backups*.

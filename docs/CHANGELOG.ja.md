@@ -1,6 +1,25 @@
-# 🚀 ncexs Toolkit v3.0.1
+# 🚀 ncexs Toolkit v3.1
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | **日本語** | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.1 システムマスタリーアップデート
+
+### ✨ 新機能と強化
+- **システム情報強化**: マザーボードの詳細、OSビルド、アップタイム、およびシリアル番号を追加しました。
+- **ジャンククリーナー強化**: Windows Update キャッシュ、CrashDumps、WER、CBS ログのクリーンアップを追加しました。
+- **アプリキャッシュクリーナー**: Discord、Spotify、Steam、Telegram、WhatsAppのキャッシュを安全に削除します。
+- **イベントログクリーナー**: Windows イベントログを消去する新しいメニュー (16) を追加。
+- **ライブメトリクス**: 全てのクリーンアップツールで解放された MB を表示します。
+- **安全なヘルスチェック**: SFC および DISM と並んで非破壊的な `chkdsk C: /scan` を追加しました。
+
+### 🎨 UI＆UXの改善
+- **17メニューグリッド**: 奇数 (17) のメニューに対応した完全なレイアウト。
+- **デフォルト言語**: 英語 (EN) に設定しました。
+- **廃止**: システムの安全性を最優先するため、Windows Update リセット機能は削除されました。
+
+---
+
+# 🚀 ncexs Toolkit v3.0.1
 
 ## 🧰 ncexs Toolkit – v3.0.1 安全性＆UXの改善
 

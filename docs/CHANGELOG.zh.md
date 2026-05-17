@@ -1,6 +1,25 @@
-# 🚀 ncexs Toolkit v3.0.1
+# 🚀 ncexs Toolkit v3.1
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | **中文** | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.1 系统精通更新
+
+### ✨ 功能与增强
+- **增强的系统信息**: 增加了主板详细信息、操作系统版本、运行时间和序列号。
+- **更强的垃圾清理**: 新增清理 Windows Update 缓存、CrashDumps、WER 和 CBS 日志。
+- **应用缓存清理**: 安全清除 Discord、Spotify、Steam、Telegram 和 WhatsApp 的缓存。
+- **事件日志清理**: 新增菜单 (16) 以清除所有 Windows 事件日志。
+- **实时指标**: 清理工具现在显示释放的具体 MB。
+- **更安全的健康检查**: 在 SFC 和 DISM 旁添加了无损的 `chkdsk C: /scan`。
+
+### 🎨 UI 和 UX
+- **17 菜单网格**: 完美支持奇数 (17) 菜单项目的布局。
+- **默认语言**: 默认语言现已设置为英语 (EN)。
+- **已弃用**: 为确保最高级别的系统安全性，已完全删除重置 Windows Update 的功能。
+
+---
+
+# 🚀 ncexs Toolkit v3.0.1
 
 ## 🧰 ncexs Toolkit – v3.0.1 安全性与用户体验优化
 

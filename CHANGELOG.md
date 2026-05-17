@@ -1,3 +1,23 @@
+# 🚀 ncexs Toolkit v3.1
+
+## 🧰 ncexs Toolkit – v3.1 System Mastery Update
+
+### ✨ Features & Enhancements
+- **Enhanced System Info**: Upgraded the System Information (Menu 1) to display the motherboard details, exact OS build, system uptime, and hardware Serial Number. Storage metrics now clearly show total, free, and used percentage.
+- **Richer Junk Cleaner**: Greatly expanded the Enhanced Junk Cleaner (Menu 2) to safely clear `SoftwareDistribution\Download` (Windows Update cache), `CrashDumps`, `WER ReportArchive`, and bloated `CBS` logs, freeing significantly more space.
+- **Clear App Caches**: Rebranded and supercharged the WhatsApp Optimizer (Menu 15) into a comprehensive "App Cache Cleaner." It now automatically detects and clears massive storage-hogging caches from **Discord**, **Spotify**, **Steam (Web Cache)**, **Telegram**, and **WhatsApp**, all without touching user accounts or logins.
+- **Dedicated Event Logs Cleaner**: Added a new dedicated action (Menu 16) to clear all Windows Event Viewer logs safely. Includes live calculation of MBs freed.
+- **Live Cleanup Metrics**: Upgraded the Recycle Bin menu to measure and report the exact amount of MBs freed after emptying.
+- **Safer Health Check**: Improved the System Health Checker (Menu 10) by injecting `chkdsk C: /scan` to verify disk integrity non-destructively alongside SFC and DISM.
+
+### 🎨 UI & UX Improvements
+- **Dynamic Grid UI**: The main menu seamlessly supports odd numbers of items (now 17) while maintaining perfectly aligned borders and empty column handling.
+- **Action Feedbacks**: All cleaning actions now transparently display exactly how much data was successfully removed (in MB).
+- **Default Locale**: Toolkit default language is now set to English (EN).
+- **Deprecation**: Removed the "Reset Windows Update" utility entirely to prioritize maximum system safety.
+
+---
+
 # 🚀 ncexs Toolkit v3.0.1
 
 🌐 **English** | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](docs/CHANGELOG.jv.md) | [Basa Sunda](docs/CHANGELOG.su.md) | [हिन्दी](docs/CHANGELOG.hi.md) | [Русский](docs/CHANGELOG.ru.md) | [日本語](docs/CHANGELOG.ja.md) | [한국어](docs/CHANGELOG.ko.md) | [中文](docs/CHANGELOG.zh.md) | [العربية](docs/CHANGELOG.ar.md)

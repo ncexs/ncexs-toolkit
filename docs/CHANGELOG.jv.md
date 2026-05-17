@@ -1,11 +1,30 @@
-# 🚀 ncexs Toolkit v3.0.1
+# 🚀 ncexs Toolkit v3.1
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | **Basa Jawa** | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.1 Pembaruan Panguasaan Sistem
+
+### ✨ Fitur & Peningkatan
+- **Info Sistem Ditingkatake**: Nuduhake detail motherboard, versi OS build, uptime, lan Serial Number. Metrik panyimpenan luwih cetha.
+- **Pembersih Sampah Ekstra**: Mbusak cache Windows Update, CrashDumps, WER, lan log CBS kanggo mbebasake ruang sing luwih gedhe.
+- **Pembersih Cache Aplikasi**: Ngganti utilitas lawas kanggo mbusak cache Discord, Spotify, Steam, Telegram, lan WhatsApp kanthi aman.
+- **Pembersih Event Logs**: Nambahake aksi khusus (Menu 16) kanggo mbusak log Windows Event Viewer.
+- **Metrik Live**: Menu Recycle Bin lan liyane saiki nuduhake pira MB data sing wis kasil dibusak.
+- **Pemeriksaan Kesehatan Aman**: Nambahake `chkdsk C: /scan` sing aman bebarengan karo SFC lan DISM.
+
+### 🎨 UI & UX
+- **Grid 17-Menu**: Antarmuka wis disempurnakake supaya tetep lurus sanajan jumlahe ganjil (17).
+- **Lokal Default**: Basa gawan diowahi dadi Basa Inggris (EN).
+- **Depresiasi**: Mbusak opsi Reset Windows Update kanggo ngamanake sistem kanthi maksimal.
+
+---
+
+# 🚀 ncexs Toolkit v3.0.1
 
 ## 🧰 ncexs Toolkit – v3.0.1 Penyempurnaan Keamanan & UX
 
 ### ✨ Fitur & Peningkatan
-- **Penyempurnaan Keamanan UX**: Nambahake pituduh pembatalan multi-basa sing cetha lan dinamis kanggo mbantu pangguna awam mangerteni carane mbatalke tugas kanthi aman tanpa nutup jendela terminal kanthi peksa.
+- **Penyempurnaan Keamanan UX**: Nambahake pituduh pembatalan multi-basa sing cetha lan dinamis kanggo mbantu pangguna mangerteni carane mbatalke tugas kanthi aman tanpa nutup jendela terminal kanthi peksa.
 - **Penanganan Ctrl+C**: Nerapake panangkap eksepsi global (`trap [PipelineStoppedException]`) ing jero loop utama. Mencet `Ctrl+C` kanggo mbatalke tugas sing mlaku ora bakal maneh metu saka toolkit menyang shell. Skrip saiki nangkep sinyal batal kanthi alus, nuduhake pesan pembatalan, lan mbalekake pangguna menyang menu utama tanpa perlu nglakokake maneh prentah eksekusi.
 - **Dukungan Multi-basa**: Nambahake terjemahan `"Process_Cancel"` lan `"Process_Aborted"` kanggo basa Inggris ("EN") lan Indonesia ("ID"), nuntun pangguna mbatalke proses nganggo `Ctrl+C` ing wektu apa wae.
 - **Peringatan Kontekstual**: Nggabungake peringatan pembatalan menyang pambiyantu konfirmasi standar supaya muncul otomatis sadurunge nglakokake proses apa wae (kayata Junk Cleaner, Defrag, Compact OS), lan sadurunge miwiti *Winget Upgrades* sarta *Driver Backups*.
