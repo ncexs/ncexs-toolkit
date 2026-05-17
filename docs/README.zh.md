@@ -1,4 +1,4 @@
-# 🧰 ncexs Toolkit (NT)
+﻿# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | [Basa Jawa](README.jv.md) | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | **中文** | [العربية](README.ar.md)
 
@@ -17,13 +17,15 @@
 ### ⚡ 快速修复与诊断 (Quick Fix & Diagnostics)
 * **一键维护：** 在一个菜单选项中，自动依次执行系统垃圾清理、网络修复和内存优化。
 * **实时进度跟踪：** 直接在控制台终端中，通过直观的百分比进度条实时查看任务执行状态。
-* **系统健康检查：** 调用系统自带的 `SFC` 和 `DISM` 工具并配合自定义界面渲染，清晰掌握修复进度。
+* **实时健康检查:** 调用原生的 `SFC`、`DISM` 和无损的 `chkdsk /scan` 工具，并带有自定义 UI，进度一目了然。
 
-### 🧹 存储与清理 (Storage & Clean Up)
-* **Compact OS 压缩：** 安全地压缩系统文件，在不损失性能或系统功能的前提下，释放 **2GB – 5GB** 的磁盘存储空间。
-* **增强型垃圾清理：** 深入清理系统临时文件夹、Prefetch 预读取文件、GPU 着色器缓存，以及多个常用浏览器（Chrome、Edge、Brave、WhatsApp Web）的缓存。
-* **智能软件卸载：** 通过对活跃系统注册表的模糊搜索，快速定位并运行系统原生卸载程序。
-* **回收站与磁盘清理：** 安全清空回收站或快速调用 Windows 系统自带的磁盘清理界面。
+### 🧹 存储与清理
+* **Compact OS 压缩:** 安全压缩系统二进制文件，释放 **2GB – 5GB** 存储空间。
+* **增强型垃圾清理:** 深入清理系统临时文件夹、Prefetch、CrashDumps、Windows Update 缓存、CBS 日志和 GPU 着色器缓存。
+* **应用缓存清理:** 自动安全清除 Discord、Spotify、Steam、Telegram 和 WhatsApp 的缓存，无需重新登录。
+* **事件日志清理:** 一键清除所有 Windows 事件日志并报告释放的 MB。
+* **智能卸载程序:** 通过活跃的系统注册表进行模糊搜索，立即运行卸载脚本。
+* **回收站和磁盘清理:** 安全清除已删除的文件。
 
 ### ⚡ 性能与优化 (Performance & Optimization)
 * **内存优化：** 释放未使用的内存工作集（Working Set），在控制台清晰显示优化“前与后”的可用内存统计数据。

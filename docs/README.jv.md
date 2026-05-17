@@ -1,4 +1,4 @@
-# 🧰 ncexs Toolkit (NT)
+﻿# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | **Basa Jawa** | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -17,11 +17,13 @@
 ### ⚡ Quick Fix & Diagnostik
 * **Pangopènan Sepisan Klik:** Nglakokaké urutan otomatis kang nggabungaké Reresik Sampah, Ndandani Jaringan, lan Optimasi RAM kanthi sepisan pilih ing menu.
 * **Ngawasi Progres Langsung:** Pantau lakuné tugas kanthi wektu nyata (real-time) nganggé persentase lan bar visual langsung ing terminal panjenengan.
-* **Pemeriksa Kesehatan Sistem:** Nganggo piranti bawaan SFC lan DISM kanthi tampilan UI kustom supaya panjenengan mangerteni kanthi cetha kapan prosesé rampung.
+* **Pemeriksa Kesehatan Sistem:** Nganggo piranti bawaan SFC, DISM, lan `chkdsk /scan` sing aman kanthi tampilan UI kustom supaya panjenengan mangerteni kanthi cetha kapan prosesé rampung.
 
 ### 🧹 Panyimpenan & Reresik
 * **Kompresi Compact OS:** Ngompresi file sistem kanthi aman kanggo mbebasaké ruang panyimpenan **2GB – 5GB** tanpa nyuda performa utawa fitur sistem.
-* **Reresik Sampah (Enhanced):** Ngresiki folder sistem temp, Prefetch, shader cache GPU, lan cache profil browser sing aktif (Chrome, Edge, Brave, WhatsApp Web).
+* **Reresik Sampah (Enhanced):** Ngresiki folder sistem temp, Prefetch, CrashDumps, cache Windows Update, log CBS sing gedhe, lan cache shader GPU.
+* **Pembersih Cache Aplikasi:** Mbusak cache raksasa saka Discord, Spotify, Steam, Telegram, lan WhatsApp kanthi aman tanpa ngetokake akun panjenengan.
+* **Pembersih Event Logs:** Utilitas khusus kanggo ngosongake kabeh log Windows Event Viewer kanthi aman lan nglaporake MB sing dibusak.
 * **Smart App Uninstaller:** Pados cepet lumantar registri sistem aktif kanggo nemokaké lan mbukak uninstaller bawaan kanthi cepet.
 * **Recycle Bin & Disk Cleanup:** Ngosongaké file ing Recycle Bin kanthi aman utawa mbukak utilitas Disk Cleanup bawaan Windows.
 

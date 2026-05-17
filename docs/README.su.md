@@ -1,4 +1,4 @@
-# 🧰 ncexs Toolkit (NT)
+﻿# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | [Basa Jawa](README.jv.md) | **Basa Sunda** | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -17,11 +17,13 @@
 ### ⚡ Quick Fix & Diagnostik
 * **Pangrawatan Sakali Klik:** Ngajalankeun runtuyan otomatis nu ngagabungkeun Meresihan Runtah, Ngalereskeun Jaringan, sareng Optimasi RAM dina sakali pemicu menu.
 * **Mata-mata Progres Langsung:** Titenan jalanna pancén sacara real-time ku persentase sareng bar visual langsung dina terminal anjeun.
-* **Parios Kaséhatan Sistem:** Ngagunakeun pakakas bawaan SFC sareng DISM ku tampilan UI kustom sangkan anjeun terang kalayan écés iraha prosésna réngsé.
+* **Parios Kaséhatan Sistem:** Ngagunakeun pakakas bawaan SFC, DISM, sareng `chkdsk /scan` anu aman ku tampilan UI kustom sangkan anjeun terang kalayan écés iraha prosésna réngsé.
 
 ### 🧹 Panyimpenan & Meresihan
 * **Kompresi Compact OS:** Ngompresi file sistem kalayan aman pikeun ngabebaskeun rohangan panyimpenan **2GB – 5GB** tanpa ngirangan performa atawa fitur OS.
-* **Meresihan Runtah (Enhanced):** Ngabersihan folder sistem temp, Prefetch, shader cache GPU, sareng cache profil browser nu aktif (Chrome, Edge, Brave, WhatsApp Web).
+* **Meresihan Runtah (Enhanced):** Ngabersihan folder sistem temp, Prefetch, CrashDumps, cache Windows Update, log CBS anu ngabareuhan, sareng cache shader GPU.
+* **Pembersih Cache Aplikasi:** Mupus cache raksasa tina Discord, Spotify, Steam, Telegram, sareng WhatsApp kalayan aman tanpa ngaluarkeun anjeun tina akun.
+* **Pembersih Event Logs:** Utilitas husus pikeun ngosongkeun sadaya log Windows Event Viewer kalayan aman sarta ngalaporkeun MB anu dipupus.
 * **Smart App Uninstaller:** Pilarian gancang ngaliwatan registri sistem aktif pikeun milari sareng ngajalankeun uninstaller bawaan kalayan instan.
 * **Recycle Bin & Disk Cleanup:** Ngosongkeun file dina Recycle Bin kalayan aman atawa memicu utilitas Disk Cleanup bawaan Windows.
 

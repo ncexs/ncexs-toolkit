@@ -1,4 +1,4 @@
-# 🧰 ncexs Toolkit (NT)
+﻿# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | **Bahasa Indonesia** | [Basa Jawa](README.jv.md) | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -17,11 +17,13 @@
 ### ⚡ Quick Fix & Diagnostik
 * **Pemeliharaan Sekali Klik:** Menjalankan rangkaian berurutan otomatis yang menggabungkan Pembersihan Sampah, Perbaikan Jaringan, dan Optimasi RAM dalam satu pemicu menu (Opsi Q/Quick).
 * **Pelacakan Progres Langsung:** Pantau jalannya tugas secara real-time dengan umpan balik persentase dan bar visual langsung di terminal Anda.
-* **Pemeriksa Kesehatan Sistem:** Memanggil SFC dan DISM bawaan dengan render UI kustom agar Anda tahu persis jalannya progres pemicu kesehatan Windows Anda.
+* **Pemeriksa Kesehatan Sistem:** Memanggil SFC, DISM bawaan, dan pemindaian non-destruktif `chkdsk /scan` dengan render UI kustom agar Anda tahu persis jalannya progres pemicu kesehatan Windows Anda.
 
 ### 🧹 Penyimpanan & Pembersihan
 * **Kompresi Compact OS:** Mengompresi binary sistem dengan aman untuk membebaskan ruang penyimpanan sebesar **2GB – 5GB** tanpa menurunkan performa atau fungsi OS.
-* **Pemberantas Sampah (Enhanced):** Pembersihan mendalam untuk folder sistem temp, Prefetch, shader cache GPU, dan cache profil browser aktif (Chrome, Edge, Brave, WhatsApp Web).
+* **Pemberantas Sampah (Enhanced):** Pembersihan mendalam untuk folder sistem temp, Prefetch, CrashDumps, cache Windows Update, log CBS yang membengkak, dan cache shader GPU.
+* **Pembersih Cache Aplikasi:** Menghapus cache raksasa dari Discord, Spotify, Steam, Telegram, dan WhatsApp secara otomatis dan aman tanpa mengeluarkan Anda dari akun.
+* **Pembersih Event Logs:** Utilitas khusus untuk mengosongkan semua log Windows Event Viewer dengan aman dan melaporkan MB yang dibersihkan.
 * **Smart App Uninstaller:** Pencarian fuzzy cepat melalui registri sistem aktif untuk mencari dan menjalankan uninstaller bawaan secara instan.
 * **Recycle Bin & Disk Cleanup:** Mengosongkan file sampah di Recycle Bin dengan aman atau memicu utilitas bawaan Windows Disk Cleanup dengan cepat.
 

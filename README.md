@@ -17,11 +17,13 @@
 ### ⚡ Quick Fix & Diagnostics
 * **One-Click Maintenance:** Runs a bundled sequence combining Junk Cleanup, Network Repair, and RAM Optimization with a single menu trigger.
 * **Live Progress Tracking:** Follow task execution in real-time with beautiful percentage-based feedback indicators directly in your terminal.
-* **Live Health Check:** Invokes native `SFC` and `DISM` tools with custom UI rendering so you never have to guess when the task completes.
+* **Live Health Check:** Invokes native `SFC`, `DISM`, and non-destructive `chkdsk /scan` tools with custom UI rendering so you never have to guess when the task completes.
 
 ### 🧹 Storage & Clean Up
 * **Compact OS Compression:** Safely compresses system binaries to free up **2GB – 5GB** of storage without losing system performance or features.
-* **Enhanced Junk Cleaner:** Deep-cleans temporary system folders, Prefetch files, GPU shader caches, and multiple active browser profiles (Chrome, Edge, Brave, WhatsApp Web).
+* **Enhanced Junk Cleaner:** Deep-cleans temporary system folders, Prefetch files, CrashDumps, Windows Update cache, bloated CBS logs, and GPU shader caches.
+* **App Cache Cleaner:** Safely and automatically wipes massive storage-hogging caches from Discord, Spotify, Steam, Telegram, and WhatsApp without logging you out.
+* **Event Logs Cleaner:** Dedicated one-click utility to securely flush all Windows Event Viewer logs and accurately report freed MBs.
 * **Smart App Uninstaller:** Quick fuzzy search through active system registries to find and run uninstallation scripts immediately.
 * **Recycle Bin & Disk Cleanup:** Safely purges deleted files or triggers the native Windows Cleanup interface instantly.
 
