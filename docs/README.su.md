@@ -1,4 +1,4 @@
-﻿# 🧰 ncexs Toolkit (NT)
+# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | [Basa Jawa](README.jv.md) | **Basa Sunda** | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -15,17 +15,23 @@
 ## 🔥 Fitur Utama & Modul
 
 ### ⚡ Quick Fix & Diagnostik
-* **Pangrawatan Sakali Klik:** Ngajalankeun runtuyan otomatis nu ngagabungkeun Meresihan Runtah, Ngalereskeun Jaringan, sareng Optimasi RAM dina sakali pemicu menu.
 * **Mata-mata Progres Langsung:** Titenan jalanna pancén sacara real-time ku persentase sareng bar visual langsung dina terminal anjeun.
 * **Parios Kaséhatan Sistem:** Ngagunakeun pakakas bawaan SFC, DISM, sareng `chkdsk /scan` anu aman ku tampilan UI kustom sangkan anjeun terang kalayan écés iraha prosésna réngsé.
 
 ### 🧹 Panyimpenan & Meresihan
-* **Kompresi Compact OS:** Ngompresi file sistem kalayan aman pikeun ngabebaskeun rohangan panyimpenan **2GB – 5GB** tanpa ngirangan performa atawa fitur OS.
+* **Kompresi Compact OS:** Ayeuna bersifat **dua arah** (ngarojong komprési sareng dekomprési), ngahémat **2GB – 5GB** rohangan panyimpenan.
 * **Meresihan Runtah (Enhanced):** Ngabersihan folder sistem temp, Prefetch, CrashDumps, cache Windows Update, log CBS anu ngabareuhan, sareng cache shader GPU.
 * **Pembersih Cache Aplikasi:** Mupus cache raksasa tina Discord, Spotify, Steam, Telegram, sareng WhatsApp kalayan aman tanpa ngaluarkeun anjeun tina akun.
-* **Pembersih Event Logs:** Utilitas husus pikeun ngosongkeun sadaya log Windows Event Viewer kalayan aman sarta ngalaporkeun MB anu dipupus.
+* **Pembersih Event Logs:** Utilitas dumasar API .NET pikeun ngosongkeun sadaya log Windows Event Viewer **sacara instan (kirang ti 1 detik)**.
 * **Smart App Uninstaller:** Pilarian gancang ngaliwatan registri sistem aktif pikeun milari sareng ngajalankeun uninstaller bawaan kalayan instan.
 * **Recycle Bin & Disk Cleanup:** Ngosongkeun file dina Recycle Bin kalayan aman atawa memicu utilitas Disk Cleanup bawaan Windows.
+
+### 🛠️ Pusat Pangropéa Sistem
+* **Laporan Audit PC (HTML):** Nyieun laporan spésifikasi PC interaktif format HTML nu diékspor langsung ka Desktop. Ngadit CPU, RAM, detail OS, Motherboard, sareng **Akun Windows Aktif** kalayan labél hak aksés nu écés (Administrator vs Standar).
+* **Pangropéa Sakali Klik:** Ngalakukeun pangropéa sistem otomatis (mupus runtah, DNS flush, SFC/DISM scan) bari tetep ngajaga Recycle Bin supados file penting henteu leungit.
+* **Analisis Kaséhatan Baterai:** Ngitung tingkat keausan baterai real-time, atanapi ngadetéksi PC Desktop sacara dinamis.
+* **Pengelola Remote Desktop (RDP):** Ngaktipkeun/nonaktipkeun RDP kalayan gancang sareng ngatur aturan Windows Firewall.
+* **Pembersih Cache Browser:** Ngabersihan cache Google Chrome, Microsoft Edge, sareng Mozilla Firefox.
 
 ### ⚡ Performa & Optimasi
 * **Optimasi Mémori:** Ngosongkeun mémori RAM nu henteu digunakeun pikeun ngabebaskeun mémori fisik, mintonkeun statistik RAM "Sateuacan & Saparantos".
@@ -34,7 +40,7 @@
 
 ### 🌐 Jaringan & Pakakas Admin
 * **Ngalereskeun Jaringan:** Ngawengku 5 pakakas perbaikan penting (reset TCP/IP, reset Winsock, flush DNS, release/renew IP) pikeun ngalereskeun koneksi internet nu gangguan.
-* **Pangganti DNS:** Ngalihkeun DNS kalayan gancang kana Cloudflare (1.1.1.1), Google DNS (8.8.8.8), Quad9, AdGuard (Blokir Iklan), atawa standar DHCP.
+* **Pangganti DNS:** Ngalihkeun DNS kalayan gancang kana Cloudflare (1.1.1.1), Google DNS (8.8.8.8), Quad9, AdGuard (Blokir Iklan), atawa standar DHCP. Dilarapkeun ka **sadaya adaptor jaringan fisik nu aktip** sacara babarengan.
 * **Wi-Fi Password Recovery:** Milari sareng mintonkeun kecap sandi (password) pikeun sakabéh jaringan lokal nu kungsi disimpen dina PC anjeun.
 * **Update & Backup Driver:** Ngamutahirkeun sakabéh aplikasi ngagunakeun `winget` sareng nyimpen cadangan driver kana folder `C:\DriversBackup`.
 

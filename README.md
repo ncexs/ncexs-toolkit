@@ -15,17 +15,23 @@
 ## 🔥 Key Features & Modules
 
 ### ⚡ Quick Fix & Diagnostics
-* **One-Click Maintenance:** Runs a bundled sequence combining Junk Cleanup, Network Repair, and RAM Optimization with a single menu trigger.
 * **Live Progress Tracking:** Follow task execution in real-time with beautiful percentage-based feedback indicators directly in your terminal.
 * **Live Health Check:** Invokes native `SFC`, `DISM`, and non-destructive `chkdsk /scan` tools with custom UI rendering so you never have to guess when the task completes.
 
 ### 🧹 Storage & Clean Up
-* **Compact OS Compression:** Safely compresses system binaries to free up **2GB – 5GB** of storage without losing system performance or features.
+* **Compact OS Compression:** Rebuilt to be **bidirectional** (supports both compressing OS files and decompressing back to default), safely saving **2GB – 5GB** of storage.
 * **Enhanced Junk Cleaner:** Deep-cleans temporary system folders, Prefetch files, CrashDumps, Windows Update cache, bloated CBS logs, and GPU shader caches.
 * **App Cache Cleaner:** Safely and automatically wipes massive storage-hogging caches from Discord, Spotify, Steam, Telegram, and WhatsApp without logging you out.
-* **Event Logs Cleaner:** Dedicated one-click utility to securely flush all Windows Event Viewer logs and accurately report freed MBs.
+* **Event Logs Cleaner:** Direct .NET API-based utility that clears all Event Viewer logs **instantly (under 1 second)**.
 * **Smart App Uninstaller:** Quick fuzzy search through active system registries to find and run uninstallation scripts immediately.
 * **Recycle Bin & Disk Cleanup:** Safely purges deleted files or triggers the native Windows Cleanup interface instantly.
+
+### 🛠️ PC Maintenance Suite
+* **PC Audit Report (HTML):** Generates a premium and clean interactive HTML PC specifications report exported directly to your Desktop. Audits CPU, RAM, OS details, Motherboard, Storage space, and **Active Windows Accounts** with clear privilege badging (Administrator vs Standard).
+* **One-Click Maintenance:** Performs fully automated system maintenance (junk clean, DNS flush, SFC/DISM scan) while intelligently preserving the Recycle Bin to prevent loss of important user files.
+* **Battery Health Analyzer:** Calculates real-time battery wear, design capacity, and full charge capacity, or dynamically detects Desktop PCs.
+* **Remote Desktop (RDP) Manager:** Turn RDP on/off instantly and configures required Windows Firewall rules.
+* **Browser Cache Cleaner:** Cleans accumulated cache databases from Google Chrome, Microsoft Edge, and Mozilla Firefox.
 
 ### ⚡ Performance & Optimization
 * **Memory Optimizer:** Flushes unused active working sets to free up system memory, displaying precise "Before & After" RAM stats.
@@ -34,7 +40,7 @@
 
 ### 🌐 Network & Admin Tools
 * **Network Repair Suite:** Automates 5 critical repair tools (TCP/IP stack reset, Winsock reset, DNS flush, IP release/renew) to restore broken connectivity.
-* **DNS Profile Switcher:** Rapidly toggle between Cloudflare (1.1.1.1), Google DNS (8.8.8.8), Quad9, AdGuard (Ad-blocking), or standard DHCP.
+* **DNS Profile Switcher:** Rapidly toggle between Cloudflare (1.1.1.1), Google DNS (8.8.8.8), Quad9, AdGuard (Ad-blocking), or standard DHCP. Automatically applies configurations to **all active physical network adapters** simultaneously.
 * **Wi-Fi Password Recovery:** Retrieves and displays security keys for all saved local networks.
 * **Updates & Driver Backups:** Run bulk updates for all installed apps using `winget` and exports active third-party drivers to `C:\DriversBackup`.
 

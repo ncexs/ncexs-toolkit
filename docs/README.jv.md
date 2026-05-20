@@ -1,4 +1,4 @@
-﻿# 🧰 ncexs Toolkit (NT)
+# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | **Basa Jawa** | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -15,17 +15,23 @@
 ## 🔥 Fitur Utama & Modul
 
 ### ⚡ Quick Fix & Diagnostik
-* **Pangopènan Sepisan Klik:** Nglakokaké urutan otomatis kang nggabungaké Reresik Sampah, Ndandani Jaringan, lan Optimasi RAM kanthi sepisan pilih ing menu.
 * **Ngawasi Progres Langsung:** Pantau lakuné tugas kanthi wektu nyata (real-time) nganggé persentase lan bar visual langsung ing terminal panjenengan.
 * **Pemeriksa Kesehatan Sistem:** Nganggo piranti bawaan SFC, DISM, lan `chkdsk /scan` sing aman kanthi tampilan UI kustom supaya panjenengan mangerteni kanthi cetha kapan prosesé rampung.
 
 ### 🧹 Panyimpenan & Reresik
-* **Kompresi Compact OS:** Ngompresi file sistem kanthi aman kanggo mbebasaké ruang panyimpenan **2GB – 5GB** tanpa nyuda performa utawa fitur sistem.
+* **Kompresi Compact OS:** Saiki bersifat **rong arah** (ndhukung kompresi lan dekompresi), ngirit **2GB – 5GB** ruang panyimpenan.
 * **Reresik Sampah (Enhanced):** Ngresiki folder sistem temp, Prefetch, CrashDumps, cache Windows Update, log CBS sing gedhe, lan cache shader GPU.
 * **Pembersih Cache Aplikasi:** Mbusak cache raksasa saka Discord, Spotify, Steam, Telegram, lan WhatsApp kanthi aman tanpa ngetokake akun panjenengan.
-* **Pembersih Event Logs:** Utilitas khusus kanggo ngosongake kabeh log Windows Event Viewer kanthi aman lan nglaporake MB sing dibusak.
+* **Pembersih Event Logs:** Utilitas adhedhasar API .NET kanggo ngosongake kabeh log Windows Event Viewer **secara instan (kurang saka 1 detik)**.
 * **Smart App Uninstaller:** Pados cepet lumantar registri sistem aktif kanggo nemokaké lan mbukak uninstaller bawaan kanthi cepet.
-* **Recycle Bin & Disk Cleanup:** Ngosongaké file ing Recycle Bin kanthi aman utawa mbukak utilitas Disk Cleanup bawaan Windows.
+* **Recycle Bin & Disk Cleanup:** Ngosongaké file in Recycle Bin kanthi aman utำ mbukak utilitas Disk Cleanup bawaan Windows.
+
+### 🛠️ Pusat Pangopenan Sistem
+* **Laporan Audit PC (HTML):** Nggawe Laporan Audit PC interaktif format HTML sing diekspor langsung menyang Desktop. Ngadit CPU, RAM, detail OS, Motherboard, lan **Akun Windows Aktif** kanthi label hak akses sing cetha (Administrator vs Standar).
+* **Pangopenan Sepisan Klik:** Nindakake pangopenan sistem otomatis (ngresiki sampah, DNS flush, SFC/DISM scan) kanthi tetep njaga Recycle Bin supaya file penting ora ilang.
+* **Analisis Kesehatan Baterai:** Ngitung tingkat keausan baterai real-time, utawa ndeteksi PC Desktop sacara dinamis.
+* **Pengelola Remote Desktop (RDP):** Ngaktifake/nonaktifake RDP kanthi cepet lan ngatur aturan Windows Firewall.
+* **Pembersih Cache Browser:** Ngresiki database cache Google Chrome, Microsoft Edge, lan Mozilla Firefox.
 
 ### ⚡ Performa & Optimasi
 * **Optimasi Memori:** Ngosongaké memori RAM sing ora digunakaké kanggo mbebasaké memori fisik, kanthi nuduhaké statistik RAM "Sadurungé & Sawisé".
@@ -33,8 +39,8 @@
 * **Optimasi Drive:** Nglakokaké defrag/trim pinter kanthi aturan pangecualian otomatis kanggo partisi sistem lan partisi sing didhelikaké.
 
 ### 🌐 Jaringan & Piranti Admin
-* **Ndandani Jaringan:** Ngowahi 5 piranti perbaikan penting (reset TCP/IP, reset Winsock, flush DNS, release/renew IP) kanggo ndandani koneksi internet sing rusak.
-* **Pangganti DNS:** Ngalihaké DNS kanthi cepet menyang Cloudflare (1.1.1.1), Google DNS (8.8.8.8), Quad9, AdGuard (Blokir Iklan), utawa standar DHCP.
+* **Ndandani Jaringan:** Ngowahi 5 piranti perbaikan penting (reset TCP/IP, reset Winsock, flush DNS, release/renew IP) kanggo ndandani koneksi internet ngantos leres.
+* **Pangganti DNS:** Ngalihaké DNS kanthi cepet menyang Cloudflare (1.1.1.1), Google DNS (8.8.8.8), Quad9, AdGuard (Blokir Iklan), utawa standar DHCP. Ditrapake kanggo **kabeh adaptor jaringan fisik sing aktif** bebarengan.
 * **Wi-Fi Password Recovery:** Nemokaké lan nuduhaké tembung sandhi (password) kanggo kabeh jaringan lokal sing disimpen ing PC panjenengan.
 * **Update & Backup Driver:** Nganyari kabeh aplikasi nggunakaké `winget` lan nyimpen cadangan driver menyang folder `C:\DriversBackup`.
 

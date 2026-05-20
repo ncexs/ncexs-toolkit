@@ -1,4 +1,4 @@
-﻿# 🧰 ncexs Toolkit (NT)
+# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | [Basa Jawa](README.jv.md) | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | **中文** | [العربية](README.ar.md)
 
@@ -14,27 +14,33 @@
 
 ## 🔥 核心功能与模块
 
-### ⚡ 快速修复与诊断 (Quick Fix & Diagnostics)
-* **一键维护：** 在一个菜单选项中，自动依次执行系统垃圾清理、网络修复和内存优化。
+### ⚡ 快速修复与诊断
 * **实时进度跟踪：** 直接在控制台终端中，通过直观的百分比进度条实时查看任务执行状态。
-* **实时健康检查:** 调用原生的 `SFC`、`DISM` 和无损的 `chkdsk /scan` 工具，并带有自定义 UI，进度一目了然。
+* **实时健康检查：** 调用原生的 `SFC`、`DISM` 和无损的 `chkdsk /scan` 工具，并带有自定义 UI，进度一目了然。
 
 ### 🧹 存储与清理
-* **Compact OS 压缩:** 安全压缩系统二进制文件，释放 **2GB – 5GB** 存储空间。
-* **增强型垃圾清理:** 深入清理系统临时文件夹、Prefetch、CrashDumps、Windows Update 缓存、CBS 日志和 GPU 着色器缓存。
-* **应用缓存清理:** 自动安全清除 Discord、Spotify、Steam、Telegram 和 WhatsApp 的缓存，无需重新登录。
-* **事件日志清理:** 一键清除所有 Windows 事件日志并报告释放的 MB。
-* **智能卸载程序:** 通过活跃的系统注册表进行模糊搜索，立即运行卸载脚本。
-* **回收站和磁盘清理:** 安全清除已删除的文件。
+* **Compact OS 双向压缩：** 重新构建为**双向**模式（支持压缩系统文件及恢复为默认解压状态），安全释放 **2GB – 5GB** 存储空间。
+* **增强型垃圾清理：** 深入清理系统临时文件夹、Prefetch、CrashDumps、Windows Update 缓存、CBS 日志和 GPU 着色器缓存。
+* **应用缓存清理：** 自动安全清除 Discord、Spotify、Steam、Telegram 和 WhatsApp 的缓存，无需重新登录。
+* **事件日志清理：** 直接基于 .NET API 的实用工具，**瞬间（不足 1 秒）**清除所有事件查看器日志。
+* **智能卸载程序：** 通过活跃的系统注册表进行模糊搜索，立即运行卸载脚本。
+* **回收站与磁盘清理：** 安全清除已删除的文件，或立即可视化启动 Windows 原生的“磁盘清理”界面。
 
-### ⚡ 性能与优化 (Performance & Optimization)
+### 🛠️ PC 维护套件
+* **PC 审计报告 (HTML)：** 直接在桌面导出生成精美且交互式的 HTML PC 规格报告。审计项目包括 CPU、内存、操作系统详情、主板、存储空间以及带有清晰权限标示（管理员 vs 标准）的**活跃 Windows 账户**。
+* **一键维护：** 执行全自动系统维护（垃圾清理、DNS 刷新、SFC/DISM 扫描），同时智能保留回收站以防止用户重要文件丢失。
+* **电池健康分析：** 实时计算电池损耗度、设计容量和完全充电容量，或动态识别台式机。
+* **远程桌面 (RDP) 管理：** 瞬间开启/关闭 RDP 并自动配置所需的 Windows 防火墙规则。
+* **浏览器缓存清理：** 清理 Google Chrome、Microsoft Edge 和 Mozilla Firefox 累积的缓存数据库。
+
+### ⚡ 性能与优化
 * **内存优化：** 释放未使用的内存工作集（Working Set），在控制台清晰显示优化“前与后”的可用内存统计数据。
 * **智能电源计划：** 恢复隐藏的系统电源计划（高性能与平衡）并优化屏幕亮度设置。
 * **驱动器优化：** 运行智能磁盘碎片整理和 TRIM，自动排除系统隐藏分区。
 
-### 🌐 网络与管理工具 (Network & Admin Tools)
+### 🌐 网络与管理工具
 * **网络修复套件：** 自动化执行 5 项关键网络修复（重置 TCP/IP、Winsock 重置、刷新 DNS、释放/更新 IP），以解决网络连接异常。
-* **DNS 切换器：** 快速将活动网卡的 DNS 切换至 Cloudflare (1.1.1.1)、Google DNS (8.8.8.8)、Quad9、AdGuard（广告拦截）或恢复为自动获取 (DHCP)。
+* **DNS 配置文件切换：** 快速在 Cloudflare (1.1.1.1)、Google DNS (8.8.8.8)、Quad9、AdGuard（广告拦截）或标准 DHCP 之间切换。自动应用配置至**所有活跃的物理网卡**。
 * **Wi-Fi 密码找回：** 检索并显示您电脑上保存过的所有本地无线网络的安全密码。
 * **软件更新与驱动备份：** 使用 `winget` 一键批量更新已安装的应用程序，并将第三方驱动程序导出备份至 `C:\DriversBackup`。
 
@@ -113,4 +119,4 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [Net.ServicePointManager]::Sec
 如果您觉得本工具箱对您有帮助，欢迎支持本项目的持续开发：
 
 [![Saweria](https://img.shields.io/badge/Saweria-请我喝杯咖啡-orange?style=flat&logo=buymeacoffee&logoColor=white)](https://saweria.co/ncexs)
-[![GitHub Star](https://img.shields.io/badge/GitHub-点亮小星星-blue?style=flat&logo=github)](https://github.com/ncexs/toolkit)
+[![GitHub Star](https://img.shields.io/badge/GitHub-点亮小星星-blue?style=flat&logo=github)](https://github.com/ncexs/ncexs-toolkit)

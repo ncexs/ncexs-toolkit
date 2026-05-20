@@ -1,4 +1,4 @@
-﻿# 🧰 ncexs Toolkit (NT)
+# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | **Bahasa Indonesia** | [Basa Jawa](README.jv.md) | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -15,17 +15,23 @@
 ## 🔥 Fitur Unggulan & Modul
 
 ### ⚡ Quick Fix & Diagnostik
-* **Pemeliharaan Sekali Klik:** Menjalankan rangkaian berurutan otomatis yang menggabungkan Pembersihan Sampah, Perbaikan Jaringan, dan Optimasi RAM dalam satu pemicu menu (Opsi Q/Quick).
 * **Pelacakan Progres Langsung:** Pantau jalannya tugas secara real-time dengan umpan balik persentase dan bar visual langsung di terminal Anda.
 * **Pemeriksa Kesehatan Sistem:** Memanggil SFC, DISM bawaan, dan pemindaian non-destruktif `chkdsk /scan` dengan render UI kustom agar Anda tahu persis jalannya progres pemicu kesehatan Windows Anda.
 
 ### 🧹 Penyimpanan & Pembersihan
-* **Kompresi Compact OS:** Mengompresi binary sistem dengan aman untuk membebaskan ruang penyimpanan sebesar **2GB – 5GB** tanpa menurunkan performa atau fungsi OS.
+* **Kompresi Compact OS:** Kini bersifat **dua arah** (mendukung kompresi file OS dan dekompresi kembali ke default), menghemat **2GB – 5GB** ruang penyimpanan.
 * **Pemberantas Sampah (Enhanced):** Pembersihan mendalam untuk folder sistem temp, Prefetch, CrashDumps, cache Windows Update, log CBS yang membengkak, dan cache shader GPU.
 * **Pembersih Cache Aplikasi:** Menghapus cache raksasa dari Discord, Spotify, Steam, Telegram, dan WhatsApp secara otomatis dan aman tanpa mengeluarkan Anda dari akun.
-* **Pembersih Event Logs:** Utilitas khusus untuk mengosongkan semua log Windows Event Viewer dengan aman dan melaporkan MB yang dibersihkan.
+* **Pembersih Event Logs:** Utilitas berbasis API .NET langsung untuk mengosongkan semua log Windows Event Viewer **secara instan (kurang dari 1 detik)**.
 * **Smart App Uninstaller:** Pencarian fuzzy cepat melalui registri sistem aktif untuk mencari dan menjalankan uninstaller bawaan secara instan.
 * **Recycle Bin & Disk Cleanup:** Mengosongkan file sampah di Recycle Bin dengan aman atau memicu utilitas bawaan Windows Disk Cleanup dengan cepat.
+
+### 🛠️ Pusat Pemeliharaan Sistem
+* **Laporan Audit PC (HTML):** Membuat laporan spesifikasi PC interaktif premium dan bersih dalam format HTML yang diekspor langsung ke Desktop. Mengaudit CPU, RAM, detail OS, Motherboard, ruang penyimpanan, dan **Akun Windows Aktif** dengan label hak akses yang jelas (Administrator vs Standar).
+* **Pemeliharaan Satu Klik:** Melakukan pemeliharaan sistem otomatis (pembersihan sampah, pembersihan DNS, pemindaian SFC/DISM) dengan tetap mempertahankan Recycle Bin untuk menghindari hilangnya file penting milik pengguna.
+* **Analisis Kesehatan Baterai:** Menghitung tingkat keausan baterai real-time, kapasitas desain, dan kapasitas isi penuh, atau mendeteksi PC Desktop secara dinamis.
+* **Pengelola Remote Desktop (RDP):** Mengaktifkan/menonaktifkan RDP secara instan dan mengonfigurasi aturan Windows Firewall yang diperlukan.
+* **Pembersih Cache Browser:** Membersihkan database cache dari Google Chrome, Microsoft Edge, dan Mozilla Firefox.
 
 ### ⚡ Performa & Optimasi
 * **Optimasi Memori:** Mengosongkan *working set* RAM yang tidak terpakai untuk membebaskan memori fisik, menampilkan statistik "Sebelum & Sesudah" RAM yang jelas di terminal.
@@ -34,7 +40,7 @@
 
 ### 🌐 Jaringan & Alat Admin
 * **Perbaikan Jaringan:** Mengotomatiskan 5 alat perbaikan penting (reset TCP/IP, reset Winsock, flush DNS, release/renew IP) untuk memulihkan konektivitas internet yang bermasalah.
-* **Pengubah DNS:** Mengalihkan DNS dengan cepat ke Cloudflare (1.1.1.1), Google DNS (8.8.8.8), Quad9, AdGuard (Blokir Iklan), atau mengembalikannya ke default (DHCP).
+* **Pengubah DNS:** Mengalihkan DNS dengan cepat ke Cloudflare (1.1.1.1), Google DNS (8.8.8.8), Quad9, AdGuard (Blokir Iklan), atau default (DHCP). Secara otomatis menerapkan konfigurasi ke **semua adapter jaringan fisik yang aktif** secara bersamaan.
 * **Wi-Fi Password Recovery:** Memulihkan dan menampilkan kunci keamanan WPA/WPA2 untuk semua jaringan lokal yang pernah tersimpan di PC Anda.
 * **Update & Backup Driver:** Memperbarui semua aplikasi terinstal via `winget` secara massal dan mengekspor driver pihak ketiga aktif ke folder aman `C:\DriversBackup`.
 
