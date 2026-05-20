@@ -1,3 +1,26 @@
+# 🚀 ncexs Toolkit v3.2
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | **Basa Jawa** | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.2 Pangopenan & Audit Sistem
+
+### ✨ Fitur & Peningkatan
+- **Pusat Pangopenan Sistem**: Nambahake sub-menu anyar sing komplit (Menu 17) kanthi piranti ing ngisor iki:
+  - **Laporan Audit PC (HTML)**: Nggawe laporan spesifikasi PC interaktif format HTML sing diekspor langsung menyang Desktop. Ngadit CPU, RAM, detail OS, Motherboard, lan **Akun Windows Aktif** kanthi label hak akses sing cetha (Administrator vs Standar).
+  - **Pangopenan Sepisan Klik**: Nindakake pangopenan sistem otomatis (ngresiki sampah, DNS flush, SFC/DISM scan) kanthi tetep njaga Recycle Bin supaya file penting ora ilang.
+  - **Analisis Kesehatan Baterai**: Ngitung tingkat keausan baterai real-time, utawa ndeteksi PC Desktop sacara dinamis.
+  - **Pengelola Remote Desktop (RDP)**: Ngaktifake/nonaktifake RDP kanthi cepet lan ngatur aturan Windows Firewall.
+  - **Pembersih Cache Browser**: Ngresiki database cache Google Chrome, Microsoft Edge, lan Mozilla Firefox.
+- **Pembersihan Event Logs .NET**: Nganyari fitur reresik Event Viewer nganggo API .NET, eksekusi cepet kurang saka 1 detik.
+- **DNS Multi-Adapter**: Ngetrapake konfigurasi DNS menyang *kabeh adaptor jaringan fisik sing aktif* bebarengan.
+- **Compact OS Rong Arah**: Ndhukung kompresi (`/CompactOS:always`) lan dekompresi (`/CompactOS:never`) file sistem.
+
+### 🐛 Perbaikan Bug & Lokalisasi
+- **Lokalisasi & Pengamanan**: Ndandani bug basa campuran ing Compact OS kanthi mindhah kabeh string menyang sistem `$global:Translations`.
+- **Perlindungan File Pangguna**: Nyegah pambusakan Recycle Bin saka pangopenan otomatis supaya berkas pangguna ora ilang.
+
+---
+
 # 🚀 ncexs Toolkit v3.1
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | **Basa Jawa** | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)

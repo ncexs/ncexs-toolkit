@@ -1,3 +1,26 @@
+# 🚀 ncexs Toolkit v3.2
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | **中文** | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.2 系统维护与审计版
+
+### ✨ 功能与改进
+- **PC 维护套件**: 新增全新综合子菜单（菜单 17）：
+  - **PC 审计报告 (HTML)**: 在桌面生成精美的交互式 HTML 系统规格报告。审计 CPU、内存、系统、主板及**活跃 Windows 账户**权限级别（管理员与标准）。
+  - **一键维护**: 自动进行系统维护（清理垃圾、刷新 DNS、SFC/DISM 扫描），同时安全保留回收站以防文件丢失。
+  - **电池健康分析**: 实时计算电池损耗或自动识别台式机。
+  - **远程桌面 (RDP) 管理**: 快速启用/禁用 RDP 并自动配置防火墙规则。
+  - **浏览器缓存清理**: 清除 Google Chrome、Edge 和 Firefox 的缓存。
+- **.NET 高速事件日志清理**: 升级为直接使用 .NET API 查询清理事件查看器日志，1 秒内瞬间完成。
+- **多网卡 DNS**: DNS 更改功能现已支持同时应用到所有处于活跃状态的物理网卡。
+- **双向 Compact OS**: 支持系统文件的压缩（`/CompactOS:always`）与解压缩（`/CompactOS:never`）。
+
+### 🐛 缺陷修复与本地化
+- **本地化与安全**: 修复了 Compact OS 中的语言混合 Bug，并完善了翻译映射。
+- **保护用户文件**: 一键维护中排除了清空回收站操作，以防用户的重要文件被意外删除。
+
+---
+
 # 🚀 ncexs Toolkit v3.1
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | **中文** | [العربية](CHANGELOG.ar.md)
