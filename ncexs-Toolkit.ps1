@@ -15,7 +15,7 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue
 
-$global:ToolkitVersion = "v3.1"
+$global:ToolkitVersion = "v3.2"
 $global:Language = "EN"
 
 $global:Theme = @{
@@ -46,9 +46,9 @@ $global:Translations = @{
         "Menu_Option9" = "Defrag & Optimize Drives"; "Menu_Option10" = "System Health Checker"
         "Menu_Option11" = "Updates & Drivers Center"; "Menu_Option12" = "DNS Changer"
         "Menu_Option13" = "Wi-Fi Password Recovery"; "Menu_Option14" = "Visual FX Booster"
-        "Menu_Option15" = "Clear App Caches"; "Menu_Option16" = "Clear Event Logs"; "Menu_Option17" = "Exit Toolkit"
+        "Menu_Option15" = "Clear App Caches"; "Menu_Option16" = "Clear Event Logs"; "Menu_Option17" = "PC Maintenance Suite"; "Menu_Option18" = "Exit Toolkit"
         "Menu_OptionL" = "Change Language"
-        "SubMenu_Power" = "POWER & BATTERY"; "SubMenu_Update" = "UPDATES & DRIVERS CENTER"
+        "SubMenu_Power" = "POWER & BATTERY"; "SubMenu_Update" = "UPDATES & DRIVERS CENTER"; "SubMenu_Maintenance" = "PC MAINTENANCE SUITE"
         "DNS_Menu_Text" = "`n [1] Cloudflare (Fastest)`n [2] Google DNS (Stable)`n [3] Quad9 (Privacy)`n [4] AdGuard DNS (Block Ads)`n [5] Reset to Default (DHCP)`n [6] Back"
         "DNS_NoAdapter" = "No active internet adapter found."
         "DNS_Invalid" = "Invalid option"
@@ -60,6 +60,9 @@ $global:Translations = @{
         "Process_Cancel" = "Press Ctrl+C to cancel/abort the running process."
         "Process_Aborted" = "Process cancelled/aborted by user. Returning to main menu..."
         "Compact_Title" = "COMPACT OS"; "Compact_Confirm" = "Start compressing OS?"; "Compact_Done" = "OS Compression completed."
+        "Compact_Option1" = "Compress OS (Save 2-5GB Space)"; "Compact_Option2" = "Decompress OS (Restore Default)"; "Compact_Option3" = "Back"
+        "Compact_Decompress_Confirm" = "Restore OS to uncompressed state?"; "Compact_Decompress_Done" = "OS Decompression completed."
+        "Compact_Compressing" = "Compressing..."; "Compact_Decompressing" = "Decompressing..."
         "System_Title" = "SYSTEM INFORMATION"; "Clean_Title" = "JUNK CLEANER"; "Clean_Confirm" = "Start scanning and cleaning junk files?"
         "Uninstall_Title" = "ADVANCED UNINSTALLER"; "Uninstall_Prompt" = "Enter application name to search:"
         "Uninstall_Search" = "Searching for installed applications..."; "Uninstall_NotFound" = "Application not found."
@@ -72,6 +75,40 @@ $global:Translations = @{
         "Health_Confirm" = "Scan system health? (Takes a few minutes)"; "Update_Backup" = "Backup created at"
         "Visual_Confirm" = "Boost UI now? (Explorer will restart)"; "Visual_Success" = "UI Boosted."
         "Event_Confirm" = "Clear all Windows Event Logs? (May take a minute)"; "Event_Done" = "Event Logs cleared."
+        
+        "Maint_License_Title" = "WINDOWS LICENSE STATUS"
+        "Maint_Audit_Title" = "PC AUDIT REPORT"
+        "Maint_Audit_Exporting" = "Gathering PC specifications and generating report..."
+        "Maint_Audit_Success" = "Audit report successfully saved to Desktop: {0}"
+        "Maint_Maint_Title" = "ONE-CLICK MAINTENANCE"
+        "Maint_Maint_Confirm" = "Start automatic maintenance? (This will clean junk, flush DNS, and repair system health)"
+        "Maint_Maint_Junk" = "Cleaning junk files..."
+        "Maint_Maint_DNS" = "Flushing DNS Cache..."
+        "Maint_Maint_SFC" = "Running System File Checker (SFC)..."
+        "Maint_Maint_DISM" = "Running DISM System Image Repair..."
+        "Maint_Maint_Done" = "One-Click Maintenance completed."
+        "Maint_Battery_Title" = "BATTERY HEALTH CHECK"
+        "Maint_Battery_Desktop" = "This system is running on a Desktop PC. No battery detected."
+        "Maint_Battery_Wear" = "Battery Health: {0}% | Design Capacity: {1} mWh | Full Charge Capacity: {2} mWh"
+        "Maint_RDP_Title" = "REMOTE DESKTOP MANAGER"
+        "Maint_RDP_Status" = "Current RDP Status: {0}"
+        "Maint_RDP_Enabled" = "ENABLED"
+        "Maint_RDP_Disabled" = "DISABLED"
+        "Maint_RDP_Enable_Prompt" = "Enable Remote Desktop (RDP)?"
+        "Maint_RDP_Disable_Prompt" = "Disable Remote Desktop (RDP)?"
+        "Maint_RDP_Enable_Success" = "Remote Desktop (RDP) has been enabled and firewall rules configured."
+        "Maint_RDP_Disable_Success" = "Remote Desktop (RDP) has been disabled."
+        "Maint_Browser_Title" = "BROWSER CACHE CLEANER"
+        "Maint_Browser_Confirm" = "Clear caches for Google Chrome, MS Edge, and Firefox?"
+        "Maint_Browser_Cleared" = "Cleared cache folder for {0}."
+        "Maint_Browser_Success" = "Browser cache cleaning completed. Freed: {0} MB"
+        "Maint_Option1" = "Windows License Status"
+        "Maint_Option2" = "Export PC Audit Report (HTML)"
+        "Maint_Option3" = "One-Click Maintenance"
+        "Maint_Option4" = "Battery Health Analyzer"
+        "Maint_Option5" = "Remote Desktop (RDP) Manager"
+        "Maint_Option6" = "Clear Browser Caches"
+        "Maint_Option7" = "Back to Main Menu"
     };
     "ID" = @{
         "Menu_Title" = "ncexs Toolkit $($global:ToolkitVersion)"; "Menu_Option0" = "Compact OS (Hemat 2-5GB Space)"
@@ -82,9 +119,9 @@ $global:Translations = @{
         "Menu_Option9" = "Defragment & Optimasi Drive"; "Menu_Option10" = "Pemeriksa Kesehatan Sistem"
         "Menu_Option11" = "Pusat Update & Driver"; "Menu_Option12" = "Pengubah DNS"
         "Menu_Option13" = "Wi-Fi Password Recovery"; "Menu_Option14" = "Visual FX Booster"
-        "Menu_Option15" = "Pembersih Cache Aplikasi"; "Menu_Option16" = "Hapus Event Logs"; "Menu_Option17" = "Keluar Aplikasi"
+        "Menu_Option15" = "Pembersih Cache Aplikasi"; "Menu_Option16" = "Hapus Event Logs"; "Menu_Option17" = "Pusat Pemeliharaan Sistem"; "Menu_Option18" = "Keluar Aplikasi"
         "Menu_OptionL" = "Ubah Bahasa"
-        "SubMenu_Power" = "UTILITAS DAYA & BATERAI"; "SubMenu_Update" = "PUSAT UPDATE & DRIVER"
+        "SubMenu_Power" = "UTILITAS DAYA & BATERAI"; "SubMenu_Update" = "PUSAT UPDATE & DRIVER"; "SubMenu_Maintenance" = "PUSAT PEMELIHARAAN SISTEM"
         "DNS_Menu_Text" = "`n [1] Cloudflare (Tercepat)`n [2] Google DNS (Stabil)`n [3] Quad9 (Privasi)`n [4] AdGuard DNS (Blokir Iklan)`n [5] Reset ke Default (DHCP)`n [6] Kembali"
         "DNS_NoAdapter" = "Tidak ada adapter internet aktif."
         "DNS_Invalid" = "Pilihan tidak valid"
@@ -96,6 +133,9 @@ $global:Translations = @{
         "Process_Cancel" = "Tekan Ctrl+C untuk membatalkan/menghentikan proses yang sedang berjalan."
         "Process_Aborted" = "Proses dibatalkan oleh pengguna. Kembali ke menu utama..."
         "Compact_Title" = "COMPACT OS"; "Compact_Confirm" = "Mulai kompresi OS?"; "Compact_Done" = "Kompresi OS selesai."
+        "Compact_Option1" = "Kompres OS (Hemat 2-5GB Ruang)"; "Compact_Option2" = "Dekompres OS (Kembalikan Default)"; "Compact_Option3" = "Kembali"
+        "Compact_Decompress_Confirm" = "Kembalikan OS ke kondisi tidak terkompresi?"; "Compact_Decompress_Done" = "Dekompresi OS selesai."
+        "Compact_Compressing" = "Sedang mengompresi..."; "Compact_Decompressing" = "Sedang mendekampresi..."
         "System_Title" = "INFORMASI SISTEM"; "Clean_Title" = "PEMBERSIH SAMPAH"; "Clean_Confirm" = "Mulai memindai dan membersihkan file sampah?"
         "Uninstall_Title" = "ADVANCED UNINSTALLER"; "Uninstall_Prompt" = "Masukkan nama aplikasi yang dicari:"
         "Uninstall_Search" = "Mencari aplikasi terinstal..."; "Uninstall_NotFound" = "Aplikasi tidak ditemukan."
@@ -108,6 +148,40 @@ $global:Translations = @{
         "Health_Confirm" = "Scan kesehatan sistem? (Butuh beberapa menit)"; "Update_Backup" = "Backup selesai di"
         "Visual_Confirm" = "Boost UI sekarang? (Explorer akan direstart)"; "Visual_Success" = "UI Boosted."
         "Event_Confirm" = "Bersihkan semua log Windows Event Viewer? (Butuh 1 menit)"; "Event_Done" = "Event Logs berhasil dibersihkan."
+        
+        "Maint_License_Title" = "STATUS LISENSI WINDOWS"
+        "Maint_Audit_Title" = "LAPORAN AUDIT SPESIFIKASI PC"
+        "Maint_Audit_Exporting" = "Mengumpulkan spesifikasi PC dan membuat laporan..."
+        "Maint_Audit_Success" = "Laporan audit berhasil disimpan ke Desktop: {0}"
+        "Maint_Maint_Title" = "PEMELIHARAAN SATU KLIK"
+        "Maint_Maint_Confirm" = "Mulai pemeliharaan otomatis? (Akan membersihkan sampah, flush DNS, dan scan kesehatan sistem)"
+        "Maint_Maint_Junk" = "Membersihkan file sampah..."
+        "Maint_Maint_DNS" = "Membersihkan DNS Cache..."
+        "Maint_Maint_SFC" = "Menjalankan System File Checker (SFC)..."
+        "Maint_Maint_DISM" = "Menjalankan DISM System Image Repair..."
+        "Maint_Maint_Done" = "Pemeliharaan Satu Klik selesai."
+        "Maint_Battery_Title" = "ANALISIS KESEHATAN BATERAI"
+        "Maint_Battery_Desktop" = "Sistem ini berjalan di PC Desktop. Tidak ada baterai terdeteksi."
+        "Maint_Battery_Wear" = "Kesehatan Baterai: {0}% | Kapasitas Desain: {1} mWh | Kapasitas Isi Penuh: {2} mWh"
+        "Maint_RDP_Title" = "PENGELOLA REMOTE DESKTOP (RDP)"
+        "Maint_RDP_Status" = "Status RDP Saat Ini: {0}"
+        "Maint_RDP_Enabled" = "AKTIF"
+        "Maint_RDP_Disabled" = "NONAKTIF"
+        "Maint_RDP_Enable_Prompt" = "Aktifkan Remote Desktop (RDP)?"
+        "Maint_RDP_Disable_Prompt" = "Nonaktifkan Remote Desktop (RDP)?"
+        "Maint_RDP_Enable_Success" = "Remote Desktop (RDP) berhasil diaktifkan dan aturan firewall dikonfigurasi."
+        "Maint_RDP_Disable_Success" = "Remote Desktop (RDP) berhasil dinonaktifkan."
+        "Maint_Browser_Title" = "PEMBERSIH CACHE BROWSER"
+        "Maint_Browser_Confirm" = "Bersihkan cache untuk Google Chrome, MS Edge, dan Firefox?"
+        "Maint_Browser_Cleared" = "Berhasil membersihkan folder cache {0}."
+        "Maint_Browser_Success" = "Pembersihan cache browser selesai. Berhasil mengosongkan: {0} MB"
+        "Maint_Option1" = "Cek Status Lisensi Windows"
+        "Maint_Option2" = "Ekspor Laporan Audit PC (HTML)"
+        "Maint_Option3" = "Pemeliharaan Satu Klik"
+        "Maint_Option4" = "Analisis Kesehatan Baterai"
+        "Maint_Option5" = "Remote Desktop (RDP) Manager"
+        "Maint_Option6" = "Bersihkan Cache Browser"
+        "Maint_Option7" = "Kembali ke Menu Utama"
     }
 }
 
@@ -147,8 +221,27 @@ function Show-Intro {
 function Invoke-CompactOS {
     Write-Title (Get-Translation 'Compact_Title')
     $rawStatus = compact.exe /CompactOS:query
-    Write-Info "Status: $rawStatus"
-    if (Request-Confirm (Get-Translation 'Compact_Confirm')) { Write-Host " Sedang mengompresi..." -ForegroundColor Cyan; compact.exe /CompactOS:always; Write-Success (Get-Translation 'Compact_Done') }
+    Write-Host " Status: $rawStatus`n"
+    
+    Write-Host " [1] $(Get-Translation 'Compact_Option1')"
+    Write-Host " [2] $(Get-Translation 'Compact_Option2')"
+    Write-Host " [3] $(Get-Translation 'Compact_Option3')"
+    Write-Host ""
+    
+    $c = Read-Host " $(Get-Translation 'SelectOption')"
+    if ($c -eq "1") {
+        if (Request-Confirm (Get-Translation 'Compact_Confirm')) { 
+            Write-Host " $(Get-Translation 'Compact_Compressing')" -ForegroundColor Cyan
+            compact.exe /CompactOS:always
+            Write-Success (Get-Translation 'Compact_Done') 
+        }
+    } elseif ($c -eq "2") {
+        if (Request-Confirm (Get-Translation 'Compact_Decompress_Confirm')) {
+            Write-Host " $(Get-Translation 'Compact_Decompressing')" -ForegroundColor Cyan
+            compact.exe /CompactOS:never
+            Write-Success (Get-Translation 'Compact_Decompress_Done')
+        }
+    }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
@@ -327,13 +420,13 @@ function Show-DNSMenu {
     
     if ($c -eq "6") { return }
     
-    $adapter = Get-NetAdapter | Where-Object { $_.Status -eq "Up" -and $_.Virtual -eq $false } | Select-Object -First 1
-    if (-not $adapter -and $c -match "^[1-5]$") { Write-Error (Get-Translation 'DNS_NoAdapter') }
-    elseif ($c -eq "1") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("1.1.1.1", "1.0.0.1"); Write-Success "DNS: Cloudflare (1.1.1.1)" }
-    elseif ($c -eq "2") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("8.8.8.8", "8.8.4.4"); Write-Success "DNS: Google (8.8.8.8)" }
-    elseif ($c -eq "3") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("9.9.9.9", "149.112.112.112"); Write-Success "DNS: Quad9 (9.9.9.9)" }
-    elseif ($c -eq "4") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("94.140.14.14", "94.140.15.15"); Write-Success "DNS: AdGuard (94.140.14.14)" }
-    elseif ($c -eq "5") { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ResetServerAddresses; Write-Success "DNS: Default (DHCP)" }
+    $adapters = Get-NetAdapter | Where-Object { $_.Status -eq "Up" -and $_.Virtual -eq $false }
+    if ($adapters.Count -eq 0 -and $c -match "^[1-5]$") { Write-Error (Get-Translation 'DNS_NoAdapter') }
+    elseif ($c -eq "1") { foreach ($adapter in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("1.1.1.1", "1.0.0.1") }; Write-Success "DNS: Cloudflare (1.1.1.1)" }
+    elseif ($c -eq "2") { foreach ($adapter in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("8.8.8.8", "8.8.4.4") }; Write-Success "DNS: Google (8.8.8.8)" }
+    elseif ($c -eq "3") { foreach ($adapter in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("9.9.9.9", "149.112.112.112") }; Write-Success "DNS: Quad9 (9.9.9.9)" }
+    elseif ($c -eq "4") { foreach ($adapter in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("94.140.14.14", "94.140.15.15") }; Write-Success "DNS: AdGuard (94.140.14.14)" }
+    elseif ($c -eq "5") { foreach ($adapter in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ResetServerAddresses }; Write-Success "DNS: Default (DHCP)" }
     else { Write-Warning (Get-Translation 'DNS_Invalid') }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
@@ -379,11 +472,625 @@ function Clear-EventLogs {
     Write-Host " Clearing Event Logs (Wait a few seconds)..." -ForegroundColor Cyan
     $logPath = "$env:SystemRoot\System32\Winevt\Logs\*"
     $beforeSize = 0; try { $beforeSize = (Get-ChildItem -Path $logPath -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum } catch {}
-    wevtutil el | ForEach-Object { wevtutil cl "$_" 2>$null }
+    
+    # Instant Event Log clearing via .NET API for active logs
+    $logs = Get-WinEvent -ListLog * -ErrorAction SilentlyContinue | Where-Object { $_.RecordCount -gt 0 }
+    foreach ($log in $logs) {
+        try {
+            [System.Diagnostics.Eventing.Reader.EventLogSession]::GlobalSession.ClearLog($log.LogName)
+        } catch {}
+    }
+    
     $afterSize = 0; try { $afterSize = (Get-ChildItem -Path $logPath -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum } catch {}
     $freed = $beforeSize - $afterSize; if ($freed -lt 0) { $freed = 0 }
     Write-Success ((Get-Translation 'Event_Done') + " Freed: $([math]::Round($freed / 1MB, 2)) MB")
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
+}
+
+function Get-WindowsLicenseStatus {
+    Write-Title (Get-Translation 'Maint_License_Title')
+    Write-Host ""
+    try {
+        $wmi = Get-CimInstance SoftwareLicensingProduct -Filter "PartialProductKey IS NOT NULL" | Select-Object -First 1
+        $statusMap = @{
+            0 = "Unlicensed"
+            1 = "Licensed (Activated)"
+            2 = "OOBGrace"
+            3 = "OOTGrace"
+            4 = "NonGenuineGrace"
+            5 = "Notification"
+            6 = "ExtendedGrace"
+        }
+        $statusStr = if ($wmi -and $statusMap.ContainsKey($wmi.LicenseStatus)) { $statusMap[[int]$wmi.LicenseStatus] } else { "Unknown" }
+        
+        Write-Host " [ License Information ]" -ForegroundColor $global:Theme.Section
+        Write-Host "   Description      : $($wmi.Description)"
+        Write-Host "   License Status   : $statusStr"
+        if ($wmi.LicenseStatus -eq 1) {
+            Write-Success "Windows is fully activated."
+        } else {
+            Write-Warning "Windows is not activated or is in grace period."
+        }
+        
+        Write-Host "`n [ Activation Check via slmgr ]" -ForegroundColor $global:Theme.Section
+        Write-Info "Running slmgr.vbs /dli to verify..."
+        $slmgrOut = cscript //nologo $env:SystemRoot\System32\slmgr.vbs /dli
+        if ($slmgrOut) {
+            $slmgrOut | ForEach-Object { Write-Host "   $_" }
+        }
+    } catch {
+        Write-Error "Failed to retrieve license details."
+    }
+    Read-Host "`n $(Get-Translation 'PressAnyKey')"
+}
+
+function Export-PCAuditReport {
+    Write-Title (Get-Translation 'Maint_Audit_Title')
+    Write-Info (Get-Translation 'Maint_Audit_Exporting')
+    
+    try {
+        $computerName = $env:COMPUTERNAME
+        $userName = $env:USERNAME
+        
+        $os = Get-CimInstance Win32_OperatingSystem
+        $osName = $os.Caption
+        $osVer = $os.Version
+        $osArch = $os.OSArchitecture
+        $installDate = $os.InstallDate.ToString("yyyy-MM-dd HH:mm:ss")
+        $lastBoot = $os.LastBootUpTime.ToString("yyyy-MM-dd HH:mm:ss")
+        $uptime = (Get-Date) - $os.LastBootUpTime
+        $uptimeStr = "$($uptime.Days)d $($uptime.Hours)h $($uptime.Minutes)m"
+
+        $mobo = Get-CimInstance Win32_BaseBoard
+        $bios = Get-CimInstance Win32_BIOS
+        $cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
+        $system = Get-CimInstance Win32_ComputerSystem
+        $gpu = Get-CimInstance Win32_VideoController | Select-Object -ExpandProperty Name
+        
+        $ramTotal = [math]::Round($system.TotalPhysicalMemory / 1GB, 2)
+        $ramChips = Get-CimInstance Win32_PhysicalMemory
+        $ramDetails = ""
+        foreach ($chip in $ramChips) {
+            $cap = [math]::Round($chip.Capacity / 1GB, 2)
+            $ramDetails += "Slot: $($chip.DeviceLocator) | Speed: $($chip.Speed) MHz | Capacity: $cap GB<br>"
+        }
+
+        $disks = Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3"
+        $diskRows = ""
+        foreach ($d in $disks) {
+            $total = [math]::Round($d.Size/1GB, 2)
+            $free = [math]::Round($d.FreeSpace/1GB, 2)
+            $used = [math]::Round($total - $free, 2)
+            $usedPct = [math]::Round(($used/$total)*100, 1)
+            $diskRows += "<tr><td>$($d.DeviceID)</td><td>$total GB</td><td>$free GB</td><td>$used GB ($usedPct%)</td></tr>"
+        }
+
+        $adapters = Get-NetAdapter | Where-Object { $_.Status -eq "Up" }
+        $netRows = ""
+        foreach ($a in $adapters) {
+            $ips = Get-NetIPAddress -InterfaceIndex $a.ifIndex | Where-Object { $_.AddressFamily -eq 'IPv4' } | Select-Object -ExpandProperty IPAddress
+            $ipStr = $ips -join ", "
+            $netRows += "<tr><td>$($a.Name)</td><td>$($a.MacAddress)</td><td>$ipStr</td><td>$($a.LinkSpeed)</td></tr>"
+        }
+
+        $userAccounts = Get-CimInstance Win32_UserAccount -Filter "LocalAccount=True" -ErrorAction SilentlyContinue
+        $adminMembers = @()
+        try {
+            $adminGroup = Get-CimInstance Win32_Group -Filter "SID = 'S-1-5-32-544'" -ErrorAction SilentlyContinue
+            if ($adminGroup) {
+                $adminMembers = Get-CimInstance Win32_GroupUser -ErrorAction SilentlyContinue | 
+                    Where-Object { $_.GroupComponent.Name -eq $adminGroup.Name } | 
+                    ForEach-Object { $_.PartComponent.Name }
+            }
+        } catch {}
+
+        $userRows = ""
+        if ($userAccounts) {
+            foreach ($u in $userAccounts) {
+                $status = if ($u.Disabled) { "Disabled" } else { "Enabled" }
+                $statusColor = if ($u.Disabled) { "#ef4444" } else { "#10b981" }
+                $fullName = if ($u.FullName) { $u.FullName } else { "-" }
+                $description = if ($u.Description) { $u.Description } else { "-" }
+                
+                # Check if user is administrator
+                $isAdmin = $adminMembers -contains $u.Name
+                $roleText = if ($isAdmin) { "Administrator" } else { "Standard" }
+                $roleColor = if ($isAdmin) { "#ec4899" } else { "#9ca3af" }
+                
+                $userRows += "<tr><td>$($u.Name)</td><td>$fullName</td><td><span style='color:$statusColor;font-weight:600;'>$status</span></td><td><span style='color:$roleColor;font-weight:600;'>$roleText</span></td><td>$description</td></tr>"
+            }
+        } else {
+            $userRows = "<tr><td colspan='5' style='text-align:center;color:var(--text-secondary);'>No local accounts found</td></tr>"
+        }
+
+        $uninstallPaths = @(
+            'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*',
+            'HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*'
+        )
+        $installedApps = foreach ($p in $uninstallPaths) { 
+            Get-ItemProperty -Path $p -ErrorAction SilentlyContinue | 
+                Where-Object { $_.DisplayName } | 
+                Select-Object DisplayName, DisplayVersion, InstallDate
+        }
+        $installedApps = $installedApps | Sort-Object DisplayName
+        $appRows = ""
+        foreach ($app in $installedApps) {
+            $appRows += "<tr><td>$($app.DisplayName)</td><td>$($app.DisplayVersion)</td><td>$($app.InstallDate)</td></tr>"
+        }
+
+        $wmiLicense = Get-CimInstance SoftwareLicensingProduct -Filter "PartialProductKey IS NOT NULL" | Select-Object -First 1
+        $licStatus = "Unknown"
+        if ($wmiLicense) {
+            $statusMap = @{ 0="Unlicensed"; 1="Licensed"; 2="OOBGrace"; 3="OOTGrace"; 4="NonGenuineGrace"; 5="Notification"; 6="ExtendedGrace" }
+            $licStatus = $statusMap[[int]$wmiLicense.LicenseStatus]
+        }
+
+        $html = @"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Audit Report - $computerName</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(22, 28, 45, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --text-main: #f3f4f6;
+            --text-secondary: #9ca3af;
+        }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            background-image: radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px;
+            backdrop-filter: blur(12px);
+        }
+        h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .meta {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(6, 182, 212, 0.2);
+        }
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.25rem;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .card-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .card-table td {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            font-size: 0.92rem;
+        }
+        .card-table td.label {
+            color: var(--text-secondary);
+            width: 35%;
+            font-weight: 500;
+        }
+        .card-table td.value {
+            color: var(--text-main);
+            text-align: right;
+            word-break: break-word;
+        }
+        .section-title {
+            color: var(--accent-pink);
+            font-size: 1.4rem;
+            margin: 30px 0 15px 0;
+            padding-left: 10px;
+            border-left: 4px solid var(--accent-pink);
+        }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px;
+        }
+        table.data-table th, table.data-table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+        table.data-table th {
+            background-color: rgba(6, 182, 212, 0.1);
+            color: var(--accent-cyan);
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+        }
+        table.data-table td {
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            color: var(--text-main);
+            font-size: 0.9rem;
+        }
+        table.data-table tr:hover td {
+            background-color: rgba(255,255,255,0.02);
+        }
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PC AUDIT REPORT</h1>
+            <div class="meta">Generated by ncexs PC Maintenance Suite on $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")</div>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <h2>System Details</h2>
+                <table class="card-table">
+                    <tr><td class="label">Host Name</td><td class="value">$computerName</td></tr>
+                    <tr><td class="label">User Name</td><td class="value">$userName</td></tr>
+                    <tr><td class="label">OS Version</td><td class="value">$osName ($osArch)</td></tr>
+                    <tr><td class="label">Build Version</td><td class="value">$osVer</td></tr>
+                    <tr><td class="label">Installation Date</td><td class="value">$installDate</td></tr>
+                    <tr><td class="label">System Uptime</td><td class="value">$uptimeStr</td></tr>
+                    <tr><td class="label">Last Boot Time</td><td class="value">$lastBoot</td></tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Hardware Specs</h2>
+                <table class="card-table">
+                    <tr><td class="label">Motherboard</td><td class="value">$($mobo.Manufacturer) $($mobo.Product)</td></tr>
+                    <tr><td class="label">Serial Number</td><td class="value">$($bios.SerialNumber)</td></tr>
+                    <tr><td class="label">BIOS Version</td><td class="value">$($bios.SMBIOSBIOSVersion)</td></tr>
+                    <tr><td class="label">Processor</td><td class="value">$($cpu.Name)</td></tr>
+                    <tr><td class="label">Cores / Threads</td><td class="value">$($cpu.NumberOfCores) Cores / $($cpu.NumberOfLogicalProcessors) Threads</td></tr>
+                    <tr><td class="label">GPU</td><td class="value">$($gpu -join ' | ')</td></tr>
+                    <tr><td class="label">RAM Size</td><td class="value">$ramTotal GB Total</td></tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>System Health & License</h2>
+                <table class="card-table">
+                    <tr><td class="label">Windows Activation</td><td class="value">$licStatus</td></tr>
+                    <tr><td class="label">Windows Model</td><td class="value">$($os.RegisteredUser)</td></tr>
+                    <tr><td class="label">Memory Modules</td><td class="value">$ramDetails</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-title">Storage Drives</div>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Drive Letter</th>
+                    <th>Total Capacity</th>
+                    <th>Free Space</th>
+                    <th>Used Space (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                $diskRows
+            </tbody>
+        </table>
+
+        <div class="section-title">Network Adapters (Active)</div>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Adapter Name</th>
+                    <th>MAC Address</th>
+                    <th>IP Address (IPv4)</th>
+                    <th>Link Speed</th>
+                </tr>
+            </thead>
+            <tbody>
+                $netRows
+            </tbody>
+        </table>
+
+        <div class="section-title">Windows Accounts (Local Users)</div>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Account Name</th>
+                    <th>Full Name</th>
+                    <th>Status</th>
+                    <th>Privilege</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                $userRows
+            </tbody>
+        </table>
+
+        <div class="section-title">Installed Software ($($installedApps.Count) Applications)</div>
+        <div style="max-height: 400px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 12px;">
+            <table class="data-table" style="margin-bottom: 0;">
+                <thead>
+                    <tr>
+                        <th>Application Name</th>
+                        <th>Version</th>
+                        <th>Install Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    $appRows
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            Report created automatically via ncexs Toolkit &copy; 2026. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
+"@
+        
+        $destPath = "$env:USERPROFILE\Desktop\Audit_Report_$computerName.html"
+        $html | Out-File -FilePath $destPath -Encoding utf8 -Force
+        
+        Write-Success ((Get-Translation 'Maint_Audit_Success') -f $destPath)
+        Start-Process $destPath
+    } catch {
+        Write-Error "Failed to generate PC Audit Report: $_"
+    }
+    Read-Host "`n $(Get-Translation 'PressAnyKey')"
+}
+
+function Invoke-OneClickMaintenance {
+    Write-Title (Get-Translation 'Maint_Maint_Title')
+    if (-not (Request-Confirm (Get-Translation 'Maint_Maint_Confirm'))) { return }
+    
+    Write-Info (Get-Translation 'Maint_Maint_Junk')
+    $targets = @(
+        "$env:TEMP\*", 
+        "$env:SystemRoot\Temp\*", 
+        "$env:SystemRoot\Prefetch\*"
+    )
+    foreach ($p in $targets) {
+        $files = Get-ChildItem -Path $p -Recurse -Force -ErrorAction SilentlyContinue
+        if ($files) { $files | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue }
+    }
+    Write-Success "Temp files cleared."
+
+    Write-Info (Get-Translation 'Maint_Maint_DNS')
+    ipconfig /flushdns > $null
+    Write-Success "DNS Cache flushed."
+
+    Write-Info (Get-Translation 'Maint_Maint_SFC')
+    sfc /scannow
+    Write-Success "System File Checker scan completed."
+
+    Write-Info (Get-Translation 'Maint_Maint_DISM')
+    dism /online /cleanup-image /restorehealth
+    Write-Success "DISM Image repair completed."
+
+    Write-Success (Get-Translation 'Maint_Maint_Done')
+    Read-Host "`n $(Get-Translation 'PressAnyKey')"
+}
+
+function Get-BatteryHealth {
+    Write-Title (Get-Translation 'Maint_Battery_Title')
+    Write-Host ""
+    try {
+        $batteries = Get-CimInstance -ClassName Win32_Battery
+        if (-not $batteries) {
+            Write-Warning (Get-Translation 'Maint_Battery_Desktop')
+        } else {
+            $reportPath = "$env:TEMP\battery-report.html"
+            powercfg /batteryreport /output $reportPath > $null
+            
+            foreach ($b in $batteries) {
+                $name = $b.Name
+                $status = $b.Status
+                $chem = $b.Chemistry
+                
+                Write-Host " [ Battery details: $name ]" -ForegroundColor $global:Theme.Section
+                Write-Host "   Chemistry        : $chem"
+                Write-Host "   Status           : $status"
+                
+                if (Test-Path $reportPath) {
+                    $htmlContent = Get-Content -Path $reportPath -Raw
+                    $designCapMatch = [regex]::Match($htmlContent, 'DESIGN CAPACITY</td><td class="value">([\d,]+|\d+)\s*mWh')
+                    $fullCapMatch = [regex]::Match($htmlContent, 'FULL CHARGE CAPACITY</td><td class="value">([\d,]+|\d+)\s*mWh')
+                    
+                    if ($designCapMatch.Success -and $fullCapMatch.Success) {
+                        $designCapVal = $designCapMatch.Groups[1].Value -replace ',' -replace '\s'
+                        $fullCapVal = $fullCapMatch.Groups[1].Value -replace ',' -replace '\s'
+                        
+                        $designCap = [double]$designCapVal
+                        $fullCap = [double]$fullCapVal
+                        
+                        if ($designCap -gt 0) {
+                            $healthPct = [math]::Round(($fullCap / $designCap) * 100, 1)
+                            Write-Success ((Get-Translation 'Maint_Battery_Wear') -f $healthPct, $designCap, $fullCap)
+                        }
+                    } else {
+                        Write-Info "Report generated. Details can be viewed in the battery report file."
+                    }
+                }
+            }
+            
+            if (Request-Confirm "Open full battery report HTML?") {
+                Start-Process $reportPath
+            }
+        }
+    } catch {
+        Write-Error "Failed to retrieve battery details: $_"
+    }
+    Read-Host "`n $(Get-Translation 'PressAnyKey')"
+}
+
+function Manage-RemoteDesktop {
+    do {
+        Clear-Host
+        Write-Title (Get-Translation 'Maint_RDP_Title')
+        Write-Host ""
+        
+        $rdpReg = Get-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -ErrorAction SilentlyContinue
+        $rdpStatusVal = $rdpReg.fDenyTSConnections
+        
+        $statusText = if ($rdpStatusVal -eq 0) { Get-Translation 'Maint_RDP_Enabled' } else { Get-Translation 'Maint_RDP_Disabled' }
+        $statusColor = if ($rdpStatusVal -eq 0) { $global:Theme.Success } else { $global:Theme.Error }
+        
+        Write-Host "   $(Get-Translation 'Maint_RDP_Status') : " -NoNewline
+        Write-Host "$statusText" -ForegroundColor $statusColor
+        Write-Host ""
+        
+        Write-Host " [1] Enable Remote Desktop (RDP)"
+        Write-Host " [2] Disable Remote Desktop (RDP)"
+        Write-Host " [3] Back"
+        Write-Host ""
+        
+        $c = Read-Host " $(Get-Translation 'SelectOption')"
+        if ($c -eq "1") {
+            if (Request-Confirm (Get-Translation 'Maint_RDP_Enable_Prompt')) {
+                Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
+                Enable-NetFirewallRule -DisplayGroup "Remote Desktop" -ErrorAction SilentlyContinue
+                Write-Success (Get-Translation 'Maint_RDP_Enable_Success')
+                Start-Sleep -Seconds 2
+            }
+        } elseif ($c -eq "2") {
+            if (Request-Confirm (Get-Translation 'Maint_RDP_Disable_Prompt')) {
+                Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 1
+                Disable-NetFirewallRule -DisplayGroup "Remote Desktop" -ErrorAction SilentlyContinue
+                Write-Success (Get-Translation 'Maint_RDP_Disable_Success')
+                Start-Sleep -Seconds 2
+            }
+        } elseif ($c -eq "3") {
+            return
+        } else {
+            Write-Warning (Get-Translation 'Invalid_Option')
+            Start-Sleep -Seconds 1
+        }
+    } while ($true)
+}
+
+function Clear-BrowserCaches {
+    Write-Title (Get-Translation 'Maint_Browser_Title')
+    if (-not (Request-Confirm (Get-Translation 'Maint_Browser_Confirm'))) { return }
+    
+    $freed = 0
+    $targets = @(
+        @{ N = "Google Chrome"; P = "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*" },
+        @{ N = "Google Chrome Code"; P = "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Code Cache\*" },
+        @{ N = "Microsoft Edge"; P = "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" },
+        @{ N = "Microsoft Edge Code"; P = "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Code Cache\*" },
+        @{ N = "Mozilla Firefox"; P = "$env:USERPROFILE\AppData\Local\Mozilla\Firefox\Profiles\*\cache2\*" }
+    )
+    
+    foreach ($t in $targets) {
+        $pPath = $t.P
+        $resolvedPaths = @()
+        if ($pPath -like "*\*\*") {
+            $resolvedPaths = Get-Item -Path $pPath -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName
+        } else {
+            $resolvedPaths = ,$pPath
+        }
+        
+        $clearedAny = $false
+        foreach ($rp in $resolvedPaths) {
+            if (Test-Path -Path $rp) {
+                try {
+                    $files = Get-ChildItem -Path $rp -Recurse -File -Force -ErrorAction SilentlyContinue
+                    if ($files) {
+                        $size = ($files | Measure-Object -Property Length -Sum).Sum
+                        $freed += $size
+                        $files | Remove-Item -Force -ErrorAction SilentlyContinue
+                        $clearedAny = $true
+                    }
+                } catch {}
+            }
+        }
+        if ($clearedAny) {
+            Write-Info ((Get-Translation 'Maint_Browser_Cleared') -f $t.N)
+        }
+    }
+    
+    Write-Success ((Get-Translation 'Maint_Browser_Success') -f [math]::Round($freed / 1MB, 2))
+    Read-Host "`n $(Get-Translation 'PressAnyKey')"
+}
+
+function Show-PCMaintenanceMenu {
+    do {
+        Clear-Host
+        Write-Title (Get-Translation 'SubMenu_Maintenance')
+        
+        Write-Host "`n [1] $(Get-Translation 'Maint_Option1')"
+        Write-Host " [2] $(Get-Translation 'Maint_Option2')"
+        Write-Host " [3] $(Get-Translation 'Maint_Option3')"
+        Write-Host " [4] $(Get-Translation 'Maint_Option4')"
+        Write-Host " [5] $(Get-Translation 'Maint_Option5')"
+        Write-Host " [6] $(Get-Translation 'Maint_Option6')"
+        Write-Host " [7] $(Get-Translation 'Maint_Option7')"
+        Write-Host ""
+        
+        $c = Read-Host " $(Get-Translation 'SelectOption')"
+        switch ($c) {
+            "1" { Get-WindowsLicenseStatus }
+            "2" { Export-PCAuditReport }
+            "3" { Invoke-OneClickMaintenance }
+            "4" { Get-BatteryHealth }
+            "5" { Manage-RemoteDesktop }
+            "6" { Clear-BrowserCaches }
+            "7" { return }
+            default { Write-Warning (Get-Translation 'Invalid_Option'); Start-Sleep -Seconds 1 }
+        }
+    } while ($true)
 }
 
 function Show-MainMenu {
@@ -424,10 +1131,10 @@ function Show-MainMenu {
         Write-Host ("[{0,-2}]" -f $l_idx) -NoNewline -ForegroundColor $global:Theme.MenuNumber
         Write-Host (" {0,-34}" -f $l_t) -NoNewline -ForegroundColor $global:Theme.MenuText
         Write-Host "$($global:UI.VLine) " -NoNewline -ForegroundColor $global:Theme.Border
-        if ($r_idx -le 17) {
+        if ($r_idx -le 18) {
             $r_t = Get-Translation "Menu_Option$r_idx"
-            $rc = if ($r_idx -eq 17) { $global:Theme.Exit } else { $global:Theme.MenuNumber }
-            $rtc = if ($r_idx -eq 17) { $global:Theme.Exit } else { $global:Theme.MenuText }
+            $rc = if ($r_idx -eq 18) { $global:Theme.Exit } else { $global:Theme.MenuNumber }
+            $rtc = if ($r_idx -eq 18) { $global:Theme.Exit } else { $global:Theme.MenuText }
             Write-Host ("[{0,-2}]" -f $r_idx) -NoNewline -ForegroundColor $rc
             Write-Host (" {0,-35}" -f $r_t) -NoNewline -ForegroundColor $rtc
         } else {
@@ -457,7 +1164,8 @@ do {
         "9" { Invoke-Defragment }; "10" { Show-SystemHealthMenu }; "11" { Show-UpdateDriverMenu }
         "12" { Show-DNSMenu }; "13" { Invoke-WifiGrabber }; "14" { Invoke-VisualPerf }
         "15" { Invoke-OptimizeApps }; "16" { Clear-EventLogs }
-        "17" { exit }
+        "17" { Show-PCMaintenanceMenu }
+        "18" { exit }
         "L" { if ($global:Language -eq "EN") { $global:Language = "ID" } else { $global:Language = "EN" } }
         default { Write-Warning (Get-Translation 'Invalid_Option'); Start-Sleep -Seconds 1 }
     }
