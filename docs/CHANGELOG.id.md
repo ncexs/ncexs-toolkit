@@ -1,29 +1,23 @@
-# 🚀 ncexs Toolkit v3.2
+﻿# 🚀 ncexs Toolkit v3.3
 
 🌐 [English](../CHANGELOG.md) | **Bahasa Indonesia** | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
 
-## 🧰 ncexs Toolkit – v3.2 Pemeliharaan & Audit Sistem
+## 🧰 ncexs Toolkit – Pembaruan Performa & Diagnostik v3.3
 
-### ✨ Fitur & Peningkatan
-- **Pusat Pemeliharaan Sistem**: Menambahkan sub-menu komprehensif baru (Menu 17) yang dilengkapi dengan alat-alat berikut:
-  - **Laporan Audit PC (HTML)**: Membuat laporan spesifikasi PC interaktif premium dan bersih dalam format HTML yang diekspor langsung ke Desktop. Mengaudit CPU, RAM, detail OS, Motherboard, ruang penyimpanan, dan **Akun Windows Aktif** dengan label hak akses yang jelas (Administrator vs Standar).
-  - **Pemeliharaan Satu Klik**: Melakukan pemeliharaan sistem otomatis (pembersihan sampah, pembersihan DNS, pemindaian SFC/DISM) dengan tetap mempertahankan Recycle Bin untuk menghindari hilangnya file penting milik pengguna.
-  - **Analisis Kesehatan Baterai**: Menghitung tingkat keausan baterai real-time, kapasitas desain, dan kapasitas isi penuh, atau mendeteksi PC Desktop secara dinamis.
-  - **Pengelola Remote Desktop (RDP)**: Mengaktifkan/menonaktifkan RDP secara instan dan mengonfigurasi aturan Windows Firewall yang diperlukan.
-  - **Pembersih Cache Browser**: Membersihkan database cache dari Google Chrome, Microsoft Edge, dan Mozilla Firefox.
-- **Pembersihan Event Logs Cepat via .NET**: Meningkatkan fitur pembersih Event Viewer menggunakan kueri API .NET secara langsung, menghasilkan eksekusi instan kurang dari 1 detik (60x lebih cepat daripada proses berulang tradisional).
-- **DNS Multi-Adapter**: Memperluas utilitas Pengubah DNS untuk menerapkan alamat DNS yang dikonfigurasi ke *semua adapter jaringan fisik yang aktif* secara bersamaan.
-- **Compact OS Dua Arah**: Membangun ulang utilitas Compact OS untuk mendukung kompresi (`/CompactOS:always`) dan dekompresi (`/CompactOS:never`) file sistem.
+### ✨ Fitur Baru & Peningkatan
+- **Skor Performa WinSAT**: Mengintegrasikan metrik Windows System Assessment Tool ke dalam layar CLI Informasi Sistem dan laporan audit PC interaktif (HTML). Menghadirkan visualisasi bar berwarna (`█` & `░`) untuk menunjukkan performa sub-sistem (CPU, RAM, GPU, Gaming Grafis, Disk).
+- **Kesehatan Baterai di Informasi Sistem**: Menambahkan informasi kesehatan baterai (persentase wear, kapasitas desain, full charge) secara real-time langsung di menu Informasi Sistem (otomatis terdeteksi pada laptop).
+- **Optimasi Performa Besar-besaran**:
+  - **Pembersihan Cache Browser Super Cepat**: Mengoptimalkan pelacakan direktori ke tingkat folder, melakukan pembersihan cache browser hingga 100x lebih cepat.
+  - **Bypass Kompilasi RAM Cleaner**: Menambahkan verifikasi tipe data aktif untuk melewatkan kompilasi C# pada pembersihan RAM berikutnya, menghilangkan lag tunggu.
 
 ### 🐛 Perbaikan Bug & Refaktor
-- **Lokalisasi & Pengamanan**: Memperbaiki bug bahasa campuran pada Compact OS dengan mengabstraksikan seluruh string secara penuh ke sistem pemetaan `$global:Translations` untuk lokal Inggris dan Indonesia.
-- **Perlindungan File Pengguna**: Mengecualikan Recycle Bin dari pemeliharaan otomatis demi melindungi berkas penting pengguna dari penghapusan yang tidak disengaja.
+- **Parser Laporan Baterai Tangguh**: Memperbarui pencocokan regex (`DESIGN CAPACITY.*?>\s*([\d,.]+)\s*mWh`) untuk mendukung format HTML Windows 11 terbaru dan membersihkan pemisah ribuan secara dinamis.
+- **Kompatibilitas PowerShell 3.0**: Memperbaiki pemanggilan type accelerator .NET (`[System.Net.ServicePointManager]`) pada perintah mulai cepat di seluruh dokumen README demi mendukung sistem lama.
 
 ---
 
 # 🚀 ncexs Toolkit v3.1
-
-🌐 [English](../CHANGELOG.md) | **Bahasa Indonesia** | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
 
 ## 🧰 ncexs Toolkit – v3.1 Pembaruan Penguasaan Sistem
 

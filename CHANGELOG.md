@@ -1,23 +1,19 @@
-# 🚀 ncexs Toolkit v3.2
+﻿# 🚀 ncexs Toolkit v3.3
 
 🌐 **English** | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](docs/CHANGELOG.jv.md) | [Basa Sunda](docs/CHANGELOG.su.md) | [हिन्दी](docs/CHANGELOG.hi.md) | [Русский](docs/CHANGELOG.ru.md) | [日本語](docs/CHANGELOG.ja.md) | [한국어](docs/CHANGELOG.ko.md) | [中文](docs/CHANGELOG.zh.md) | [العربية](docs/CHANGELOG.ar.md)
 
-## 🧰 ncexs Toolkit – v3.2 System Maintenance Update
+## 🧰 ncexs Toolkit – v3.3 Performance & Diagnostics Update
 
 ### ✨ Features & Enhancements
-- **PC Maintenance Suite**: Introduced a brand new comprehensive sub-menu (Menu 17) packed with powerful tools:
-  - **PC Audit Report (HTML)**: Generates a premium and clean interactive HTML PC specifications report exported directly to your Desktop. Audits CPU, RAM, OS details, Motherboard, Storage space, and **Active Windows Accounts** with clear privilege badging (Administrator vs Standard).
-  - **One-Click Maintenance**: Performs fully automated system maintenance (junk clean, DNS flush, SFC/DISM scan) while intelligently preserving the Recycle Bin to prevent loss of important user files.
-  - **Battery Health Analyzer**: Calculates real-time battery wear, design capacity, and full charge capacity, or dynamically detects Desktop PCs.
-  - **Remote Desktop (RDP) Manager**: Turn RDP on/off instantly and configures required Windows Firewall rules.
-  - **Browser Cache Cleaner**: Cleans accumulated cache databases from Google Chrome, Microsoft Edge, and Mozilla Firefox.
-- **Direct .NET Event Logs Clearing**: Upgraded Event Viewer cleaner to use direct .NET Event Log API querying, resulting in an instant < 1 second execution (60x faster than traditional iterative processes).
-- **Multi-Adapter DNS**: Expanded the DNS Changer utility to apply configured DNS addresses to *all active physical network adapters* simultaneously.
-- **Bidirectional Compact OS**: Rebuilt the Compact OS utility to support both compressing (`/CompactOS:always`) and decompressing (`/CompactOS:never`) system files.
+- **WinSAT Performance Scores**: Integrated Windows System Assessment Tool metrics into the System Information CLI screen and the interactive HTML PC Audit report. Features visual colored rating bars (`█` and `░`) indicating sub-system performance (CPU, RAM, GPU, Gaming Graphics, Disk).
+- **Battery Health in System Info**: Embedded robust, real-time Battery Health metrics directly into the System Information CLI screen (auto-detected on mobile/laptops).
+- **Massive Performance Optimizations**:
+  - **Supercharged Browser Cache Cleaner**: Optimized path resolving to execute at the folder level instead of scanning individual files. Resolves deep-level caches up to 100x faster.
+  - **RAM Clear Compile Bypass**: Implemented active Type checks to skip C# compilation on subsequent RAM clears, removing execution lag.
 
 ### 🐛 Bug Fixes & Refactors
-- **Localization & Safeties**: Extracted all Compact OS hardcoded strings and added them cleanly to `$global:Translations` mapping tables for English (`EN`) and Indonesian (`ID`) to fix the mixed-language menu bug.
-- **Preserved User Files**: Excluded the Recycle Bin deletion action from the automated maintenance routine to prevent accidental data loss.
+- **Robust Battery Report Parser**: Upgraded regex pattern matching (`DESIGN CAPACITY.*?>\s*([\d,.]+)\s*mWh`) to safely support modern Windows 11 HTML reports and handle dots/commas thousand separators dynamically.
+- **PowerShell 3.0 Compatibility**: Corrected .NET type accelerator calls (`[System.Net.ServicePointManager]`) in quick-launch commands across all README documentations to support legacy environments.
 
 ---
 
@@ -43,7 +39,6 @@
 
 # 🚀 ncexs Toolkit v3.0.1
 
-🌐 **English** | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](docs/CHANGELOG.jv.md) | [Basa Sunda](docs/CHANGELOG.su.md) | [हिन्दी](docs/CHANGELOG.hi.md) | [Русский](docs/CHANGELOG.ru.md) | [日本語](docs/CHANGELOG.ja.md) | [한국어](docs/CHANGELOG.ko.md) | [中文](docs/CHANGELOG.zh.md) | [العربية](docs/CHANGELOG.ar.md)
 ## 🧰 ncexs Toolkit – v3.0.1 Safety & UX Refinement
 
 ### ✨ Features & Enhancements

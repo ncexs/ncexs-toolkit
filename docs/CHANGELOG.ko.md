@@ -1,29 +1,23 @@
-# 🚀 ncexs Toolkit v3.2
+﻿# 🚀 ncexs Toolkit v3.3
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | **한국어** | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
 
-## 🧰 ncexs Toolkit – v3.2 시스템 유지 관리 및 감사 업데이트
+## 🧰 ncexs Toolkit – v3.3 성능 및 진단 업데이트
 
 ### ✨ 기능 및 개선 사항
-- **PC 유지 관리 제품군**: 새로운 포괄적 하위 메뉴 (메뉴 17) 추가:
-  - **PC 감사 보고서 (HTML)**: 바탕 화면에 세련된 대화형 HTML 사양 보고서를 생성합니다. CPU, RAM, OS, 메인보드 및 **활성 Windows 계정** 권한 등급(관리자/표준)을 감사합니다.
-  - **원클릭 유지 관리**: 휴지통을 안전하게 보존하면서 시스템 자동 유지 관리(정리, DNS 플러시, SFC/DISM)를 실행합니다.
-  - **배터리 수명 분석기**: 실시간 배터리 성능 저하율을 측정하거나 데스크톱 PC를 자동으로 감지합니다.
-  - **원격 데스크톱 (RDP) 관리**: RDP를 즉시 활성화/비활성화하고 방화벽 규칙을 적용합니다.
-  - **브라우저 캐시 클리너**: Chrome, Edge, Firefox 캐시를 안전하게 삭제합니다.
-- **.NET 기반 초고속 이벤트 로그 삭제**: .NET API를 직접 조회하여 1초 이내에 모든 이벤트 로그를 즉시 비웁니다.
-- **멀티 어댑터 DNS**: DNS 설정을 활성화된 모든 물리 네트워크 어댑터에 동시에 적용합니다.
-- **양방향 Compact OS**: 시스템 파일 압축 (`/CompactOS:always`) 및 해제 (`/CompactOS:never`) 지원.
+- **WinSAT 성능 점수**: Windows 시스템 평가 도구(WinSAT) 메트릭을 시스템 정보 CLI 화면 및 대화형 HTML PC 감사 보고서에 통합했습니다. 하위 시스템 성능(CPU, RAM, GPU, 게임 그래픽, 디스크)을 나타내는 시각적 컬러 평가 표시줄(`█` 및 `░`)을 제공합니다。
+- **시스템 정보의 배터리 수명/성능**: 실시간 배터리 성능 메트릭(마모율, 설계 용량 대 완충 용량)을 시스템 정보 CLI 화면에 직접 포함했습니다(노트북 자동 감지)。
+- **대규모 성능 최적화**:
+  - **초고속 브라우저 캐시 클리너**: 개별 파일을 스캔하는 대신 폴더 수준에서 실행되도록 경로 정리를 최적화했습니다. 딥 레벨 캐시를 최대 100배 빠르게 정리합니다。
+  - **RAM 클리어 컴파일 바이패스**: 후속 RAM 정리 시 C# 컴파일을 건너뛰는 활성 유형 검사를 구현하여 실행 지연을 제거했습니다。
 
-### 🐛 버그 수정 및 다국어화
-- **다국어 및 보안**: Compact OS의 언어 혼동 오류를 수정하고 번역 시스템에 완벽하게 통합했습니다.
-- **사용자 파일 보호**: 자동 유지 관리 시 중요 파일 유실을 방지하기 위해 휴지통 비우기 작업을 프로세스에서 제외하였습니다.
+### 🐛 버그 수정 및 리팩토링
+- **최적화된 배터리 보고서 파서**: 정규식 패턴(`DESIGN CAPACITY.*?>\s*([\d,.]+)\s*mWh`)을 업그레이드하여 최신 Windows 11 HTML 보고서를 안전하게 지원하고 천 단위 구분 기호를 동적으로 처리하도록 했습니다。
+- **PowerShell 3.0 호환성**: 이전 환경을 지원하기 위해 모든 README 문서의 빠른 실행 명령에서 .NET 유형 가속기 호출(`[System.Net.ServicePointManager]`)을 수정했습니다.
 
 ---
 
 # 🚀 ncexs Toolkit v3.1
-
-🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | **한국어** | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
 
 ## 🧰 ncexs Toolkit – v3.1 시스템 마스터리 업데이트
 

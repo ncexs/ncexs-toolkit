@@ -1,29 +1,23 @@
-# 🚀 ncexs Toolkit v3.2
+﻿# 🚀 ncexs Toolkit v3.3
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | **Basa Sunda** | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
 
-## 🧰 ncexs Toolkit – v3.2 Pangropéa & Audit Sistem
+## 🧰 ncexs Toolkit – v3.3 Pembaruan Performa & Diagnostik
 
 ### ✨ Fitur & Peningkatan
-- **Pusat Pangropéa Sistem**: Nambihan sub-menu anyar nu komprehensif (Menu 17) nu dilengkepan ku pakakas ieu:
-  - **Laporan Audit PC (HTML)**: Nyieun laporan spésifikasi PC interaktif format HTML nu diékspor langsung ka Desktop. Ngadit CPU, RAM, detail OS, Motherboard, sareng **Akun Windows Aktif** kalayan labél hak aksés nu écés (Administrator vs Standar).
-  - **Pangropéa Sakali Klik**: Ngalakukeun pangropéa sistem otomatis (mupus runtah, DNS flush, SFC/DISM scan) bari tetep ngajaga Recycle Bin supados file penting teu leungit.
-  - **Analisis Kaséhatan Baterai**: Ngitung tingkat keausan baterai real-time, atanapi ngadetéksi PC Desktop sacara dinamis.
-  - **Pengelola Remote Desktop (RDP)**: Ngaktipkeun/nonaktipkeun RDP kalayan gancang sareng ngatur aturan Windows Firewall.
-  - **Pembersih Cache Browser**: Ngabersihan cache Google Chrome, Microsoft Edge, sareng Mozilla Firefox.
-- **Pembersihan Event Logs .NET**: Naronjatkeun fitur mupus Event Viewer ngagunakeun API .NET, éksekusi gancang kirang ti 1 detik.
-- **DNS Multi-Adapter**: Nerapkeun konfigurasi DNS ka *sadaya adaptor jaringan fisik nu aktip* sacara babarengan.
-- **Compact OS Dua Arah**: Ngarojong komprési (`/CompactOS:always`) sareng dekomprési (`/CompactOS:never`) file sistem.
+- **Skor Kinerja WinSAT**: Ngahijikeun metrik Windows System Assessment Tool kana layar CLI Informasi Sistem sareng laporan audit PC interaktif (HTML). Nampilkeun bar rating warna visual (`█` sareng `░`) anu nunjukkeun kinerja sub-sistem (CPU, RAM, GPU, Gaming Grafis, Disk).
+- **Kaséhatan Baterai dina Info Sistem**: Nambahkeun inpormasi kaséhatan baterai (persentase wear, kapasitas desain, full charge) sacara real-time langsung dina menu Informasi Sistem (otomatis dideteksi dina laptop).
+- **Optimasi Kinerja Gédé-gédéan**:
+  - **Beresih Cache Browser Super Gancang**: Ngoptimal keun nyukcruk diréktori kana tingkat folder, ngabersihkeun cache browser dugi ka 100x langkung gancang.
+  - **Bypass Kompilasi RAM Cleaner**: Nambahkeun verifikasi jinis data aktif pikeun ngalangkungan kompilasi C# dina pembersihan RAM salajengna, ngaleungitkeun lag ngantosan.
 
-### 🐛 Perbaikan Bug & Lokalisasi
-- **Lokalisasi & Pengamanan**: Ngalereskeun bug basa campuran dina Compact OS ku cara mindahkeun sadaya string kana sistem `$global:Translations`.
-- **Perlindungan File Pangguna**: Nyegah pambusakan Recycle Bin tina pangropéa otomatis supados berkas pangguna teu leungit.
+### 🐛 Perbaikan Bug & Refaktor
+- **Parser Laporan Baterai Tangguh**: Ngamutahirkeun pencocokan regex (`DESIGN CAPACITY.*?>\s*([\d,.]+)\s*mWh`) pikeun ngadukung format HTML Windows 11 panganyarna sareng ngabersihkeun pemisah rébuan sacara dinamis.
+- **Kasaluyuan PowerShell 3.0**: Nereskeun pemanggilan type accelerator .NET (`[System.Net.ServicePointManager]`) dina paréntah ngamimitian gancang dina sadaya dokumén README pikeun ngadukung sistem heubeul.
 
 ---
 
 # 🚀 ncexs Toolkit v3.1
-
-🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | **Basa Sunda** | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
 
 ## 🧰 ncexs Toolkit – v3.1 Pembaruan Pangawasaan Sistem
 
