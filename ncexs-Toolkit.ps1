@@ -5,7 +5,8 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
         Write-Host "Toolkit perlu dijalankan sebagai Administrator. Meminta akses..." -ForegroundColor Yellow
         Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$($MyInvocation.MyCommand.Path)`"" -Verb RunAs
         exit
-    } else {
+    }
+    else {
         Write-Host "`n[!] AKSES DITOLAK: Anda belum membuka PowerShell sebagai Administrator." -ForegroundColor Red
         Write-Host "Silakan klik kanan pada PowerShell dan pilih 'Run as Administrator', lalu jalankan ulang command-nya.`n" -ForegroundColor Yellow
         Read-Host "Tekan Enter untuk keluar..."
@@ -15,7 +16,7 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue
 
-$global:ToolkitVersion = "v3.2"
+$global:ToolkitVersion = "v3.3"
 $global:Language = "EN"
 
 $global:Theme = @{
@@ -187,7 +188,7 @@ $global:Translations = @{
 
 function Get-Translation { param([string]$key) if ($global:Translations[$global:Language].ContainsKey($key)) { return $global:Translations[$global:Language][$key] } return $key }
 function Write-Centered { param([string]$text, [string]$color = $global:Theme.Title, [int]$width = 80) $padLeft = [math]::Max(0, [math]::Floor(($width - $text.Length) / 2)); Write-Host (" " * $padLeft + $text) -ForegroundColor $color }
-function Write-BoxHeader { param([string]$title) $w=86; $l=[string]$global:UI.HLine*($w-4); Write-Host (" {0}{1}{2}" -f $global:UI.TopLeft,$l,$global:UI.TopRight) -ForegroundColor $global:Theme.Border; $cleanTitle = " $title "; $padLeft = [math]::Max(0, [math]::Floor((($w-4) - $cleanTitle.Length) / 2)); $padRight = [math]::Max(0, (($w-4) - $cleanTitle.Length - $padLeft)); Write-Host " $($global:UI.VLine)" -NoNewline -ForegroundColor $global:Theme.Border; Write-Host (" " * $padLeft) -NoNewline; Write-Host $cleanTitle -NoNewline -ForegroundColor $global:Theme.Title; Write-Host (" " * $padRight) -NoNewline; Write-Host "$($global:UI.VLine)" -ForegroundColor $global:Theme.Border; Write-Host (" {0}{1}{2}" -f $global:UI.BottomLeft,$l,$global:UI.BottomRight) -ForegroundColor $global:Theme.Border }
+function Write-BoxHeader { param([string]$title) $w = 86; $l = [string]$global:UI.HLine * ($w - 4); Write-Host (" {0}{1}{2}" -f $global:UI.TopLeft, $l, $global:UI.TopRight) -ForegroundColor $global:Theme.Border; $cleanTitle = " $title "; $padLeft = [math]::Max(0, [math]::Floor((($w - 4) - $cleanTitle.Length) / 2)); $padRight = [math]::Max(0, (($w - 4) - $cleanTitle.Length - $padLeft)); Write-Host " $($global:UI.VLine)" -NoNewline -ForegroundColor $global:Theme.Border; Write-Host (" " * $padLeft) -NoNewline; Write-Host $cleanTitle -NoNewline -ForegroundColor $global:Theme.Title; Write-Host (" " * $padRight) -NoNewline; Write-Host "$($global:UI.VLine)" -ForegroundColor $global:Theme.Border; Write-Host (" {0}{1}{2}" -f $global:UI.BottomLeft, $l, $global:UI.BottomRight) -ForegroundColor $global:Theme.Border }
 function Write-Title { param([string]$message) Write-BoxHeader $message }
 function Write-Error { param([string]$message) Write-Host " [$($global:UI.Cross)] $message" -ForegroundColor $global:Theme.Error }
 function Write-Success { param([string]$message) Write-Host " [$($global:UI.Check)] $message" -ForegroundColor $global:Theme.Success }
@@ -235,7 +236,8 @@ function Invoke-CompactOS {
             compact.exe /CompactOS:always
             Write-Success (Get-Translation 'Compact_Done') 
         }
-    } elseif ($c -eq "2") {
+    }
+    elseif ($c -eq "2") {
         if (Request-Confirm (Get-Translation 'Compact_Decompress_Confirm')) {
             Write-Host " $(Get-Translation 'Compact_Decompressing')" -ForegroundColor Cyan
             compact.exe /CompactOS:never
@@ -272,10 +274,114 @@ function Show-SystemInfo {
         
         Write-Host "`n [ Storage (Local Drives) ]" -ForegroundColor $global:Theme.Section
         Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3" | ForEach-Object { 
-            $total = [math]::Round($_.Size/1GB, 2)
-            $free = [math]::Round($_.FreeSpace/1GB, 2)
-            $usedPct = [math]::Round((($total-$free)/$total)*100, 1)
+            $total = [math]::Round($_.Size / 1GB, 2)
+            $free = [math]::Round($_.FreeSpace / 1GB, 2)
+            $usedPct = [math]::Round((($total - $free) / $total) * 100, 1)
             Write-Host "   $($_.DeviceID)\          : $total GB Total | $free GB Free | Used: $usedPct%" 
+        }
+
+        Write-Host "`n [ Battery Health ]" -ForegroundColor $global:Theme.Section
+        try {
+            $batteries = Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue
+            if ($batteries) {
+                $reportPath = "$env:TEMP\battery-report-sysinfo.html"
+                powercfg /batteryreport /output $reportPath > $null
+                
+                foreach ($b in $batteries) {
+                    Write-Host "   Name         : $($b.Name)"
+                    Write-Host "   Chemistry    : $($b.Chemistry)"
+                    Write-Host "   Status       : $($b.Status)"
+                    
+                    if (Test-Path $reportPath) {
+                        $htmlContent = Get-Content -Path $reportPath -Raw
+                        $designCapMatch = [regex]::Match($htmlContent, 'DESIGN CAPACITY.*?>\s*([\d,.]+)\s*mWh')
+                        $fullCapMatch = [regex]::Match($htmlContent, 'FULL CHARGE CAPACITY.*?>\s*([\d,.]+)\s*mWh')
+                        
+                        if ($designCapMatch.Success -and $fullCapMatch.Success) {
+                            $designCapVal = $designCapMatch.Groups[1].Value -replace '[.,\s]'
+                            $fullCapVal = $fullCapMatch.Groups[1].Value -replace '[.,\s]'
+                            $designCap = [double]$designCapVal
+                            $fullCap = [double]$fullCapVal
+                            
+                            if ($designCap -gt 0) {
+                                $healthPct = [math]::Round(($fullCap / $designCap) * 100, 1)
+                                $blockFull = [char]0x2588
+                                $blockLight = [char]0x2591
+                                $filled = [math]::Min(10, [math]::Max(0, [int][math]::Round($healthPct / 10)))
+                                $empty = 10 - $filled
+                                $bar = ([string]$blockFull * $filled) + ([string]$blockLight * $empty)
+                                
+                                $color = "Green"
+                                if ($healthPct -lt 50.0) { $color = "Red" }
+                                elseif ($healthPct -lt 80.0) { $color = "Yellow" }
+                                
+                                Write-Host "   Health       : [" -NoNewline
+                                Write-Host $bar -NoNewline -ForegroundColor $color
+                                Write-Host "] $healthPct%"
+                                Write-Host "   Capacity     : $fullCap mWh / $designCap mWh"
+                            }
+                        }
+                    }
+                }
+                Remove-Item $reportPath -Force -ErrorAction SilentlyContinue
+            }
+            else {
+                Write-Host "   No battery detected on this system (Desktop/Virtual Machine)." -ForegroundColor $global:Theme.Warning
+            }
+        }
+        catch {
+            Write-Host "   Unable to retrieve battery details." -ForegroundColor $global:Theme.Error
+        }
+
+        Write-Host "`n [ WinSAT Performance Scores ]" -ForegroundColor $global:Theme.Section
+        try {
+            $winsat = Get-CimInstance Win32_WinSAT -ErrorAction SilentlyContinue
+            if ($winsat) {
+                $blockFull = [char]0x2588
+                $blockLight = [char]0x2591
+                $scores = @(
+                    @{ Name = "Processor (CPU) "; Score = $winsat.CPUScore }
+                    @{ Name = "Memory (RAM)    "; Score = $winsat.MemoryScore }
+                    @{ Name = "Graphics (GPU)  "; Score = $winsat.GraphicsScore }
+                    @{ Name = "Gaming Graphics "; Score = $winsat.D3DScore }
+                    @{ Name = "Primary Disk    "; Score = $winsat.DiskScore }
+                )
+                
+                foreach ($s in $scores) {
+                    $val = $s.Score
+                    $filled = [math]::Min(10, [math]::Max(0, [int][math]::Round($val)))
+                    $empty = 10 - $filled
+                    $bar = ([string]$blockFull * $filled) + ([string]$blockLight * $empty)
+                    
+                    $color = "Green"
+                    if ($val -lt 4.0) { $color = "Red" }
+                    elseif ($val -lt 7.0) { $color = "Yellow" }
+                    
+                    Write-Host "   $($s.Name) : [" -NoNewline
+                    Write-Host $bar -NoNewline -ForegroundColor $color
+                    Write-Host "] $val"
+                }
+                
+                Write-Host "   ---------------------------------------"
+                $baseFilled = [math]::Min(10, [math]::Max(0, [int][math]::Round($winsat.WinSPRLevel)))
+                $baseEmpty = 10 - $baseFilled
+                $baseBar = ([string]$blockFull * $baseFilled) + ([string]$blockLight * $baseEmpty)
+                
+                $baseColor = "Green"
+                if ($winsat.WinSPRLevel -lt 4.0) { $baseColor = "Red" }
+                elseif ($winsat.WinSPRLevel -lt 7.0) { $baseColor = "Yellow" }
+                
+                Write-Host "   Base/Overall Score : [" -NoNewline
+                Write-Host $baseBar -NoNewline -ForegroundColor $baseColor
+                Write-Host "] $($winsat.WinSPRLevel) (Max 9.9)"
+            }
+            else {
+                Write-Host "   WinSAT assessment data not found." -ForegroundColor $global:Theme.Warning
+                Write-Host "   To generate scores, run 'winsat formal' in an Administrator command prompt." -ForegroundColor $global:Theme.Info
+            }
+        }
+        catch {
+            Write-Host "   Unable to retrieve WinSAT scores." -ForegroundColor $global:Theme.Error
         }
     }
     catch { Write-Error "Failed to load some system info." }
@@ -317,7 +423,8 @@ function Clear-RecycleBin-Menu {
         $size = 0; if ($items) { foreach ($i in $items) { $size += $i.Size } }
         Clear-RecycleBin -Force -ErrorAction Stop
         Write-Success ((Get-Translation 'Recycle_Success') + " Freed: $([math]::Round($size / 1MB, 2)) MB")
-    } catch { 
+    }
+    catch { 
         Write-Info (Get-Translation 'Recycle_Empty') 
     }
     Read-Host "`n $(Get-Translation 'PressAnyKey')" 
@@ -372,8 +479,19 @@ function Show-PowerMenu {
 function Clear-RAM { 
     if (-not (Request-Confirm (Get-Translation 'RAM_Confirm'))) { return }
     $before = Get-CimInstance Win32_OperatingSystem | Select-Object -ExpandProperty FreePhysicalMemory
-    $code = "using System; using System.Runtime.InteropServices; public class M { [DllImport(`"psapi.dll`")] public static extern bool EmptyWorkingSet(IntPtr h); public static void C() { foreach(var p in System.Diagnostics.Process.GetProcesses()) try { EmptyWorkingSet(p.Handle); } catch {} } }"
-    Add-Type -TypeDefinition $code -ErrorAction SilentlyContinue; [M]::C(); [System.GC]::Collect();
+    
+    $typeLoaded = $false
+    try {
+        if ([M]) { $typeLoaded = $true }
+    }
+    catch {}
+    
+    if (-not $typeLoaded) {
+        $code = "using System; using System.Runtime.InteropServices; public class M { [DllImport(`"psapi.dll`")] public static extern bool EmptyWorkingSet(IntPtr h); public static void C() { foreach(var p in System.Diagnostics.Process.GetProcesses()) try { EmptyWorkingSet(p.Handle); } catch {} } }"
+        Add-Type -TypeDefinition $code -ErrorAction SilentlyContinue
+    }
+    
+    [M]::C(); [System.GC]::Collect();
     Start-Sleep -Seconds 1
     $after = Get-CimInstance Win32_OperatingSystem | Select-Object -ExpandProperty FreePhysicalMemory
     $freed = [math]::Round(($after - $before) / 1024, 2)
@@ -404,7 +522,8 @@ function Show-UpdateDriverMenu {
     if ($c -eq "1") {
         Write-Info (Get-Translation 'Process_Cancel')
         winget upgrade --all --accept-package-agreements --accept-source-agreements --silent
-    } elseif ($c -eq "2") {
+    }
+    elseif ($c -eq "2") {
         Write-Info (Get-Translation 'Process_Cancel')
         $dest = "C:\DriversBackup"; if (!(Test-Path -Path $dest)) { New-Item -Path $dest -ItemType Directory }; Export-WindowsDriver -Online -Destination $dest; Write-Success "$(Get-Translation 'Update_Backup') $dest"
     }
@@ -478,7 +597,8 @@ function Clear-EventLogs {
     foreach ($log in $logs) {
         try {
             [System.Diagnostics.Eventing.Reader.EventLogSession]::GlobalSession.ClearLog($log.LogName)
-        } catch {}
+        }
+        catch {}
     }
     
     $afterSize = 0; try { $afterSize = (Get-ChildItem -Path $logPath -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum } catch {}
@@ -508,7 +628,8 @@ function Get-WindowsLicenseStatus {
         Write-Host "   License Status   : $statusStr"
         if ($wmi.LicenseStatus -eq 1) {
             Write-Success "Windows is fully activated."
-        } else {
+        }
+        else {
             Write-Warning "Windows is not activated or is in grace period."
         }
         
@@ -518,7 +639,8 @@ function Get-WindowsLicenseStatus {
         if ($slmgrOut) {
             $slmgrOut | ForEach-Object { Write-Host "   $_" }
         }
-    } catch {
+    }
+    catch {
         Write-Error "Failed to retrieve license details."
     }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
@@ -558,10 +680,10 @@ function Export-PCAuditReport {
         $disks = Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3"
         $diskRows = ""
         foreach ($d in $disks) {
-            $total = [math]::Round($d.Size/1GB, 2)
-            $free = [math]::Round($d.FreeSpace/1GB, 2)
+            $total = [math]::Round($d.Size / 1GB, 2)
+            $free = [math]::Round($d.FreeSpace / 1GB, 2)
             $used = [math]::Round($total - $free, 2)
-            $usedPct = [math]::Round(($used/$total)*100, 1)
+            $usedPct = [math]::Round(($used / $total) * 100, 1)
             $diskRows += "<tr><td>$($d.DeviceID)</td><td>$total GB</td><td>$free GB</td><td>$used GB ($usedPct%)</td></tr>"
         }
 
@@ -579,10 +701,11 @@ function Export-PCAuditReport {
             $adminGroup = Get-CimInstance Win32_Group -Filter "SID = 'S-1-5-32-544'" -ErrorAction SilentlyContinue
             if ($adminGroup) {
                 $adminMembers = Get-CimInstance Win32_GroupUser -ErrorAction SilentlyContinue | 
-                    Where-Object { $_.GroupComponent.Name -eq $adminGroup.Name } | 
-                    ForEach-Object { $_.PartComponent.Name }
+                Where-Object { $_.GroupComponent.Name -eq $adminGroup.Name } | 
+                ForEach-Object { $_.PartComponent.Name }
             }
-        } catch {}
+        }
+        catch {}
 
         $userRows = ""
         if ($userAccounts) {
@@ -599,7 +722,8 @@ function Export-PCAuditReport {
                 
                 $userRows += "<tr><td>$($u.Name)</td><td>$fullName</td><td><span style='color:$statusColor;font-weight:600;'>$status</span></td><td><span style='color:$roleColor;font-weight:600;'>$roleText</span></td><td>$description</td></tr>"
             }
-        } else {
+        }
+        else {
             $userRows = "<tr><td colspan='5' style='text-align:center;color:var(--text-secondary);'>No local accounts found</td></tr>"
         }
 
@@ -609,8 +733,8 @@ function Export-PCAuditReport {
         )
         $installedApps = foreach ($p in $uninstallPaths) { 
             Get-ItemProperty -Path $p -ErrorAction SilentlyContinue | 
-                Where-Object { $_.DisplayName } | 
-                Select-Object DisplayName, DisplayVersion, InstallDate
+            Where-Object { $_.DisplayName } | 
+            Select-Object DisplayName, DisplayVersion, InstallDate
         }
         $installedApps = $installedApps | Sort-Object DisplayName
         $appRows = ""
@@ -621,8 +745,105 @@ function Export-PCAuditReport {
         $wmiLicense = Get-CimInstance SoftwareLicensingProduct -Filter "PartialProductKey IS NOT NULL" | Select-Object -First 1
         $licStatus = "Unknown"
         if ($wmiLicense) {
-            $statusMap = @{ 0="Unlicensed"; 1="Licensed"; 2="OOBGrace"; 3="OOTGrace"; 4="NonGenuineGrace"; 5="Notification"; 6="ExtendedGrace" }
+            $statusMap = @{ 0 = "Unlicensed"; 1 = "Licensed"; 2 = "OOBGrace"; 3 = "OOTGrace"; 4 = "NonGenuineGrace"; 5 = "Notification"; 6 = "ExtendedGrace" }
             $licStatus = $statusMap[[int]$wmiLicense.LicenseStatus]
+        }
+
+        $winsat = Get-CimInstance Win32_WinSAT -ErrorAction SilentlyContinue
+        $winsatCard = ""
+        if ($winsat) {
+            $cpuPct = [int]($winsat.CPUScore * 10)
+            $memPct = [int]($winsat.MemoryScore * 10)
+            $gpuPct = [int]($winsat.GraphicsScore * 10)
+            $d3dPct = [int]($winsat.D3DScore * 10)
+            $diskPct = [int]($winsat.DiskScore * 10)
+            $basePct = [int]($winsat.WinSPRLevel * 10)
+            
+            $winsatCard = @"
+            <div class="card">
+                <h2>Performance Scores (WinSAT)</h2>
+                <table class="card-table">
+                    <tr>
+                        <td class="label">Processor (CPU)</td>
+                        <td class="value">
+                            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
+                                <div style="width: 100px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: $cpuPct%; height: 100%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
+                                </div>
+                                <span>$($winsat.CPUScore)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">Memory (RAM)</td>
+                        <td class="value">
+                            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
+                                <div style="width: 100px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: $memPct%; height: 100%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
+                                </div>
+                                <span>$($winsat.MemoryScore)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">Graphics (GPU)</td>
+                        <td class="value">
+                            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
+                                <div style="width: 100px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: $gpuPct%; height: 100%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
+                                </div>
+                                <span>$($winsat.GraphicsScore)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">Gaming Graphics</td>
+                        <td class="value">
+                            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
+                                <div style="width: 100px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: $d3dPct%; height: 100%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
+                                </div>
+                                <span>$($winsat.D3DScore)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">Primary Disk</td>
+                        <td class="value">
+                            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
+                                <div style="width: 100px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: $diskPct%; height: 100%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
+                                </div>
+                                <span>$($winsat.DiskScore)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px solid var(--border-color);">
+                        <td class="label" style="color: var(--accent-cyan); font-weight: 600;">Base Score</td>
+                        <td class="value">
+                            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
+                                <div style="width: 100px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: $basePct%; height: 100%; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));"></div>
+                                </div>
+                                <span style="color: var(--accent-cyan); font-weight: bold;">$($winsat.WinSPRLevel)</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+"@
+        }
+        else {
+            $winsatCard = @"
+            <div class="card">
+                <h2>Performance Scores (WinSAT)</h2>
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 80%; text-align: center; color: var(--text-secondary); padding: 20px;">
+                    <p style="margin: 0 0 10px 0; font-size: 0.95rem;">No WinSAT assessment data found.</p>
+                    <code style="background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; border: 1px solid var(--border-color); color: var(--accent-cyan);">winsat formal</code>
+                    <p style="font-size: 0.8rem; margin: 10px 0 0 0; color: var(--text-secondary);">Run the command above in an Administrator command prompt to benchmark your PC performance.</p>
+                </div>
+            </div>
+"@
         }
 
         $html = @"
@@ -808,6 +1029,8 @@ function Export-PCAuditReport {
                     <tr><td class="label">Memory Modules</td><td class="value">$ramDetails</td></tr>
                 </table>
             </div>
+            
+            $winsatCard
         </div>
 
         <div class="section-title">Storage Drives</div>
@@ -885,7 +1108,8 @@ function Export-PCAuditReport {
         
         Write-Success ((Get-Translation 'Maint_Audit_Success') -f $destPath)
         Start-Process $destPath
-    } catch {
+    }
+    catch {
         Write-Error "Failed to generate PC Audit Report: $_"
     }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
@@ -930,7 +1154,8 @@ function Get-BatteryHealth {
         $batteries = Get-CimInstance -ClassName Win32_Battery
         if (-not $batteries) {
             Write-Warning (Get-Translation 'Maint_Battery_Desktop')
-        } else {
+        }
+        else {
             $reportPath = "$env:TEMP\battery-report.html"
             powercfg /batteryreport /output $reportPath > $null
             
@@ -945,12 +1170,12 @@ function Get-BatteryHealth {
                 
                 if (Test-Path $reportPath) {
                     $htmlContent = Get-Content -Path $reportPath -Raw
-                    $designCapMatch = [regex]::Match($htmlContent, 'DESIGN CAPACITY</td><td class="value">([\d,]+|\d+)\s*mWh')
-                    $fullCapMatch = [regex]::Match($htmlContent, 'FULL CHARGE CAPACITY</td><td class="value">([\d,]+|\d+)\s*mWh')
+                    $designCapMatch = [regex]::Match($htmlContent, 'DESIGN CAPACITY.*?>\s*([\d,.]+)\s*mWh')
+                    $fullCapMatch = [regex]::Match($htmlContent, 'FULL CHARGE CAPACITY.*?>\s*([\d,.]+)\s*mWh')
                     
                     if ($designCapMatch.Success -and $fullCapMatch.Success) {
-                        $designCapVal = $designCapMatch.Groups[1].Value -replace ',' -replace '\s'
-                        $fullCapVal = $fullCapMatch.Groups[1].Value -replace ',' -replace '\s'
+                        $designCapVal = $designCapMatch.Groups[1].Value -replace '[.,\s]'
+                        $fullCapVal = $fullCapMatch.Groups[1].Value -replace '[.,\s]'
                         
                         $designCap = [double]$designCapVal
                         $fullCap = [double]$fullCapVal
@@ -959,7 +1184,8 @@ function Get-BatteryHealth {
                             $healthPct = [math]::Round(($fullCap / $designCap) * 100, 1)
                             Write-Success ((Get-Translation 'Maint_Battery_Wear') -f $healthPct, $designCap, $fullCap)
                         }
-                    } else {
+                    }
+                    else {
                         Write-Info "Report generated. Details can be viewed in the battery report file."
                     }
                 }
@@ -969,7 +1195,8 @@ function Get-BatteryHealth {
                 Start-Process $reportPath
             }
         }
-    } catch {
+    }
+    catch {
         Write-Error "Failed to retrieve battery details: $_"
     }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
@@ -1004,16 +1231,19 @@ function Manage-RemoteDesktop {
                 Write-Success (Get-Translation 'Maint_RDP_Enable_Success')
                 Start-Sleep -Seconds 2
             }
-        } elseif ($c -eq "2") {
+        }
+        elseif ($c -eq "2") {
             if (Request-Confirm (Get-Translation 'Maint_RDP_Disable_Prompt')) {
                 Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 1
                 Disable-NetFirewallRule -DisplayGroup "Remote Desktop" -ErrorAction SilentlyContinue
                 Write-Success (Get-Translation 'Maint_RDP_Disable_Success')
                 Start-Sleep -Seconds 2
             }
-        } elseif ($c -eq "3") {
+        }
+        elseif ($c -eq "3") {
             return
-        } else {
+        }
+        else {
             Write-Warning (Get-Translation 'Invalid_Option')
             Start-Sleep -Seconds 1
         }
@@ -1026,20 +1256,23 @@ function Clear-BrowserCaches {
     
     $freed = 0
     $targets = @(
-        @{ N = "Google Chrome"; P = "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*" },
-        @{ N = "Google Chrome Code"; P = "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Code Cache\*" },
-        @{ N = "Microsoft Edge"; P = "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" },
-        @{ N = "Microsoft Edge Code"; P = "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Code Cache\*" },
-        @{ N = "Mozilla Firefox"; P = "$env:USERPROFILE\AppData\Local\Mozilla\Firefox\Profiles\*\cache2\*" }
+        @{ N = "Google Chrome"; P = "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache" },
+        @{ N = "Google Chrome Code"; P = "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Code Cache\js" },
+        @{ N = "Microsoft Edge"; P = "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache" },
+        @{ N = "Microsoft Edge Code"; P = "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Code Cache\js" },
+        @{ N = "Mozilla Firefox"; P = "$env:USERPROFILE\AppData\Local\Mozilla\Firefox\Profiles\*\cache2" }
     )
     
     foreach ($t in $targets) {
         $pPath = $t.P
         $resolvedPaths = @()
-        if ($pPath -like "*\*\*") {
-            $resolvedPaths = Get-Item -Path $pPath -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName
-        } else {
-            $resolvedPaths = ,$pPath
+        try {
+            $resolvedPaths = Resolve-Path -Path $pPath -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Path
+        }
+        catch {}
+        
+        if (-not $resolvedPaths -and (Test-Path -Path $pPath)) {
+            $resolvedPaths = , $pPath
         }
         
         $clearedAny = $false
@@ -1053,7 +1286,8 @@ function Clear-BrowserCaches {
                         $files | Remove-Item -Force -ErrorAction SilentlyContinue
                         $clearedAny = $true
                     }
-                } catch {}
+                }
+                catch {}
             }
         }
         if ($clearedAny) {
@@ -1137,7 +1371,8 @@ function Show-MainMenu {
             $rtc = if ($r_idx -eq 18) { $global:Theme.Exit } else { $global:Theme.MenuText }
             Write-Host ("[{0,-2}]" -f $r_idx) -NoNewline -ForegroundColor $rc
             Write-Host (" {0,-35}" -f $r_t) -NoNewline -ForegroundColor $rtc
-        } else {
+        }
+        else {
             Write-Host (" " * 40) -NoNewline
         }
         Write-Host "$($global:UI.VLine)" -ForegroundColor $global:Theme.Border
