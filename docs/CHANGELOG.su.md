@@ -17,6 +17,27 @@
 
 ---
 
+# 🚀 ncexs Toolkit v3.2
+
+## 🧰 ncexs Toolkit – v3.2 Pangropéa & Audit Sistem
+
+### ✨ Fitur & Peningkatan
+- **Pusat Pangropéa Sistem**: Nambihan sub-menu anyar nu komprehensif (Menu 17) nu dilengkepan ku pakakas ieu:
+  - **Laporan Audit PC (HTML)**: Nyieun laporan spésifikasi PC interaktif format HTML nu diékspor langsung ka Desktop. Ngadit CPU, RAM, detail OS, Motherboard, sareng **Akun Windows Aktif** kalayan labél hak aksés nu écés (Administrator vs Standar).
+  - **Pangropéa Sakali Klik**: Ngalakukeun pangropéa sistem otomatis (mupus runtah, DNS flush, SFC/DISM scan) bari tetep ngajaga Recycle Bin supados file penting teu leungit.
+  - **Analisis Kaséhatan Baterai**: Ngitung tingkat keausan baterai real-time, atanapi ngadetéksi PC Desktop sacara dinamis.
+  - **Pengelola Remote Desktop (RDP)**: Ngaktipkeun/nonaktipkeun RDP kalayan gancang sareng ngatur aturan Windows Firewall.
+  - **Pembersih Cache Browser**: Ngabersihan cache Google Chrome, Microsoft Edge, sareng Mozilla Firefox.
+- **Pembersihan Event Logs .NET**: Naronjatkeun fitur mupus Event Viewer ngagunakeun API .NET, éksekusi gancang kirang ti 1 detik.
+- **DNS Multi-Adapter**: Nerapkeun konfigurasi DNS ka *sadaya adaptor jaringan fisik nu aktip* sacara babarengan.
+- **Compact OS Dua Arah**: Ngarojong komprési (`/CompactOS:always`) sareng dekomprési (`/CompactOS:never`) file sistem.
+
+### 🐛 Perbaikan Bug & Lokalisasi
+- **Lokalisasi & Pengamanan**: Ngalereskeun bug basa campuran dina Compact OS ku cara mindahkeun sadaya string kana sistem `$global:Translations`.
+- **Perlindungan File Pangguna**: Nyegah pambusakan Recycle Bin tina pangropéa otomatis supados berkas pangguna teu leungit.
+
+---
+
 # 🚀 ncexs Toolkit v3.1
 
 ## 🧰 ncexs Toolkit – v3.1 Pembaruan Pangawasaan Sistem

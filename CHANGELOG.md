@@ -17,6 +17,27 @@
 
 ---
 
+# 🚀 ncexs Toolkit v3.2
+
+## 🧰 ncexs Toolkit – v3.2 System Maintenance Update
+
+### ✨ Features & Enhancements
+- **PC Maintenance Suite**: Introduced a brand new comprehensive sub-menu (Menu 17) packed with powerful tools:
+  - **PC Audit Report (HTML)**: Generates a premium and clean interactive HTML PC specifications report exported directly to your Desktop. Audits CPU, RAM, OS details, Motherboard, Storage space, and **Active Windows Accounts** with clear privilege badging (Administrator vs Standard).
+  - **One-Click Maintenance**: Performs fully automated system maintenance (junk clean, DNS flush, SFC/DISM scan) while intelligently preserving the Recycle Bin to prevent loss of important user files.
+  - **Battery Health Analyzer**: Calculates real-time battery wear, design capacity, and full charge capacity, or dynamically detects Desktop PCs.
+  - **Remote Desktop (RDP) Manager**: Turn RDP on/off instantly and configures required Windows Firewall rules.
+  - **Browser Cache Cleaner**: Cleans accumulated cache databases from Google Chrome, Microsoft Edge, and Mozilla Firefox.
+- **Direct .NET Event Logs Clearing**: Upgraded Event Viewer cleaner to use direct .NET Event Log API querying, resulting in an instant < 1 second execution (60x faster than traditional iterative processes).
+- **Multi-Adapter DNS**: Expanded the DNS Changer utility to apply configured DNS addresses to *all active physical network adapters* simultaneously.
+- **Bidirectional Compact OS**: Rebuilt the Compact OS utility to support both compressing (`/CompactOS:always`) and decompressing (`/CompactOS:never`) system files.
+
+### 🐛 Bug Fixes & Refactors
+- **Localization & Safeties**: Extracted all Compact OS hardcoded strings and added them cleanly to `$global:Translations` mapping tables for English (`EN`) and Indonesian (`ID`) to fix the mixed-language menu bug.
+- **Preserved User Files**: Excluded the Recycle Bin deletion action from the automated maintenance routine to prevent accidental data loss.
+
+---
+
 # 🚀 ncexs Toolkit v3.1
 
 ## 🧰 ncexs Toolkit – v3.1 System Mastery Update
