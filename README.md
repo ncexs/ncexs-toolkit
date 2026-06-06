@@ -1,4 +1,4 @@
-﻿# 🧰 ncexs Toolkit (NT)
+# 🧰 ncexs Toolkit (NT)
 
 🌐 **English** | [Bahasa Indonesia](docs/README.id.md) | [Basa Jawa](docs/README.jv.md) | [Basa Sunda](docs/README.su.md) | [हिन्दी](docs/README.hi.md) | [Русский](docs/README.ru.md) | [日本語](docs/README.ja.md) | [한국어](docs/README.ko.md) | [中文](docs/README.zh.md) | [العربية](docs/README.ar.md)
 
@@ -35,6 +35,7 @@
 
 ### ⚡ Performance & Optimization
 * **Memory Optimizer:** Flushes unused active working sets to free up system memory, displaying precise "Before & After" RAM stats.
+* **Visual FX Booster:** Tweaks system responsiveness and speeds up visual transition delay (MenuShowDelay) instantly.
 * **Smart Power Plans:** Restores hidden system power plans (High Performance vs. Balanced) and optimizes active brightness defaults.
 * **Drive Optimizer:** Runs smart defrag/trim routines with exclusion rules for system and hidden partitions.
 

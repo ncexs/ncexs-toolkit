@@ -1,4 +1,17 @@
-﻿# 🚀 ncexs Toolkit v3.3
+# 🚀 ncexs Toolkit v3.4
+
+🌐 [English](../CHANGELOG.md) | **Bahasa Indonesia** | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – Pembaruan Struktur Menu v3.4
+
+### ✨ Fitur & Peningkatan
+- **UI 2-Kolom Simetris**: Menata ulang menu utama TUI (Terminal User Interface) menjadi tata letak 2 kolom yang presisi dan simetris dengan tepat 20 opsi (10 baris, 2 kolom).
+- **Opsi Keluar Berwarna Merah**: Memetakan ulang Opsi `[20]` untuk keluar dari toolkit (Keluar Aplikasi) di posisi kanan bawah, yang diwarnai merah cerah (`$global:Theme.Exit`) agar mudah dikenali.
+- **Rute Menu Teroptimasi**: Menyesuaikan logika switch pilihan (`switch ($choice)`) untuk mendukung 20 opsi dan merutekan input `"20"` secara bersih untuk mengakhiri program.
+
+---
+
+# 🚀 ncexs Toolkit v3.3
 
 🌐 [English](../CHANGELOG.md) | **Bahasa Indonesia** | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
 

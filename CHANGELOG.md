@@ -1,4 +1,17 @@
-﻿# 🚀 ncexs Toolkit v3.3
+# 🚀 ncexs Toolkit v3.4
+
+🌐 **English** | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](docs/CHANGELOG.jv.md) | [Basa Sunda](docs/CHANGELOG.su.md) | [हिन्दी](docs/CHANGELOG.hi.md) | [Русский](docs/CHANGELOG.ru.md) | [日本語](docs/CHANGELOG.ja.md) | [한국어](docs/CHANGELOG.ko.md) | [中文](docs/CHANGELOG.zh.md) | [العربية](docs/CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.4 Menu Restructure
+
+### ✨ Features & Enhancements
+- **Symmetrical 2-Column UI**: Restructured the TUI (Terminal User Interface) main menu into a perfectly symmetrical 2-column layout with exactly 20 options (10 rows, 2 columns).
+- **Red Exit Option**: Re-mapped Option `[20]` to exit the toolkit (Keluar Aplikasi / Exit Toolkit) in the bottom-right slot, colored in vibrant red (`$global:Theme.Exit`) for quick and clear identification.
+- **Optimized Menu Routing**: Updated the selection logic (`switch ($choice)`) to support 20 options and route input `"20"` to cleanly exit the toolkit.
+
+---
+
+# 🚀 ncexs Toolkit v3.3
 
 🌐 **English** | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](docs/CHANGELOG.jv.md) | [Basa Sunda](docs/CHANGELOG.su.md) | [हिन्दी](docs/CHANGELOG.hi.md) | [Русский](docs/CHANGELOG.ru.md) | [日本語](docs/CHANGELOG.ja.md) | [한국어](docs/CHANGELOG.ko.md) | [中文](docs/CHANGELOG.zh.md) | [العربية](docs/CHANGELOG.ar.md)
 

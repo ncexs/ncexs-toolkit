@@ -1,4 +1,17 @@
-﻿# 🚀 ncexs Toolkit v3.3
+# 🚀 ncexs Toolkit v3.4
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | **中文** | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.4 菜单重构
+
+### ✨ 功能与改进
+- **对称双列 UI**: 重构了 TUI (Terminal User Interface) 主菜单，将其调整为完全对称的双列排版，正好包含 20 个选项（10 行，2 列）。
+- **红色退出选项**: 将右下角的选项 `[20]` 重新映射为退出工具箱（Keluar Aplikasi / Exit Toolkit），并使用醒目的红色 (`$global:Theme.Exit`) 标注，以便快速识别。
+- **优化的菜单路由**: 更新了选择逻辑 (`switch ($choice)`) 以支持 20 个选项，并将输入 `"20"` 清洁地路由到退出程序。
+
+---
+
+# 🚀 ncexs Toolkit v3.3
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | **中文** | [العربية](CHANGELOG.ar.md)
 

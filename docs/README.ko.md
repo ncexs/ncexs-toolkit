@@ -1,4 +1,4 @@
-﻿# 🧰 ncexs Toolkit (NT)
+# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | [Basa Jawa](README.jv.md) | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | **한국어** | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -35,6 +35,7 @@
 
 ### ⚡ 성능 및 최적화
 * **메모리 최적화:** 사용되지 않는 작업 세트를 플러시하여 물리적 메모리를 확보하고 정확한 "정리 전과 후"의 RAM 통계를 표시합니다.
+* **Visual FX Booster:** 시스템 반응성을 개선하고 시각적 전환 지연 시간(MenuShowDelay)을 즉시 단축합니다.
 * **스마트 전원 관리 옵션:** 숨겨진 시스템 전원 관리 옵션(고성능 및 균형 조정)을 복원하고 화면 밝기를 최적화합니다.
 * **드라이브 최적화:** 시스템 및 숨김 파티션에 대한 제외 규칙을 적용하여 스마트 조각 모음/트림 루틴을 실행합니다.
 

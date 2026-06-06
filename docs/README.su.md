@@ -1,4 +1,4 @@
-﻿# 🧰 ncexs Toolkit (NT)
+# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | [Basa Jawa](README.jv.md) | **Basa Sunda** | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -35,6 +35,7 @@
 
 ### ⚡ Performa & Optimasi
 * **Optimasi Mémori:** Ngosongkeun mémori RAM nu henteu digunakeun pikeun ngabebaskeun mémori fisik, mintonkeun statistik RAM "Sateuacan & Saparantos".
+* **Visual FX Booster:** Ngoptimalkeun responsivitas sistem sareng ngagancangkan éfék transisi visual (MenuShowDelay) sacara instan.
 * **Rencana Daya Pinter:** Mulangkeun rencana daya nu disumputkeun (High Performance vs Balanced) sareng ngatur tingkat caangna layar.
 * **Optimasi Drive:** Ngajalankeun defrag/trim pinter ku aturan pangecualian otomatis pikeun partisi sistem sareng partisi nu disumputkeun.
 

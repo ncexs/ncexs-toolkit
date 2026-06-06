@@ -16,7 +16,7 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue
 
-$global:ToolkitVersion = "v3.3"
+$global:ToolkitVersion = "v3.4"
 $global:Language = "EN"
 
 $global:Theme = @{
@@ -40,16 +40,17 @@ try { $Host.PrivateData.PromptForegroundColor = $global:Theme.Prompt } catch {}
 $global:Translations = @{
     "EN" = @{
         "Menu_Title" = "ncexs Toolkit $($global:ToolkitVersion)"; "Menu_Option0" = "Compact OS (Save 2-5GB Space)"
-        "Menu_Option1" = "System Information"; "Menu_Option2" = "Enhanced Junk Cleaner"
-        "Menu_Option3" = "Empty Recycle Bin"; "Menu_Option4" = "Open Disk Cleanup"
-        "Menu_Option5" = "Smart Uninstaller"; "Menu_Option6" = "Network Repair"
-        "Menu_Option7" = "Power & Battery Utilities"; "Menu_Option8" = "Memory Optimizer"
-        "Menu_Option9" = "Defrag & Optimize Drives"; "Menu_Option10" = "System Health Checker"
-        "Menu_Option11" = "Updates & Drivers Center"; "Menu_Option12" = "DNS Changer"
-        "Menu_Option13" = "Wi-Fi Password Recovery"; "Menu_Option14" = "Visual FX Booster"
-        "Menu_Option15" = "Clear App Caches"; "Menu_Option16" = "Clear Event Logs"; "Menu_Option17" = "PC Maintenance Suite"; "Menu_Option18" = "Exit Toolkit"
+        "Menu_Option1" = "System Information"; "Menu_Option2" = "System Health Checker"
+        "Menu_Option3" = "One-Click Maintenance"; "Menu_Option4" = "Updates & Drivers Center"
+        "Menu_Option5" = "Memory Optimizer"; "Menu_Option6" = "Defrag & Optimize Drives"
+        "Menu_Option7" = "Power & Battery Utilities"; "Menu_Option8" = "Visual FX Booster"
+        "Menu_Option9" = "Smart Uninstaller"; "Menu_Option10" = "Remote Desktop (RDP) Manager"
+        "Menu_Option11" = "Enhanced Junk Cleaner"; "Menu_Option12" = "Clear App Caches"
+        "Menu_Option13" = "Clear Browser Caches"; "Menu_Option14" = "Empty Recycle Bin"
+        "Menu_Option15" = "Open Disk Cleanup"; "Menu_Option16" = "Clear Event Logs"
+        "Menu_Option17" = "Network Repair"; "Menu_Option18" = "DNS Changer"
+        "Menu_Option19" = "Wi-Fi Password Recovery"; "Menu_Option20" = "Exit Toolkit"
         "Menu_OptionL" = "Change Language"
-        "SubMenu_Power" = "POWER & BATTERY"; "SubMenu_Update" = "UPDATES & DRIVERS CENTER"; "SubMenu_Maintenance" = "PC MAINTENANCE SUITE"
         "DNS_Menu_Text" = "`n [1] Cloudflare (Fastest)`n [2] Google DNS (Stable)`n [3] Quad9 (Privacy)`n [4] AdGuard DNS (Block Ads)`n [5] Reset to Default (DHCP)`n [6] Back"
         "DNS_NoAdapter" = "No active internet adapter found."
         "DNS_Invalid" = "Invalid option"
@@ -77,6 +78,12 @@ $global:Translations = @{
         "Visual_Confirm" = "Boost UI now? (Explorer will restart)"; "Visual_Success" = "UI Boosted."
         "Event_Confirm" = "Clear all Windows Event Logs? (May take a minute)"; "Event_Done" = "Event Logs cleared."
         
+        "SysInfo_Title" = "SYSTEM INFORMATION"
+        "SysInfo_Option1" = "Export PC Audit Report (HTML)"
+        "SysInfo_Option2" = "Open Detailed Battery Report (HTML)"
+        "SysInfo_Option3" = "Check Windows License Activation"
+        "SysInfo_Option4" = "Back to Main Menu"
+
         "Maint_License_Title" = "WINDOWS LICENSE STATUS"
         "Maint_Audit_Title" = "PC AUDIT REPORT"
         "Maint_Audit_Exporting" = "Gathering PC specifications and generating report..."
@@ -97,7 +104,7 @@ $global:Translations = @{
         "Maint_RDP_Disabled" = "DISABLED"
         "Maint_RDP_Enable_Prompt" = "Enable Remote Desktop (RDP)?"
         "Maint_RDP_Disable_Prompt" = "Disable Remote Desktop (RDP)?"
-        "Maint_RDP_Enable_Success" = "Remote Desktop (RDP) has been enabled and firewall rules configured."
+        "Maint_RDP_Enable_Success" = "Enable Remote Desktop (RDP) has been enabled and firewall rules configured."
         "Maint_RDP_Disable_Success" = "Remote Desktop (RDP) has been disabled."
         "Maint_Browser_Title" = "BROWSER CACHE CLEANER"
         "Maint_Browser_Confirm" = "Clear caches for Google Chrome, MS Edge, and Firefox?"
@@ -112,17 +119,18 @@ $global:Translations = @{
         "Maint_Option7" = "Back to Main Menu"
     };
     "ID" = @{
-        "Menu_Title" = "ncexs Toolkit $($global:ToolkitVersion)"; "Menu_Option0" = "Compact OS (Hemat 2-5GB Space)"
-        "Menu_Option1" = "Informasi Sistem"; "Menu_Option2" = "Pembersih Sampah (Enhanced)"
-        "Menu_Option3" = "Kosongkan Recycle Bin"; "Menu_Option4" = "Buka Disk Cleanup"
-        "Menu_Option5" = "Smart Uninstaller"; "Menu_Option6" = "Perbaikan Jaringan"
-        "Menu_Option7" = "Utilitas Daya & Baterai"; "Menu_Option8" = "Optimasi Memori"
-        "Menu_Option9" = "Defragment & Optimasi Drive"; "Menu_Option10" = "Pemeriksa Kesehatan Sistem"
-        "Menu_Option11" = "Pusat Update & Driver"; "Menu_Option12" = "Pengubah DNS"
-        "Menu_Option13" = "Wi-Fi Password Recovery"; "Menu_Option14" = "Visual FX Booster"
-        "Menu_Option15" = "Pembersih Cache Aplikasi"; "Menu_Option16" = "Hapus Event Logs"; "Menu_Option17" = "Pusat Pemeliharaan Sistem"; "Menu_Option18" = "Keluar Aplikasi"
+        "Menu_Title" = "ncexs Toolkit $($global:ToolkitVersion)"; "Menu_Option0" = "Compact OS (Hemat 2-5GB Ruang)"
+        "Menu_Option1" = "Informasi Sistem"; "Menu_Option2" = "Pemeriksa Kesehatan Sistem"
+        "Menu_Option3" = "Pemeliharaan Satu Klik"; "Menu_Option4" = "Pusat Update & Driver"
+        "Menu_Option5" = "Optimasi Memori"; "Menu_Option6" = "Defragment & Optimasi Drive"
+        "Menu_Option7" = "Utilitas Daya & Baterai"; "Menu_Option8" = "Visual FX Booster"
+        "Menu_Option9" = "Smart Uninstaller"; "Menu_Option10" = "Remote Desktop (RDP) Manager"
+        "Menu_Option11" = "Pembersih Sampah (Enhanced)"; "Menu_Option12" = "Pembersih Cache Aplikasi"
+        "Menu_Option13" = "Bersihkan Cache Browser"; "Menu_Option14" = "Kosongkan Recycle Bin"
+        "Menu_Option15" = "Buka Disk Cleanup"; "Menu_Option16" = "Hapus Event Logs"
+        "Menu_Option17" = "Perbaikan Jaringan"; "Menu_Option18" = "Pengubah DNS"
+        "Menu_Option19" = "Wi-Fi Password Recovery"; "Menu_Option20" = "Keluar Aplikasi"
         "Menu_OptionL" = "Ubah Bahasa"
-        "SubMenu_Power" = "UTILITAS DAYA & BATERAI"; "SubMenu_Update" = "PUSAT UPDATE & DRIVER"; "SubMenu_Maintenance" = "PUSAT PEMELIHARAAN SISTEM"
         "DNS_Menu_Text" = "`n [1] Cloudflare (Tercepat)`n [2] Google DNS (Stabil)`n [3] Quad9 (Privasi)`n [4] AdGuard DNS (Blokir Iklan)`n [5] Reset ke Default (DHCP)`n [6] Kembali"
         "DNS_NoAdapter" = "Tidak ada adapter internet aktif."
         "DNS_Invalid" = "Pilihan tidak valid"
@@ -150,39 +158,11 @@ $global:Translations = @{
         "Visual_Confirm" = "Boost UI sekarang? (Explorer akan direstart)"; "Visual_Success" = "UI Boosted."
         "Event_Confirm" = "Bersihkan semua log Windows Event Viewer? (Butuh 1 menit)"; "Event_Done" = "Event Logs berhasil dibersihkan."
         
-        "Maint_License_Title" = "STATUS LISENSI WINDOWS"
-        "Maint_Audit_Title" = "LAPORAN AUDIT SPESIFIKASI PC"
-        "Maint_Audit_Exporting" = "Mengumpulkan spesifikasi PC dan membuat laporan..."
-        "Maint_Audit_Success" = "Laporan audit berhasil disimpan ke Desktop: {0}"
-        "Maint_Maint_Title" = "PEMELIHARAAN SATU KLIK"
-        "Maint_Maint_Confirm" = "Mulai pemeliharaan otomatis? (Akan membersihkan sampah, flush DNS, dan scan kesehatan sistem)"
-        "Maint_Maint_Junk" = "Membersihkan file sampah..."
-        "Maint_Maint_DNS" = "Membersihkan DNS Cache..."
-        "Maint_Maint_SFC" = "Menjalankan System File Checker (SFC)..."
-        "Maint_Maint_DISM" = "Menjalankan DISM System Image Repair..."
-        "Maint_Maint_Done" = "Pemeliharaan Satu Klik selesai."
-        "Maint_Battery_Title" = "ANALISIS KESEHATAN BATERAI"
-        "Maint_Battery_Desktop" = "Sistem ini berjalan di PC Desktop. Tidak ada baterai terdeteksi."
-        "Maint_Battery_Wear" = "Kesehatan Baterai: {0}% | Kapasitas Desain: {1} mWh | Kapasitas Isi Penuh: {2} mWh"
-        "Maint_RDP_Title" = "PENGELOLA REMOTE DESKTOP (RDP)"
-        "Maint_RDP_Status" = "Status RDP Saat Ini: {0}"
-        "Maint_RDP_Enabled" = "AKTIF"
-        "Maint_RDP_Disabled" = "NONAKTIF"
-        "Maint_RDP_Enable_Prompt" = "Aktifkan Remote Desktop (RDP)?"
-        "Maint_RDP_Disable_Prompt" = "Nonaktifkan Remote Desktop (RDP)?"
-        "Maint_RDP_Enable_Success" = "Remote Desktop (RDP) berhasil diaktifkan dan aturan firewall dikonfigurasi."
-        "Maint_RDP_Disable_Success" = "Remote Desktop (RDP) berhasil dinonaktifkan."
-        "Maint_Browser_Title" = "PEMBERSIH CACHE BROWSER"
-        "Maint_Browser_Confirm" = "Bersihkan cache untuk Google Chrome, MS Edge, dan Firefox?"
-        "Maint_Browser_Cleared" = "Berhasil membersihkan folder cache {0}."
-        "Maint_Browser_Success" = "Pembersihan cache browser selesai. Berhasil mengosongkan: {0} MB"
-        "Maint_Option1" = "Cek Status Lisensi Windows"
-        "Maint_Option2" = "Ekspor Laporan Audit PC (HTML)"
-        "Maint_Option3" = "Pemeliharaan Satu Klik"
-        "Maint_Option4" = "Analisis Kesehatan Baterai"
-        "Maint_Option5" = "Remote Desktop (RDP) Manager"
-        "Maint_Option6" = "Bersihkan Cache Browser"
-        "Maint_Option7" = "Kembali ke Menu Utama"
+        "SysInfo_Title" = "INFORMASI SISTEM"
+        "SysInfo_Option1" = "Ekspor Laporan Audit PC (HTML)"
+        "SysInfo_Option2" = "Analisis Detail Kesehatan Baterai"
+        "SysInfo_Option3" = "Cek Status Lisensi Windows"
+        "SysInfo_Option4" = "Kembali ke Menu Utama"
     }
 }
 
@@ -248,144 +228,170 @@ function Invoke-CompactOS {
 }
 
 function Show-SystemInfo {
-    Write-Title (Get-Translation 'System_Title')
-    try {
-        $os = Get-CimInstance Win32_OperatingSystem
-        $cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
-        $system = Get-CimInstance Win32_ComputerSystem
-        $gpu = Get-CimInstance Win32_VideoController | Select-Object -ExpandProperty Name
-        $mobo = Get-CimInstance Win32_BaseBoard
-        $bios = Get-CimInstance Win32_BIOS
-        
-        $uptime = (Get-Date) - $os.LastBootUpTime
-        $uptimeStr = "$($uptime.Days) Hari, $($uptime.Hours) Jam, $($uptime.Minutes) Menit"
-        
-        Write-Host "`n [ System Details ]" -ForegroundColor $global:Theme.Section
-        Write-Host "   Hostname     : $env:COMPUTERNAME"
-        Write-Host "   OS           : $($os.Caption) ($($os.OSArchitecture))"
-        Write-Host "   OS Build     : $($os.Version)"
-        Write-Host "   System Uptime: $uptimeStr"
-        Write-Host "`n [ Hardware ]" -ForegroundColor $global:Theme.Section
-        Write-Host "   Motherboard  : $($mobo.Manufacturer) $($mobo.Product)"
-        Write-Host "   Serial Number: $($bios.SerialNumber)"
-        Write-Host "   CPU          : $($cpu.Name.Trim())"
-        Write-Host "   GPU          : $($gpu -join ' | ')"
-        Write-Host "   RAM          : $([math]::Round($system.TotalPhysicalMemory / 1GB, 2)) GB Total"
-        
-        Write-Host "`n [ Storage (Local Drives) ]" -ForegroundColor $global:Theme.Section
-        Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3" | ForEach-Object { 
-            $total = [math]::Round($_.Size / 1GB, 2)
-            $free = [math]::Round($_.FreeSpace / 1GB, 2)
-            $usedPct = [math]::Round((($total - $free) / $total) * 100, 1)
-            Write-Host "   $($_.DeviceID)\          : $total GB Total | $free GB Free | Used: $usedPct%" 
-        }
-
-        Write-Host "`n [ Battery Health ]" -ForegroundColor $global:Theme.Section
+    do {
+        Clear-Host
+        Write-Title (Get-Translation 'System_Title')
         try {
-            $batteries = Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue
-            if ($batteries) {
-                $reportPath = "$env:TEMP\battery-report-sysinfo.html"
-                powercfg /batteryreport /output $reportPath > $null
-                
-                foreach ($b in $batteries) {
-                    Write-Host "   Name         : $($b.Name)"
-                    Write-Host "   Chemistry    : $($b.Chemistry)"
-                    Write-Host "   Status       : $($b.Status)"
+            $os = Get-CimInstance Win32_OperatingSystem
+            $cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
+            $system = Get-CimInstance Win32_ComputerSystem
+            $gpu = Get-CimInstance Win32_VideoController | Select-Object -ExpandProperty Name
+            $mobo = Get-CimInstance Win32_BaseBoard
+            $bios = Get-CimInstance Win32_BIOS
+            
+            $uptime = (Get-Date) - $os.LastBootUpTime
+            $uptimeStr = "$($uptime.Days) Hari, $($uptime.Hours) Jam, $($uptime.Minutes) Menit"
+            
+            Write-Host "`n [ System Details ]" -ForegroundColor $global:Theme.Section
+            Write-Host "   Hostname     : $env:COMPUTERNAME"
+            Write-Host "   OS           : $($os.Caption) ($($os.OSArchitecture))"
+            Write-Host "   OS Build     : $($os.Version)"
+            Write-Host "   System Uptime: $uptimeStr"
+            Write-Host "`n [ Hardware ]" -ForegroundColor $global:Theme.Section
+            Write-Host "   Motherboard  : $($mobo.Manufacturer) $($mobo.Product)"
+            Write-Host "   Serial Number: $($bios.SerialNumber)"
+            Write-Host "   CPU          : $($cpu.Name.Trim())"
+            Write-Host "   GPU          : $($gpu -join ' | ')"
+            Write-Host "   RAM          : $([math]::Round($system.TotalPhysicalMemory / 1GB, 2)) GB Total"
+            
+            Write-Host "`n [ Storage (Local Drives) ]" -ForegroundColor $global:Theme.Section
+            Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3" | ForEach-Object { 
+                $total = [math]::Round($_.Size / 1GB, 2)
+                $free = [math]::Round($_.FreeSpace / 1GB, 2)
+                $usedPct = [math]::Round((($total - $free) / $total) * 100, 1)
+                Write-Host "   $($_.DeviceID)\          : $total GB Total | $free GB Free | Used: $usedPct%" 
+            }
+
+            Write-Host "`n [ Battery Health ]" -ForegroundColor $global:Theme.Section
+            try {
+                $batteries = Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue
+                if ($batteries) {
+                    $reportPath = "$env:TEMP\battery-report-sysinfo.html"
+                    powercfg /batteryreport /output $reportPath > $null
                     
-                    if (Test-Path $reportPath) {
-                        $htmlContent = Get-Content -Path $reportPath -Raw
-                        $designCapMatch = [regex]::Match($htmlContent, 'DESIGN CAPACITY.*?>\s*([\d,.]+)\s*mWh')
-                        $fullCapMatch = [regex]::Match($htmlContent, 'FULL CHARGE CAPACITY.*?>\s*([\d,.]+)\s*mWh')
+                    foreach ($b in $batteries) {
+                        Write-Host "   Name         : $($b.Name)"
+                        Write-Host "   Chemistry    : $($b.Chemistry)"
+                        Write-Host "   Status       : $($b.Status)"
                         
-                        if ($designCapMatch.Success -and $fullCapMatch.Success) {
-                            $designCapVal = $designCapMatch.Groups[1].Value -replace '[.,\s]'
-                            $fullCapVal = $fullCapMatch.Groups[1].Value -replace '[.,\s]'
-                            $designCap = [double]$designCapVal
-                            $fullCap = [double]$fullCapVal
+                        if (Test-Path $reportPath) {
+                            $htmlContent = Get-Content -Path $reportPath -Raw
+                            $designCapMatch = [regex]::Match($htmlContent, 'DESIGN CAPACITY.*?>\s*([\d,.]+)\s*mWh')
+                            $fullCapMatch = [regex]::Match($htmlContent, 'FULL CHARGE CAPACITY.*?>\s*([\d,.]+)\s*mWh')
                             
-                            if ($designCap -gt 0) {
-                                $healthPct = [math]::Round(($fullCap / $designCap) * 100, 1)
-                                $blockFull = [char]0x2588
-                                $blockLight = [char]0x2591
-                                $filled = [math]::Min(10, [math]::Max(0, [int][math]::Round($healthPct / 10)))
-                                $empty = 10 - $filled
-                                $bar = ([string]$blockFull * $filled) + ([string]$blockLight * $empty)
+                            if ($designCapMatch.Success -and $fullCapMatch.Success) {
+                                $designCapVal = $designCapMatch.Groups[1].Value -replace '[.,\s]'
+                                $fullCapVal = $fullCapMatch.Groups[1].Value -replace '[.,\s]'
+                                $designCap = [double]$designCapVal
+                                $fullCap = [double]$fullCapVal
                                 
-                                $color = "Green"
-                                if ($healthPct -lt 50.0) { $color = "Red" }
-                                elseif ($healthPct -lt 80.0) { $color = "Yellow" }
-                                
-                                Write-Host "   Health       : [" -NoNewline
-                                Write-Host $bar -NoNewline -ForegroundColor $color
-                                Write-Host "] $healthPct%"
-                                Write-Host "   Capacity     : $fullCap mWh / $designCap mWh"
+                                if ($designCap -gt 0) {
+                                    $healthPct = [math]::Round(($fullCap / $designCap) * 100, 1)
+                                    $blockFull = [char]0x2588
+                                    $blockLight = [char]0x2591
+                                    $filled = [math]::Min(10, [math]::Max(0, [int][math]::Round($healthPct / 10)))
+                                    $empty = 10 - $filled
+                                    $bar = ([string]$blockFull * $filled) + ([string]$blockLight * $empty)
+                                    
+                                    $color = "Green"
+                                    if ($healthPct -lt 50.0) { $color = "Red" }
+                                    elseif ($healthPct -lt 80.0) { $color = "Yellow" }
+                                    
+                                    Write-Host "   Health       : [" -NoNewline
+                                    Write-Host $bar -NoNewline -ForegroundColor $color
+                                    Write-Host "] $healthPct%"
+                                    Write-Host "   Capacity     : $fullCap mWh / $designCap mWh"
+                                }
                             }
                         }
                     }
+                    Remove-Item $reportPath -Force -ErrorAction SilentlyContinue
                 }
-                Remove-Item $reportPath -Force -ErrorAction SilentlyContinue
+                else {
+                    Write-Host "   No battery detected on this system (Desktop/Virtual Machine)." -ForegroundColor $global:Theme.Warning
+                }
             }
-            else {
-                Write-Host "   No battery detected on this system (Desktop/Virtual Machine)." -ForegroundColor $global:Theme.Warning
+            catch {
+                Write-Host "   Unable to retrieve battery details." -ForegroundColor $global:Theme.Error
             }
-        }
-        catch {
-            Write-Host "   Unable to retrieve battery details." -ForegroundColor $global:Theme.Error
-        }
 
-        Write-Host "`n [ WinSAT Performance Scores ]" -ForegroundColor $global:Theme.Section
-        try {
-            $winsat = Get-CimInstance Win32_WinSAT -ErrorAction SilentlyContinue
-            if ($winsat) {
-                $blockFull = [char]0x2588
-                $blockLight = [char]0x2591
-                $scores = @(
-                    @{ Name = "Processor (CPU) "; Score = $winsat.CPUScore }
-                    @{ Name = "Memory (RAM)    "; Score = $winsat.MemoryScore }
-                    @{ Name = "Graphics (GPU)  "; Score = $winsat.GraphicsScore }
-                    @{ Name = "Gaming Graphics "; Score = $winsat.D3DScore }
-                    @{ Name = "Primary Disk    "; Score = $winsat.DiskScore }
-                )
-                
-                foreach ($s in $scores) {
-                    $val = $s.Score
-                    $filled = [math]::Min(10, [math]::Max(0, [int][math]::Round($val)))
-                    $empty = 10 - $filled
-                    $bar = ([string]$blockFull * $filled) + ([string]$blockLight * $empty)
+            Write-Host "`n [ WinSAT Performance Scores ]" -ForegroundColor $global:Theme.Section
+            try {
+                $winsat = Get-CimInstance Win32_WinSAT -ErrorAction SilentlyContinue
+                if ($winsat) {
+                    $blockFull = [char]0x2588
+                    $blockLight = [char]0x2591
+                    $scores = @(
+                        @{ Name = "Processor (CPU) "; Score = $winsat.CPUScore }
+                        @{ Name = "Memory (RAM)    "; Score = $winsat.MemoryScore }
+                        @{ Name = "Graphics (GPU)  "; Score = $winsat.GraphicsScore }
+                        @{ Name = "Gaming Graphics "; Score = $winsat.D3DScore }
+                        @{ Name = "Primary Disk    "; Score = $winsat.DiskScore }
+                    )
                     
-                    $color = "Green"
-                    if ($val -lt 4.0) { $color = "Red" }
-                    elseif ($val -lt 7.0) { $color = "Yellow" }
+                    foreach ($s in $scores) {
+                        $val = $s.Score
+                        $filled = [math]::Min(10, [math]::Max(0, [int][math]::Round($val)))
+                        $empty = 10 - $filled
+                        $bar = ([string]$blockFull * $filled) + ([string]$blockLight * $empty)
+                        
+                        $color = "Green"
+                        if ($val -lt 4.0) { $color = "Red" }
+                        elseif ($val -lt 7.0) { $color = "Yellow" }
+                        
+                        Write-Host "   $($s.Name) : [" -NoNewline
+                        Write-Host $bar -NoNewline -ForegroundColor $color
+                        Write-Host "] $val"
+                    }
                     
-                    Write-Host "   $($s.Name) : [" -NoNewline
-                    Write-Host $bar -NoNewline -ForegroundColor $color
-                    Write-Host "] $val"
+                    Write-Host "   ---------------------------------------"
+                    $baseFilled = [math]::Min(10, [math]::Max(0, [int][math]::Round($winsat.WinSPRLevel)))
+                    $baseEmpty = 10 - $baseFilled
+                    $baseBar = ([string]$blockFull * $baseFilled) + ([string]$blockLight * $baseEmpty)
+                    
+                    $baseColor = "Green"
+                    if ($winsat.WinSPRLevel -lt 4.0) { $baseColor = "Red" }
+                    elseif ($winsat.WinSPRLevel -lt 7.0) { $baseColor = "Yellow" }
+                    
+                    Write-Host "   Base/Overall Score : [" -NoNewline
+                    Write-Host $baseBar -NoNewline -ForegroundColor $baseColor
+                    Write-Host "] $($winsat.WinSPRLevel) (Max 9.9)"
                 }
-                
-                Write-Host "   ---------------------------------------"
-                $baseFilled = [math]::Min(10, [math]::Max(0, [int][math]::Round($winsat.WinSPRLevel)))
-                $baseEmpty = 10 - $baseFilled
-                $baseBar = ([string]$blockFull * $baseFilled) + ([string]$blockLight * $baseEmpty)
-                
-                $baseColor = "Green"
-                if ($winsat.WinSPRLevel -lt 4.0) { $baseColor = "Red" }
-                elseif ($winsat.WinSPRLevel -lt 7.0) { $baseColor = "Yellow" }
-                
-                Write-Host "   Base/Overall Score : [" -NoNewline
-                Write-Host $baseBar -NoNewline -ForegroundColor $baseColor
-                Write-Host "] $($winsat.WinSPRLevel) (Max 9.9)"
+                else {
+                    Write-Host "   WinSAT assessment data not found." -ForegroundColor $global:Theme.Warning
+                    Write-Host "   To generate scores, run 'winsat formal' in an Administrator command prompt." -ForegroundColor $global:Theme.Info
+                }
             }
-            else {
-                Write-Host "   WinSAT assessment data not found." -ForegroundColor $global:Theme.Warning
-                Write-Host "   To generate scores, run 'winsat formal' in an Administrator command prompt." -ForegroundColor $global:Theme.Info
+            catch {
+                Write-Host "   Unable to retrieve WinSAT scores." -ForegroundColor $global:Theme.Error
             }
         }
-        catch {
-            Write-Host "   Unable to retrieve WinSAT scores." -ForegroundColor $global:Theme.Error
+        catch { Write-Error "Failed to load some system info." }
+        
+        Write-Host "`n [1] $(Get-Translation 'SysInfo_Option1')"
+        Write-Host " [2] $(Get-Translation 'SysInfo_Option2')"
+        Write-Host " [3] $(Get-Translation 'SysInfo_Option3')"
+        Write-Host " [4] $(Get-Translation 'SysInfo_Option4')"
+        Write-Host ""
+        
+        $c = Read-Host " $(Get-Translation 'SelectOption')"
+        if ($c -eq "1") {
+            Export-PCAuditReport
         }
-    }
-    catch { Write-Error "Failed to load some system info." }
-    Read-Host "`n $(Get-Translation 'PressAnyKey')"
+        elseif ($c -eq "2") {
+            Get-BatteryHealth
+        }
+        elseif ($c -eq "3") {
+            Get-WindowsLicenseStatus
+        }
+        elseif ($c -eq "4") {
+            return
+        }
+        else {
+            Write-Warning (Get-Translation 'Invalid_Option')
+            Start-Sleep -Seconds 1
+        }
+    } while ($true)
 }
 
 function Clear-JunkFiles {
@@ -1125,11 +1131,16 @@ function Invoke-OneClickMaintenance {
         "$env:SystemRoot\Temp\*", 
         "$env:SystemRoot\Prefetch\*"
     )
+    $totalFreed = 0
     foreach ($p in $targets) {
         $files = Get-ChildItem -Path $p -Recurse -Force -ErrorAction SilentlyContinue
-        if ($files) { $files | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue }
+        if ($files) { 
+            $totalFreed += ($files | Measure-Object -Property Length -Sum).Sum
+            $files | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue 
+        }
     }
-    Write-Success "Temp files cleared."
+    $freedMB = [math]::Round($totalFreed / 1MB, 2)
+    Write-Success ((Get-Translation 'Junk_Cleared') -f $freedMB)
 
     Write-Info (Get-Translation 'Maint_Maint_DNS')
     ipconfig /flushdns > $null
@@ -1299,33 +1310,6 @@ function Clear-BrowserCaches {
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
-function Show-PCMaintenanceMenu {
-    do {
-        Clear-Host
-        Write-Title (Get-Translation 'SubMenu_Maintenance')
-        
-        Write-Host "`n [1] $(Get-Translation 'Maint_Option1')"
-        Write-Host " [2] $(Get-Translation 'Maint_Option2')"
-        Write-Host " [3] $(Get-Translation 'Maint_Option3')"
-        Write-Host " [4] $(Get-Translation 'Maint_Option4')"
-        Write-Host " [5] $(Get-Translation 'Maint_Option5')"
-        Write-Host " [6] $(Get-Translation 'Maint_Option6')"
-        Write-Host " [7] $(Get-Translation 'Maint_Option7')"
-        Write-Host ""
-        
-        $c = Read-Host " $(Get-Translation 'SelectOption')"
-        switch ($c) {
-            "1" { Get-WindowsLicenseStatus }
-            "2" { Export-PCAuditReport }
-            "3" { Invoke-OneClickMaintenance }
-            "4" { Get-BatteryHealth }
-            "5" { Manage-RemoteDesktop }
-            "6" { Clear-BrowserCaches }
-            "7" { return }
-            default { Write-Warning (Get-Translation 'Invalid_Option'); Start-Sleep -Seconds 1 }
-        }
-    } while ($true)
-}
 
 function Show-MainMenu {
     Write-Host "`n"
@@ -1358,17 +1342,17 @@ function Show-MainMenu {
     Write-Host ("{0,-35}" -f (Get-Translation 'Menu_OptionL')) -NoNewline -ForegroundColor $global:Theme.Special
     Write-Host " $($global:UI.VLine)" -ForegroundColor $global:Theme.Border
     Write-Host (" {0}{1}{2}" -f $global:UI.LeftT, $line, $global:UI.RightT) -ForegroundColor $global:Theme.Border
-    for ($i = 1; $i -le 9; $i++) {
-        $l_idx = $i; $r_idx = $i + 9
+    for ($i = 1; $i -le 10; $i++) {
+        $l_idx = $i; $r_idx = $i + 10
         $l_t = Get-Translation "Menu_Option$l_idx"
         Write-Host " $($global:UI.VLine) " -NoNewline -ForegroundColor $global:Theme.Border
         Write-Host ("[{0,-2}]" -f $l_idx) -NoNewline -ForegroundColor $global:Theme.MenuNumber
         Write-Host (" {0,-34}" -f $l_t) -NoNewline -ForegroundColor $global:Theme.MenuText
         Write-Host "$($global:UI.VLine) " -NoNewline -ForegroundColor $global:Theme.Border
-        if ($r_idx -le 18) {
+        if ($r_idx -le 20) {
             $r_t = Get-Translation "Menu_Option$r_idx"
-            $rc = if ($r_idx -eq 18) { $global:Theme.Exit } else { $global:Theme.MenuNumber }
-            $rtc = if ($r_idx -eq 18) { $global:Theme.Exit } else { $global:Theme.MenuText }
+            $rc = if ($r_idx -eq 20) { $global:Theme.Exit } else { $global:Theme.MenuNumber }
+            $rtc = if ($r_idx -eq 20) { $global:Theme.Exit } else { $global:Theme.MenuText }
             Write-Host ("[{0,-2}]" -f $r_idx) -NoNewline -ForegroundColor $rc
             Write-Host (" {0,-35}" -f $r_t) -NoNewline -ForegroundColor $rtc
         }
@@ -1393,14 +1377,14 @@ do {
     Show-MainMenu
     $choice = Read-Host " $(Get-Translation 'SelectOption')"
     switch ($choice) {
-        "0" { Invoke-CompactOS }; "1" { Show-SystemInfo }; "2" { Clear-JunkFiles }
-        "3" { Clear-RecycleBin-Menu }; "4" { Open-DiskCleanup }; "5" { Show-AdvancedUninstaller }
-        "6" { Invoke-NetworkRepair }; "7" { Show-PowerMenu }; "8" { Clear-RAM }
-        "9" { Invoke-Defragment }; "10" { Show-SystemHealthMenu }; "11" { Show-UpdateDriverMenu }
-        "12" { Show-DNSMenu }; "13" { Invoke-WifiGrabber }; "14" { Invoke-VisualPerf }
-        "15" { Invoke-OptimizeApps }; "16" { Clear-EventLogs }
-        "17" { Show-PCMaintenanceMenu }
-        "18" { exit }
+        "0" { Invoke-CompactOS }; "1" { Show-SystemInfo }; "2" { Show-SystemHealthMenu }
+        "3" { Invoke-OneClickMaintenance }; "4" { Show-UpdateDriverMenu }; "5" { Clear-RAM }
+        "6" { Invoke-Defragment }; "7" { Show-PowerMenu }; "8" { Invoke-VisualPerf }
+        "9" { Show-AdvancedUninstaller }; "10" { Manage-RemoteDesktop }
+        "11" { Clear-JunkFiles }; "12" { Invoke-OptimizeApps }; "13" { Clear-BrowserCaches }
+        "14" { Clear-RecycleBin-Menu }; "15" { Open-DiskCleanup }; "16" { Clear-EventLogs }
+        "17" { Invoke-NetworkRepair }; "18" { Show-DNSMenu }; "19" { Invoke-WifiGrabber }
+        "20" { exit }
         "L" { if ($global:Language -eq "EN") { $global:Language = "ID" } else { $global:Language = "EN" } }
         default { Write-Warning (Get-Translation 'Invalid_Option'); Start-Sleep -Seconds 1 }
     }

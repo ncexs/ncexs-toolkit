@@ -1,4 +1,17 @@
-﻿# 🚀 ncexs Toolkit v3.3
+# 🚀 ncexs Toolkit v3.4
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | **العربية**
+
+## 🧰 ncexs Toolkit – v3.4 تحديث إعادة هيكلة القائمة
+
+### ✨ الميزات والتحسينات
+- **واجهة مستخدم متناظرة من عمودين**: إعادة هيكلة القائمة الرئيسية TUI لتصبح متناظرة تماماً من عمودين بـ 20 خياراً (10 صفوف وعمودين).
+- **خيار خروج باللون الأحمر**: إعادة تعيين الخيار `[20]` للخروج من الأداة (Keluar Aplikasi / Exit Toolkit) في الزاوية اليمنى السفلية، وتلوينه باللون الأحمر الساطع لسهولة التعرف عليه.
+- **توجيه قائمة محسّن**: تحديث منطق اختيار القائمة (`switch ($choice)`) لدعم 20 خياراً وتوجيه الإدخال `"20"` للخروج بشكل نظيف من الأداة.
+
+---
+
+# 🚀 ncexs Toolkit v3.3
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | **العربية**
 

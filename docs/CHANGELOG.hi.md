@@ -1,4 +1,17 @@
-﻿# 🚀 ncexs Toolkit v3.3
+# 🚀 ncexs Toolkit v3.4
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | **हिन्दी** | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.4 मेनू पुनर्गठन
+
+### ✨ सुविधाएं और संवर्द्धन
+- **सममित 2-कॉलम यूआई**: मुख्य मेनू TUI (Terminal User Interface) को ठीक 20 विकल्पों (10 पंक्तियाँ, 2 कॉलम) के साथ पूरी तरह से सममित 2-कॉलम लेआउट में पुनर्गठित किया गया है।
+- **लाल रंग में बाहर निकलने का विकल्प**: निचले-दाएँ स्लॉट में टूलकिट से बाहर निकलने (Keluar Aplikasi / Exit Toolkit) के लिए विकल्प `[20]` को फिर से मैप किया गया है, और इसे त्वरित पहचान के लिए लाल रंग (`$global:Theme.Exit`) से दर्शाया गया है।
+- **अनुकूलित मेनू रूटिंग**: 20 विकल्पों का समर्थन करने और इनपुट `"20"` को साफ-सुथरे तरीके से बाहर निकलने के लिए रूट करने हेतु चयन तर्क (`switch ($choice)`) को अपडेट किया गया है।
+
+---
+
+# 🚀 ncexs Toolkit v3.3
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | **हिन्दी** | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
 

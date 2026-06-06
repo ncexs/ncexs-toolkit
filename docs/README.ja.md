@@ -1,4 +1,4 @@
-﻿# 🧰 ncexs Toolkit (NT)
+# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | [Basa Jawa](README.jv.md) | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | **日本語** | [한국어](README.ko.md) | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -35,6 +35,7 @@
 
 ### ⚡ パフォーマンス＆最適化
 * **メモリ最適化：** 使用されていないワーキングセットを解放して物理メモリを空け、明確な「実行前と実行後」のRAM統計を表示します。
+* **Visual FX Booster：** システムの応答性を向上させ、視覚的なトランジション遅延 (MenuShowDelay) を即座に短縮します。
 * **スマート電源プラン：** 非表示になっている電源プラン（高パフォーマンスとバランス）を復元し、画面の明るさを最適化します。
 * **ドライブ最適化：** システムおよび非表示パーティションを除外ルールとしたスマートなデフラグ／トリムルーチンを実行します。
 

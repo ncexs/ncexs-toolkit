@@ -1,4 +1,17 @@
-﻿# 🚀 ncexs Toolkit v3.3
+# 🚀 ncexs Toolkit v3.4
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | **日本語** | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.4 メニュー再構成
+
+### ✨ 功能と機能向上
+- **対称2カラム UI**: TUI (Terminal User Interface) メインメニューを再構成し、正確に20個のオプション（10行、2カラム）で構成される完全対称の2カラムレイアウトに調整しました。
+- **赤色の終了オプション**: 右下のオプション `[20]` をツールキットの終了（Keluar Aplikasi / Exit Toolkit）に再マッピングし、識別しやすいように鮮やかな赤色 (`$global:Theme.Exit`) で表示するようにしました。
+- **メニュー表示とルートの最適化**: 20個のオプションに対応するように入力処理ロジック (`switch ($choice)`) を更新し、入力 `"20"` でツールキットをクリーンに終了するようにしました。
+
+---
+
+# 🚀 ncexs Toolkit v3.3
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | **日本語** | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
 

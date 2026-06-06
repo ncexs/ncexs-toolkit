@@ -1,4 +1,4 @@
-﻿# 🧰 ncexs Toolkit (NT)
+# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | [Basa Jawa](README.jv.md) | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | **中文** | [العربية](README.ar.md)
 
@@ -35,6 +35,7 @@
 
 ### ⚡ 性能与优化
 * **内存优化：** 释放未使用的内存工作集（Working Set），在控制台清晰显示优化“前与后”的可用内存统计数据。
+* **视觉特效加速 (Visual FX Booster)：** 优化系统响应速度，瞬间缩短窗口与菜单的视觉过渡延迟 (MenuShowDelay)。
 * **智能电源计划：** 恢复隐藏的系统电源计划（高性能与平衡）并优化屏幕亮度设置。
 * **驱动器优化：** 运行智能磁盘碎片整理和 TRIM，自动排除系统隐藏分区。
 
