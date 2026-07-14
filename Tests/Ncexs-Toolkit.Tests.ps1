@@ -1,5 +1,10 @@
 # Ncexs-Toolkit.Tests.ps1
 
+$ToolkitPath = Join-Path $PSScriptRoot "../ncexs-Toolkit.ps1"
+if (-not (Test-Path $ToolkitPath)) {
+    $ToolkitPath = "./ncexs-Toolkit.ps1"
+}
+
 Describe "ncexs-Toolkit Tests" {
     # 1. Mock destructive / system-level cmdlets
     Mock Set-ItemProperty {}
@@ -47,8 +52,7 @@ Describe "ncexs-Toolkit Tests" {
     function cleanmgr.exe { }
     function powercfg { }
 
-    # 2. Dot-source the main script (execution guard will prevent loop and admin checks)
-    . "$PSScriptRoot/../ncexs-Toolkit.ps1"
+    . $ToolkitPath
 
     Context "Translation Tests" {
         It "Should translate standard English menu titles correctly" {
