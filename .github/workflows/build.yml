@@ -16,20 +16,19 @@ jobs:
       - name: 🧩 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 🔍 Scan PowerShell Files
+      - name: 🔍 Scan PowerShell with PSScriptAnalyzer
         shell: pwsh
         run: |
-          Write-Host "=== Scanning PowerShell scripts ==="
-          $files = @(Get-ChildItem -Path . -Filter "*.ps1" -Recurse)
-          if ($files.Count -eq 0) {
-            Write-Host "⚠️ No PowerShell files found!"
+          Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser -ErrorAction SilentlyContinue
+          $results = Invoke-ScriptAnalyzer -Path ./ncexs-Toolkit.ps1 -Recurse -Severity Error,Warning
+          if ($results) {
+              $results | Format-Table
+              Write-Error "PSScriptAnalyzer mendeteksi kesalahan atau peringatan keamanan!"
+              exit 1
           } else {
-            foreach ($f in $files) {
-              Write-Host "📄 Found script: $($f.Name)"
-              $lineCount = @(Get-Content $f.FullName).Count
-              Write-Host "   ↳ $lineCount lines read successfully ✅"
-            }
+              Write-Host "Analisis statis aman! Tidak ditemukan masalah kritis."
           }
+
 
       - name: 🧪 Run Pester Tests
         shell: pwsh
@@ -47,3 +46,12 @@ jobs:
           } else {
             Write-Host "⚠️ Test file not found at $testPath — skipping tests."
           }
+
+      - name: 🛡️ VirusTotal Scan
+        if: ${{ secrets.VT_API_KEY != '' }}
+        uses: crazy-max/ghaction-virustotal@v5
+        with:
+          vt_api_key: ${{ secrets.VT_API_KEY }}
+          files: |
+            ./ncexs-Toolkit.ps1
+

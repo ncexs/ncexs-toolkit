@@ -1,4 +1,4 @@
-# 🧰 ncexs Toolkit (NT)
+﻿# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | **Basa Jawa** | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -17,19 +17,18 @@
 ### ⚡ Quick Fix & Diagnostik
 * **Ngawasi Progres Langsung:** Pantau lakuné tugas kanthi wektu nyata (real-time) nganggé persentase lan bar visual langsung ing terminal panjenengan.
 * **Pemeriksa Kesehatan Sistem:** Nganggo piranti bawaan SFC, DISM, lan `chkdsk /scan` sing aman kanthi tampilan UI kustom supaya panjenengan mangerteni kanthi cetha kapan prosesé rampung.
+* **Menu Diagnostik & Laporan Sistem:** Sub-menu khusus kanggo laporan PC Audit HTML, kesehatan baterei, lisensi Windows, lan kompatibilitas Windows 11.
+* **Pemeriksa Kompatibilitas Windows 11:** Mriksa kompatibilitas hardware kanggo Windows 11 (UEFI, Secure Boot, TPM 2.0).
 
 ### 🧹 Panyimpenan & Reresik
 * **Kompresi Compact OS:** Saiki bersifat **rong arah** (ndhukung kompresi lan dekompresi), ngirit **2GB – 5GB** ruang panyimpenan.
-* **Reresik Sampah (Enhanced):** Ngresiki folder sistem temp, Prefetch, CrashDumps, cache Windows Update, log CBS sing gedhe, lan cache shader GPU.
-* **Pembersih Cache Aplikasi:** Mbusak cache raksasa saka Discord, Spotify, Steam, Telegram, lan WhatsApp kanthi aman tanpa ngetokake akun panjenengan.
-* **Pembersih Event Logs:** Utilitas adhedhasar API .NET kanggo ngosongake kabeh log Windows Event Viewer **secara instan (kurang saka 1 detik)**.
-* **Smart App Uninstaller:** Pados cepet lumantar registri sistem aktif kanggo nemokaké lan mbukak uninstaller bawaan kanthi cepet.
-* **Recycle Bin & Disk Cleanup:** Ngosongaké file in Recycle Bin kanthi aman utำ mbukak utilitas Disk Cleanup bawaan Windows.
+* **Pembersih Jero Sistem & Aplikasi:** Nggabungake Junk Sistem, Cache Aplikasi (WhatsApp, Discord, Spotify, Steam, Telegram, Teams, Zoom, Skype, Epic Games, GOG), lan Event Logs Windows dadi siji utilitas reresik. Ndhukung operasi meneng (silent) ing njero Pangopenan Sepisan Klik.
+* **Smart App Uninstaller:** Pados cepet lumantar registri sistem aktif kanggo nemokaké lan mbukak uninstaller bawaan kanthi cepat.
+* **Recycle Bin & Disk Cleanup:** Ngosongaké file ing Recycle Bin kanthi aman utawa mbukak utilitas Disk Cleanup bawaan Windows.
 
 ### 🛠️ Pusat Pangopenan Sistem
-* **Laporan Audit PC (HTML):** Nggawe Laporan Audit PC interaktif format HTML sing diekspor langsung menyang Desktop. Ngadit CPU, RAM, detail OS, Motherboard, lan **Akun Windows Aktif** kanthi label hak akses sing cetha (Administrator vs Standar).
 * **Pangopenan Sepisan Klik:** Nindakake pangopenan sistem otomatis (ngresiki sampah, DNS flush, SFC/DISM scan) kanthi tetep njaga Recycle Bin supaya file penting ora ilang.
-* **Analisis Kesehatan Baterai:** Ngitung tingkat keausan baterai real-time, utawa ndeteksi PC Desktop sacara dinamis.
+* **Startup Manager:** Fitur interaktif kanggo ngatur aplikasi startup saka Registry lan folder Startup.
 * **Pengelola Remote Desktop (RDP):** Ngaktifake/nonaktifake RDP kanthi cepet lan ngatur aturan Windows Firewall.
 * **Pembersih Cache Browser:** Ngresiki database cache Google Chrome, Microsoft Edge, lan Mozilla Firefox.
 
@@ -70,7 +69,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 <details>
 <summary><b>🛡️ Klik kanggo priksani Fitur Keamanan & Transparansi</b></summary>
 
-* **Terverifikasi VirusTotal:** Skrip wis dipriksa kabeh lan dipesthekake bebas saka virus/malware.
+* **Terverifikasi VirusTotal:** Skrip wis dipriksa kabeh, dipesthekake bebas saka virus/malware, lan dipindai otomatis dening VirusTotal saben push kode.
 * **Open Source & Transparan:** Panjenengan saged mriksa kabeh baris PowerShell piyambak—ora ana kode sing didhelikake utawa file tambahan saka njaba.
 * **Aman kanggo Admin:** Nyuwun ijin administrator kanthi aman lan metu kanthi resik yen ijin ditulak tanpa ngganggu sistem.
 * **Proteksi Sesi Aktif:** Kita ngliwati folder penting supaya akun aktif ing browser lan Discord ora metu kanthi dadakan.

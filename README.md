@@ -1,4 +1,4 @@
-# 🧰 ncexs Toolkit (NT)
+﻿# 🧰 ncexs Toolkit (NT)
 
 🌐 **English** | [Bahasa Indonesia](docs/README.id.md) | [Basa Jawa](docs/README.jv.md) | [Basa Sunda](docs/README.su.md) | [हिन्दी](docs/README.hi.md) | [Русский](docs/README.ru.md) | [日本語](docs/README.ja.md) | [한국어](docs/README.ko.md) | [中文](docs/README.zh.md) | [العربية](docs/README.ar.md)
 
@@ -17,19 +17,18 @@
 ### ⚡ Quick Fix & Diagnostics
 * **Live Progress Tracking:** Follow task execution in real-time with beautiful percentage-based feedback indicators directly in your terminal.
 * **Live Health Check:** Invokes native `SFC`, `DISM`, and non-destructive `chkdsk /scan` tools with custom UI rendering so you never have to guess when the task completes.
+* **System Diagnostics & Reports:** Dedicated sub-menu containing PC Audit HTML export, battery health report, license activation check, and Windows 11 compatibility check.
+* **Windows 11 Compatibility Checker:** Validates UEFI boot mode, Secure Boot state, and TPM 2.0 specifications.
 
 ### 🧹 Storage & Clean Up
 * **Compact OS Compression:** Rebuilt to be **bidirectional** (supports both compressing OS files and decompressing back to default), safely saving **2GB – 5GB** of storage.
-* **Enhanced Junk Cleaner:** Deep-cleans temporary system folders, Prefetch files, CrashDumps, Windows Update cache, bloated CBS logs, and GPU shader caches.
-* **App Cache Cleaner:** Safely and automatically wipes massive storage-hogging caches from Discord, Spotify, Steam, Telegram, and WhatsApp without logging you out.
-* **Event Logs Cleaner:** Direct .NET API-based utility that clears all Event Viewer logs **instantly (under 1 second)**.
+* **System & App Deep Cleaner:** Merges System Junk, App Caches (WhatsApp, Discord, Spotify, Steam, Telegram, Teams, Zoom, Skype, Epic Games, GOG), and Windows Event Logs into one single deep cleaning utility. Supports silent operation in One-Click Maintenance.
 * **Smart App Uninstaller:** Quick fuzzy search through active system registries to find and run uninstallation scripts immediately.
 * **Recycle Bin & Disk Cleanup:** Safely purges deleted files or triggers the native Windows Cleanup interface instantly.
 
 ### 🛠️ PC Maintenance Suite
-* **PC Audit Report (HTML):** Generates a premium and clean interactive HTML PC specifications report exported directly to your Desktop. Audits CPU, RAM, OS details, Motherboard, Storage space, and **Active Windows Accounts** with clear privilege badging (Administrator vs Standard).
 * **One-Click Maintenance:** Performs fully automated system maintenance (junk clean, DNS flush, SFC/DISM scan) while intelligently preserving the Recycle Bin to prevent loss of important user files.
-* **Battery Health Analyzer:** Calculates real-time battery wear, design capacity, and full charge capacity, or dynamically detects Desktop PCs.
+* **Startup Manager:** Interactive manager to list, enable, or disable registry and folder startup applications.
 * **Remote Desktop (RDP) Manager:** Turn RDP on/off instantly and configures required Windows Firewall rules.
 * **Browser Cache Cleaner:** Cleans accumulated cache databases from Google Chrome, Microsoft Edge, and Mozilla Firefox.
 
@@ -70,7 +69,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 <details>
 <summary><b>🛡️ Click to view Security & Safety Features</b></summary>
 
-* **VirusTotal Verified:** The script is fully audited and confirmed malware-free.
+* **VirusTotal Verified:** The script is fully audited, confirmed malware-free, and automatically scanned by VirusTotal on every commit/push.
 * **Open Source and Transparent:** Review all PowerShell lines yourself—absolutely no obfuscation, compiled dependencies, or third-party wrappers.
 * **Admin-Friendly Design:** Requests elevated permissions gracefully and safely logs out if denied without blocking system session resources.
 * **Protected Profiles:** We exclude user-critical storage paths to guarantee you stay logged into your active browsers and Discord.

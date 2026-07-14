@@ -1,3 +1,19 @@
+# 🚀 ncexs Toolkit v3.5
+
+🌐 **English** | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](docs/CHANGELOG.jv.md) | [Basa Sunda](docs/CHANGELOG.su.md) | [हिन्दी](docs/CHANGELOG.hi.md) | [Русский](docs/CHANGELOG.ru.md) | [日本語](docs/CHANGELOG.ja.md) | [한국어](docs/CHANGELOG.ko.md) | [中文](docs/CHANGELOG.zh.md) | [العربية](docs/CHANGELOG.ar.md)
+
+## 🎓 ncexs Toolkit – v3.5 UAS Freedom Update
+
+### ✨ Features & Enhancements
+- **System & App Deep Cleaner**: Combined System Junk, App Caches (supporting Teams, Zoom, Skype, Epic Games, GOG, WhatsApp, Discord, Spotify, Steam, Telegram), and Windows Event Logs into one single deep cleaning utility (`[11]`). Support for silent operation inside One-Click Maintenance.
+- **System Diagnostics & Reports Menu**: Created a dedicated Diagnostics sub-menu (`[19]`) holding PC Audit HTML export, battery health report, license activation check, and Windows 11 compatibility check.
+- **Windows 11 Compatibility Checker**: Integrated a core hardware compatibility checker validating UEFI boot mode, Secure Boot state, and TPM 2.0 specs with detailed recommendation guides.
+- **Startup Manager Integration**: Added an interactive manager (`[18]`) to list, enable, or disable registry and folder startup applications.
+- **Logically Categorized Grid UI**: Restructured the 2-column menu layout into organized sections: Left Column for Diagnostics & System Utilities, Right Column for Performance, Cleaning & Optimization.
+- **CI/CD & Security Pipelines**: Integrated PSScriptAnalyzer for static code analysis, Pester for sandboxed unit testing, and VirusTotal CLI Action for automated malware scanning on every code push.
+
+---
+
 # 🚀 ncexs Toolkit v3.4
 
 🌐 **English** | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](docs/CHANGELOG.jv.md) | [Basa Sunda](docs/CHANGELOG.su.md) | [हिन्दी](docs/CHANGELOG.hi.md) | [Русский](docs/CHANGELOG.ru.md) | [日本語](docs/CHANGELOG.ja.md) | [한국어](docs/CHANGELOG.ko.md) | [中文](docs/CHANGELOG.zh.md) | [العربية](docs/CHANGELOG.ar.md)

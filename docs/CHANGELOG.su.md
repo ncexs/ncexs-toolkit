@@ -1,3 +1,19 @@
+# 🚀 ncexs Toolkit v3.5
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | **Basa Sunda** | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🎓 ncexs Toolkit – v3.5 UAS Freedom Update
+
+### ✨ Fitur & Peningkatan
+- **System & App Deep Cleaner**: Ngahijikeun Runtah Sistem, Cache Aplikasi (ngadukung Teams, Zoom, Skype, Epic Games, GOG, WhatsApp, Discord, Spotify, Steam, Telegram), sareng Windows Event Logs janten hiji utilitas pembersih mendalam (`[11]`). Ngadukung operasi tiiseun (silent) di jero Pemeliharaan Sakali Klik.
+- **Menu Diagnostik & Laporan Sistem**: Ngadamel sub-menu Diagnostik khusus (`[19]`) anu ngandung PC Audit HTML, laporan kasehatan baterai, pamariksaan lisensi Windows, sareng pamariksaan kasaluyuan Windows 11.
+- **Pamariksa Kasaluyuan Windows 11**: Ngahijikeun pamariksa kasaluyuan hardware inti pikeun marios mode boot UEFI, status Secure Boot, sareng spésifikasi TPM 2.0 kalayan pituduh rekomendasi anu detil.
+- **Pengelola Startup (Startup Manager)**: Nambihan manajer interaktif (`[18]`) pikeun ningali, ngaktipkeun, atanapi nganonaktipkeun aplikasi startup tina registry sareng folder startup.
+- **Kategorisasi Logis UI Grid**: Ngatur deui perenah menu 2 kolom janten bagian anu teratur: Kolom Kénca pikeun Diagnostik & Utilitas Sistem, Kolom Katuhu pikeun Kinerja, Pembersihan & Optimasi.
+- **CI/CD & Pipeline Kaamanan**: Ngahijikeun PSScriptAnalyzer pikeun analisis kode statis, Pester pikeun tés unit anu diisolasi, sareng VirusTotal CLI Action pikeun mindai malware otomatis dina unggal push kode.
+
+---
+
 # 🚀 ncexs Toolkit v3.4
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | **Basa Sunda** | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)

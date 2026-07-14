@@ -1,3 +1,19 @@
+# 🚀 ncexs Toolkit v3.5
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | **العربية**
+
+## 🎓 ncexs Toolkit – v3.5 UAS Freedom Update
+
+### ✨ الميزات والتحسينات
+- **منظف النظام والتطبيقات العميق**: دمج ملفات النظام المؤقتة (Junk)، وذاكرة التخزين المؤقت للتطبيقات (يدعم Teams، Zoom، Skype، Epic Games، GOG، WhatsApp، Discord، Spotify، Steam، Telegram)، وسجلات أحداث Windows في أداة تنظيف عميق واحدة (`[11]`). دعم التشغيل الصامت داخل الصيانة بنقرة واحدة.
+- **قائمة تشخيصات النظام والتقارير**: إنشاء قائمة فرعية مخصصة للتشخيصات (`[19]`) تحتوي على تصدير تقرير فحص الكمبيوتر بصيغة HTML، وتقرير صحة البطارية، والتحقق من تنشيط الترخيص، وفحص التوافق مع Windows 11.
+- **أداة فحص التوافق مع Windows 11**: دمج أداة فحص التوافق للأجهزة الأساسية للتحقق من وضع التمهيد UEFI، وحالة الإقلاع الآمن (Secure Boot)، ومواصفات TPM 2.0 مع أدلة توصيات مفصلة.
+- **تكامل مدير برامج بدء التشغيل**: إضافة مدير تفاعلي (`[18]`) لعرض برامج بدء تشغيل سجل النظام (Registry) والمجلدات، وتمكينها أو تعطيلها.
+- **واجهة مستخدم شبكية مصنفة منطقيًا**: إعادة هيكلة تخطيط القائمة المكونة من عمودين إلى أقسام منظمة: العمود الأيسر للتشخيصات وأدوات النظام، والعمود الأيمن للأداء والتنظيف والتحسين.
+- **مسارات التطوير والتحقق المستمر (CI/CD) والأمان**: تم دمج PSScriptAnalyzer لتحليل التعليمات البرمجية الثابتة، وPester لاختبارات الوحدات المعزولة، وVirusTotal CLI Action لفحص البرامج الضارة تلقائيًا عند كل عملية دفع للتعليمات البرمجية.
+
+---
+
 # 🚀 ncexs Toolkit v3.4
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | **العربية**

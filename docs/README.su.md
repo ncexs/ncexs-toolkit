@@ -1,4 +1,4 @@
-# 🧰 ncexs Toolkit (NT)
+﻿# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | [Basa Jawa](README.jv.md) | **Basa Sunda** | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -17,19 +17,18 @@
 ### ⚡ Quick Fix & Diagnostik
 * **Mata-mata Progres Langsung:** Titenan jalanna pancén sacara real-time ku persentase sareng bar visual langsung dina terminal anjeun.
 * **Parios Kaséhatan Sistem:** Ngagunakeun pakakas bawaan SFC, DISM, sareng `chkdsk /scan` anu aman ku tampilan UI kustom sangkan anjeun terang kalayan écés iraha prosésna réngsé.
+* **Menu Diagnostik & Laporan Sistem:** Sub-menu khusus anu ngandung PC Audit HTML, laporan kasehatan baterai, pamariksaan lisensi Windows, sareng pamariksaan kasaluyuan Windows 11.
+* **Pamariksa Kasaluyuan Windows 11:** Marios kasaluyuan hardware pikeun Windows 11 (UEFI, Secure Boot, TPM 2.0).
 
 ### 🧹 Panyimpenan & Meresihan
 * **Kompresi Compact OS:** Ayeuna bersifat **dua arah** (ngarojong komprési sareng dekomprési), ngahémat **2GB – 5GB** rohangan panyimpenan.
-* **Meresihan Runtah (Enhanced):** Ngabersihan folder sistem temp, Prefetch, CrashDumps, cache Windows Update, log CBS anu ngabareuhan, sareng cache shader GPU.
-* **Pembersih Cache Aplikasi:** Mupus cache raksasa tina Discord, Spotify, Steam, Telegram, sareng WhatsApp kalayan aman tanpa ngaluarkeun anjeun tina akun.
-* **Pembersih Event Logs:** Utilitas dumasar API .NET pikeun ngosongkeun sadaya log Windows Event Viewer **sacara instan (kirang ti 1 detik)**.
+* **System & App Deep Cleaner:** Ngahijikeun Runtah Sistem, Cache Aplikasi (WhatsApp, Discord, Spotify, Steam, Telegram, Teams, Zoom, Skype, Epic Games, GOG), sareng Windows Event Logs janten hiji utilitas pembersih mendalam. Ngadukung operasi tiiseun (silent) di jero Pemeliharaan Sakali Klik.
 * **Smart App Uninstaller:** Pilarian gancang ngaliwatan registri sistem aktif pikeun milari sareng ngajalankeun uninstaller bawaan kalayan instan.
 * **Recycle Bin & Disk Cleanup:** Ngosongkeun file dina Recycle Bin kalayan aman atawa memicu utilitas Disk Cleanup bawaan Windows.
 
 ### 🛠️ Pusat Pangropéa Sistem
-* **Laporan Audit PC (HTML):** Nyieun laporan spésifikasi PC interaktif format HTML nu diékspor langsung ka Desktop. Ngadit CPU, RAM, detail OS, Motherboard, sareng **Akun Windows Aktif** kalayan labél hak aksés nu écés (Administrator vs Standar).
 * **Pangropéa Sakali Klik:** Ngalakukeun pangropéa sistem otomatis (mupus runtah, DNS flush, SFC/DISM scan) bari tetep ngajaga Recycle Bin supados file penting henteu leungit.
-* **Analisis Kaséhatan Baterai:** Ngitung tingkat keausan baterai real-time, atanapi ngadetéksi PC Desktop sacara dinamis.
+* **Startup Manager:** Manajer interaktif pikeun ningali, ngaktipkeun, atanapi nganonaktipkeun aplikasi startup tina registry sareng folder startup.
 * **Pengelola Remote Desktop (RDP):** Ngaktipkeun/nonaktipkeun RDP kalayan gancang sareng ngatur aturan Windows Firewall.
 * **Pembersih Cache Browser:** Ngabersihan cache Google Chrome, Microsoft Edge, sareng Mozilla Firefox.
 
@@ -70,7 +69,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 <details>
 <summary><b>🛡️ Klik pikeun ningali Fitur Kaamanan & Transparansi</b></summary>
 
-* **Kaverifikasi VirusTotal:** Skrip parantos diparios sapenuhna tur dipastikeun bébas tina virus/malware.
+* **Kaverifikasi VirusTotal:** Skrip parantos diparios sapenuhna, dipastikeun bébas tina virus/malware, sareng otomatis dipindai ku VirusTotal dina unggal push kode.
 * **Open Source & Transparan:** Anjeun tiasa marios sakabéh jajaran PowerShell ku anjeun sorangan—henteu aya kode nu disumputkeun atawa file tambahan ti luar.
 * **Aman pikeun Admin:** Nyuhunkeun widi administrator kalayan aman sareng kaluar kalayan beresih upami widi ditolak tanpa ngaganggu sistem.
 * **Proteksi Sesi Aktif:** Simkuring ngalangkungan folder penting sangkan akun aktif dina browser sareng Discord henteu kaluar sacara dadakan.

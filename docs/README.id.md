@@ -1,4 +1,4 @@
-# 🧰 ncexs Toolkit (NT)
+﻿# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | **Bahasa Indonesia** | [Basa Jawa](README.jv.md) | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -17,19 +17,18 @@
 ### ⚡ Quick Fix & Diagnostik
 * **Pelacakan Progres Langsung:** Pantau jalannya tugas secara real-time dengan umpan balik persentase dan bar visual langsung di terminal Anda.
 * **Pemeriksa Kesehatan Sistem:** Memanggil SFC, DISM bawaan, dan pemindaian non-destruktif `chkdsk /scan` dengan render UI kustom agar Anda tahu persis jalannya progres pemicu kesehatan Windows Anda.
+* **Menu Diagnostik & Laporan Sistem:** Sub-menu khusus yang berisi PC Audit HTML, analisa kesehatan baterai, lisensi Windows, dan status kompatibilitas Windows 11.
+* **Pemeriksa Kompatibilitas Windows 11:** Memeriksa kesiapan perangkat keras termasuk mode boot UEFI, status Secure Boot, dan spesifikasi TPM 2.0.
 
 ### 🧹 Penyimpanan & Pembersihan
 * **Kompresi Compact OS:** Kini bersifat **dua arah** (mendukung kompresi file OS dan dekompresi kembali ke default), menghemat **2GB – 5GB** ruang penyimpanan.
-* **Pemberantas Sampah (Enhanced):** Pembersihan mendalam untuk folder sistem temp, Prefetch, CrashDumps, cache Windows Update, log CBS yang membengkak, dan cache shader GPU.
-* **Pembersih Cache Aplikasi:** Menghapus cache raksasa dari Discord, Spotify, Steam, Telegram, dan WhatsApp secara otomatis dan aman tanpa mengeluarkan Anda dari akun.
-* **Pembersih Event Logs:** Utilitas berbasis API .NET langsung untuk mengosongkan semua log Windows Event Viewer **secara instan (kurang dari 1 detik)**.
+* **Pembersih Mendalam Sistem & Aplikasi:** Menggabungkan pembersihan sampah sistem, cache aplikasi (WhatsApp, Discord, Spotify, Steam, Telegram, Teams, Zoom, Skype, Epic Games, GOG), dan Windows Event Logs ke dalam satu menu pembersih serbaguna. Mendukung pembersihan senyap (silent) di dalam Pemeliharaan Satu Klik.
 * **Smart App Uninstaller:** Pencarian fuzzy cepat melalui registri sistem aktif untuk mencari dan menjalankan uninstaller bawaan secara instan.
 * **Recycle Bin & Disk Cleanup:** Mengosongkan file sampah di Recycle Bin dengan aman atau memicu utilitas bawaan Windows Disk Cleanup dengan cepat.
 
 ### 🛠️ Pusat Pemeliharaan Sistem
-* **Laporan Audit PC (HTML):** Membuat laporan spesifikasi PC interaktif premium dan bersih dalam format HTML yang diekspor langsung ke Desktop. Mengaudit CPU, RAM, detail OS, Motherboard, ruang penyimpanan, dan **Akun Windows Aktif** dengan label hak akses yang jelas (Administrator vs Standar).
 * **Pemeliharaan Satu Klik:** Melakukan pemeliharaan sistem otomatis (pembersihan sampah, pembersihan DNS, pemindaian SFC/DISM) dengan tetap mempertahankan Recycle Bin untuk menghindari hilangnya file penting milik pengguna.
-* **Analisis Kesehatan Baterai:** Menghitung tingkat keausan baterai real-time, kapasitas desain, dan kapasitas isi penuh, atau mendeteksi PC Desktop secara dinamis.
+* **Pengelola Startup (Startup Manager):** Fitur interaktif untuk melihat, mengaktifkan, atau menonaktifkan aplikasi startup dari Registry dan folder Startup.
 * **Pengelola Remote Desktop (RDP):** Mengaktifkan/menonaktifkan RDP secara instan dan mengonfigurasi aturan Windows Firewall yang diperlukan.
 * **Pembersih Cache Browser:** Membersihkan database cache dari Google Chrome, Microsoft Edge, dan Mozilla Firefox.
 
@@ -70,7 +69,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 <details>
 <summary><b>🛡️ Klik untuk melihat Fitur Keamanan & Transparansi</b></summary>
 
-* **Terverifikasi VirusTotal:** Skrip sepenuhnya diaudit dan dikonfirmasi 100% bebas dari malware/virus berbahaya.
+* **Terverifikasi VirusTotal:** Skrip sepenuhnya diaudit, dikonfirmasi 100% bebas dari malware/virus berbahaya, dan otomatis dipindai oleh VirusTotal pada setiap push kode.
 * **Open Source & Transparan:** Tinjau setiap baris PowerShell sendiri—sama sekali tidak ada enkripsi, dependensi tersembunyi, atau file binary eksternal.
 * **Aman & Sopan:** Meminta hak akses administrator secara transparan dan keluar secara bersih tanpa memblokir sesi Windows Anda jika akses ditolak.
 * **Proteksi Sesi Aktif:** Kami mengecualikan folder kritis agar sesi aktif di browser dan Discord Anda tidak keluar secara mendadak.

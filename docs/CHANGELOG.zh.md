@@ -1,6 +1,22 @@
+# 🚀 ncexs Toolkit v3.5
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | **中文** | [العربية](CHANGELOG.ar.md)
+
+## 🎓 ncexs Toolkit – v3.5 UAS Freedom Update
+
+### ✨ 功能与改进
+- **系统与应用深度清理**: 将系统垃圾、应用缓存（支持 Teams、Zoom、Skype、Epic Games、GOG、WhatsApp、Discord、Spotify、Steam、Telegram）以及 Windows 事件日志整合为单个深度清理工具（`[11]`）。支持在“一键维护”中静默运行。
+- **系统诊断与报告菜单**: 创建了专门的诊断子菜单（`[19]`），容纳 PC 审计 HTML 导出、电池健康报告、许可证激活检查以及 Windows 11 兼容性检查。
+- **Windows 11 兼容性检查器**: 集成了核心硬件兼容性检查器，验证 UEFI 启动模式、安全启动 (Secure Boot) 状态和 TPM 2.0 规范，并附带详细的建议指南。
+- **启动管理器集成**: 添加了交互式启动管理器（`[18]`），用于列出、启用或禁用注册表 and 文件夹中的自启动应用程序。
+- **逻辑分类网格 UI**: 将双列菜单布局重构为有组织的分区：左列为诊断与系统工具，右列为性能、清理与优化。
+- **CI/CD 与安全流水线**: 集成了用于静态代码分析的 PSScriptAnalyzer、用于沙箱单元测试的 Pester，以及用于在每次代码推送时自动进行恶意软件扫描的 VirusTotal CLI Action。
+
+---
+
 # 🚀 ncexs Toolkit v3.4
 
-🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | **中文** | [العربية](CHANGELOG.ar.md)
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | **中文** | [العربية](CHANGELOG.ar.md)
 
 ## 🧰 ncexs Toolkit – v3.4 菜单重构
 

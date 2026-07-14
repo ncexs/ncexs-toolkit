@@ -1,3 +1,19 @@
+# 🚀 ncexs Toolkit v3.5
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | **日本語** | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🎓 ncexs Toolkit – v3.5 UAS Freedom Update
+
+### ✨ 機能と向上
+- **システムとアプリのディープクリーナー**: システムのジャンク、アプリのキャッシュ（Teams、Zoom、Skype、Epic Games、GOG、WhatsApp、Discord、Spotify、Steam、Telegramをサポート）、およびWindowsイベントログを1つのディープクリーニングユーティリティ（`[11]`）に統合。「ワンクリックメンテナンス」内でのサイレント実行をサポート。
+- **システム診断とレポートメニュー**: PC監査HTMLエクスポート、バッテリーヘルスレポート、ライセンス認証チェック、およびWindows 11互換性チェックを含む、専用の診断サブメニュー（`[19]`）を作成。
+- **Windows 11互換性チェッカー**: UEFIブートモード、セキュアブート状態、およびTPM 2.0仕様を検証するコアハードウェア互換性チェッカーを統合し、詳細な推奨ガイドを同梱。
+- **スタートアップマネージャーの統合**: レジストリおよびフォルダーのスタートアップアプリケーションを一覧表示、有効化、または無効化できる対話型マネージャー（`[18]`）を追加。
+- **論理的に分類されたグリッドUI**: 2列のメニューレイアウトを整理されたセクションに再構成：左列は診断とシステムユーティリティ、右列はパフォーマンス、クリーニング、および最適化。
+- **CI/CDとセキュリティパイプライン**: 静的コード分析用のPSScriptAnalyzer、サンドボックス化されたユニットテスト用のPester、およびコードプッシュごとの自動マルウェアスキャンのためのVirusTotal CLI Actionを統合しました。
+
+---
+
 # 🚀 ncexs Toolkit v3.4
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | **日本語** | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)

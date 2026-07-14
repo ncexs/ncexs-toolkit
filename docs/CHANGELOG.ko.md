@@ -1,3 +1,19 @@
+# 🚀 ncexs Toolkit v3.5
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | **한국어** | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🎓 ncexs Toolkit – v3.5 UAS Freedom Update
+
+### ✨ 기능 및 개선 사항
+- **시스템 및 앱 정밀 정리기 (Deep Cleaner)**: 시스템 정크, 앱 캐시(Teams, Zoom, Skype, Epic Games, GOG, WhatsApp, Discord, Spotify, Steam, Telegram 지원) 및 Windows 이벤트 로그를 하나의 정밀 정리 유틸리티(`[11]`)로 통합. '원클릭 유지 관리' 내 무인(silent) 실행 지원.
+- **시스템 진단 및 보고서 메뉴**: PC 감사 HTML 내보내기, 배터리 상태 보고서, 라이선스 정품 인증 확인, Windows 11 호환성 검사를 포함하는 전용 진단 하위 메뉴(`[19]`) 생성.
+- **Windows 11 호환성 검사기**: UEFI 부트 모드, 보안 부팅(Secure Boot) 상태 및 TPM 2.0 사양을 검증하는 핵심 하드웨어 호환성 검사기를 통합하고 상세 권장 가이드 제공.
+- **시작 프로그램 관리자 통합**: 레지스트리 및 폴더 시작 프로그램을 나열, 활성화 또는 비활성화할 수 있는 대화형 관리자(`[18]`) 추가.
+- **논리적으로 분류된 그리드 UI**: 2열 메뉴 레이아웃을 체계적인 섹션으로 재구성: 왼쪽 열은 진단 및 시스템 유틸리티, 오른쪽 열은 성능, 정리 및 최적화.
+- **CI/CD 및 보안 파이프라인**: 정적 코드 분석을 위한 PSScriptAnalyzer, 샌드박스 단위 테스트를 위한 Pester, 매 코드 푸시 시 자동 맬웨어 검사를 위한 VirusTotal CLI Action을 통합했습니다.
+
+---
+
 # 🚀 ncexs Toolkit v3.4
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | **한국어** | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)

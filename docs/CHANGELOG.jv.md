@@ -1,3 +1,19 @@
+# 🚀 ncexs Toolkit v3.5
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | **Basa Jawa** | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🎓 ncexs Toolkit – v3.5 UAS Freedom Update
+
+### ✨ Fitur & Peningkatan
+- **System & App Deep Cleaner**: Nggabungake Junk Sistem, Cache Aplikasi (Teams, Zoom, Skype, Epic Games, GOG, WhatsApp, Discord, Spotify, Steam, Telegram), lan Event Logs Windows dadi siji utilitas pembersih (`[11]`).
+- **Menu Diagnostik & Laporan Sistem**: Nggawe sub-menu Diagnostik khusus (`[19]`) kanggo laporan PC Audit HTML, kesehatan baterei, lisensi Windows, lan kompatibilitas Windows 11.
+- **Windows 11 Compatibility Checker**: Nambahake fitur mriksa kompatibilitas Windows 11 (UEFI, Secure Boot, TPM 2.0).
+- **Startup Manager**: Nambahake fitur kanggo ngatur aplikasi startup registry lan folder (`[18]`).
+- **Kategorisasi Menu**: Nata menu utama dadi 2 kolom sing logis (Kiwa: Diagnostik & Sistem, Tengen: Pembersihan & Optimasi).
+- **CI/CD & Pipeline Keamanan**: Nggabungake PSScriptAnalyzer kanggo analisis kode statis, Pester kanggo tes unit terisolasi, lan VirusTotal CLI Action kanggo mindhai malware otomatis saben push kode.
+
+---
+
 # 🚀 ncexs Toolkit v3.4
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | **Basa Jawa** | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)

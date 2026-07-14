@@ -1,4 +1,4 @@
-# 🧰 ncexs Toolkit (NT)
+﻿# 🧰 ncexs Toolkit (NT)
 
 🌐 [English](../README.md) | [Bahasa Indonesia](README.id.md) | [Basa Jawa](README.jv.md) | [Basa Sunda](README.su.md) | [हिन्दी](README.hi.md) | [Русский](README.ru.md) | [日本語](README.ja.md) | **한국어** | [中文](README.zh.md) | [العربية](README.ar.md)
 
@@ -17,19 +17,18 @@
 ### ⚡ 빠른 수정 및 진단
 * **실시간 진행률 추적:** 터미널에서 직접 직관적인 백분율 표시줄을 통해 실시간으로 작업 실행을 모니터링합니다.
 * **실시간 상태 검사:** 사용자 지정 UI와 함께 `SFC`, `DISM` 및 비파괴적 `chkdsk /scan` 도구를 호출하여 작업 완료 시기를 정확히 알 수 있습니다.
+* **시스템 진단 및 보고서:** PC 감사 HTML 내보내기, 배터리 상태 보고서, 라이선스 정품 인증 확인, Windows 11 호환성 검사를 포함하는 전용 진단 하위 메뉴.
+* **Windows 11 호환성 검사기:** UEFI 부트 모드, 보안 부팅(Secure Boot) 상태 및 TPM 2.0 사양을 검증.
 
 ### 🧹 저장소 및 정리
 * **Compact OS 양방향 압축:** **양방향** 압축 방식(시스템 파일 압축 및 기본 상태로의 복원 해제 모두 지원)으로 재설계되어, **2GB – 5GB**의 저장 공간을 안전하게 확보합니다.
-* **강력한 정크 클리너:** 임시 시스템 폴더, Prefetch 파일, CrashDumps, Windows Update 캐시, CBS 로그 및 GPU 셰이더 캐시를 정리합니다.
-* **앱 캐시 클리너:** Discord, Spotify, Steam, Telegram, WhatsApp 캐시를 로그아웃 없이 안전하게 삭제합니다.
-* **이벤트 로그 클리너:** 직접적인 .NET API를 기반으로 제작되어 모든 Windows 이벤트 뷰어 로그를 **즉시 (1초 미만)** 비웁니다.
+* **시스템 및 앱 정밀 정리기 (Deep Cleaner)**: 시스템 정크, 앱 캐시(WhatsApp, Discord, Spotify, Steam, Telegram, Teams, Zoom, Skype, Epic Games, GOG 지원) 및 Windows 이벤트 로그를 하나의 유틸리티로 통합. '원클릭 유지 관리' 내 무인(silent) 실행 지원.
 * **스마트 앱 제거기:** 빠른 퍼지 검색으로 제거 스크립트를 즉시 실행합니다.
 * **휴지통 및 디스크 정리:** 삭제된 파일을 안전하게 비우거나 Windows 기본 디스크 정리 도구 인터페이스를 즉시 실행합니다.
 
 ### 🛠️ PC 유지 관리 도구
-* **PC 감사 보고서 (HTML):** 바탕 화면에 직접 프리미엄하고 세련된 대화형 HTML PC 상세 사양 보고서를 생성하고 내보냅니다. CPU, RAM, OS 정보, 메인보드, 저장 공간 및 권한 등급(관리자 vs 일반)이 명확히 표시된 **활성 Windows 계정**을 감사하여 보여줍니다.
 * **원클릭 유지 관리:** 사용자의 중요한 파일 손실을 방지하기 위해 휴지통을 인테리전트하게 보존하면서 완전 자동화된 시스템 유지 관리(정크 정리, DNS 플러시, SFC/DISM 스캔)를 수행합니다.
-* **배터리 수명 분석기:** 실시간 배터리 성능 저하율(웨어율), 설계 용량, 완충 용량을 계산하고 데스크톱 PC 여부를 동적으로 판별합니다.
+* **시작 프로그램 관리자 (Startup Manager):** 레지스트리 및 폴더 시작 프로그램 앱을 나열, 활성화 또는 비활성화할 수 있는 대화형 관리자.
 * **원격 데스크톱 (RDP) 관리자:** RDP를 즉시 켜고 끄며 필요한 Windows 방화벽 규칙을 자동으로 구성합니다.
 * **브라우저 캐시 클리너:** Google Chrome, Microsoft Edge, Mozilla Firefox에서 축적된 캐시 데이터베이스를 비웁니다.
 
@@ -70,7 +69,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 <details>
 <summary><b>🛡️ 보안 및 안전 기능 보기 (클릭하여 펼치기)</b></summary>
 
-* **VirusTotal 검증 완료:** 스크립트는 철저한 감사를 거쳤으며 악성 코드가 전혀 없음을 확인했습니다.
+* **VirusTotal 검증 완료:** 스크립트는 철저한 감사를 거쳤으며 악성 코드가 전혀 없음을 확인했고, 매 코드 푸시 시 VirusTotal을 통해 자동으로 검사됩니다.
 * **오픈 소스 및 투명성:** 모든 PowerShell 코드를 직접 확인할 수 있습니다. 코드 난독화나 외부 바이너리 의존성이 전혀 없습니다.
 * **관리자 친화적인 설계:** 관리자 권한을 안전하게 요청하며 권한 거부 시 시스템을 차단하지 않고 안전하게 종료합니다.
 * **보호되는 프로필:** 활성 브라우저 및 Discord에서 로그아웃되지 않도록 중요 사용자 폴더를 제외합니다.

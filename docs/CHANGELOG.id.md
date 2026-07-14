@@ -1,3 +1,19 @@
+# 🚀 ncexs Toolkit v3.5
+
+🌐 [English](../CHANGELOG.md) | **Bahasa Indonesia** | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🎓 ncexs Toolkit – v3.5 UAS Freedom Update
+
+### ✨ Fitur & Peningkatan
+- **Pembersih Mendalam Sistem & Aplikasi (Deep Cleaner)**: Menggabungkan pembersihan sampah sistem, cache aplikasi (WhatsApp, Discord, Spotify, Steam, Telegram, Teams, Zoom, Skype, Epic Games, GOG), dan Windows Event Logs ke dalam satu menu pembersih serbaguna (`[11]`). Mendukung pembersihan senyap (silent) di dalam Pemeliharaan Satu Klik.
+- **Menu Diagnostik & Laporan Sistem**: Memisahkan utilitas laporan PC Audit HTML, analisa kesehatan baterai, lisensi Windows, dan status Windows 11 ke dalam sub-menu khusus (`[19]`).
+- **Pemeriksa Kompatibilitas Windows 11**: Menambahkan diagnostik kesiapan Windows 11 yang memeriksa tipe boot UEFI, status Secure Boot, dan spesifikasi TPM 2.0 dengan rekomendasi yang dinamis.
+- **Pengelola Startup (Startup Manager)**: Menambahkan fitur interaktif (`[18]`) untuk melihat, mengaktifkan, atau menonaktifkan aplikasi startup dari Registry dan folder Startup.
+- **Kategorisasi Logis UI Grid**: Mengatur ulang 20 opsi menu utama menjadi kolom-kolom logis: Kolom Kiri untuk Diagnostik & Sistem, Kolom Kanan untuk Pembersihan & Optimasi.
+- **Pipeline CI/CD & Keamanan**: Mengintegrasikan PSScriptAnalyzer untuk pemindaian statis kualitas kode, Pester untuk pengujian unit terisolasi (sandboxed), dan VirusTotal CLI Action untuk pemindaian malware otomatis pada setiap push kode.
+
+---
+
 # 🚀 ncexs Toolkit v3.4
 
 🌐 [English](../CHANGELOG.md) | **Bahasa Indonesia** | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)

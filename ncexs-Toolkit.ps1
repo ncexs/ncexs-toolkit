@@ -1,25 +1,28 @@
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    if ($MyInvocation.MyCommand.Path) {
-        Write-Host "Toolkit perlu dijalankan sebagai Administrator. Meminta akses..." -ForegroundColor Yellow
-        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$($MyInvocation.MyCommand.Path)`"" -Verb RunAs
-        exit
-    }
-    else {
-        Write-Host "`n[!] AKSES DITOLAK: Anda belum membuka PowerShell sebagai Administrator." -ForegroundColor Red
-        Write-Host "Silakan klik kanan pada PowerShell dan pilih 'Run as Administrator', lalu jalankan ulang command-nya.`n" -ForegroundColor Yellow
-        Read-Host "Tekan Enter untuk keluar..."
-        exit
+if ($MyInvocation.InvocationName -ne '.') {
+    if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+        if ($MyInvocation.MyCommand.Path) {
+            Write-Host "Toolkit perlu dijalankan sebagai Administrator. Meminta akses..." -ForegroundColor Yellow
+            Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$($MyInvocation.MyCommand.Path)`"" -Verb RunAs
+            exit
+        }
+        else {
+            Write-Host "`n[!] AKSES DITOLAK: Anda belum membuka PowerShell sebagai Administrator." -ForegroundColor Red
+            Write-Host "Silakan klik kanan pada PowerShell dan pilih 'Run as Administrator', lalu jalankan ulang command-nya.`n" -ForegroundColor Yellow
+            Read-Host "Tekan Enter untuk keluar..."
+            exit
+        }
     }
 }
 
+
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue
 
-$global:ToolkitVersion = "v3.4"
-$global:Language = "EN"
+$script:ToolkitVersion = "v3.5"
+$script:Language = "EN"
 
-$global:Theme = @{
+$script:Theme = @{
     Border = 'DarkCyan'; Title = 'Cyan'; Section = 'Magenta'
     MenuNumber = 'Cyan'; MenuText = 'White'; Special = 'Yellow'
     Highlight = 'Green'; Prompt = 'Cyan'; Success = 'Green'
@@ -27,7 +30,7 @@ $global:Theme = @{
     Exit = 'Red'; AsciiArt = 'Magenta'
 }
 
-$global:UI = @{
+$script:UI = @{
     HLine = [char]0x2500; VLine = [char]0x2502
     TopLeft = [char]0x256D; TopRight = [char]0x256E
     BottomLeft = [char]0x2570; BottomRight = [char]0x256F
@@ -35,11 +38,11 @@ $global:UI = @{
     Check = [char]0x2714; Cross = [char]0x2718
     RArrow = [char]0x00BB; LArrow = [char]0x00AB
 }
-try { $Host.PrivateData.PromptForegroundColor = $global:Theme.Prompt } catch {}
+try { $Host.PrivateData.PromptForegroundColor = $script:Theme.Prompt } catch { Write-Debug $_.Exception.Message }
 
-$global:Translations = @{
+$script:Translations = @{
     "EN" = @{
-        "Menu_Title" = "ncexs Toolkit $($global:ToolkitVersion)"; "Menu_Option0" = "Compact OS (Save 2-5GB Space)"
+        "Menu_Title" = "ncexs Toolkit $($script:ToolkitVersion)"; "Menu_Option0" = "Compact OS (Save 2-5GB Space)"
         "Menu_Option1" = "System Information"; "Menu_Option2" = "System Health Checker"
         "Menu_Option3" = "One-Click Maintenance"; "Menu_Option4" = "Updates & Drivers Center"
         "Menu_Option5" = "Memory Optimizer"; "Menu_Option6" = "Defrag & Optimize Drives"
@@ -119,7 +122,7 @@ $global:Translations = @{
         "Maint_Option7" = "Back to Main Menu"
     };
     "ID" = @{
-        "Menu_Title" = "ncexs Toolkit $($global:ToolkitVersion)"; "Menu_Option0" = "Compact OS (Hemat 2-5GB Ruang)"
+        "Menu_Title" = "ncexs Toolkit $($script:ToolkitVersion)"; "Menu_Option0" = "Compact OS (Hemat 2-5GB Ruang)"
         "Menu_Option1" = "Informasi Sistem"; "Menu_Option2" = "Pemeriksa Kesehatan Sistem"
         "Menu_Option3" = "Pemeliharaan Satu Klik"; "Menu_Option4" = "Pusat Update & Driver"
         "Menu_Option5" = "Optimasi Memori"; "Menu_Option6" = "Defragment & Optimasi Drive"
@@ -166,14 +169,14 @@ $global:Translations = @{
     }
 }
 
-function Get-Translation { param([string]$key) if ($global:Translations[$global:Language].ContainsKey($key)) { return $global:Translations[$global:Language][$key] } return $key }
-function Write-Centered { param([string]$text, [string]$color = $global:Theme.Title, [int]$width = 80) $padLeft = [math]::Max(0, [math]::Floor(($width - $text.Length) / 2)); Write-Host (" " * $padLeft + $text) -ForegroundColor $color }
-function Write-BoxHeader { param([string]$title) $w = 86; $l = [string]$global:UI.HLine * ($w - 4); Write-Host (" {0}{1}{2}" -f $global:UI.TopLeft, $l, $global:UI.TopRight) -ForegroundColor $global:Theme.Border; $cleanTitle = " $title "; $padLeft = [math]::Max(0, [math]::Floor((($w - 4) - $cleanTitle.Length) / 2)); $padRight = [math]::Max(0, (($w - 4) - $cleanTitle.Length - $padLeft)); Write-Host " $($global:UI.VLine)" -NoNewline -ForegroundColor $global:Theme.Border; Write-Host (" " * $padLeft) -NoNewline; Write-Host $cleanTitle -NoNewline -ForegroundColor $global:Theme.Title; Write-Host (" " * $padRight) -NoNewline; Write-Host "$($global:UI.VLine)" -ForegroundColor $global:Theme.Border; Write-Host (" {0}{1}{2}" -f $global:UI.BottomLeft, $l, $global:UI.BottomRight) -ForegroundColor $global:Theme.Border }
+function Get-Translation { param([string]$key) if ($script:Translations[$script:Language].ContainsKey($key)) { return $script:Translations[$script:Language][$key] } return $key }
+function Write-Centered { param([string]$text, [string]$color = $script:Theme.Title, [int]$width = 80) $padLeft = [math]::Max(0, [math]::Floor(($width - $text.Length) / 2)); Write-Host (" " * $padLeft + $text) -ForegroundColor $color }
+function Write-BoxHeader { param([string]$title) $w = 86; $l = [string]$script:UI.HLine * ($w - 4); Write-Host (" {0}{1}{2}" -f $script:UI.TopLeft, $l, $script:UI.TopRight) -ForegroundColor $script:Theme.Border; $cleanTitle = " $title "; $padLeft = [math]::Max(0, [math]::Floor((($w - 4) - $cleanTitle.Length) / 2)); $padRight = [math]::Max(0, (($w - 4) - $cleanTitle.Length - $padLeft)); Write-Host " $($script:UI.VLine)" -NoNewline -ForegroundColor $script:Theme.Border; Write-Host (" " * $padLeft) -NoNewline; Write-Host $cleanTitle -NoNewline -ForegroundColor $script:Theme.Title; Write-Host (" " * $padRight) -NoNewline; Write-Host "$($script:UI.VLine)" -ForegroundColor $script:Theme.Border; Write-Host (" {0}{1}{2}" -f $script:UI.BottomLeft, $l, $script:UI.BottomRight) -ForegroundColor $script:Theme.Border }
 function Write-Title { param([string]$message) Write-BoxHeader $message }
-function Write-Error { param([string]$message) Write-Host " [$($global:UI.Cross)] $message" -ForegroundColor $global:Theme.Error }
-function Write-Success { param([string]$message) Write-Host " [$($global:UI.Check)] $message" -ForegroundColor $global:Theme.Success }
-function Write-Warning { param([string]$message) Write-Host " [!] $message" -ForegroundColor $global:Theme.Warning }
-function Write-Info { param([string]$message) Write-Host " [i] $message" -ForegroundColor $global:Theme.Info }
+function Write-CustomError { param([string]$message) Write-Host " [$($script:UI.Cross)] $message" -ForegroundColor $script:Theme.Error }
+function Write-Success { param([string]$message) Write-Host " [$($script:UI.Check)] $message" -ForegroundColor $script:Theme.Success }
+function Write-CustomWarning { param([string]$message) Write-Host " [!] $message" -ForegroundColor $script:Theme.Warning }
+function Write-Info { param([string]$message) Write-Host " [i] $message" -ForegroundColor $script:Theme.Info }
 function Request-Confirm {
     param([string]$msg)
     Write-Info (Get-Translation 'Process_Cancel')
@@ -185,15 +188,15 @@ function Request-Confirm {
 function Show-Intro {
     Clear-Host; Write-Host ""
     $w = 86
-    Write-Centered ' __    __   ______   ________  __    __   ______  ' $global:Theme.AsciiArt $w
-    Write-Centered '|  \  |  \ /      \ |        \|  \  /  \ /      \ ' $global:Theme.AsciiArt $w
-    Write-Centered '| $$\ | $$|  $$$$$$\| $$$$$$$$ \$$\/  $$|  $$$$$$\' $global:Theme.AsciiArt $w
-    Write-Centered '| $$$\| $$| $$   \$$| $$__      >$$  $$ | $$___\$$' $global:Theme.AsciiArt $w
-    Write-Centered '| $$$$\ $$| $$      | $$  \    /  $$$$\  \$$    \ ' $global:Theme.AsciiArt $w
-    Write-Centered '| $$\$$ $$| $$   __ | $$$$$   |  $$ \$$\ _\$$$$$$\' $global:Theme.AsciiArt $w
-    Write-Centered '| $$ \$$$$| $$__/  \| $$_____ | $$  | $$|  \__| $$' $global:Theme.AsciiArt $w
-    Write-Centered '| $$  \$$$ \$$    $$| $$     \| $$  | $$ \$$    $$' $global:Theme.AsciiArt $w
-    Write-Centered ' \$$   \$$  \$$$$$$  \$$$$$$$$ \$$   \$$  \$$$$$$ ' $global:Theme.AsciiArt $w
+    Write-Centered ' __    __   ______   ________  __    __   ______  ' $script:Theme.AsciiArt $w
+    Write-Centered '|  \  |  \ /      \ |        \|  \  /  \ /      \ ' $script:Theme.AsciiArt $w
+    Write-Centered '| $$\ | $$|  $$$$$$\| $$$$$$$$ \$$\/  $$|  $$$$$$\' $script:Theme.AsciiArt $w
+    Write-Centered '| $$$\| $$| $$   \$$| $$__      >$$  $$ | $$___\$$' $script:Theme.AsciiArt $w
+    Write-Centered '| $$$$\ $$| $$      | $$  \    /  $$$$\  \$$    \ ' $script:Theme.AsciiArt $w
+    Write-Centered '| $$\$$ $$| $$   __ | $$$$$   |  $$ \$$\ _\$$$$$$\' $script:Theme.AsciiArt $w
+    Write-Centered '| $$ \$$$$| $$__/  \| $$_____ | $$  | $$|  \__| $$' $script:Theme.AsciiArt $w
+    Write-Centered '| $$  \$$$ \$$    $$| $$     \| $$  | $$ \$$    $$' $script:Theme.AsciiArt $w
+    Write-Centered ' \$$   \$$  \$$$$$$  \$$$$$$$$ \$$   \$$  \$$$$$$ ' $script:Theme.AsciiArt $w
     Write-Host "" ; Write-Centered "S T A B L E    B U I L D" "Cyan" $w; Write-Host ""
     $modules = @("Kernel", "UI", "Network", "Disk", "Security", "Social")
     foreach ($m in $modules) { Write-Host " [INIT] Loading module: $m..." -ForegroundColor DarkGray; Start-Sleep -Milliseconds 50 }
@@ -242,19 +245,19 @@ function Show-SystemInfo {
             $uptime = (Get-Date) - $os.LastBootUpTime
             $uptimeStr = "$($uptime.Days) Hari, $($uptime.Hours) Jam, $($uptime.Minutes) Menit"
             
-            Write-Host "`n [ System Details ]" -ForegroundColor $global:Theme.Section
+            Write-Host "`n [ System Details ]" -ForegroundColor $script:Theme.Section
             Write-Host "   Hostname     : $env:COMPUTERNAME"
             Write-Host "   OS           : $($os.Caption) ($($os.OSArchitecture))"
             Write-Host "   OS Build     : $($os.Version)"
             Write-Host "   System Uptime: $uptimeStr"
-            Write-Host "`n [ Hardware ]" -ForegroundColor $global:Theme.Section
+            Write-Host "`n [ Hardware ]" -ForegroundColor $script:Theme.Section
             Write-Host "   Motherboard  : $($mobo.Manufacturer) $($mobo.Product)"
             Write-Host "   Serial Number: $($bios.SerialNumber)"
             Write-Host "   CPU          : $($cpu.Name.Trim())"
             Write-Host "   GPU          : $($gpu -join ' | ')"
             Write-Host "   RAM          : $([math]::Round($system.TotalPhysicalMemory / 1GB, 2)) GB Total"
             
-            Write-Host "`n [ Storage (Local Drives) ]" -ForegroundColor $global:Theme.Section
+            Write-Host "`n [ Storage (Local Drives) ]" -ForegroundColor $script:Theme.Section
             Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3" | ForEach-Object { 
                 $total = [math]::Round($_.Size / 1GB, 2)
                 $free = [math]::Round($_.FreeSpace / 1GB, 2)
@@ -262,7 +265,7 @@ function Show-SystemInfo {
                 Write-Host "   $($_.DeviceID)\          : $total GB Total | $free GB Free | Used: $usedPct%" 
             }
 
-            Write-Host "`n [ Battery Health ]" -ForegroundColor $global:Theme.Section
+            Write-Host "`n [ Battery Health ]" -ForegroundColor $script:Theme.Section
             try {
                 $batteries = Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue
                 if ($batteries) {
@@ -308,14 +311,14 @@ function Show-SystemInfo {
                     Remove-Item $reportPath -Force -ErrorAction SilentlyContinue
                 }
                 else {
-                    Write-Host "   No battery detected on this system (Desktop/Virtual Machine)." -ForegroundColor $global:Theme.Warning
+                    Write-Host "   No battery detected on this system (Desktop/Virtual Machine)." -ForegroundColor $script:Theme.Warning
                 }
             }
             catch {
-                Write-Host "   Unable to retrieve battery details." -ForegroundColor $global:Theme.Error
+                Write-Host "   Unable to retrieve battery details." -ForegroundColor $script:Theme.Error
             }
 
-            Write-Host "`n [ WinSAT Performance Scores ]" -ForegroundColor $global:Theme.Section
+            Write-Host "`n [ WinSAT Performance Scores ]" -ForegroundColor $script:Theme.Section
             try {
                 $winsat = Get-CimInstance Win32_WinSAT -ErrorAction SilentlyContinue
                 if ($winsat) {
@@ -358,15 +361,15 @@ function Show-SystemInfo {
                     Write-Host "] $($winsat.WinSPRLevel) (Max 9.9)"
                 }
                 else {
-                    Write-Host "   WinSAT assessment data not found." -ForegroundColor $global:Theme.Warning
-                    Write-Host "   To generate scores, run 'winsat formal' in an Administrator command prompt." -ForegroundColor $global:Theme.Info
+                    Write-Host "   WinSAT assessment data not found." -ForegroundColor $script:Theme.Warning
+                    Write-Host "   To generate scores, run 'winsat formal' in an Administrator command prompt." -ForegroundColor $script:Theme.Info
                 }
             }
             catch {
-                Write-Host "   Unable to retrieve WinSAT scores." -ForegroundColor $global:Theme.Error
+                Write-Host "   Unable to retrieve WinSAT scores." -ForegroundColor $script:Theme.Error
             }
         }
-        catch { Write-Error "Failed to load some system info." }
+        catch { Write-CustomError "Failed to load some system info." }
         
         Write-Host "`n [1] $(Get-Translation 'SysInfo_Option1')"
         Write-Host " [2] $(Get-Translation 'SysInfo_Option2')"
@@ -388,13 +391,13 @@ function Show-SystemInfo {
             return
         }
         else {
-            Write-Warning (Get-Translation 'Invalid_Option')
+            Write-CustomWarning (Get-Translation 'Invalid_Option')
             Start-Sleep -Seconds 1
         }
     } while ($true)
 }
 
-function Clear-JunkFiles {
+function Clear-JunkFile {
     Write-Title (Get-Translation 'Clean_Title')
     if (-not (Request-Confirm (Get-Translation 'Clean_Confirm'))) { return }
     $cDriveBefore = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='C:'"
@@ -450,7 +453,7 @@ function Show-AdvancedUninstaller {
             $sel = Read-Host " $(Get-Translation 'SelectOption')"; if ($sel -match '^\d+$') { cmd /c $found[[int]$sel - 1].UninstallString }
         }
         else {
-            Write-Warning (Get-Translation 'Uninstall_NotFound')
+            Write-CustomWarning (Get-Translation 'Uninstall_NotFound')
         }
     }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
@@ -477,7 +480,7 @@ function Show-PowerMenu {
         Clear-Host
         Write-Title (Get-Translation 'SubMenu_Power')
         Write-Host "`n [1] High Performance`n [2] Balanced`n [3] Back"
-        $c = Read-Host " $(Get-Translation 'SelectOption')"; if ($c -eq "1") { powercfg /setactive SCHEME_MIN; Write-Success "Set to High" } elseif ($c -eq "2") { powercfg /setactive SCHEME_BALANCED; Write-Success "Set to Balanced" } elseif ($c -eq "3") { return } else { Write-Warning (Get-Translation 'Invalid_Option') }
+        $c = Read-Host " $(Get-Translation 'SelectOption')"; if ($c -eq "1") { powercfg /setactive SCHEME_MIN; Write-Success "Set to High" } elseif ($c -eq "2") { powercfg /setactive SCHEME_BALANCED; Write-Success "Set to Balanced" } elseif ($c -eq "3") { return } else { Write-CustomWarning (Get-Translation 'Invalid_Option') }
         Read-Host " $(Get-Translation 'PressAnyKey')"
     } while ($true)
 }
@@ -490,10 +493,10 @@ function Clear-RAM {
     try {
         if ([M]) { $typeLoaded = $true }
     }
-    catch {}
+    catch { Write-Debug $_.Exception.Message }
     
     if (-not $typeLoaded) {
-        $code = "using System; using System.Runtime.InteropServices; public class M { [DllImport(`"psapi.dll`")] public static extern bool EmptyWorkingSet(IntPtr h); public static void C() { foreach(var p in System.Diagnostics.Process.GetProcesses()) try { EmptyWorkingSet(p.Handle); } catch {} } }"
+        $code = "using System; using System.Runtime.InteropServices; public class M { [DllImport(`"psapi.dll`")] public static extern bool EmptyWorkingSet(IntPtr h); public static void C() { foreach(var p in System.Diagnostics.Process.GetProcesses()) try { EmptyWorkingSet(p.Handle); } catch { Write-Debug $_.Exception.Message } } }"
         Add-Type -TypeDefinition $code -ErrorAction SilentlyContinue
     }
     
@@ -533,7 +536,7 @@ function Show-UpdateDriverMenu {
         Write-Info (Get-Translation 'Process_Cancel')
         $dest = "C:\DriversBackup"; if (!(Test-Path -Path $dest)) { New-Item -Path $dest -ItemType Directory }; Export-WindowsDriver -Online -Destination $dest; Write-Success "$(Get-Translation 'Update_Backup') $dest"
     }
-    elseif ($c -eq "3") { return } else { Write-Warning (Get-Translation 'Invalid_Option') }
+    elseif ($c -eq "3") { return } else { Write-CustomWarning (Get-Translation 'Invalid_Option') }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
@@ -546,13 +549,13 @@ function Show-DNSMenu {
     if ($c -eq "6") { return }
     
     $adapters = Get-NetAdapter | Where-Object { $_.Status -eq "Up" -and $_.Virtual -eq $false }
-    if ($adapters.Count -eq 0 -and $c -match "^[1-5]$") { Write-Error (Get-Translation 'DNS_NoAdapter') }
+    if ($adapters.Count -eq 0 -and $c -match "^[1-5]$") { Write-CustomError (Get-Translation 'DNS_NoAdapter') }
     elseif ($c -eq "1") { foreach ($adapter in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("1.1.1.1", "1.0.0.1") }; Write-Success "DNS: Cloudflare (1.1.1.1)" }
     elseif ($c -eq "2") { foreach ($adapter in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("8.8.8.8", "8.8.4.4") }; Write-Success "DNS: Google (8.8.8.8)" }
     elseif ($c -eq "3") { foreach ($adapter in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("9.9.9.9", "149.112.112.112") }; Write-Success "DNS: Quad9 (9.9.9.9)" }
     elseif ($c -eq "4") { foreach ($adapter in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses ("94.140.14.14", "94.140.15.15") }; Write-Success "DNS: AdGuard (94.140.14.14)" }
     elseif ($c -eq "5") { foreach ($adapter in $adapters) { Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ResetServerAddresses }; Write-Success "DNS: Default (DHCP)" }
-    else { Write-Warning (Get-Translation 'DNS_Invalid') }
+    else { Write-CustomWarning (Get-Translation 'DNS_Invalid') }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
@@ -585,7 +588,7 @@ function Invoke-OptimizeApps {
                 if ($f) { $freed += ($f | Measure-Object -Property Length -Sum).Sum; $f | Remove-Item -Force -ErrorAction SilentlyContinue }
                 Write-Info "Optimized: $($t.N)"
             }
-            catch {}
+            catch { Write-Debug $_.Exception.Message }
         }
     }
     Write-Success "Apps Optimized. Freed: $([math]::Round($freed / 1MB, 2)) MB"; Read-Host "`n $(Get-Translation 'PressAnyKey')"
@@ -596,7 +599,7 @@ function Clear-EventLogs {
     if (-not (Request-Confirm (Get-Translation 'Event_Confirm'))) { return }
     Write-Host " Clearing Event Logs (Wait a few seconds)..." -ForegroundColor Cyan
     $logPath = "$env:SystemRoot\System32\Winevt\Logs\*"
-    $beforeSize = 0; try { $beforeSize = (Get-ChildItem -Path $logPath -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum } catch {}
+    $beforeSize = 0; try { $beforeSize = (Get-ChildItem -Path $logPath -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum } catch { Write-Debug $_.Exception.Message }
     
     # Instant Event Log clearing via .NET API for active logs
     $logs = Get-WinEvent -ListLog * -ErrorAction SilentlyContinue | Where-Object { $_.RecordCount -gt 0 }
@@ -604,10 +607,10 @@ function Clear-EventLogs {
         try {
             [System.Diagnostics.Eventing.Reader.EventLogSession]::GlobalSession.ClearLog($log.LogName)
         }
-        catch {}
+        catch { Write-Debug $_.Exception.Message }
     }
     
-    $afterSize = 0; try { $afterSize = (Get-ChildItem -Path $logPath -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum } catch {}
+    $afterSize = 0; try { $afterSize = (Get-ChildItem -Path $logPath -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum } catch { Write-Debug $_.Exception.Message }
     $freed = $beforeSize - $afterSize; if ($freed -lt 0) { $freed = 0 }
     Write-Success ((Get-Translation 'Event_Done') + " Freed: $([math]::Round($freed / 1MB, 2)) MB")
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
@@ -629,17 +632,17 @@ function Get-WindowsLicenseStatus {
         }
         $statusStr = if ($wmi -and $statusMap.ContainsKey($wmi.LicenseStatus)) { $statusMap[[int]$wmi.LicenseStatus] } else { "Unknown" }
         
-        Write-Host " [ License Information ]" -ForegroundColor $global:Theme.Section
+        Write-Host " [ License Information ]" -ForegroundColor $script:Theme.Section
         Write-Host "   Description      : $($wmi.Description)"
         Write-Host "   License Status   : $statusStr"
         if ($wmi.LicenseStatus -eq 1) {
             Write-Success "Windows is fully activated."
         }
         else {
-            Write-Warning "Windows is not activated or is in grace period."
+            Write-CustomWarning "Windows is not activated or is in grace period."
         }
         
-        Write-Host "`n [ Activation Check via slmgr ]" -ForegroundColor $global:Theme.Section
+        Write-Host "`n [ Activation Check via slmgr ]" -ForegroundColor $script:Theme.Section
         Write-Info "Running slmgr.vbs /dli to verify..."
         $slmgrOut = cscript //nologo $env:SystemRoot\System32\slmgr.vbs /dli
         if ($slmgrOut) {
@@ -647,7 +650,7 @@ function Get-WindowsLicenseStatus {
         }
     }
     catch {
-        Write-Error "Failed to retrieve license details."
+        Write-CustomError "Failed to retrieve license details."
     }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
@@ -711,7 +714,7 @@ function Export-PCAuditReport {
                 ForEach-Object { $_.PartComponent.Name }
             }
         }
-        catch {}
+        catch { Write-Debug $_.Exception.Message }
 
         $userRows = ""
         if ($userAccounts) {
@@ -1116,7 +1119,7 @@ function Export-PCAuditReport {
         Start-Process $destPath
     }
     catch {
-        Write-Error "Failed to generate PC Audit Report: $_"
+        Write-CustomError "Failed to generate PC Audit Report: $_"
     }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
@@ -1164,7 +1167,7 @@ function Get-BatteryHealth {
     try {
         $batteries = Get-CimInstance -ClassName Win32_Battery
         if (-not $batteries) {
-            Write-Warning (Get-Translation 'Maint_Battery_Desktop')
+            Write-CustomWarning (Get-Translation 'Maint_Battery_Desktop')
         }
         else {
             $reportPath = "$env:TEMP\battery-report.html"
@@ -1175,7 +1178,7 @@ function Get-BatteryHealth {
                 $status = $b.Status
                 $chem = $b.Chemistry
                 
-                Write-Host " [ Battery details: $name ]" -ForegroundColor $global:Theme.Section
+                Write-Host " [ Battery details: $name ]" -ForegroundColor $script:Theme.Section
                 Write-Host "   Chemistry        : $chem"
                 Write-Host "   Status           : $status"
                 
@@ -1208,12 +1211,12 @@ function Get-BatteryHealth {
         }
     }
     catch {
-        Write-Error "Failed to retrieve battery details: $_"
+        Write-CustomError "Failed to retrieve battery details: $_"
     }
     Read-Host "`n $(Get-Translation 'PressAnyKey')"
 }
 
-function Manage-RemoteDesktop {
+function Set-RemoteDesktop {
     do {
         Clear-Host
         Write-Title (Get-Translation 'Maint_RDP_Title')
@@ -1223,7 +1226,7 @@ function Manage-RemoteDesktop {
         $rdpStatusVal = $rdpReg.fDenyTSConnections
         
         $statusText = if ($rdpStatusVal -eq 0) { Get-Translation 'Maint_RDP_Enabled' } else { Get-Translation 'Maint_RDP_Disabled' }
-        $statusColor = if ($rdpStatusVal -eq 0) { $global:Theme.Success } else { $global:Theme.Error }
+        $statusColor = if ($rdpStatusVal -eq 0) { $script:Theme.Success } else { $script:Theme.Error }
         
         Write-Host "   $(Get-Translation 'Maint_RDP_Status') : " -NoNewline
         Write-Host "$statusText" -ForegroundColor $statusColor
@@ -1255,13 +1258,13 @@ function Manage-RemoteDesktop {
             return
         }
         else {
-            Write-Warning (Get-Translation 'Invalid_Option')
+            Write-CustomWarning (Get-Translation 'Invalid_Option')
             Start-Sleep -Seconds 1
         }
     } while ($true)
 }
 
-function Clear-BrowserCaches {
+function Clear-BrowserCache {
     Write-Title (Get-Translation 'Maint_Browser_Title')
     if (-not (Request-Confirm (Get-Translation 'Maint_Browser_Confirm'))) { return }
     
@@ -1280,7 +1283,7 @@ function Clear-BrowserCaches {
         try {
             $resolvedPaths = Resolve-Path -Path $pPath -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Path
         }
-        catch {}
+        catch { Write-Debug $_.Exception.Message }
         
         if (-not $resolvedPaths -and (Test-Path -Path $pPath)) {
             $resolvedPaths = , $pPath
@@ -1298,7 +1301,7 @@ function Clear-BrowserCaches {
                         $clearedAny = $true
                     }
                 }
-                catch {}
+                catch { Write-Debug $_.Exception.Message }
             }
         }
         if ($clearedAny) {
@@ -1313,79 +1316,81 @@ function Clear-BrowserCaches {
 
 function Show-MainMenu {
     Write-Host "`n"
-    $w = 86; $line = [string]$global:UI.HLine * ($w - 4)
-    Write-Centered ' __    __   ______   ________  __    __   ______  ' $global:Theme.AsciiArt $w
-    Write-Centered '|  \  |  \ /      \ |        \|  \  /  \ /      \ ' $global:Theme.AsciiArt $w
-    Write-Centered '| $$\ | $$|  $$$$$$\| $$$$$$$$ \$$\/  $$|  $$$$$$\' $global:Theme.AsciiArt $w
-    Write-Centered '| $$$\| $$| $$   \$$| $$__      >$$  $$ | $$___\$$' $global:Theme.AsciiArt $w
-    Write-Centered '| $$$$\ $$| $$      | $$  \    /  $$$$\  \$$    \ ' $global:Theme.AsciiArt $w
-    Write-Centered '| $$\$$ $$| $$   __ | $$$$$   |  $$ \$$\ _\$$$$$$\' $global:Theme.AsciiArt $w
-    Write-Centered '| $$ \$$$$| $$__/  \| $$_____ | $$  | $$|  \__| $$' $global:Theme.AsciiArt $w
-    Write-Centered '| $$  \$$$ \$$    $$| $$     \| $$  | $$ \$$    $$' $global:Theme.AsciiArt $w
-    Write-Centered ' \$$   \$$  \$$$$$$  \$$$$$$$$ \$$   \$$  \$$$$$$ ' $global:Theme.AsciiArt $w
+    $w = 86; $line = [string]$script:UI.HLine * ($w - 4)
+    Write-Centered ' __    __   ______   ________  __    __   ______  ' $script:Theme.AsciiArt $w
+    Write-Centered '|  \  |  \ /      \ |        \|  \  /  \ /      \ ' $script:Theme.AsciiArt $w
+    Write-Centered '| $$\ | $$|  $$$$$$\| $$$$$$$$ \$$\/  $$|  $$$$$$\' $script:Theme.AsciiArt $w
+    Write-Centered '| $$$\| $$| $$   \$$| $$__      >$$  $$ | $$___\$$' $script:Theme.AsciiArt $w
+    Write-Centered '| $$$$\ $$| $$      | $$  \    /  $$$$\  \$$    \ ' $script:Theme.AsciiArt $w
+    Write-Centered '| $$\$$ $$| $$   __ | $$$$$   |  $$ \$$\ _\$$$$$$\' $script:Theme.AsciiArt $w
+    Write-Centered '| $$ \$$$$| $$__/  \| $$_____ | $$  | $$|  \__| $$' $script:Theme.AsciiArt $w
+    Write-Centered '| $$  \$$$ \$$    $$| $$     \| $$  | $$ \$$    $$' $script:Theme.AsciiArt $w
+    Write-Centered ' \$$   \$$  \$$$$$$  \$$$$$$$$ \$$   \$$  \$$$$$$ ' $script:Theme.AsciiArt $w
     Write-Host ""
-    Write-Host (" {0}{1}{2}" -f $global:UI.TopLeft, $line, $global:UI.TopRight) -ForegroundColor $global:Theme.Border
-    $title = " $($global:UI.RArrow) $(Get-Translation 'Menu_Title') $($global:UI.LArrow) "
+    Write-Host (" {0}{1}{2}" -f $script:UI.TopLeft, $line, $script:UI.TopRight) -ForegroundColor $script:Theme.Border
+    $title = " $($script:UI.RArrow) $(Get-Translation 'Menu_Title') $($script:UI.LArrow) "
     $padLeft = [math]::Max(0, [math]::Floor((($w - 4) - $title.Length) / 2))
     $padRight = [math]::Max(0, (($w - 4) - $title.Length - $padLeft))
-    Write-Host " $($global:UI.VLine)" -NoNewline -ForegroundColor $global:Theme.Border
+    Write-Host " $($script:UI.VLine)" -NoNewline -ForegroundColor $script:Theme.Border
     Write-Host (" " * $padLeft) -NoNewline
-    Write-Host $title -NoNewline -ForegroundColor $global:Theme.Title
+    Write-Host $title -NoNewline -ForegroundColor $script:Theme.Title
     Write-Host (" " * $padRight) -NoNewline
-    Write-Host "$($global:UI.VLine)" -ForegroundColor $global:Theme.Border
-    Write-Host (" {0}{1}{2}" -f $global:UI.LeftT, $line, $global:UI.RightT) -ForegroundColor $global:Theme.Border
-    Write-Host " $($global:UI.VLine) " -NoNewline -ForegroundColor $global:Theme.Border
-    Write-Host "[0] " -NoNewline -ForegroundColor $global:Theme.Highlight
-    Write-Host ("{0,-34}" -f (Get-Translation 'Menu_Option0')) -NoNewline -ForegroundColor $global:Theme.Highlight
-    Write-Host " $($global:UI.VLine) " -NoNewline -ForegroundColor $global:Theme.Border
-    Write-Host "[L] " -NoNewline -ForegroundColor $global:Theme.Special
-    Write-Host ("{0,-35}" -f (Get-Translation 'Menu_OptionL')) -NoNewline -ForegroundColor $global:Theme.Special
-    Write-Host " $($global:UI.VLine)" -ForegroundColor $global:Theme.Border
-    Write-Host (" {0}{1}{2}" -f $global:UI.LeftT, $line, $global:UI.RightT) -ForegroundColor $global:Theme.Border
+    Write-Host "$($script:UI.VLine)" -ForegroundColor $script:Theme.Border
+    Write-Host (" {0}{1}{2}" -f $script:UI.LeftT, $line, $script:UI.RightT) -ForegroundColor $script:Theme.Border
+    Write-Host " $($script:UI.VLine) " -NoNewline -ForegroundColor $script:Theme.Border
+    Write-Host "[0] " -NoNewline -ForegroundColor $script:Theme.Highlight
+    Write-Host ("{0,-34}" -f (Get-Translation 'Menu_Option0')) -NoNewline -ForegroundColor $script:Theme.Highlight
+    Write-Host " $($script:UI.VLine) " -NoNewline -ForegroundColor $script:Theme.Border
+    Write-Host "[L] " -NoNewline -ForegroundColor $script:Theme.Special
+    Write-Host ("{0,-35}" -f (Get-Translation 'Menu_OptionL')) -NoNewline -ForegroundColor $script:Theme.Special
+    Write-Host " $($script:UI.VLine)" -ForegroundColor $script:Theme.Border
+    Write-Host (" {0}{1}{2}" -f $script:UI.LeftT, $line, $script:UI.RightT) -ForegroundColor $script:Theme.Border
     for ($i = 1; $i -le 10; $i++) {
         $l_idx = $i; $r_idx = $i + 10
         $l_t = Get-Translation "Menu_Option$l_idx"
-        Write-Host " $($global:UI.VLine) " -NoNewline -ForegroundColor $global:Theme.Border
-        Write-Host ("[{0,-2}]" -f $l_idx) -NoNewline -ForegroundColor $global:Theme.MenuNumber
-        Write-Host (" {0,-34}" -f $l_t) -NoNewline -ForegroundColor $global:Theme.MenuText
-        Write-Host "$($global:UI.VLine) " -NoNewline -ForegroundColor $global:Theme.Border
+        Write-Host " $($script:UI.VLine) " -NoNewline -ForegroundColor $script:Theme.Border
+        Write-Host ("[{0,-2}]" -f $l_idx) -NoNewline -ForegroundColor $script:Theme.MenuNumber
+        Write-Host (" {0,-34}" -f $l_t) -NoNewline -ForegroundColor $script:Theme.MenuText
+        Write-Host "$($script:UI.VLine) " -NoNewline -ForegroundColor $script:Theme.Border
         if ($r_idx -le 20) {
             $r_t = Get-Translation "Menu_Option$r_idx"
-            $rc = if ($r_idx -eq 20) { $global:Theme.Exit } else { $global:Theme.MenuNumber }
-            $rtc = if ($r_idx -eq 20) { $global:Theme.Exit } else { $global:Theme.MenuText }
+            $rc = if ($r_idx -eq 20) { $script:Theme.Exit } else { $script:Theme.MenuNumber }
+            $rtc = if ($r_idx -eq 20) { $script:Theme.Exit } else { $script:Theme.MenuText }
             Write-Host ("[{0,-2}]" -f $r_idx) -NoNewline -ForegroundColor $rc
             Write-Host (" {0,-35}" -f $r_t) -NoNewline -ForegroundColor $rtc
         }
         else {
             Write-Host (" " * 40) -NoNewline
         }
-        Write-Host "$($global:UI.VLine)" -ForegroundColor $global:Theme.Border
+        Write-Host "$($script:UI.VLine)" -ForegroundColor $script:Theme.Border
     }
-    Write-Host (" {0}{1}{2}" -f $global:UI.BottomLeft, $line, $global:UI.BottomRight) -ForegroundColor $global:Theme.Border
+    Write-Host (" {0}{1}{2}" -f $script:UI.BottomLeft, $line, $script:UI.BottomRight) -ForegroundColor $script:Theme.Border
 }
 
-Show-Intro
-Start-Sleep -Seconds 1
-do {
-    trap [System.Management.Automation.PipelineStoppedException] {
-        Write-Host "`n"
-        Write-Warning (Get-Translation 'Process_Aborted')
-        Start-Sleep -Seconds 2
-        continue
-    }
-    Clear-Host
-    Show-MainMenu
-    $choice = Read-Host " $(Get-Translation 'SelectOption')"
-    switch ($choice) {
-        "0" { Invoke-CompactOS }; "1" { Show-SystemInfo }; "2" { Show-SystemHealthMenu }
-        "3" { Invoke-OneClickMaintenance }; "4" { Show-UpdateDriverMenu }; "5" { Clear-RAM }
-        "6" { Invoke-Defragment }; "7" { Show-PowerMenu }; "8" { Invoke-VisualPerf }
-        "9" { Show-AdvancedUninstaller }; "10" { Manage-RemoteDesktop }
-        "11" { Clear-JunkFiles }; "12" { Invoke-OptimizeApps }; "13" { Clear-BrowserCaches }
-        "14" { Clear-RecycleBin-Menu }; "15" { Open-DiskCleanup }; "16" { Clear-EventLogs }
-        "17" { Invoke-NetworkRepair }; "18" { Show-DNSMenu }; "19" { Invoke-WifiGrabber }
-        "20" { exit }
-        "L" { if ($global:Language -eq "EN") { $global:Language = "ID" } else { $global:Language = "EN" } }
-        default { Write-Warning (Get-Translation 'Invalid_Option'); Start-Sleep -Seconds 1 }
-    }
-} while ($true)
+if ($MyInvocation.InvocationName -ne '.') {
+    Show-Intro
+    Start-Sleep -Seconds 1
+    do {
+        trap [System.Management.Automation.PipelineStoppedException] {
+            Write-Host "`n"
+            Write-CustomWarning (Get-Translation 'Process_Aborted')
+            Start-Sleep -Seconds 2
+            continue
+        }
+        Clear-Host
+        Show-MainMenu
+        $choice = Read-Host " $(Get-Translation 'SelectOption')"
+        switch ($choice) {
+            "0" { Invoke-CompactOS }; "1" { Show-SystemInfo }; "2" { Show-SystemHealthMenu }
+            "3" { Invoke-OneClickMaintenance }; "4" { Show-UpdateDriverMenu }; "5" { Clear-RAM }
+            "6" { Invoke-Defragment }; "7" { Show-PowerMenu }; "8" { Invoke-VisualPerf }
+            "9" { Show-AdvancedUninstaller }; "10" { Set-RemoteDesktop }
+            "11" { Clear-JunkFile }; "12" { Invoke-OptimizeApps }; "13" { Clear-BrowserCache }
+            "14" { Clear-RecycleBin-Menu }; "15" { Open-DiskCleanup }; "16" { Clear-EventLogs }
+            "17" { Invoke-NetworkRepair }; "18" { Show-DNSMenu }; "19" { Invoke-WifiGrabber }
+            "20" { exit }
+            "L" { if ($script:Language -eq "EN") { $script:Language = "ID" } else { $script:Language = "EN" } }
+            default { Write-CustomWarning (Get-Translation 'Invalid_Option'); Start-Sleep -Seconds 1 }
+        }
+    } while ($true)
+}
