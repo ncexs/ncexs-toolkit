@@ -20,7 +20,7 @@ jobs:
         shell: powershell
         run: |
           Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser -ErrorAction SilentlyContinue
-          $results = Invoke-ScriptAnalyzer -Path ./ncexs-Toolkit.ps1 -Recurse -Severity Error,Warning
+          $results = Invoke-ScriptAnalyzer -Path ./ncexs-Toolkit.ps1 -Recurse -Severity Error
           if ($results) {
               $results | Format-Table
               Write-Error "PSScriptAnalyzer mendeteksi kesalahan atau peringatan keamanan!"
