@@ -52,7 +52,17 @@ Describe "ncexs-Toolkit Tests" {
     function cleanmgr.exe { }
     function powercfg { }
 
-    . $ToolkitPath
+    Write-Host "DIAGNOSTIC: ToolkitPath is '$ToolkitPath'"
+    Write-Host "DIAGNOSTIC: File exists: $(Test-Path $ToolkitPath)"
+    try {
+        . $ToolkitPath
+        Write-Host "DIAGNOSTIC: Dot-sourcing completed successfully."
+        Write-Host "DIAGNOSTIC: Get-Translation exists: $((Get-Command Get-Translation -ErrorAction SilentlyContinue) -ne $null)"
+    }
+    catch {
+        Write-Host "DIAGNOSTIC: Dot-sourcing failed: $_"
+        Write-Host "DIAGNOSTIC: Exception Details: $($_.Exception.Message)"
+    }
 
     Context "Translation Tests" {
         It "Should translate standard English menu titles correctly" {
