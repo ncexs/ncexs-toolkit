@@ -34,6 +34,9 @@ jobs:
         shell: powershell
         run: |
           Write-Host "=== Running Pester Tests ==="
+          Get-Module Pester -ListAvailable | Format-Table Name, Version, Path
+          Import-Module Pester -RequiredVersion 3.4.0 -Force -ErrorAction SilentlyContinue
+          Write-Host "Loaded Pester version: $((Get-Module Pester).Version)"
           $testPath = "Tests/Ncexs-Toolkit.Tests.ps1"
           if (Test-Path $testPath) {
             $results = Invoke-Pester -Path $testPath -PassThru
