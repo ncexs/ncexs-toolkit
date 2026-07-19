@@ -1,3 +1,21 @@
+# 🚀 ncexs Toolkit v3.5.1 Hotfix
+
+🌐 **English** | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](docs/CHANGELOG.jv.md) | [Basa Sunda](docs/CHANGELOG.su.md) | [हिन्दी](docs/CHANGELOG.hi.md) | [Русский](docs/CHANGELOG.ru.md) | [日本語](docs/CHANGELOG.ja.md) | [한국어](docs/CHANGELOG.ko.md) | [中文](docs/CHANGELOG.zh.md) | [العربية](docs/CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.5.1 Hotfix Update
+
+### 🐛 Bug Fixes & Refactors
+- **RAM Optimizer Fix**: Resolved dynamic C# compilation syntax error (`Write-Debug` and powerShell-style catch block inside C# string) that caused Menu 5 (Memory Optimizer) to crash at runtime. Cleaned up type checking using safe type cast.
+- **Indonesian Translation Dictionary Completeness**: Added all missing `Maint_*` translation keys to the Indonesian (`ID`) dictionary to prevent internal code key names from displaying in the UI.
+- **Robust Translation Fallback**: Enhanced the `Get-Translation` function to automatically fallback to English (EN) if a key is not found in the Indonesian dictionary.
+- **DNS Changer Title Fix**: Corrected mismatched title in the DNS Changer menu which previously displayed "APP CACHE CLEANER" (Menu 12 title) instead of "DNS Changer" (Menu 18 title).
+- **WiFi SSID / Password Colon Support**: Fixed truncation issues for WiFi names or passwords containing colons (`:`) in the Wi-Fi Recovery tool.
+- **Accurate Cleaner Statistics**: Upgraded file cleaning logic across all utilities to only count file sizes that were successfully deleted, preventing exaggerated clean statistics from locked files.
+- **Uninstaller Index Protection**: Added bounds validation checks in the interactive uninstaller to prevent index out of range actions.
+- **Localized Health Checker**: Translated hardcoded console steps in the System Health menu.
+
+---
+
 # 🚀 ncexs Toolkit v3.5
 
 🌐 **English** | [Bahasa Indonesia](docs/CHANGELOG.id.md) | [Basa Jawa](docs/CHANGELOG.jv.md) | [Basa Sunda](docs/CHANGELOG.su.md) | [हिन्दी](docs/CHANGELOG.hi.md) | [Русский](docs/CHANGELOG.ru.md) | [日本語](docs/CHANGELOG.ja.md) | [한국어](docs/CHANGELOG.ko.md) | [中文](docs/CHANGELOG.zh.md) | [العربية](docs/CHANGELOG.ar.md)

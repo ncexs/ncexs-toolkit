@@ -1,3 +1,19 @@
+# 🚀 ncexs Toolkit v3.5.1 Hotfix
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | **한국어** | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.5.1 핫픽스 업데이트
+
+### 🐛 버그 수정 및 리팩토링
+- **RAM 최적화 도구 수정**: C# 문자열 내의 `Write-Debug` 및 PowerShell 스타일 catch 블록으로 인해 발생하던 동적 C# 컴파일 구문 오류를 해결하여 메뉴 5(메모리 최적화)의 실행 시 크래시 현상을 수정했습니다.
+- **번역 폴백 시스템**: 번역 함수 `Get-Translation`을 개선하여 선택한 언어 사전에서 키를 찾을 수 없는 경우 자동으로 영어(EN) 번역으로 대체되도록 했습니다.
+- **DNS 변경 도구 타이틀 수정**: DNS 변경 메뉴에서 타이틀이 '앱 캐시 클리너'로 잘못 표시되던 문제를 수정했습니다.
+- **WiFi SSID / 비밀번호 콜론 지원**: Wi-Fi 비밀번호 복구 도구에서 콜론(`:`)이 포함된 WiFi 이름 또는 비밀번호가 잘리는 현상을 수정했습니다.
+- **정확한 정리 용량 표시**: 잠긴 파일 등으로 인해 삭제에 실패한 파일 용량은 제외하고, 실제로 삭제가 성공한 파일의 용량만 집계하도록 정리 로직을 개선했습니다.
+- **언인스톨러 인덱스 예외 처리**: 범위를 벗어난 인덱스 선택 시 오작동을 방지하기 위해 검증 로직을 추가했습니다.
+
+---
+
 # 🚀 ncexs Toolkit v3.5
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | **한국어** | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)

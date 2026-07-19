@@ -1,3 +1,19 @@
+# 🚀 ncexs Toolkit v3.5.1 Hotfix
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | **日本語** | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.5.1 ホットフィックス アップデート
+
+### 🐛 バグ修正とリファクタリング
+- **メモリ最適化ツール（RAM Optimizer）の修正**: 動的C#コンパイル時の構文エラー（C#文字列内の`Write-Debug`およびPowerShellスタイルのcatchブロック）を解決し、メニュー5（メモリ最適化）のクラッシュを修正しました。
+- **翻訳フォールバックの強化**: 翻訳関数 `Get-Translation` を改良し、選択された言語の辞书にキーが見つからない場合、自動的に英語（EN）にフォールバックするようにしました。
+- **DNSチェンジャーのタイトル修正**: DNSチェンジャーメニューのタイトルが「アプリキャッシュクリーナー」と表示されていた不具合を修正しました。
+- **WiFiのSSID/パスワードのコロン対応**: Wi-Fiパスワード復元ツールにおいて、コロン（`:`）を含むWiFi名やパスワードが途中で切れてしまう問題を修正しました。
+- **正確なクリーンアップ統計**: ファイル削除ロジックを更新し、ロックされたファイルを除外して、実際に削除に成功したファイルサイズのみをカウントするようにしました。
+- **アンインストーラーの範囲チェック**: インデックスが範囲外になるのを防ぐため、アンインストーラーに境界値検証を追加しました。
+
+---
+
 # 🚀 ncexs Toolkit v3.5
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | **日本語** | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)

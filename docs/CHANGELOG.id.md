@@ -1,3 +1,21 @@
+# 🚀 ncexs Toolkit v3.5.1 Hotfix
+
+🌐 [English](../CHANGELOG.md) | **Bahasa Indonesia** | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – Pembaruan v3.5.1 Hotfix
+
+### 🐛 Perbaikan Bug & Refaktor
+- **Perbaikan RAM Optimizer**: Menyelesaikan kesalahan sintaks kompilasi C# dinamis (`Write-Debug` dan block catch bergaya PowerShell di dalam string C#) yang menyebabkan Menu 5 (Optimasi Memori) crash pada saat dijalankan. Membersihkan pemeriksaan pemuatan tipe menggunakan type cast yang aman.
+- **Kelengkapan Kamus Terjemahan Indonesia**: Menambahkan semua kunci terjemahan `Maint_*` yang hilang pada kamus Bahasa Indonesia (`ID`) untuk mencegah nama kunci kode internal ditampilkan di UI.
+- **Fallback Terjemahan yang Tangguh**: Meningkatkan fungsi `Get-Translation` agar secara otomatis beralih ke Bahasa Inggris (EN) jika kunci tidak ditemukan dalam kamus Bahasa Indonesia.
+- **Perbaikan Judul DNS Changer**: Memperbaiki judul menu pengubah DNS yang sebelumnya salah menampilkan "PEMBERSIH CACHE APLIKASI" (judul Menu 12) alih-alih "Pengubah DNS" (judul Menu 18).
+- **Dukungan Titik Dua untuk SSID / Password WiFi**: Memperbaiki masalah pemotongan nama atau kata sandi WiFi yang mengandung karakter titik dua (`:`) pada utilitas Wi-Fi Recovery.
+- **Statistik Pembersihan yang Akurat**: Meningkatkan logika pembersihan file di seluruh utilitas agar hanya menghitung ukuran file yang berhasil dihapus, mencegah statistik pembersihan palsu dari file yang sedang dikunci.
+- **Perlindungan Index Uninstaller**: Menambahkan pemeriksaan validasi batas index pada uninstaller interaktif untuk mencegah eksekusi di luar batas array.
+- **Lokalisasi Pemeriksa Kesehatan**: Menerjemahkan langkah-langkah konsol yang sebelumnya di-hardcode ke dalam menu Kesehatan Sistem.
+
+---
+
 # 🚀 ncexs Toolkit v3.5
 
 🌐 [English](../CHANGELOG.md) | **Bahasa Indonesia** | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)

@@ -68,13 +68,13 @@ Describe "ncexs-Toolkit Tests" {
         It "Should translate standard English menu titles correctly" {
             $script:Language = "EN"
             $translation = Get-Translation "Menu_Title"
-            $translation | Should Be "ncexs Toolkit v3.5"
+            $translation | Should Be "ncexs Toolkit v3.5.1 Hotfix"
         }
 
         It "Should translate standard Indonesian menu titles correctly" {
             $script:Language = "ID"
             $translation = Get-Translation "Menu_Title"
-            $translation | Should Be "ncexs Toolkit v3.5"
+            $translation | Should Be "ncexs Toolkit v3.5.1 Hotfix"
         }
     }
 

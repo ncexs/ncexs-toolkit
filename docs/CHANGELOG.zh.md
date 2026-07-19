@@ -1,3 +1,19 @@
+# 🚀 ncexs Toolkit v3.5.1 Hotfix
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | **中文** | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – v3.5.1 热修复更新
+
+### 🐛 Bug 修复与重构
+- **内存优化器修复**: 解决了 C# 字符串中包含 PowerShell 风格的 catch 块及 `Write-Debug` 导致的动态 C# 编译语法错误，该错误曾导致菜单 5（内存优化）在运行时崩溃。
+- **语言翻译备用机制**: 改进了 `Get-Translation` 函数，当在所选语言字典中找不到对应翻译键时，将自动降级使用英文（EN）显示。
+- **DNS 切换器标题修正**: 修正了 DNS 切换器菜单的标题错误显示为“应用缓存清理器”的问题。
+- **WiFi SSID / 密码冒号支持**: 修复了 Wi-Fi 密码恢复工具中，当 WiFi 名称或密码包含冒号（`:`）时被截断的问题。
+- **精确的清理统计**: 优化了清理逻辑，只统计实际成功删除的文件大小，避免将因被占用而无法删除的锁死文件计入清理额度。
+- **卸载程序范围验证**: 在交互式卸载程序中加入了索引边界检查，以防止超出数组范围的操作。
+
+---
+
 # 🚀 ncexs Toolkit v3.5
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | **中文** | [العربية](CHANGELOG.ar.md)

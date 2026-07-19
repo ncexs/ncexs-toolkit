@@ -1,3 +1,19 @@
+# 🚀 ncexs Toolkit v3.5.1 Hotfix
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | **العربية**
+
+## 🧰 ncexs Toolkit – تحديث الإصلاح العاجل v3.5.1
+
+### 🐛 إصلاح الأخطاء وإعادة الهيكلة
+- **إصلاح محسن الذاكرة (RAM)**: تم حل خطأ في بنية كود C# الديناميكي (كتلة catch بأسلوب PowerShell و `Write-Debug` داخل سلسلة C#) والذي تسبب في تعطل القائمة 5 (محسن الذاكرة) عند التشغيل.
+- **تراجع الترجمة الاحتياطي**: تم تحسين دالة `Get-Translation` للتراجع تلقائيًا إلى اللغة الإنجليزية (EN) إذا لم يتم العثور على المفتاح في قاموس اللغة النشطة.
+- **تصحيح عنوان مغير DNS**: تم تصحيح تعارض العنوان في قائمة مغير DNS والتي كانت تعرض سابقًا "منظف ذاكرة التخزين المؤقت للتطبيقات".
+- **دعم النقطتين في SSID / كلمات مرور WiFi**: تم إصلاح مشكلات اقتطاع أسماء أو كلمات مرور WiFi التي تحتوي على نقطتين (`:`) في أداة استرداد Wi-Fi.
+- **إحصائيات تنظيف دقيقة**: تم تحديث منطق حذف الملفات لحساب أحجام الملفات التي تم حذفها بنجاح فقط، مما يمنع الإحصائيات غير الدقيقة بسبب الملفات المقفلة.
+- **حماية مؤشر إلغاء التثبيت**: تم إضافة فحص التحقق من حدود المؤشر في برنامج إلغاء التثبيت التفاعلي لمنع أخطاء الخروج عن الحدود.
+
+---
+
 # 🚀 ncexs Toolkit v3.5
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | [Basa Jawa](CHANGELOG.jv.md) | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | **العربية**

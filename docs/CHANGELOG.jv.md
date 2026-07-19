@@ -1,3 +1,21 @@
+# 🚀 ncexs Toolkit v3.5.1 Hotfix
+
+🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | **Basa Jawa** | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)
+
+## 🧰 ncexs Toolkit – Pembaruan v3.5.1 Hotfix
+
+### 🐛 Dandani Bug & Refaktor
+- **Ndandani RAM Optimizer**: Rampungake kesalahan sintaks kompilasi C# dinamis (`Write-Debug` lan block catch gaya PowerShell ing njero string C#) sing nyebabake Menu 5 (Optimasi Memori) crash nalika dilakokake.
+- **Kamus Terjemahan Basa Jawa**: Nambahake terjemahan anyar lan fallback sing luwih apik kanggo tampilan antarmuka.
+- **Fallback Terjemahan**: Nambah fungsi `Get-Translation` supaya otomatis nganggo Basa Inggris (EN) yen terjemahan ora ditemokake ing kamus liyane.
+- **Ndandani Judul DNS Changer**: Ndandani kesalahan judhul menu DNS Changer sing sadurunge metu "PEMBERSIH CACHE APLIKASI" tinimbang "DNS Changer".
+- **Dhukungan Titik Loro SSID / Sandi WiFi**: Ndandani masalah pemotongan jeneng utawa sandi WiFi sing ngemot karakter titik loro (`:`).
+- **Statistik Resik-resik sing Akurat**: Nganyari logika mbusak file supaya mung ngetung ukuran file sing bener-bener kasil dibusak.
+- **Validasi Index Uninstaller**: Nambahake pamriksaan watesan index ing uninstaller kanggo nyegah error out of range.
+- **Lokalisasi Menu Kesehatan**: Nerjemahake pesen konsol ing menu Kesehatan Sistem.
+
+---
+
 # 🚀 ncexs Toolkit v3.5
 
 🌐 [English](../CHANGELOG.md) | [Bahasa Indonesia](CHANGELOG.id.md) | **Basa Jawa** | [Basa Sunda](CHANGELOG.su.md) | [हिन्दी](CHANGELOG.hi.md) | [Русский](CHANGELOG.ru.md) | [日本語](CHANGELOG.ja.md) | [한국어](CHANGELOG.ko.md) | [中文](CHANGELOG.zh.md) | [العربية](CHANGELOG.ar.md)

@@ -19,7 +19,7 @@ if ($MyInvocation.InvocationName -ne '.') {
 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue
 
-$script:ToolkitVersion = "v3.5"
+$script:ToolkitVersion = "v3.5.1 Hotfix"
 $script:Language = "EN"
 
 $script:Theme = @{
@@ -120,6 +120,11 @@ $script:Translations = @{
         "Maint_Option5" = "Remote Desktop (RDP) Manager"
         "Maint_Option6" = "Clear Browser Caches"
         "Maint_Option7" = "Back to Main Menu"
+        "SubMenu_Power" = "POWER & BATTERY UTILITIES"
+        "SubMenu_Update" = "UPDATES & DRIVERS CENTER"
+        "Health_SFC" = "Running System File Checker (SFC)..."
+        "Health_DISM" = "Running Deployment Image Servicing (DISM)..."
+        "Health_CHKDSK" = "Scanning Drive C: for Errors (CHKDSK)..."
     };
     "ID" = @{
         "Menu_Title" = "ncexs Toolkit $($script:ToolkitVersion)"; "Menu_Option0" = "Compact OS (Hemat 2-5GB Ruang)"
@@ -166,10 +171,51 @@ $script:Translations = @{
         "SysInfo_Option2" = "Analisis Detail Kesehatan Baterai"
         "SysInfo_Option3" = "Cek Status Lisensi Windows"
         "SysInfo_Option4" = "Kembali ke Menu Utama"
+        
+        "Maint_License_Title" = "STATUS LISENSI WINDOWS"
+        "Maint_Audit_Title" = "LAPORAN AUDIT PC"
+        "Maint_Audit_Exporting" = "Mengumpulkan spesifikasi PC dan membuat laporan..."
+        "Maint_Audit_Success" = "Laporan audit berhasil disimpan ke Desktop: {0}"
+        "Maint_Maint_Title" = "PEMELIHARAAN SATU KLIK"
+        "Maint_Maint_Confirm" = "Mulai pemeliharaan otomatis? (Ini akan membersihkan file sampah, flush DNS, dan memperbaiki kesehatan sistem)"
+        "Maint_Maint_Junk" = "Membersihkan file sampah..."
+        "Maint_Maint_DNS" = "Membersihkan Cache DNS..."
+        "Maint_Maint_SFC" = "Menjalankan System File Checker (SFC)..."
+        "Maint_Maint_DISM" = "Menjalankan DISM System Image Repair..."
+        "Maint_Maint_Done" = "Pemeliharaan Satu Klik selesai."
+        "Maint_Battery_Title" = "CEK KESEHATAN BATERAI"
+        "Maint_Battery_Desktop" = "Sistem ini berjalan pada PC Desktop. Tidak ada baterai yang terdeteksi."
+        "Maint_Battery_Wear" = "Kesehatan Baterai: {0}% | Kapasitas Desain: {1} mWh | Kapasitas Pengisian Penuh: {2} mWh"
+        "Maint_RDP_Title" = "PENGELOLA REMOTE DESKTOP"
+        "Maint_RDP_Status" = "Status RDP Saat Ini: {0}"
+        "Maint_RDP_Enabled" = "AKTIF"
+        "Maint_RDP_Disabled" = "NONAKTIF"
+        "Maint_RDP_Enable_Prompt" = "Aktifkan Remote Desktop (RDP)?"
+        "Maint_RDP_Disable_Prompt" = "Nonaktifkan Remote Desktop (RDP)?"
+        "Maint_RDP_Enable_Success" = "Remote Desktop (RDP) berhasil diaktifkan dan aturan firewall dikonfigurasi."
+        "Maint_RDP_Disable_Success" = "Remote Desktop (RDP) berhasil dinonaktifkan."
+        "Maint_Browser_Title" = "PEMBERSIH CACHE BROWSER"
+        "Maint_Browser_Confirm" = "Bersihkan cache untuk Google Chrome, MS Edge, dan Firefox?"
+        "Maint_Browser_Cleared" = "Membersihkan folder cache untuk {0}."
+        "Maint_Browser_Success" = "Pembersihan cache browser selesai. Berhasil mengosongkan: {0} MB"
+        "SubMenu_Power" = "UTILITAS DAYA & BATERAI"
+        "SubMenu_Update" = "PUSAT UPDATE & DRIVER"
+        "Health_SFC" = "Menjalankan System File Checker (SFC)..."
+        "Health_DISM" = "Menjalankan Deployment Image Servicing (DISM)..."
+        "Health_CHKDSK" = "Memindai Error pada Drive C: (CHKDSK)..."
     }
 }
 
-function Get-Translation { param([string]$key) if ($script:Translations[$script:Language].ContainsKey($key)) { return $script:Translations[$script:Language][$key] } return $key }
+function Get-Translation {
+    param([string]$key)
+    if ($script:Translations[$script:Language].ContainsKey($key)) {
+        return $script:Translations[$script:Language][$key]
+    }
+    if ($script:Translations["EN"].ContainsKey($key)) {
+        return $script:Translations["EN"][$key]
+    }
+    return $key
+}
 function Write-Centered { param([string]$text, [string]$color = $script:Theme.Title, [int]$width = 80) $padLeft = [math]::Max(0, [math]::Floor(($width - $text.Length) / 2)); Write-Host (" " * $padLeft + $text) -ForegroundColor $color }
 function Write-BoxHeader { param([string]$title) $w = 86; $l = [string]$script:UI.HLine * ($w - 4); Write-Host (" {0}{1}{2}" -f $script:UI.TopLeft, $l, $script:UI.TopRight) -ForegroundColor $script:Theme.Border; $cleanTitle = " $title "; $padLeft = [math]::Max(0, [math]::Floor((($w - 4) - $cleanTitle.Length) / 2)); $padRight = [math]::Max(0, (($w - 4) - $cleanTitle.Length - $padLeft)); Write-Host " $($script:UI.VLine)" -NoNewline -ForegroundColor $script:Theme.Border; Write-Host (" " * $padLeft) -NoNewline; Write-Host $cleanTitle -NoNewline -ForegroundColor $script:Theme.Title; Write-Host (" " * $padRight) -NoNewline; Write-Host "$($script:UI.VLine)" -ForegroundColor $script:Theme.Border; Write-Host (" {0}{1}{2}" -f $script:UI.BottomLeft, $l, $script:UI.BottomRight) -ForegroundColor $script:Theme.Border }
 function Write-Title { param([string]$message) Write-BoxHeader $message }
@@ -413,8 +459,26 @@ function Clear-JunkFile {
         "$env:SystemRoot\Logs\CBS\*.log"
     )
     foreach ($p in $targets) {
-        $files = Get-ChildItem -Path $p -Recurse -Force -ErrorAction SilentlyContinue
-        if ($files) { $totalFreed += ($files | Measure-Object -Property Length -Sum).Sum; $files | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue }
+        $items = Get-ChildItem -Path $p -Recurse -Force -ErrorAction SilentlyContinue
+        if ($items) {
+            foreach ($item in $items) {
+                if (-not $item.PSIsContainer) {
+                    try {
+                        $item | Remove-Item -Force -ErrorAction Stop
+                        $totalFreed += $item.Length
+                    }
+                    catch {}
+                }
+            }
+            foreach ($item in $items) {
+                if ($item.PSIsContainer) {
+                    try {
+                        $item | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+                    }
+                    catch {}
+                }
+            }
+        }
     }
     $cDriveAfter = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='C:'"
     $freeAfterMB = [math]::Round($cDriveAfter.FreeSpace / 1MB, 2)
@@ -450,7 +514,13 @@ function Show-AdvancedUninstaller {
         if ($found) { 
             $count = 1
             foreach ($item in $found) { Write-Host " [$count] $($item.DisplayName)"; $count++ }
-            $sel = Read-Host " $(Get-Translation 'SelectOption')"; if ($sel -match '^\d+$') { cmd /c $found[[int]$sel - 1].UninstallString }
+            $sel = Read-Host " $(Get-Translation 'SelectOption')"
+            if ($sel -match '^\d+$' -and [int]$sel -ge 1 -and [int]$sel -le $found.Count) {
+                cmd /c $found[[int]$sel - 1].UninstallString
+            }
+            else {
+                Write-CustomWarning (Get-Translation 'Invalid_Option')
+            }
         }
         else {
             Write-CustomWarning (Get-Translation 'Uninstall_NotFound')
@@ -489,14 +559,10 @@ function Clear-RAM {
     if (-not (Request-Confirm (Get-Translation 'RAM_Confirm'))) { return }
     $before = Get-CimInstance Win32_OperatingSystem | Select-Object -ExpandProperty FreePhysicalMemory
     
-    $typeLoaded = $false
-    try {
-        if ([M]) { $typeLoaded = $true }
-    }
-    catch { Write-Debug $_.Exception.Message }
+    $typeLoaded = $null -ne ('M' -as [type])
     
     if (-not $typeLoaded) {
-        $code = "using System; using System.Runtime.InteropServices; public class M { [DllImport(`"psapi.dll`")] public static extern bool EmptyWorkingSet(IntPtr h); public static void C() { foreach(var p in System.Diagnostics.Process.GetProcesses()) try { EmptyWorkingSet(p.Handle); } catch { Write-Debug $_.Exception.Message } } }"
+        $code = 'using System; using System.Runtime.InteropServices; public class M { [DllImport("psapi.dll")] public static extern bool EmptyWorkingSet(IntPtr h); public static void C() { foreach(var p in System.Diagnostics.Process.GetProcesses()) try { EmptyWorkingSet(p.Handle); } catch {} } }'
         Add-Type -TypeDefinition $code -ErrorAction SilentlyContinue
     }
     
@@ -517,9 +583,9 @@ function Clear-RAM {
 function Invoke-Defragment { if (-not (Request-Confirm (Get-Translation 'Defrag_Confirm'))) { return }; Optimize-Volume -DriveLetter C -Verbose; Read-Host "`n $(Get-Translation 'PressAnyKey')" }
 function Show-SystemHealthMenu { 
     if (-not (Request-Confirm (Get-Translation 'Health_Confirm'))) { return }
-    Write-Host "`n [1/3] Menjalankan System File Checker (SFC)..." -ForegroundColor Cyan; sfc /scannow
-    Write-Host "`n [2/3] Menjalankan Deployment Image Servicing (DISM)..." -ForegroundColor Cyan; dism /online /cleanup-image /restorehealth
-    Write-Host "`n [3/3] Memindai Error pada Drive C: (CHKDSK)..." -ForegroundColor Cyan; chkdsk C: /scan
+    Write-Host "`n [1/3] $(Get-Translation 'Health_SFC')" -ForegroundColor Cyan; sfc /scannow
+    Write-Host "`n [2/3] $(Get-Translation 'Health_DISM')" -ForegroundColor Cyan; dism /online /cleanup-image /restorehealth
+    Write-Host "`n [3/3] $(Get-Translation 'Health_CHKDSK')" -ForegroundColor Cyan; chkdsk C: /scan
     Read-Host "`n $(Get-Translation 'PressAnyKey')" 
 }
 
@@ -542,7 +608,7 @@ function Show-UpdateDriverMenu {
 
 function Show-DNSMenu { 
     Write-Host ""
-    Write-Title (Get-Translation 'Menu_Option12')
+    Write-Title (Get-Translation 'Menu_Option18')
     Write-Host (Get-Translation 'DNS_Menu_Text')
     $c = Read-Host " $(Get-Translation 'SelectOption')"
     
@@ -561,8 +627,8 @@ function Show-DNSMenu {
 
 function Invoke-WifiGrabber {
     netsh wlan show profiles | Select-String "All User Profile|Profil Pengguna Semua" | ForEach-Object {
-        $n = $_.ToString().Split(":")[1].Trim(); $r = netsh wlan show profile name="$n" key=clear;
-        $p = $r | Select-String "Key Content|Konten Kunci"; if ($p) { Write-Host " SSID: $n -> Pass: $($p.ToString().Split(":")[1].Trim())" -ForegroundColor Yellow }
+        $n = ($_.ToString() -split ':', 2)[1].Trim(); $r = netsh wlan show profile name="$n" key=clear;
+        $p = $r | Select-String "Key Content|Konten Kunci"; if ($p) { Write-Host " SSID: $n -> Pass: $(($p.ToString() -split ':', 2)[1].Trim())" -ForegroundColor Yellow }
     }; Read-Host "`n Press any key"
 }
 
@@ -585,7 +651,15 @@ function Invoke-OptimizeApps {
         if (Test-Path -Path $t.P) {
             try {
                 $f = Get-ChildItem -Path $t.P -Recurse -File -Force -ErrorAction SilentlyContinue
-                if ($f) { $freed += ($f | Measure-Object -Property Length -Sum).Sum; $f | Remove-Item -Force -ErrorAction SilentlyContinue }
+                if ($f) {
+                    foreach ($file in $f) {
+                        try {
+                            $file | Remove-Item -Force -ErrorAction Stop
+                            $freed += $file.Length
+                        }
+                        catch {}
+                    }
+                }
                 Write-Info "Optimized: $($t.N)"
             }
             catch { Write-Debug $_.Exception.Message }
@@ -1136,10 +1210,25 @@ function Invoke-OneClickMaintenance {
     )
     $totalFreed = 0
     foreach ($p in $targets) {
-        $files = Get-ChildItem -Path $p -Recurse -Force -ErrorAction SilentlyContinue
-        if ($files) { 
-            $totalFreed += ($files | Measure-Object -Property Length -Sum).Sum
-            $files | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue 
+        $items = Get-ChildItem -Path $p -Recurse -Force -ErrorAction SilentlyContinue
+        if ($items) { 
+            foreach ($item in $items) {
+                if (-not $item.PSIsContainer) {
+                    try {
+                        $item | Remove-Item -Force -ErrorAction Stop
+                        $totalFreed += $item.Length
+                    }
+                    catch {}
+                }
+            }
+            foreach ($item in $items) {
+                if ($item.PSIsContainer) {
+                    try {
+                        $item | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+                    }
+                    catch {}
+                }
+            }
         }
     }
     $freedMB = [math]::Round($totalFreed / 1MB, 2)
@@ -1295,10 +1384,14 @@ function Clear-BrowserCache {
                 try {
                     $files = Get-ChildItem -Path $rp -Recurse -File -Force -ErrorAction SilentlyContinue
                     if ($files) {
-                        $size = ($files | Measure-Object -Property Length -Sum).Sum
-                        $freed += $size
-                        $files | Remove-Item -Force -ErrorAction SilentlyContinue
-                        $clearedAny = $true
+                        foreach ($file in $files) {
+                            try {
+                                $file | Remove-Item -Force -ErrorAction Stop
+                                $freed += $file.Length
+                                $clearedAny = $true
+                            }
+                            catch {}
+                        }
                     }
                 }
                 catch { Write-Debug $_.Exception.Message }
@@ -1393,4 +1486,4 @@ if ($MyInvocation.InvocationName -ne '.') {
             default { Write-CustomWarning (Get-Translation 'Invalid_Option'); Start-Sleep -Seconds 1 }
         }
     } while ($true)
-}
+}
